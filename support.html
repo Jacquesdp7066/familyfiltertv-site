@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Support — FamilyFilterTV</title>
+<meta name="description" content="Get help with FamilyFilterTV: Stremio setup steps, known limits, and how to contact support.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <svg class="glyph" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M3 9v6h4l5 4V5L7 9H3z" fill="#fff"/>
+        <path d="M16 4l5 16" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      FamilyFilterTV
+    </a>
+    <nav class="site">
+      <a href="index.html">Home</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="support.html">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1>Support</h1>
+
+  <div class="panel">
+    <strong>Contact</strong>
+    <p>Email <a href="mailto:jacquesjdupreez@gmail.com">jacquesjdupreez@gmail.com</a> and describe
+    what you were doing, your device (TV or phone, manufacturer/model), and Android version. A
+    screenshot of the FamilyFilterTV banner or the Diagnostics screen helps a lot.</p>
+  </div>
+
+  <h2>Setting up FamilyFilterTV with Stremio</h2>
+  <ol>
+    <li>Install <strong>Stremio</strong> and <strong>FamilyFilterTV</strong> on the same Android
+      device.</li>
+    <li>Open FamilyFilterTV once from the launcher to pick a filter profile (default
+      <strong>Family</strong>) and whether subtitles are drawn on screen.</li>
+    <li>In Stremio, start a title, open the <strong>Player</strong> menu on the control bar (the
+      picture-in-frame icon) and choose <strong>External</strong>.</li>
+    <li>Pick <strong>FamilyFilterTV</strong> from Android's "Open with" chooser and tap
+      <strong>Always</strong> so this happens automatically next time.</li>
+    <li>On Android TV: <strong>OK</strong> pauses/resumes, <strong>◀ / ▶</strong> seek 10 seconds,
+      <strong>▲</strong> opens the subtitle and audio-track menu, <strong>Back</strong> returns to
+      Stremio and hands your playback position back to it. On phone, use the on-screen touch
+      controls.</li>
+    <li>Watch the banner in the first few seconds of playback — it tells you where subtitles came
+      from, or says plainly if none were found for that title (filtering can't work without a
+      subtitle to read).</li>
+  </ol>
+
+  <h2>Known limits</h2>
+  <ul>
+    <li><strong>HEVC 10-bit video</strong> — some Android phones and boxes lack hardware decoding
+      for 10-bit HEVC streams. Playback may stutter, drop frames, or fail to start regardless of
+      FamilyFilterTV; this is a device/codec limitation, not something the app can filter around.</li>
+    <li><strong>Subtitles are required</strong> — filtering only works where a subtitle track exists,
+      either embedded in the video or found by Stremio's OpenSubtitles add-on. No subtitle means no
+      filtering, and the app tells you when that's the case.</li>
+    <li><strong>Notification-listener permission</strong> — the optional Diagnostics screen needs
+      this Android permission to read what other apps are currently playing. It's only requested if
+      you open Diagnostics, and you can revoke it any time in Android's notification-access settings.</li>
+  </ul>
+
+  <h2>Something not working?</h2>
+  <p>Most playback issues come down to either a codec the device can't decode, or no subtitles being
+  available for that particular title/release. If FamilyFilterTV crashes or the mute behaviour looks
+  wrong, email support with the device details above and, if possible, which title and which add-on
+  provided the stream in Stremio.</p>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    FamilyFilterTV · Jacques du Preez · South Africa ·
+    <a href="mailto:jacquesjdupreez@gmail.com">jacquesjdupreez@gmail.com</a>
+  </div>
+</footer>
+</body>
+</html>

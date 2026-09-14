@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FamilyFilterTV — real-time profanity muting for Stremio</title>
+<meta name="description" content="FamilyFilterTV is Stremio's external video player. It plays your stream and mutes its own audio during profane subtitle lines. No accounts, no analytics, no ads.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <svg class="glyph" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M3 9v6h4l5 4V5L7 9H3z" fill="#fff"/>
+        <path d="M16 4l5 16" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      FamilyFilterTV
+    </a>
+    <nav class="site">
+      <a href="index.html">Home</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="support.html">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1>Watch Stremio without the swearing</h1>
+  <p>FamilyFilterTV is an Android app — TV and phone — that plugs into
+  <a href="https://www.stremio.com/" target="_blank" rel="noopener">Stremio</a> as its external video
+  player. Start anything in Stremio, hand it to FamilyFilterTV, and it plays the stream normally but
+  mutes its own audio for the exact seconds a subtitle line is profane. Nothing is cut, blurred, or
+  skipped — the picture keeps playing, the sound just drops out and comes back.</p>
+
+  <div class="panel">
+    <strong>What it does</strong>
+    <ul>
+      <li>Registers as an external player Stremio can hand a stream to.</li>
+      <li>Reads subtitles from the video's own text track, or fetches them from Stremio's free
+        OpenSubtitles add-on when the video doesn't have any.</li>
+      <li>Mutes its own audio output for the duration of any subtitle line that matches your chosen
+        filter strength (Off / Mild / Family / Strict). It never edits, uploads, or redistributes the
+        video or subtitle file — filtering happens locally, live, during playback.</li>
+      <li>Works on Android TV (D-pad, big-screen layout) and on Android phones (touch).</li>
+      <li>No accounts, no sign-in, no analytics, no ads in this version.</li>
+    </ul>
+  </div>
+
+  <h2>Setting it up with Stremio</h2>
+  <ol>
+    <li>Install <strong>Stremio</strong> and <strong>FamilyFilterTV</strong> on the same Android
+      device.</li>
+    <li>Open FamilyFilterTV once from the launcher so you can pick a filter profile (default
+      <strong>Family</strong>) and, optionally, whether subtitles are drawn on screen — muting works
+      either way.</li>
+    <li>In Stremio, start any title, open the <strong>Player</strong> menu on the control bar (the
+      picture-in-frame icon) and choose <strong>External</strong>.</li>
+    <li>Android shows an "Open with" chooser — pick <strong>FamilyFilterTV</strong> and tap
+      <strong>Always</strong> so Stremio goes straight to it from then on.</li>
+    <li>Play as normal. A small banner at the top of the screen for the first few seconds shows where
+      the subtitles came from, or says so plainly if none were found — filtering only works where
+      subtitles exist for that title.</li>
+  </ol>
+
+  <h2>Known limits</h2>
+  <ul>
+    <li>Some phones and boxes don't decode 10-bit HEVC video in hardware — playback may stutter or
+      fail on those streams regardless of FamilyFilterTV.</li>
+    <li>Filtering depends entirely on a matching subtitle track being available. If Stremio's
+      add-ons can't find subtitles for a title, FamilyFilterTV plays it unfiltered and says so on
+      screen.</li>
+  </ul>
+
+  <p>Read the full <a href="privacy.html">privacy policy</a> and <a href="terms.html">terms</a>, or
+  visit <a href="support.html">support</a> if something isn't working.</p>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    FamilyFilterTV · Jacques du Preez · South Africa ·
+    <a href="mailto:jacquesjdupreez@gmail.com">jacquesjdupreez@gmail.com</a>
+  </div>
+</footer>
+</body>
+</html>
