@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Link this TV — FamilyFilterTV</title>
+<meta name="description" content="Link your TV to FamilyFilterTV using the code shown on screen.">
+<link rel="stylesheet" href="style.css">
+<style>
+  .code-display {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: clamp(2.6rem, 12vw, 4.5rem);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-align: center;
+    color: var(--purple-dark);
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 0.5em 0.3em;
+    margin: 1.2em 0;
+    word-break: break-all;
+  }
+  .code-note {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin-top: -0.6em;
+  }
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <svg class="glyph" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M3 9v6h4l5 4V5L7 9H3z" fill="#fff"/>
+        <path d="M16 4l5 16" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      FamilyFilterTV
+    </a>
+    <nav class="site">
+      <a href="index.html">Home</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="support.html">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1>Link this TV</h1>
+
+  <div id="code-block" hidden>
+    <p class="code-display" id="code-display"></p>
+    <p class="code-note">The code expires after 10 minutes; the TV shows a new one automatically.</p>
+  </div>
+
+  <p id="no-code-message" hidden>No linking code was found in this link. On the TV, open
+  FamilyFilterTV and look for the code on screen, then open this page again using the link or QR
+  code shown there.</p>
+
+  <div class="panel">
+    <strong>To link</strong>
+    <ol id="steps">
+      <li>Open FamilyFilterTV on your phone.</li>
+      <li>Tap <strong>Link a TV</strong>.</li>
+      <li>Enter the code <strong id="step-code">shown above</strong>.</li>
+    </ol>
+  </div>
+
+  <p><a class="btn" href="https://play.google.com/store/apps/details?id=com.familyfiltertv.app">Get
+  FamilyFilterTV on Google Play</a></p>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    FamilyFilterTV · Jacques du Preez · South Africa ·
+    <a href="mailto:jacquesjdupreez@gmail.com">jacquesjdupreez@gmail.com</a>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var params = new URLSearchParams(window.location.search);
+  var raw = (params.get('code') || '').trim().toUpperCase().replace(/[^A-Z0-9]/g, '');
+  var codeBlock = document.getElementById('code-block');
+  var noCodeMessage = document.getElementById('no-code-message');
+  var stepCode = document.getElementById('step-code');
+
+  if (raw.length > 0) {
+    var display = raw.length > 3 ? raw.slice(0, 3) + '-' + raw.slice(3) : raw;
+    document.getElementById('code-display').textContent = display;
+    codeBlock.hidden = false;
+    stepCode.textContent = display;
+  } else {
+    noCodeMessage.hidden = false;
+    stepCode.textContent = 'shown on your TV';
+  }
+})();
+</script>
+</body>
+</html>
