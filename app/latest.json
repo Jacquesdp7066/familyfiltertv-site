@@ -1,9 +1,9 @@
 {
-  "versionCode": 7,
-  "versionName": "0.2.2",
-  "apkUrl": "https://github.com/Jacquesdp7066/familyfiltertv-releases/releases/latest/download/FamilyFilterTV-direct.apk",
-  "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "versionCode": 8,
+  "versionName": "0.2.3",
+  "apkUrl": "https://github.com/Jacquesdp7066/familyfiltertv-releases/releases/download/v0.2.3/FamilyFilterTV-0.2.3-direct.apk",
+  "sha256": "0e3992c8d60c43abb10b9aa6bc0a70647c8ecd94e8dfac892679a297facd507c",
   "minSupportedVersionCode": 0,
-  "notes": "Placeholder manifest - not a real release. CI overwrites this file on the first tagged direct-release build.",
-  "publishedAt": "2026-09-15T00:00:00Z"
+  "notes": "First direct-install release: sign in with Google, clearer account setup, self-updates.",
+  "publishedAt": "2026-09-15T11:48:21Z"
 }
