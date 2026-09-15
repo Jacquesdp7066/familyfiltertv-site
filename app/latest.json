@@ -1,9 +1,9 @@
 {
-  "versionCode": 9,
-  "versionName": "0.2.4",
+  "versionCode": 10,
+  "versionName": "0.2.5",
   "apkUrl": "https://jacquesdp7066.github.io/familyfiltertv-site/app/FamilyFilterTV-direct.apk",
-  "sha256": "79aa1701829b78e8748ca54a23dc0bc73d19d9bc772dccf550f2df37cfd82599",
+  "sha256": "ce6bb01d656650650179b005a768c65e5ceb6e30decbccc7cf09334f9250a209",
   "minSupportedVersionCode": 0,
-  "notes": "Change the filter on your phone and every linked TV follows. Clearer Subscribe screen and linking errors.",
-  "publishedAt": "2026-09-15T14:05:34Z"
+  "notes": "Play the next episode without leaving the app, see what the torrent is really doing while you wait, and fixes for two muting and resume bugs.",
+  "publishedAt": "2026-09-15T18:00:40Z"
 }
