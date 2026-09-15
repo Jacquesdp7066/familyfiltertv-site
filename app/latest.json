@@ -1,9 +1,9 @@
 {
-  "versionCode": 10,
-  "versionName": "0.2.5",
+  "versionCode": 11,
+  "versionName": "0.2.6",
   "apkUrl": "https://jacquesdp7066.github.io/familyfiltertv-site/app/FamilyFilterTV-direct.apk",
-  "sha256": "ce6bb01d656650650179b005a768c65e5ceb6e30decbccc7cf09334f9250a209",
+  "sha256": "7a649f26638d8485cb3a23f58dac821bee6f0bae98118e2de3477d84c178b9dc",
   "minSupportedVersionCode": 0,
-  "notes": "Play the next episode without leaving the app, see what the torrent is really doing while you wait, and fixes for two muting and resume bugs.",
-  "publishedAt": "2026-09-15T18:00:40Z"
+  "notes": "Fixes: a finished episode now starts over instead of jumping to the credits, Back returns you to Stremio instead of leaving the app, and the download line on the loading screen is no longer cut off.",
+  "publishedAt": "2026-09-15T19:49:41Z"
 }
