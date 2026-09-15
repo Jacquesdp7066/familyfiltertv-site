@@ -5,78 +5,74 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Link this TV — FamilyFilterTV</title>
 <meta name="description" content="Link your TV to FamilyFilterTV using the code shown on screen.">
+<meta name="theme-color" content="#0B0C0F">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="assets/icon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Link this TV">
+<meta property="og:description" content="Enter the code shown on your TV to activate it.">
+<meta property="og:image" content="https://jacquesdp7066.github.io/familyfiltertv-site/assets/feature-graphic.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap">
 <link rel="stylesheet" href="style.css">
-<style>
-  .code-display {
-    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
-    font-size: clamp(2.6rem, 12vw, 4.5rem);
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-align: center;
-    color: var(--purple-dark);
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 0.5em 0.3em;
-    margin: 1.2em 0;
-    word-break: break-all;
-  }
-  .code-note {
-    text-align: center;
-    color: var(--muted);
-    font-size: 0.95rem;
-    margin-top: -0.6em;
-  }
-</style>
 </head>
 <body>
-<header class="site">
+<header class="site-head">
   <div class="wrap">
     <a class="brand" href="index.html">
-      <svg class="glyph" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M3 9v6h4l5 4V5L7 9H3z" fill="#fff"/>
-        <path d="M16 4l5 16" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-      </svg>
+      <img src="assets/icon-192.png" alt="" width="30" height="30">
       FamilyFilterTV
     </a>
-    <nav class="site">
+    <nav class="site-nav" aria-label="Pages">
       <a href="index.html">Home</a>
       <a href="download.html">Download</a>
+      <a href="support.html">Support</a>
       <a href="privacy.html">Privacy</a>
       <a href="terms.html">Terms</a>
-      <a href="support.html">Support</a>
     </nav>
   </div>
 </header>
 
 <main class="wrap">
-  <h1>Link this TV</h1>
+  <h1 class="page-title">Link this TV</h1>
 
   <div id="code-block" hidden>
-    <p class="code-display" id="code-display"></p>
-    <p class="code-note">The code expires after 2 minutes; the TV shows a new one automatically.</p>
+    <div class="code-plate">
+      <p class="code-display" id="code-display"></p>
+      <p class="code-note">The code expires after 2 minutes. The TV shows a new one automatically.</p>
+    </div>
   </div>
 
   <p id="no-code-message" hidden>No linking code was found in this link. On the TV, open
   FamilyFilterTV and look for the code on screen, then open this page again using the link or QR
   code shown there.</p>
 
-  <div class="panel">
-    <strong>To link</strong>
-    <ol id="steps">
-      <li>Open FamilyFilterTV on your phone.</li>
-      <li>Tap <strong>Link a TV</strong>.</li>
-      <li>Enter the code <strong id="step-code">shown above</strong>.</li>
-    </ol>
-  </div>
+  <h2>To link</h2>
+  <ol class="steps">
+    <li><div><p>Open FamilyFilterTV on your phone.</p></div></li>
+    <li><div><p>Tap <strong>Link a TV</strong>.</p></div></li>
+    <li><div><p>Enter the code <strong id="step-code">shown above</strong>.</p></div></li>
+  </ol>
 
-  <p><a class="btn" href="download.html">Get FamilyFilterTV</a></p>
+  <div class="actions">
+    <a class="btn" href="download.html">Get FamilyFilterTV</a>
+  </div>
 </main>
 
-<footer class="site">
+<footer class="site-foot">
   <div class="wrap">
-    FamilyFilterTV · Jacques du Preez · South Africa ·
-    <a href="mailto:jacquesjdupreez@gmail.com">jacquesjdupreez@gmail.com</a>
+    <p>FamilyFilterTV is made by Jacques du Preez in South Africa.</p>
+    <p><a href="mailto:jacquesjdupreez@gmail.com">jacquesjdupreez@gmail.com</a></p>
+    <nav class="foot-nav" aria-label="Footer">
+      <a href="download.html">Download</a>
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </nav>
+    <p class="fine">An independent app. Not affiliated with, or endorsed by, Stremio or Google.</p>
   </div>
 </footer>
 

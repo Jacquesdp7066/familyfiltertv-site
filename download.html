@@ -5,70 +5,59 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Download — FamilyFilterTV</title>
 <meta name="description" content="Get FamilyFilterTV from Google Play, or install it directly on Android TV boxes and phones where Play isn't offered.">
+<meta name="theme-color" content="#0B0C0F">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="assets/icon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Download FamilyFilterTV">
+<meta property="og:description" content="From Google Play, or installed directly on TV boxes that don't offer Play.">
+<meta property="og:image" content="https://jacquesdp7066.github.io/familyfiltertv-site/assets/feature-graphic.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap">
 <link rel="stylesheet" href="style.css">
-<style>
-  .btn.secondary {
-    background: #fff;
-    color: var(--purple-dark);
-    border: 1px solid var(--line);
-  }
-  .btn.secondary:hover {
-    background: var(--panel);
-  }
-  .version-line {
-    font-size: 0.95rem;
-    color: var(--muted);
-    margin: 0.2em 0 1em;
-  }
-  .sha {
-    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
-    font-size: 0.85rem;
-    word-break: break-all;
-  }
-</style>
 </head>
 <body>
-<header class="site">
+<header class="site-head">
   <div class="wrap">
     <a class="brand" href="index.html">
-      <svg class="glyph" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M3 9v6h4l5 4V5L7 9H3z" fill="#fff"/>
-        <path d="M16 4l5 16" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-      </svg>
+      <img src="assets/icon-192.png" alt="" width="30" height="30">
       FamilyFilterTV
     </a>
-    <nav class="site">
+    <nav class="site-nav" aria-label="Pages">
       <a href="index.html">Home</a>
-      <a href="download.html">Download</a>
+      <a href="download.html" aria-current="page">Download</a>
+      <a href="support.html">Support</a>
       <a href="privacy.html">Privacy</a>
       <a href="terms.html">Terms</a>
-      <a href="support.html">Support</a>
     </nav>
   </div>
 </header>
 
 <main class="wrap">
-  <h1>Download FamilyFilterTV</h1>
-  <p>Most Android TVs and phones should install FamilyFilterTV from Google Play. A few TV boxes
-  don't offer Play at all — for those, install the same app directly as an APK.</p>
+  <h1 class="page-title">Download FamilyFilterTV</h1>
+  <p class="lead">Most Android TVs and phones install it from Google Play. A few TV boxes don't
+  offer Play at all — those install the same app directly.</p>
 
-  <h2>Google Play</h2>
-  <p><a class="btn" href="https://play.google.com/store/apps/details?id=com.familyfiltertv.app">Get
-  it on Google Play</a></p>
+  <div class="actions">
+    <a class="btn" href="https://play.google.com/store/apps/details?id=com.familyfiltertv.app">Get it on Google Play</a>
+  </div>
 
   <h2>Not offered on your TV? Install directly</h2>
   <p>This is the same app, signed and built from the same source, distributed as a plain APK
   instead of through the Play Store.</p>
   <div class="panel">
     <p class="version-line" id="version-line">Checking for the latest version…</p>
-    <p id="notes-line" hidden></p>
-    <p><a class="btn" id="download-apk-btn"
+    <p class="muted" id="notes-line" hidden></p>
+    <p><a class="btn-quiet" id="download-apk-btn"
       href="https://github.com/Jacquesdp7066/familyfiltertv-releases/releases/latest/download/FamilyFilterTV-direct.apk">Download
       APK</a></p>
     <p class="muted">SHA-256: <span class="sha" id="sha-line">unavailable</span></p>
   </div>
 
-  <h2>Android TV via the Downloader app</h2>
+  <h2>Android TV, using the Downloader app</h2>
   <ol>
     <li>On the TV, install <strong>Downloader</strong> (by AFTVnews) from the Google Play Store.</li>
     <li>Allow it to install unknown apps: on Android 7, <strong>Settings › Apps › Security &amp;
@@ -106,10 +95,17 @@
   </div>
 </main>
 
-<footer class="site">
+<footer class="site-foot">
   <div class="wrap">
-    FamilyFilterTV · Jacques du Preez · South Africa ·
-    <a href="mailto:jacquesjdupreez@gmail.com">jacquesjdupreez@gmail.com</a>
+    <p>FamilyFilterTV is made by Jacques du Preez in South Africa.</p>
+    <p><a href="mailto:jacquesjdupreez@gmail.com">jacquesjdupreez@gmail.com</a></p>
+    <nav class="foot-nav" aria-label="Footer">
+      <a href="download.html">Download</a>
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </nav>
+    <p class="fine">An independent app. Not affiliated with, or endorsed by, Stremio or Google.</p>
   </div>
 </footer>
 

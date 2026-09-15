@@ -3,32 +3,41 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Privacy Policy — FamilyFilterTV</title>
+<title>Privacy policy — FamilyFilterTV</title>
 <meta name="description" content="FamilyFilterTV privacy policy: what data the app does and does not collect, what it sends to Stremio's servers, and how the Diagnostics screen works.">
+<meta name="theme-color" content="#0B0C0F">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="assets/icon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="FamilyFilterTV privacy policy">
+<meta property="og:description" content="What the app collects, what it sends, and what it never uploads.">
+<meta property="og:image" content="https://jacquesdp7066.github.io/familyfiltertv-site/assets/feature-graphic.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site">
+<header class="site-head">
   <div class="wrap">
     <a class="brand" href="index.html">
-      <svg class="glyph" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M3 9v6h4l5 4V5L7 9H3z" fill="#fff"/>
-        <path d="M16 4l5 16" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-      </svg>
+      <img src="assets/icon-192.png" alt="" width="30" height="30">
       FamilyFilterTV
     </a>
-    <nav class="site">
+    <nav class="site-nav" aria-label="Pages">
       <a href="index.html">Home</a>
       <a href="download.html">Download</a>
-      <a href="privacy.html">Privacy</a>
-      <a href="terms.html">Terms</a>
       <a href="support.html">Support</a>
+      <a href="privacy.html" aria-current="page">Privacy</a>
+      <a href="terms.html">Terms</a>
     </nav>
   </div>
 </header>
 
 <main class="wrap">
-  <h1>Privacy Policy</h1>
+  <h1 class="page-title">Privacy policy</h1>
   <p class="muted">Effective date: 14 September 2026</p>
 
   <p>This policy covers the FamilyFilterTV Android app (TV and phone). It's written in plain
@@ -48,27 +57,29 @@
   <h2>Network requests the app makes</h2>
   <p>FamilyFilterTV talks to exactly three network destinations, all necessary for it to function as
   Stremio's external player:</p>
-  <table>
-    <thead><tr><th>Destination</th><th>Purpose</th><th>What is sent</th></tr></thead>
-    <tbody>
-      <tr>
-        <td>Stremio's own local server running on your device (<code>127.0.0.1</code>)</td>
-        <td>Receive the stream Stremio hands off to FamilyFilterTV for playback</td>
-        <td>Local device traffic only — never leaves the device</td>
-      </tr>
-      <tr>
-        <td><code>v3-cinemeta.strem.io</code> (Stremio's public metadata service)</td>
-        <td>Look up a title's canonical name/episode so subtitles can be matched correctly</td>
-        <td>The release name and/or IMDb id of the title being played</td>
-      </tr>
-      <tr>
-        <td><code>opensubtitles-v3.strem.io</code> (Stremio's free OpenSubtitles add-on)</td>
-        <td>Fetch a matching subtitle file when the video has no built-in subtitle track</td>
-        <td>The video's file hash and file size, and/or the IMDb id and episode number, used to find
-          a matching subtitle</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Destination</th><th>Purpose</th><th>What is sent</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Stremio's own local server running on your device (<code>127.0.0.1</code>)</td>
+          <td>Receive the stream Stremio hands off to FamilyFilterTV for playback</td>
+          <td>Local device traffic only — never leaves the device</td>
+        </tr>
+        <tr>
+          <td><code>v3-cinemeta.strem.io</code> (Stremio's public metadata service)</td>
+          <td>Look up a title's canonical name/episode so subtitles can be matched correctly</td>
+          <td>The release name and/or IMDb id of the title being played</td>
+        </tr>
+        <tr>
+          <td><code>opensubtitles-v3.strem.io</code> (Stremio's free OpenSubtitles add-on)</td>
+          <td>Fetch a matching subtitle file when the video has no built-in subtitle track</td>
+          <td>The video's file hash and file size, and/or the IMDb id and episode number, used to find
+            a matching subtitle</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
   <p>All three connections use HTTPS (the local Stremio connection is loopback traffic on the
   device itself). No video, audio, or subtitle content you watch is ever uploaded anywhere by
   FamilyFilterTV — subtitle files are only <em>downloaded</em>, to be read locally during playback.</p>
@@ -103,10 +114,17 @@
   Jacques du Preez, South Africa.</p>
 </main>
 
-<footer class="site">
+<footer class="site-foot">
   <div class="wrap">
-    FamilyFilterTV · Jacques du Preez · South Africa ·
-    <a href="mailto:jacquesjdupreez@gmail.com">jacquesjdupreez@gmail.com</a>
+    <p>FamilyFilterTV is made by Jacques du Preez in South Africa.</p>
+    <p><a href="mailto:jacquesjdupreez@gmail.com">jacquesjdupreez@gmail.com</a></p>
+    <nav class="foot-nav" aria-label="Footer">
+      <a href="download.html">Download</a>
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </nav>
+    <p class="fine">An independent app. Not affiliated with, or endorsed by, Stremio or Google.</p>
   </div>
 </footer>
 </body>

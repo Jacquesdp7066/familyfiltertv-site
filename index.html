@@ -3,85 +3,187 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FamilyFilterTV — real-time profanity muting for Stremio</title>
-<meta name="description" content="FamilyFilterTV is Stremio's external video player. It plays your stream and mutes its own audio during profane subtitle lines. No accounts, no analytics, no ads.">
+<title>FamilyFilterTV — mutes the swearing, keeps the show</title>
+<meta name="description" content="FamilyFilterTV is an Android TV and phone app that plays what you start in Stremio and mutes the audio for the seconds a line is profane. R250 a year, first 14 days free.">
+<meta name="theme-color" content="#0B0C0F">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="assets/icon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="FamilyFilterTV">
+<meta property="og:description" content="Mutes the swearing. Keeps the show.">
+<meta property="og:image" content="https://jacquesdp7066.github.io/familyfiltertv-site/assets/feature-graphic.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site">
+<header class="site-head">
   <div class="wrap">
     <a class="brand" href="index.html">
-      <svg class="glyph" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M3 9v6h4l5 4V5L7 9H3z" fill="#fff"/>
-        <path d="M16 4l5 16" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-      </svg>
+      <img src="assets/icon-192.png" alt="" width="30" height="30">
       FamilyFilterTV
     </a>
-    <nav class="site">
-      <a href="index.html">Home</a>
+    <nav class="site-nav" aria-label="Pages">
+      <a href="index.html" aria-current="page">Home</a>
       <a href="download.html">Download</a>
+      <a href="support.html">Support</a>
       <a href="privacy.html">Privacy</a>
       <a href="terms.html">Terms</a>
-      <a href="support.html">Support</a>
     </nav>
   </div>
 </header>
 
 <main class="wrap">
-  <h1>Watch Stremio without the swearing</h1>
-  <p>FamilyFilterTV is an Android app — TV and phone — that plugs into
-  <a href="https://www.stremio.com/" target="_blank" rel="noopener">Stremio</a> as its external video
-  player. Start anything in Stremio, hand it to FamilyFilterTV, and it plays the stream normally but
-  mutes its own audio for the exact seconds a subtitle line is profane. Nothing is cut, blurred, or
-  skipped — the picture keeps playing, the sound just drops out and comes back.</p>
+  <div class="hero">
+    <div>
+      <h1>Mutes the swearing. Keeps the show.</h1>
+      <p class="lead">FamilyFilterTV plays what you start in Stremio and drops the sound for the
+      few seconds a line is profane.</p>
+      <div class="actions">
+        <a class="btn" href="https://play.google.com/store/apps/details?id=com.familyfiltertv.app">Get it on Google Play</a>
+        <a class="btn-quiet" href="download.html">Other ways to install</a>
+      </div>
+    </div>
+    <img class="hero-mark" src="assets/icon-512.png" width="152" height="152"
+      alt="The FamilyFilterTV app icon: a shield over a television, with a muted-speaker badge.">
+  </div>
 
-  <div class="panel">
-    <strong>What it does</strong>
+  <div class="meter">
+    <div class="meter-bars" aria-hidden="true">
+        <b style="--h:50px"></b>
+        <b style="--h:78px"></b>
+        <b style="--h:27px"></b>
+        <b style="--h:25px"></b>
+        <b style="--h:39px"></b>
+        <b style="--h:22px"></b>
+        <b style="--h:19px"></b>
+        <b style="--h:20px"></b>
+        <b style="--h:24px"></b>
+        <b style="--h:54px"></b>
+        <b style="--h:40px"></b>
+        <b style="--h:21px"></b>
+        <b style="--h:71px"></b>
+        <b style="--h:55px"></b>
+        <b style="--h:33px"></b>
+        <b style="--h:32px"></b>
+        <b style="--h:20px"></b>
+        <b style="--h:25px"></b>
+        <b style="--h:23px"></b>
+        <b style="--h:13px"></b>
+        <b style="--h:38px"></b>
+        <b style="--h:56px"></b>
+        <b style="--h:36px"></b>
+        <b style="--h:50px"></b>
+        <b class="q" style="--h:41px;--i:0"></b>
+        <b class="q" style="--h:49px;--i:1"></b>
+        <b class="q" style="--h:49px;--i:2"></b>
+        <b class="q" style="--h:15px;--i:3"></b>
+        <b class="q" style="--h:20px;--i:4"></b>
+        <b class="q" style="--h:27px;--i:5"></b>
+        <b class="q" style="--h:20px;--i:6"></b>
+        <b class="q" style="--h:26px;--i:7"></b>
+        <b class="q" style="--h:36px;--i:8"></b>
+        <b class="q" style="--h:44px;--i:9"></b>
+        <b class="q" style="--h:73px;--i:10"></b>
+        <b class="q" style="--h:35px;--i:11"></b>
+        <b class="q" style="--h:27px;--i:12"></b>
+        <b class="q" style="--h:60px;--i:13"></b>
+        <b class="q" style="--h:31px;--i:14"></b>
+        <b class="q" style="--h:19px;--i:15"></b>
+        <b style="--h:20px"></b>
+        <b style="--h:20px"></b>
+        <b style="--h:33px"></b>
+        <b style="--h:34px"></b>
+        <b style="--h:18px"></b>
+        <b style="--h:68px"></b>
+        <b style="--h:66px"></b>
+        <b style="--h:30px"></b>
+        <b style="--h:43px"></b>
+        <b style="--h:33px"></b>
+        <b style="--h:30px"></b>
+        <b style="--h:24px"></b>
+        <b style="--h:12px"></b>
+        <b style="--h:25px"></b>
+        <b style="--h:44px"></b>
+        <b style="--h:26px"></b>
+    </div>
+    <p class="meter-note">Nothing is cut, blurred or skipped. The picture carries on and the sound
+    comes straight back.</p>
+  </div>
+
+  <h2>How it works</h2>
+  <ol class="steps">
+    <li>
+      <div>
+        <h3>Install it and sign in</h3>
+        <p>Put FamilyFilterTV on your Android TV and on your phone, then sign in with Google or
+        an email address.</p>
+      </div>
+    </li>
+    <li>
+      <div>
+        <h3>Activate the TV from your phone</h3>
+        <p>The TV shows a short code. Open FamilyFilterTV on your phone, tap <strong>Link a
+        TV</strong> and type the code in.</p>
+      </div>
+    </li>
+    <li>
+      <div>
+        <h3>Start watching</h3>
+        <p>In Stremio, start a title and hand it to FamilyFilterTV as the player. Pick how strict
+        the filter should be — off, mild, family or strict.</p>
+      </div>
+    </li>
+  </ol>
+
+  <h2>What it costs</h2>
+  <div class="price">
+    <p class="price-figure"><span>R250</span> <span>a year</span></p>
     <ul>
-      <li>Registers as an external player Stremio can hand a stream to.</li>
-      <li>Reads subtitles from the video's own text track, or fetches them from Stremio's free
-        OpenSubtitles add-on when the video doesn't have any.</li>
-      <li>Mutes its own audio output for the duration of any subtitle line that matches your chosen
-        filter strength (Off / Mild / Family / Strict). It never edits, uploads, or redistributes the
-        video or subtitle file — filtering happens locally, live, during playback.</li>
-      <li>Works on Android TV (D-pad, big-screen layout) and on Android phones (touch).</li>
-      <li>No accounts, no sign-in, no analytics, no ads in this version.</li>
+      <li>The first 14 days are free.</li>
+      <li>Up to three devices on one account.</li>
+      <li>Android TV and Android phones.</li>
     </ul>
   </div>
 
-  <h2>Setting it up with Stremio</h2>
-  <ol>
-    <li>Install <strong>Stremio</strong> and <strong>FamilyFilterTV</strong> on the same Android
-      device.</li>
-    <li>Open FamilyFilterTV once from the launcher so you can pick a filter profile (default
-      <strong>Family</strong>) and, optionally, whether subtitles are drawn on screen — muting works
-      either way.</li>
-    <li>In Stremio, start any title, open the <strong>Player</strong> menu on the control bar (the
-      picture-in-frame icon) and choose <strong>External</strong>.</li>
-    <li>Android shows an "Open with" chooser — pick <strong>FamilyFilterTV</strong> and tap
-      <strong>Always</strong> so Stremio goes straight to it from then on.</li>
-    <li>Play as normal. A small banner at the top of the screen for the first few seconds shows where
-      the subtitles came from, or says so plainly if none were found — filtering only works where
-      subtitles exist for that title.</li>
-  </ol>
-
-  <h2>Known limits</h2>
-  <ul>
-    <li>Some phones and boxes don't decode 10-bit HEVC video in hardware — playback may stutter or
-      fail on those streams regardless of FamilyFilterTV.</li>
-    <li>Filtering depends entirely on a matching subtitle track being available. If Stremio's
-      add-ons can't find subtitles for a title, FamilyFilterTV plays it unfiltered and says so on
-      screen.</li>
-  </ul>
-
-  <p>Read the full <a href="privacy.html">privacy policy</a> and <a href="terms.html">terms</a>, or
-  visit <a href="support.html">support</a> if something isn't working.</p>
+  <h2>Questions</h2>
+  <div class="faq">
+    <div>
+      <h3>What happens if a title has no subtitles?</h3>
+      <p>Filtering reads the subtitle line to know when to mute, so a title with no subtitles plays
+      unfiltered. FamilyFilterTV tells you on screen when that is the case.</p>
+    </div>
+    <div>
+      <h3>Does it cut or skip anything?</h3>
+      <p>No. Only the sound drops, and only for the length of that line.</p>
+    </div>
+    <div>
+      <h3>Which devices does it run on?</h3>
+      <p>Android TVs and TV boxes, and Android phones. A few TV boxes don't offer the Play Store at
+      all — <a href="download.html">install it directly</a> on those.</p>
+    </div>
+    <div>
+      <h3>Something isn't working.</h3>
+      <p><a href="support.html">Support</a> has the setup steps, the known limits, and an address to
+      write to.</p>
+    </div>
+  </div>
 </main>
 
-<footer class="site">
+<footer class="site-foot">
   <div class="wrap">
-    FamilyFilterTV · Jacques du Preez · South Africa ·
-    <a href="mailto:jacquesjdupreez@gmail.com">jacquesjdupreez@gmail.com</a>
+    <p>FamilyFilterTV is made by Jacques du Preez in South Africa.</p>
+    <p><a href="mailto:jacquesjdupreez@gmail.com">jacquesjdupreez@gmail.com</a></p>
+    <nav class="foot-nav" aria-label="Footer">
+      <a href="download.html">Download</a>
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </nav>
+    <p class="fine">An independent app. Not affiliated with, or endorsed by, Stremio or Google.</p>
   </div>
 </footer>
 </body>
