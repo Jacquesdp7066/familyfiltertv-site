@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Download — FamilyFilterTV</title>
+<meta name="description" content="Get FamilyFilterTV from Google Play, or install it directly on Android TV boxes and phones where Play isn't offered.">
+<link rel="stylesheet" href="style.css">
+<style>
+  .btn.secondary {
+    background: #fff;
+    color: var(--purple-dark);
+    border: 1px solid var(--line);
+  }
+  .btn.secondary:hover {
+    background: var(--panel);
+  }
+  .version-line {
+    font-size: 0.95rem;
+    color: var(--muted);
+    margin: 0.2em 0 1em;
+  }
+  .sha {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.85rem;
+    word-break: break-all;
+  }
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <svg class="glyph" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M3 9v6h4l5 4V5L7 9H3z" fill="#fff"/>
+        <path d="M16 4l5 16" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      FamilyFilterTV
+    </a>
+    <nav class="site">
+      <a href="index.html">Home</a>
+      <a href="download.html">Download</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="support.html">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1>Download FamilyFilterTV</h1>
+  <p>Most Android TVs and phones should install FamilyFilterTV from Google Play. A few TV boxes
+  don't offer Play at all — for those, install the same app directly as an APK.</p>
+
+  <h2>Google Play</h2>
+  <p><a class="btn" href="https://play.google.com/store/apps/details?id=com.familyfiltertv.app">Get
+  it on Google Play</a></p>
+
+  <h2>Not offered on your TV? Install directly</h2>
+  <p>This is the same app, signed and built from the same source, distributed as a plain APK
+  instead of through the Play Store.</p>
+  <div class="panel">
+    <p class="version-line" id="version-line">Checking for the latest version…</p>
+    <p id="notes-line" hidden></p>
+    <p><a class="btn" id="download-apk-btn"
+      href="https://github.com/Jacquesdp7066/familyfiltertv-releases/releases/latest/download/FamilyFilterTV-direct.apk">Download
+      APK</a></p>
+    <p class="muted">SHA-256: <span class="sha" id="sha-line">unavailable</span></p>
+  </div>
+
+  <h2>Android TV via the Downloader app</h2>
+  <ol>
+    <li>On the TV, install <strong>Downloader</strong> (by AFTVnews) from the Google Play Store.</li>
+    <li>Allow it to install unknown apps: on Android 7, <strong>Settings › Apps › Security &amp;
+      restrictions › Unknown sources</strong>; on Android 8 and later,
+      <strong>Settings › Apps › Special app access › Install unknown apps</strong>, then enable it
+      for Downloader.</li>
+    <li>Open Downloader and enter this address:
+      <code>jacquesdp7066.github.io/familyfiltertv-site/apk</code></li>
+    <li>Choose <strong>Install</strong> when it finishes downloading.</li>
+    <li>Open FamilyFilterTV. If it asks to install unknown apps too, allow it — that's what lets it
+      check for and install its own updates later from its Settings screen.</li>
+  </ol>
+
+  <h2>Phone</h2>
+  <ol>
+    <li>Open this page on the phone and tap <strong>Download APK</strong> above.</li>
+    <li>When Android or your browser asks about installing unknown apps, allow it for this one
+      install.</li>
+    <li>Open the downloaded file to install.</li>
+  </ol>
+
+  <h2>Good to know</h2>
+  <div class="panel">
+    <ul>
+      <li>You can't switch between the Play version and the direct version by updating over the
+        top of one another — they're signed differently. Uninstall one before installing the
+        other.</li>
+      <li>The direct build checks for updates itself — open FamilyFilterTV, go to
+        <strong>Settings</strong>, and use <strong>Check for updates</strong> any time, or wait for
+        it to check automatically.</li>
+      <li>To verify a downloaded APK yourself, compute its SHA-256 (for example
+        <code>shasum -a 256 FamilyFilterTV-direct.apk</code> or an equivalent on-device tool) and
+        compare it to the value shown above.</li>
+    </ul>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    FamilyFilterTV · Jacques du Preez · South Africa ·
+    <a href="mailto:jacquesjdupreez@gmail.com">jacquesjdupreez@gmail.com</a>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var versionLine = document.getElementById('version-line');
+  var notesLine = document.getElementById('notes-line');
+  var shaLine = document.getElementById('sha-line');
+
+  fetch('app/latest.json', { cache: 'no-store' })
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      if (!data || !data.versionName || !data.sha256) { throw new Error('bad manifest'); }
+      versionLine.textContent = 'Latest version: ' + data.versionName;
+      if (data.notes) {
+        notesLine.textContent = data.notes;
+        notesLine.hidden = false;
+      }
+      shaLine.textContent = data.sha256;
+    })
+    .catch(function () {
+      versionLine.textContent = 'Latest version: see the download button below.';
+    });
+})();
+</script>
+</body>
+</html>

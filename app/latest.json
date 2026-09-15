@@ -1,0 +1,9 @@
+{
+  "versionCode": 7,
+  "versionName": "0.2.2",
+  "apkUrl": "https://github.com/Jacquesdp7066/familyfiltertv-releases/releases/latest/download/FamilyFilterTV-direct.apk",
+  "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "minSupportedVersionCode": 0,
+  "notes": "Placeholder manifest - not a real release. CI overwrites this file on the first tagged direct-release build.",
+  "publishedAt": "2026-09-15T00:00:00Z"
+}
