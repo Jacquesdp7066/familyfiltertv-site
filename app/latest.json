@@ -1,9 +1,9 @@
 {
-  "versionCode": 8,
-  "versionName": "0.2.3",
+  "versionCode": 9,
+  "versionName": "0.2.4",
   "apkUrl": "https://jacquesdp7066.github.io/familyfiltertv-site/app/FamilyFilterTV-direct.apk",
-  "sha256": "0e3992c8d60c43abb10b9aa6bc0a70647c8ecd94e8dfac892679a297facd507c",
+  "sha256": "79aa1701829b78e8748ca54a23dc0bc73d19d9bc772dccf550f2df37cfd82599",
   "minSupportedVersionCode": 0,
-  "notes": "First direct-install release: sign in with Google, clearer account setup, self-updates.",
-  "publishedAt": "2026-09-15T11:48:21Z"
+  "notes": "Change the filter on your phone and every linked TV follows. Clearer Subscribe screen and linking errors.",
+  "publishedAt": "2026-09-15T14:05:34Z"
 }
