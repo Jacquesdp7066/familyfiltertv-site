@@ -1,9 +1,9 @@
 {
-  "versionCode": 11,
-  "versionName": "0.2.6",
+  "versionCode": 12,
+  "versionName": "0.2.7",
   "apkUrl": "https://jacquesdp7066.github.io/familyfiltertv-site/app/FamilyFilterTV-direct.apk",
-  "sha256": "7a649f26638d8485cb3a23f58dac821bee6f0bae98118e2de3477d84c178b9dc",
+  "sha256": "cd9ab52234d035d6768e9bb2e75cce96d52397339f9c936b28dfb3d0ae3ab18e",
   "minSupportedVersionCode": 0,
-  "notes": "Fixes: a finished episode now starts over instead of jumping to the credits, Back returns you to Stremio instead of leaving the app, and the download line on the loading screen is no longer cut off.",
-  "publishedAt": "2026-09-15T19:49:41Z"
+  "notes": "FamilyFilterTV 0.2.7.",
+  "publishedAt": "2026-09-16T09:53:59Z"
 }
