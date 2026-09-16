@@ -1,9 +1,9 @@
 {
-  "versionCode": 13,
-  "versionName": "0.2.8",
+  "versionCode": 14,
+  "versionName": "0.2.9",
   "apkUrl": "https://jacquesdp7066.github.io/familyfiltertv-site/app/FamilyFilterTV-direct.apk",
-  "sha256": "cb3e3e6f0ddafc8cc93c24dd693d4afd5b5c4e6230c94b8794656734c4980a45",
+  "sha256": "f703f895a8b084c5ccf3cac2186fc1103bfbd6eadb84ae2249d7c55c4005bec2",
   "minSupportedVersionCode": 0,
-  "notes": "FamilyFilterTV 0.2.8.",
-  "publishedAt": "2026-09-16T17:08:38Z"
+  "notes": "FamilyFilterTV 0.2.9.",
+  "publishedAt": "2026-09-16T18:15:53Z"
 }
