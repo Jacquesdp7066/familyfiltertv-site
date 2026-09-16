@@ -5,4 +5,4 @@ Allow: /
 Disallow: /link.html
 Disallow: /apk/
 
-Sitemap: https://jacquesdp7066.github.io/familyfiltertv-site/sitemap.xml
+Sitemap: https://familyfiltertv.com/sitemap.xml

@@ -48,11 +48,11 @@ and it updates itself from there afterwards.
 
 ## Pages
 
-- [Home](https://jacquesdp7066.github.io/familyfiltertv-site/): what it does, how to start, pricing, common questions.
-- [Download](https://jacquesdp7066.github.io/familyfiltertv-site/download.html): Google Play, and direct install for boxes without Play.
-- [Support](https://jacquesdp7066.github.io/familyfiltertv-site/support.html): setup steps, known limits, how to get help.
-- [Terms of use](https://jacquesdp7066.github.io/familyfiltertv-site/terms.html): subscription, trial, device limits, cancellation.
-- [Privacy policy](https://jacquesdp7066.github.io/familyfiltertv-site/privacy.html): what is stored, what payment involves, what third parties see.
+- [Home](https://familyfiltertv.com/): what it does, how to start, pricing, common questions.
+- [Download](https://familyfiltertv.com/download.html): Google Play, and direct install for boxes without Play.
+- [Support](https://familyfiltertv.com/support.html): setup steps, known limits, how to get help.
+- [Terms of use](https://familyfiltertv.com/terms.html): subscription, trial, device limits, cancellation.
+- [Privacy policy](https://familyfiltertv.com/privacy.html): what is stored, what payment involves, what third parties see.
 
 ## Honest limits
 
