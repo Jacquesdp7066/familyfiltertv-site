@@ -1,21 +1,32 @@
 # FamilyFilterTV
 
-> An Android TV and Android phone app that plays what you start in Stremio and mutes the audio for
-> the few seconds a subtitle line contains profanity. Nothing is cut and nothing is skipped: only
-> the sound drops, and only for the length of that line.
+> A profanity filter that runs on the television itself — an Android TV, an Android TV box, or an
+> Android phone — rather than in a desktop browser. It plays what you start in Stremio and mutes the
+> audio for the few seconds a subtitle line contains profanity. Nothing is cut and nothing is
+> skipped: only the sound drops, and only for the length of that line. The filter is set once on a
+> parent's phone and every linked television in the household follows it.
 
 ## What it is
 
-FamilyFilterTV is used as Stremio's external player. You start a film or episode in Stremio the way
-you normally would, hand it to FamilyFilterTV, and it plays the same stream with the swearing muted.
-Because it reads the subtitle track to know when to mute, a title with no subtitles plays unfiltered,
-and the app says so on screen rather than pretending otherwise.
+FamilyFilterTV is an app installed on the television a family actually watches together — an Android
+TV, an Android TV box, or an Android phone. It is not a browser extension and there is no computer
+in the loop: nothing is cast, mirrored or streamed from a laptop. The app is used as Stremio's
+external player, so you start a film or episode in Stremio the way you normally would, hand it to
+FamilyFilterTV, and it plays the same stream on the TV with the swearing muted. Because it reads the
+subtitle track to know when to mute, a title with no subtitles plays unfiltered, and the app says so
+on screen rather than pretending otherwise.
 
-It is aimed at parents and other adults who want to watch ordinary films and series at home without
-the language, and who do not want to give up on a title or rely on an edited version existing.
+The filter is a household setting rather than a per-device one. A parent chooses the strength on
+their phone, and every television linked to the account follows, which is what makes it usable in a
+house where the people watching are not the people deciding.
+
+It is aimed at parents and other adults who want to watch ordinary films and series on the living
+room television without the language, and who do not want to give up on a title or rely on an edited
+version existing.
 
 ## How it works
 
+- It runs on the television itself, as the player Stremio hands playback to.
 - You choose how strict the filter is: off, mild, family or strict.
 - The filter reads the subtitle line, works out the seconds that line is on screen, and mutes for
   that window with a small margin either side.
@@ -48,6 +59,8 @@ and it updates itself from there afterwards.
 - Filtering depends on a subtitle track existing for the title being played.
 - It mutes profanity in speech. It does not detect or act on violence, nudity or other visual content.
 - It is a player, not a source of films or series. You bring your own, through Stremio.
+- It plays what you start in Stremio only. It does not open, unlock or filter subscription streaming
+  services, whose apps play inside their own players that nothing else on the television can reach.
 
 ## Not affiliated
 

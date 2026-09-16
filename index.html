@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FamilyFilterTV — mutes the swearing, keeps the show</title>
-<meta name="description" content="FamilyFilterTV is an Android TV and phone app that plays what you start in Stremio and mutes the audio for the seconds a line is profane. US$14.99 a year, first 14 days free.">
+<title>FamilyFilterTV — watch it together on the TV, without the language</title>
+<meta name="description" content="FamilyFilterTV runs on the television itself. It plays what you start in Stremio and mutes the seconds a line is profane, and one setting on a parent's phone covers every linked TV in the house. US$14.99 a year, first 14 days free.">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta name="theme-color" content="#0B0C0F">
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
@@ -12,8 +12,8 @@
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <meta property="og:url" content="https://jacquesdp7066.github.io/familyfiltertv-site/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="FamilyFilterTV">
-<meta property="og:description" content="Mutes the swearing. Keeps the show.">
+<meta property="og:title" content="FamilyFilterTV — a language filter that runs on your television">
+<meta property="og:description" content="Watch it together on the TV, without the language. Set the filter on your phone; every linked television follows.">
 <meta property="og:image" content="https://jacquesdp7066.github.io/familyfiltertv-site/assets/feature-graphic.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,16 +28,18 @@
   "name": "FamilyFilterTV",
   "operatingSystem": "Android, Android TV",
   "applicationCategory": "MultimediaApplication",
-  "description": "FamilyFilterTV plays what you start in Stremio and mutes the audio for the few seconds a subtitle line contains profanity. Nothing is cut or skipped; only the sound drops. Filter strength is set per household: off, mild, family or strict.",
+  "description": "FamilyFilterTV runs on the television itself: an Android TV, a TV box, or an Android phone. It plays what you start in Stremio and mutes the audio for the few seconds a subtitle line contains profanity. Nothing is cut or skipped; only the sound drops. Filter strength is set once on a parent's phone - off, mild, family or strict - and every linked television in the household follows it.",
   "url": "https://jacquesdp7066.github.io/familyfiltertv-site/",
   "downloadUrl": "https://play.google.com/store/apps/details?id=com.familyfiltertv.app",
   "installUrl": "https://jacquesdp7066.github.io/familyfiltertv-site/download.html",
   "softwareVersion": "0.2.6",
   "featureList": [
-    "Mutes profanity in Stremio playback on Android TV and Android phones",
+    "Runs on the television itself: Android TVs, Android TV boxes and Android phones",
+    "Plays what you start in Stremio, with the swearing muted",
+    "One filter setting on a parent's phone applies to every linked television",
+    "Link a television by typing in the short code it shows on screen",
     "Filter strength: off, mild, family or strict",
-    "Settings set on the phone apply to every linked device",
-    "Link a TV from your phone with a short code",
+    "Three devices included on one account, up to six",
     "Plays the next episode of the same download automatically",
     "Direct install for TV boxes without the Play Store"
   ],
@@ -80,7 +82,23 @@
       "name": "Which devices does it run on?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Android TVs and TV boxes, and Android phones. A few TV boxes do not offer the Play Store at all, and FamilyFilterTV can be installed directly on those."
+        "text": "The television itself: Android TVs and Android TV boxes, as well as Android phones. There is no computer in the loop and nothing to cast. A few TV boxes do not offer the Play Store at all, and FamilyFilterTV can be installed directly on those."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does one setting cover every television in the house?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The filter belongs to the household, not to the device. You set it on your phone and every linked television follows. A television is linked by typing in the short code it shows on screen. Three devices are included on one account, and up to six can be linked."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it do anything about violence or nudity?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. FamilyFilterTV mutes swearing in speech and nothing else. Nothing is blurred, cut or skipped."
       }
     },
     {
@@ -93,10 +111,10 @@
     },
     {
       "@type": "Question",
-      "name": "Does it work with Stremio?",
+      "name": "What does it play?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. FamilyFilterTV is used as Stremio's external player. You start a title in Stremio as usual and hand it to FamilyFilterTV, which plays it filtered."
+        "text": "It plays what you start in Stremio, which hands the title to FamilyFilterTV as its external player. It is a player, not a library and not a way into any subscription streaming service, and it cannot reach the sound inside another app's own player."
       }
     }
   ]
@@ -123,9 +141,10 @@
 <main class="wrap">
   <div class="hero">
     <div>
-      <h1>Mutes the swearing. Keeps the show.</h1>
-      <p class="lead">FamilyFilterTV plays what you start in Stremio and drops the sound for the
-      few seconds a line is profane.</p>
+      <h1>Watch it together on the TV, without the language.</h1>
+      <p class="lead">FamilyFilterTV runs on the television itself — your Android TV or TV box. It
+      plays what you start in Stremio and drops the sound for the few seconds a line is profane,
+      and you set how strict it is from your phone.</p>
       <div class="actions">
         <a class="btn" href="https://play.google.com/store/apps/details?id=com.familyfiltertv.app">Get it on Google Play</a>
         <a class="btn-quiet" href="download.html">Other ways to install</a>
@@ -198,18 +217,34 @@
     comes straight back.</p>
   </div>
 
+  <h2>What it plays</h2>
+  <p>FamilyFilterTV is the player, not the library. You start a film or an episode in Stremio the
+  way you always do, hand it over, and FamilyFilterTV plays that same stream on the TV with the
+  swearing muted.</p>
+  <div class="panel">
+    <ul>
+      <li>It plays what you start in <strong>Stremio</strong>. That is the one thing it takes over
+        from.</li>
+      <li>It does not open, unlock or filter subscription streaming apps. Those play inside their
+        own players, and nothing else on the television can reach their sound.</li>
+      <li>Filtering reads the subtitle track, so a title with no subtitles plays unfiltered — and
+        the app says so on screen rather than pretending otherwise.</li>
+      <li>It mutes swearing in speech. It does nothing about violence or nudity.</li>
+    </ul>
+  </div>
+
   <h2>How it works</h2>
   <ol class="steps">
     <li>
       <div>
-        <h3>Install it and sign in</h3>
-        <p>Put FamilyFilterTV on your Android TV and on your phone, then sign in with Google or
-        an email address.</p>
+        <h3>Put it on the television</h3>
+        <p>Install FamilyFilterTV on your Android TV or TV box, and on your phone as well, then
+        sign in with Google or an email address.</p>
       </div>
     </li>
     <li>
       <div>
-        <h3>Activate the TV from your phone</h3>
+        <h3>Link the TV from your phone</h3>
         <p>The TV shows a short code. Open FamilyFilterTV on your phone, tap <strong>Link a
         TV</strong> and type the code in.</p>
       </div>
@@ -223,13 +258,27 @@
     </li>
   </ol>
 
+  <h2>One filter for the whole house</h2>
+  <p>The filter belongs to the household, not to the device. Set it once on your phone and every
+  television linked to your account follows — the one in the lounge, the one in the spare room,
+  the one the children are watching while you are in the kitchen.</p>
+  <div class="panel">
+    <ul>
+      <li>Choose off, mild, family or strict on your phone; the televisions pick it up.</li>
+      <li>Link a television by typing in the short code it shows on screen. That is the whole
+        setup.</li>
+      <li>Three devices are included on one account, and you can add up to six.</li>
+      <li>Nobody has to fetch a computer, cast anything, or change a setting on the TV itself.</li>
+    </ul>
+  </div>
+
   <h2>What it costs</h2>
   <div class="price">
     <p class="price-figure"><span>US$14.99</span> <span>a year</span></p>
     <ul>
       <li>The first 14 days are free.</li>
-      <li>Up to three devices on one account.</li>
-      <li>Android TV and Android phones.</li>
+      <li>Three devices on one account, and up to six if you need them.</li>
+      <li>Android TVs, Android TV boxes and Android phones.</li>
       <li>Google Play shows and charges the price in your own currency.</li>
     </ul>
   </div>
@@ -247,8 +296,18 @@
     </div>
     <div>
       <h3>Which devices does it run on?</h3>
-      <p>Android TVs and TV boxes, and Android phones. A few TV boxes don't offer the Play Store at
-      all — <a href="download.html">install it directly</a> on those.</p>
+      <p>The television itself — Android TVs and TV boxes — and Android phones. A few TV boxes
+      don't offer the Play Store at all; <a href="download.html">install it directly</a> on
+      those.</p>
+    </div>
+    <div>
+      <h3>What does it play?</h3>
+      <p>What you start in Stremio. It's a player, not a library and not a way into any
+      subscription streaming service.</p>
+    </div>
+    <div>
+      <h3>Does it do anything about violence or nudity?</h3>
+      <p>No. It mutes swearing in speech and nothing else. Nothing is blurred, cut or skipped.</p>
     </div>
     <div>
       <h3>Something isn't working.</h3>
