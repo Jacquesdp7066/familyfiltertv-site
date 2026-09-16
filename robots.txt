@@ -1,0 +1,8 @@
+# FamilyFilterTV — everything here is public and may be indexed, by search
+# engines and by AI crawlers alike. See llms.txt for a plain-text summary.
+User-agent: *
+Allow: /
+Disallow: /link.html
+Disallow: /apk/
+
+Sitemap: https://jacquesdp7066.github.io/familyfiltertv-site/sitemap.xml

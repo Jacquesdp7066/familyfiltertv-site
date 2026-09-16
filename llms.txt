@@ -1,0 +1,55 @@
+# FamilyFilterTV
+
+> An Android TV and Android phone app that plays what you start in Stremio and mutes the audio for
+> the few seconds a subtitle line contains profanity. Nothing is cut and nothing is skipped: only
+> the sound drops, and only for the length of that line.
+
+## What it is
+
+FamilyFilterTV is used as Stremio's external player. You start a film or episode in Stremio the way
+you normally would, hand it to FamilyFilterTV, and it plays the same stream with the swearing muted.
+Because it reads the subtitle track to know when to mute, a title with no subtitles plays unfiltered,
+and the app says so on screen rather than pretending otherwise.
+
+It is aimed at parents and other adults who want to watch ordinary films and series at home without
+the language, and who do not want to give up on a title or rely on an edited version existing.
+
+## How it works
+
+- You choose how strict the filter is: off, mild, family or strict.
+- The filter reads the subtitle line, works out the seconds that line is on screen, and mutes for
+  that window with a small margin either side.
+- Settings changed on the phone apply to every device linked to the same household.
+- A television is linked from the phone by typing in a short code shown on the TV screen.
+- When the next episode is part of the same download, it plays straight afterwards, already filtered.
+
+## What it costs
+
+US$14.99 a year, with the first 14 days free. Google Play shows and charges the price in the
+customer's own currency, at the price Google sets for their country. One account covers three
+devices, and up to three more can be added, to a limit of six.
+
+## Devices
+
+Android TVs, Android TV boxes, and Android phones. A small number of TV boxes are not served by the
+Google Play Store at all; FamilyFilterTV can be installed directly on those from the download page,
+and it updates itself from there afterwards.
+
+## Pages
+
+- [Home](https://jacquesdp7066.github.io/familyfiltertv-site/): what it does, how to start, pricing, common questions.
+- [Download](https://jacquesdp7066.github.io/familyfiltertv-site/download.html): Google Play, and direct install for boxes without Play.
+- [Support](https://jacquesdp7066.github.io/familyfiltertv-site/support.html): setup steps, known limits, how to get help.
+- [Terms of use](https://jacquesdp7066.github.io/familyfiltertv-site/terms.html): subscription, trial, device limits, cancellation.
+- [Privacy policy](https://jacquesdp7066.github.io/familyfiltertv-site/privacy.html): what is stored, what payment involves, what third parties see.
+
+## Honest limits
+
+- Filtering depends on a subtitle track existing for the title being played.
+- It mutes profanity in speech. It does not detect or act on violence, nudity or other visual content.
+- It is a player, not a source of films or series. You bring your own, through Stremio.
+
+## Not affiliated
+
+FamilyFilterTV is an independent app. It is not affiliated with, endorsed by, or connected to
+Stremio, Google, or any streaming service.
