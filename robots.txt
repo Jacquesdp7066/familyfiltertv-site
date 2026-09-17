@@ -3,6 +3,8 @@
 User-agent: *
 Allow: /
 Disallow: /link.html
+Disallow: /join.html
+Disallow: /join
 Disallow: /apk/
 
 Sitemap: https://familyfiltertv.com/sitemap.xml
