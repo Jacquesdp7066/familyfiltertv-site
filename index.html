@@ -21,6 +21,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap">
 <link rel="canonical" href="https://familyfiltertv.com/">
 <link rel="stylesheet" href="style.css">
+<script src="price.js" defer></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -273,12 +274,20 @@
 
   <h2>What it costs</h2>
   <div class="price">
-    <p class="price-figure"><span>US$14.99</span> <span>a year</span></p>
+    <div class="price-country" id="price-country" hidden>
+      <label for="price-country-input">Country</label>
+      <input id="price-country-input" type="text" list="price-country-list" autocomplete="off"
+        spellcheck="false" placeholder="Type to search" aria-describedby="price-note">
+      <datalist id="price-country-list"></datalist>
+    </div>
+    <p class="price-figure" aria-live="polite"><span id="price-annual">US$14.99</span> <span>a year</span></p>
     <ul>
       <li>The first 14 days are free.</li>
       <li>Three devices on one account, and up to six if you need them.</li>
+      <li id="price-devices">A 4th, 5th or 6th device adds US$3.09, US$5.99 or US$8.99 a year.</li>
       <li>Android TVs, Android TV boxes and Android phones.</li>
       <li>Google Play shows and charges the price in your own currency.</li>
+      <li id="price-note">Prices are Google Play's listed prices<span id="price-note-country"> for the United States</span>; the final amount is confirmed at checkout.</li>
     </ul>
   </div>
 

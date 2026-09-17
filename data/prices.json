@@ -1,0 +1,3120 @@
+{
+ "generatedAt": "2026-09-17T04:00:55Z",
+ "regions": {
+  "AE": {
+   "annual": {
+    "amount": 58.99,
+    "currency": "AED"
+   },
+   "device4": {
+    "amount": 11.99,
+    "currency": "AED"
+   },
+   "device5": {
+    "amount": 23.99,
+    "currency": "AED"
+   },
+   "device6": {
+    "amount": 35.99,
+    "currency": "AED"
+   }
+  },
+  "AG": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "AL": {
+   "annual": {
+    "amount": 18.46,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.7,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 7.38,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 11.08,
+    "currency": "USD"
+   }
+  },
+  "AM": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "AO": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "AR": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "AT": {
+   "annual": {
+    "amount": 15.99,
+    "currency": "EUR"
+   },
+   "device4": {
+    "amount": 3.19,
+    "currency": "EUR"
+   },
+   "device5": {
+    "amount": 6.49,
+    "currency": "EUR"
+   },
+   "device6": {
+    "amount": 9.49,
+    "currency": "EUR"
+   }
+  },
+  "AU": {
+   "annual": {
+    "amount": 23.99,
+    "currency": "AUD"
+   },
+   "device4": {
+    "amount": 4.69,
+    "currency": "AUD"
+   },
+   "device5": {
+    "amount": 9.49,
+    "currency": "AUD"
+   },
+   "device6": {
+    "amount": 13.99,
+    "currency": "AUD"
+   }
+  },
+  "AW": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "AZ": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "BA": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "BD": {
+   "annual": {
+    "amount": 2200.0,
+    "currency": "BDT"
+   },
+   "device4": {
+    "amount": 450.0,
+    "currency": "BDT"
+   },
+   "device5": {
+    "amount": 850.0,
+    "currency": "BDT"
+   },
+   "device6": {
+    "amount": 1300.0,
+    "currency": "BDT"
+   }
+  },
+  "BE": {
+   "annual": {
+    "amount": 15.99,
+    "currency": "EUR"
+   },
+   "device4": {
+    "amount": 3.19,
+    "currency": "EUR"
+   },
+   "device5": {
+    "amount": 6.49,
+    "currency": "EUR"
+   },
+   "device6": {
+    "amount": 9.49,
+    "currency": "EUR"
+   }
+  },
+  "BF": {
+   "annual": {
+    "amount": 13.32,
+    "currency": "EUR"
+   },
+   "device4": {
+    "amount": 2.66,
+    "currency": "EUR"
+   },
+   "device5": {
+    "amount": 5.33,
+    "currency": "EUR"
+   },
+   "device6": {
+    "amount": 7.99,
+    "currency": "EUR"
+   }
+  },
+  "BG": {
+   "annual": {
+    "amount": 15.99,
+    "currency": "EUR"
+   },
+   "device4": {
+    "amount": 3.19,
+    "currency": "EUR"
+   },
+   "device5": {
+    "amount": 6.49,
+    "currency": "EUR"
+   },
+   "device6": {
+    "amount": 9.49,
+    "currency": "EUR"
+   }
+  },
+  "BH": {
+   "annual": {
+    "amount": 16.99,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.39,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.99,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.99,
+    "currency": "USD"
+   }
+  },
+  "BJ": {
+   "annual": {
+    "amount": 13.32,
+    "currency": "EUR"
+   },
+   "device4": {
+    "amount": 2.66,
+    "currency": "EUR"
+   },
+   "device5": {
+    "amount": 5.33,
+    "currency": "EUR"
+   },
+   "device6": {
+    "amount": 7.99,
+    "currency": "EUR"
+   }
+  },
+  "BM": {
+   "annual": {
+    "amount": 14.99,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.09,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 5.99,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 8.99,
+    "currency": "USD"
+   }
+  },
+  "BO": {
+   "annual": {
+    "amount": 174.99,
+    "currency": "BOB"
+   },
+   "device4": {
+    "amount": 34.99,
+    "currency": "BOB"
+   },
+   "device5": {
+    "amount": 70.99,
+    "currency": "BOB"
+   },
+   "device6": {
+    "amount": 104.99,
+    "currency": "BOB"
+   }
+  },
+  "BR": {
+   "annual": {
+    "amount": 78.99,
+    "currency": "BRL"
+   },
+   "device4": {
+    "amount": 15.99,
+    "currency": "BRL"
+   },
+   "device5": {
+    "amount": 31.99,
+    "currency": "BRL"
+   },
+   "device6": {
+    "amount": 47.99,
+    "currency": "BRL"
+   }
+  },
+  "BS": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "BW": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "BY": {
+   "annual": {
+    "amount": 18.46,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.7,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 7.38,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 11.08,
+    "currency": "USD"
+   }
+  },
+  "BZ": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "CA": {
+   "annual": {
+    "amount": 20.99,
+    "currency": "CAD"
+   },
+   "device4": {
+    "amount": 4.29,
+    "currency": "CAD"
+   },
+   "device5": {
+    "amount": 8.49,
+    "currency": "CAD"
+   },
+   "device6": {
+    "amount": 12.99,
+    "currency": "CAD"
+   }
+  },
+  "CD": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "CF": {
+   "annual": {
+    "amount": 13.32,
+    "currency": "EUR"
+   },
+   "device4": {
+    "amount": 2.66,
+    "currency": "EUR"
+   },
+   "device5": {
+    "amount": 5.33,
+    "currency": "EUR"
+   },
+   "device6": {
+    "amount": 7.99,
+    "currency": "EUR"
+   }
+  },
+  "CG": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "CH": {
+   "annual": {
+    "amount": 13.0,
+    "currency": "CHF"
+   },
+   "device4": {
+    "amount": 2.5,
+    "currency": "CHF"
+   },
+   "device5": {
+    "amount": 5.0,
+    "currency": "CHF"
+   },
+   "device6": {
+    "amount": 7.5,
+    "currency": "CHF"
+   }
+  },
+  "CI": {
+   "annual": {
+    "amount": 10300.0,
+    "currency": "XOF"
+   },
+   "device4": {
+    "amount": 2100.0,
+    "currency": "XOF"
+   },
+   "device5": {
+    "amount": 4100.0,
+    "currency": "XOF"
+   },
+   "device6": {
+    "amount": 6200.0,
+    "currency": "XOF"
+   }
+  },
+  "CL": {
+   "annual": {
+    "amount": 17500.0,
+    "currency": "CLP"
+   },
+   "device4": {
+    "amount": 3500.0,
+    "currency": "CLP"
+   },
+   "device5": {
+    "amount": 7000.0,
+    "currency": "CLP"
+   },
+   "device6": {
+    "amount": 10500.0,
+    "currency": "CLP"
+   }
+  },
+  "CM": {
+   "annual": {
+    "amount": 10400.0,
+    "currency": "XAF"
+   },
+   "device4": {
+    "amount": 2100.0,
+    "currency": "XAF"
+   },
+   "device5": {
+    "amount": 4200.0,
+    "currency": "XAF"
+   },
+   "device6": {
+    "amount": 6300.0,
+    "currency": "XAF"
+   }
+  },
+  "CO": {
+   "annual": {
+    "amount": 48000.0,
+    "currency": "COP"
+   },
+   "device4": {
+    "amount": 9500.0,
+    "currency": "COP"
+   },
+   "device5": {
+    "amount": 19000.0,
+    "currency": "COP"
+   },
+   "device6": {
+    "amount": 28500.0,
+    "currency": "COP"
+   }
+  },
+  "CR": {
+   "annual": {
+    "amount": 6900.0,
+    "currency": "CRC"
+   },
+   "device4": {
+    "amount": 1400.0,
+    "currency": "CRC"
+   },
+   "device5": {
+    "amount": 2700.0,
+    "currency": "CRC"
+   },
+   "device6": {
+    "amount": 4100.0,
+    "currency": "CRC"
+   }
+  },
+  "CV": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "CY": {
+   "annual": {
+    "amount": 15.99,
+    "currency": "EUR"
+   },
+   "device4": {
+    "amount": 3.19,
+    "currency": "EUR"
+   },
+   "device5": {
+    "amount": 6.49,
+    "currency": "EUR"
+   },
+   "device6": {
+    "amount": 9.49,
+    "currency": "EUR"
+   }
+  },
+  "CZ": {
+   "annual": {
+    "amount": 389.99,
+    "currency": "CZK"
+   },
+   "device4": {
+    "amount": 79.99,
+    "currency": "CZK"
+   },
+   "device5": {
+    "amount": 159.99,
+    "currency": "CZK"
+   },
+   "device6": {
+    "amount": 229.99,
+    "currency": "CZK"
+   }
+  },
+  "DE": {
+   "annual": {
+    "amount": 15.99,
+    "currency": "EUR"
+   },
+   "device4": {
+    "amount": 3.19,
+    "currency": "EUR"
+   },
+   "device5": {
+    "amount": 6.49,
+    "currency": "EUR"
+   },
+   "device6": {
+    "amount": 9.49,
+    "currency": "EUR"
+   }
+  },
+  "DJ": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "DK": {
+   "annual": {
+    "amount": 125.0,
+    "currency": "DKK"
+   },
+   "device4": {
+    "amount": 25.0,
+    "currency": "DKK"
+   },
+   "device5": {
+    "amount": 49.0,
+    "currency": "DKK"
+   },
+   "device6": {
+    "amount": 75.0,
+    "currency": "DKK"
+   }
+  },
+  "DM": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "DO": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "DZ": {
+   "annual": {
+    "amount": 2050.0,
+    "currency": "DZD"
+   },
+   "device4": {
+    "amount": 400.0,
+    "currency": "DZD"
+   },
+   "device5": {
+    "amount": 825.0,
+    "currency": "DZD"
+   },
+   "device6": {
+    "amount": 1225.0,
+    "currency": "DZD"
+   }
+  },
+  "EC": {
+   "annual": {
+    "amount": 14.99,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.09,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 5.99,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 8.99,
+    "currency": "USD"
+   }
+  },
+  "EE": {
+   "annual": {
+    "amount": 16.99,
+    "currency": "EUR"
+   },
+   "device4": {
+    "amount": 3.29,
+    "currency": "EUR"
+   },
+   "device5": {
+    "amount": 6.49,
+    "currency": "EUR"
+   },
+   "device6": {
+    "amount": 9.99,
+    "currency": "EUR"
+   }
+  },
+  "EG": {
+   "annual": {
+    "amount": 909.99,
+    "currency": "EGP"
+   },
+   "device4": {
+    "amount": 179.99,
+    "currency": "EGP"
+   },
+   "device5": {
+    "amount": 359.99,
+    "currency": "EGP"
+   },
+   "device6": {
+    "amount": 549.99,
+    "currency": "EGP"
+   }
+  },
+  "ER": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "ES": {
+   "annual": {
+    "amount": 15.99,
+    "currency": "EUR"
+   },
+   "device4": {
+    "amount": 3.19,
+    "currency": "EUR"
+   },
+   "device5": {
+    "amount": 6.49,
+    "currency": "EUR"
+   },
+   "device6": {
+    "amount": 9.49,
+    "currency": "EUR"
+   }
+  },
+  "FI": {
+   "annual": {
+    "amount": 16.99,
+    "currency": "EUR"
+   },
+   "device4": {
+    "amount": 3.29,
+    "currency": "EUR"
+   },
+   "device5": {
+    "amount": 6.49,
+    "currency": "EUR"
+   },
+   "device6": {
+    "amount": 9.99,
+    "currency": "EUR"
+   }
+  },
+  "FJ": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "FM": {
+   "annual": {
+    "amount": 14.99,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.09,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 5.99,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 8.99,
+    "currency": "USD"
+   }
+  },
+  "FR": {
+   "annual": {
+    "amount": 15.99,
+    "currency": "EUR"
+   },
+   "device4": {
+    "amount": 3.19,
+    "currency": "EUR"
+   },
+   "device5": {
+    "amount": 6.49,
+    "currency": "EUR"
+   },
+   "device6": {
+    "amount": 9.49,
+    "currency": "EUR"
+   }
+  },
+  "GA": {
+   "annual": {
+    "amount": 13.32,
+    "currency": "EUR"
+   },
+   "device4": {
+    "amount": 2.66,
+    "currency": "EUR"
+   },
+   "device5": {
+    "amount": 5.33,
+    "currency": "EUR"
+   },
+   "device6": {
+    "amount": 7.99,
+    "currency": "EUR"
+   }
+  },
+  "GB": {
+   "annual": {
+    "amount": 13.49,
+    "currency": "GBP"
+   },
+   "device4": {
+    "amount": 2.69,
+    "currency": "GBP"
+   },
+   "device5": {
+    "amount": 5.49,
+    "currency": "GBP"
+   },
+   "device6": {
+    "amount": 7.99,
+    "currency": "GBP"
+   }
+  },
+  "GD": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "GE": {
+   "annual": {
+    "amount": 49.0,
+    "currency": "GEL"
+   },
+   "device4": {
+    "amount": 9.0,
+    "currency": "GEL"
+   },
+   "device5": {
+    "amount": 19.0,
+    "currency": "GEL"
+   },
+   "device6": {
+    "amount": 29.0,
+    "currency": "GEL"
+   }
+  },
+  "GH": {
+   "annual": {
+    "amount": 210.0,
+    "currency": "GHS"
+   },
+   "device4": {
+    "amount": 40.0,
+    "currency": "GHS"
+   },
+   "device5": {
+    "amount": 85.0,
+    "currency": "GHS"
+   },
+   "device6": {
+    "amount": 130.0,
+    "currency": "GHS"
+   }
+  },
+  "GI": {
+   "annual": {
+    "amount": 11.49,
+    "currency": "GBP"
+   },
+   "device4": {
+    "amount": 2.29,
+    "currency": "GBP"
+   },
+   "device5": {
+    "amount": 4.59,
+    "currency": "GBP"
+   },
+   "device6": {
+    "amount": 6.99,
+    "currency": "GBP"
+   }
+  },
+  "GM": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "GN": {
+   "annual": {
+    "amount": 14.99,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.09,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 5.99,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 8.99,
+    "currency": "USD"
+   }
+  },
+  "GR": {
+   "annual": {
+    "amount": 16.99,
+    "currency": "EUR"
+   },
+   "device4": {
+    "amount": 3.29,
+    "currency": "EUR"
+   },
+   "device5": {
+    "amount": 6.49,
+    "currency": "EUR"
+   },
+   "device6": {
+    "amount": 9.99,
+    "currency": "EUR"
+   }
+  },
+  "GT": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "GW": {
+   "annual": {
+    "amount": 13.32,
+    "currency": "EUR"
+   },
+   "device4": {
+    "amount": 2.66,
+    "currency": "EUR"
+   },
+   "device5": {
+    "amount": 5.33,
+    "currency": "EUR"
+   },
+   "device6": {
+    "amount": 7.99,
+    "currency": "EUR"
+   }
+  },
+  "HK": {
+   "annual": {
+    "amount": 119.0,
+    "currency": "HKD"
+   },
+   "device4": {
+    "amount": 24.9,
+    "currency": "HKD"
+   },
+   "device5": {
+    "amount": 48.0,
+    "currency": "HKD"
+   },
+   "device6": {
+    "amount": 70.9,
+    "currency": "HKD"
+   }
+  },
+  "HN": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "HR": {
+   "annual": {
+    "amount": 16.99,
+    "currency": "EUR"
+   },
+   "device4": {
+    "amount": 3.29,
+    "currency": "EUR"
+   },
+   "device5": {
+    "amount": 6.49,
+    "currency": "EUR"
+   },
+   "device6": {
+    "amount": 9.99,
+    "currency": "EUR"
+   }
+  },
+  "HT": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "HU": {
+   "annual": {
+    "amount": 6190.0,
+    "currency": "HUF"
+   },
+   "device4": {
+    "amount": 1199.0,
+    "currency": "HUF"
+   },
+   "device5": {
+    "amount": 2490.0,
+    "currency": "HUF"
+   },
+   "device6": {
+    "amount": 3699.0,
+    "currency": "HUF"
+   }
+  },
+  "ID": {
+   "annual": {
+    "amount": 269000.0,
+    "currency": "IDR"
+   },
+   "device4": {
+    "amount": 54000.0,
+    "currency": "IDR"
+   },
+   "device5": {
+    "amount": 109000.0,
+    "currency": "IDR"
+   },
+   "device6": {
+    "amount": 159000.0,
+    "currency": "IDR"
+   }
+  },
+  "IE": {
+   "annual": {
+    "amount": 15.99,
+    "currency": "EUR"
+   },
+   "device4": {
+    "amount": 3.29,
+    "currency": "EUR"
+   },
+   "device5": {
+    "amount": 6.49,
+    "currency": "EUR"
+   },
+   "device6": {
+    "amount": 9.99,
+    "currency": "EUR"
+   }
+  },
+  "IL": {
+   "annual": {
+    "amount": 46.9,
+    "currency": "ILS"
+   },
+   "device4": {
+    "amount": 9.4,
+    "currency": "ILS"
+   },
+   "device5": {
+    "amount": 18.9,
+    "currency": "ILS"
+   },
+   "device6": {
+    "amount": 28.0,
+    "currency": "ILS"
+   }
+  },
+  "IN": {
+   "annual": {
+    "amount": 1750.0,
+    "currency": "INR"
+   },
+   "device4": {
+    "amount": 350.0,
+    "currency": "INR"
+   },
+   "device5": {
+    "amount": 690.0,
+    "currency": "INR"
+   },
+   "device6": {
+    "amount": 1050.0,
+    "currency": "INR"
+   }
+  },
+  "IQ": {
+   "annual": {
+    "amount": 20150.0,
+    "currency": "IQD"
+   },
+   "device4": {
+    "amount": 4050.0,
+    "currency": "IQD"
+   },
+   "device5": {
+    "amount": 8050.0,
+    "currency": "IQD"
+   },
+   "device6": {
+    "amount": 12100.0,
+    "currency": "IQD"
+   }
+  },
+  "IS": {
+   "annual": {
+    "amount": 16.52,
+    "currency": "EUR"
+   },
+   "device4": {
+    "amount": 3.3,
+    "currency": "EUR"
+   },
+   "device5": {
+    "amount": 6.61,
+    "currency": "EUR"
+   },
+   "device6": {
+    "amount": 9.91,
+    "currency": "EUR"
+   }
+  },
+  "IT": {
+   "annual": {
+    "amount": 15.99,
+    "currency": "EUR"
+   },
+   "device4": {
+    "amount": 3.29,
+    "currency": "EUR"
+   },
+   "device5": {
+    "amount": 6.49,
+    "currency": "EUR"
+   },
+   "device6": {
+    "amount": 9.99,
+    "currency": "EUR"
+   }
+  },
+  "JM": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "JO": {
+   "annual": {
+    "amount": 10.9,
+    "currency": "JOD"
+   },
+   "device4": {
+    "amount": 2.2,
+    "currency": "JOD"
+   },
+   "device5": {
+    "amount": 4.35,
+    "currency": "JOD"
+   },
+   "device6": {
+    "amount": 6.55,
+    "currency": "JOD"
+   }
+  },
+  "JP": {
+   "annual": {
+    "amount": 2620.0,
+    "currency": "JPY"
+   },
+   "device4": {
+    "amount": 520.0,
+    "currency": "JPY"
+   },
+   "device5": {
+    "amount": 1040.0,
+    "currency": "JPY"
+   },
+   "device6": {
+    "amount": 1560.0,
+    "currency": "JPY"
+   }
+  },
+  "KE": {
+   "annual": {
+    "amount": 2300.0,
+    "currency": "KES"
+   },
+   "device4": {
+    "amount": 500.0,
+    "currency": "KES"
+   },
+   "device5": {
+    "amount": 900.0,
+    "currency": "KES"
+   },
+   "device6": {
+    "amount": 1400.0,
+    "currency": "KES"
+   }
+  },
+  "KG": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "KH": {
+   "annual": {
+    "amount": 14.99,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.09,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 5.99,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 8.99,
+    "currency": "USD"
+   }
+  },
+  "KM": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "KN": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "KR": {
+   "annual": {
+    "amount": 23000.0,
+    "currency": "KRW"
+   },
+   "device4": {
+    "amount": 4600.0,
+    "currency": "KRW"
+   },
+   "device5": {
+    "amount": 9000.0,
+    "currency": "KRW"
+   },
+   "device6": {
+    "amount": 14000.0,
+    "currency": "KRW"
+   }
+  },
+  "KW": {
+   "annual": {
+    "amount": 14.99,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.09,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 5.99,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 8.99,
+    "currency": "USD"
+   }
+  },
+  "KY": {
+   "annual": {
+    "amount": 14.99,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.09,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 5.99,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 8.99,
+    "currency": "USD"
+   }
+  },
+  "KZ": {
+   "annual": {
+    "amount": 7990.0,
+    "currency": "KZT"
+   },
+   "device4": {
+    "amount": 1590.0,
+    "currency": "KZT"
+   },
+   "device5": {
+    "amount": 3190.0,
+    "currency": "KZT"
+   },
+   "device6": {
+    "amount": 4790.0,
+    "currency": "KZT"
+   }
+  },
+  "LA": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "LB": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "LC": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "LI": {
+   "annual": {
+    "amount": 14.0,
+    "currency": "CHF"
+   },
+   "device4": {
+    "amount": 2.7,
+    "currency": "CHF"
+   },
+   "device5": {
+    "amount": 5.4,
+    "currency": "CHF"
+   },
+   "device6": {
+    "amount": 8.1,
+    "currency": "CHF"
+   }
+  },
+  "LK": {
+   "annual": {
+    "amount": 5050.0,
+    "currency": "LKR"
+   },
+   "device4": {
+    "amount": 1000.0,
+    "currency": "LKR"
+   },
+   "device5": {
+    "amount": 2025.0,
+    "currency": "LKR"
+   },
+   "device6": {
+    "amount": 3025.0,
+    "currency": "LKR"
+   }
+  },
+  "LR": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "LT": {
+   "annual": {
+    "amount": 15.99,
+    "currency": "EUR"
+   },
+   "device4": {
+    "amount": 3.19,
+    "currency": "EUR"
+   },
+   "device5": {
+    "amount": 6.49,
+    "currency": "EUR"
+   },
+   "device6": {
+    "amount": 9.49,
+    "currency": "EUR"
+   }
+  },
+  "LU": {
+   "annual": {
+    "amount": 15.99,
+    "currency": "EUR"
+   },
+   "device4": {
+    "amount": 3.09,
+    "currency": "EUR"
+   },
+   "device5": {
+    "amount": 5.99,
+    "currency": "EUR"
+   },
+   "device6": {
+    "amount": 9.49,
+    "currency": "EUR"
+   }
+  },
+  "LV": {
+   "annual": {
+    "amount": 15.99,
+    "currency": "EUR"
+   },
+   "device4": {
+    "amount": 3.19,
+    "currency": "EUR"
+   },
+   "device5": {
+    "amount": 6.49,
+    "currency": "EUR"
+   },
+   "device6": {
+    "amount": 9.49,
+    "currency": "EUR"
+   }
+  },
+  "LY": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "MA": {
+   "annual": {
+    "amount": 174.99,
+    "currency": "MAD"
+   },
+   "device4": {
+    "amount": 34.99,
+    "currency": "MAD"
+   },
+   "device5": {
+    "amount": 69.99,
+    "currency": "MAD"
+   },
+   "device6": {
+    "amount": 104.99,
+    "currency": "MAD"
+   }
+  },
+  "MC": {
+   "annual": {
+    "amount": 15.99,
+    "currency": "EUR"
+   },
+   "device4": {
+    "amount": 3.19,
+    "currency": "EUR"
+   },
+   "device5": {
+    "amount": 6.49,
+    "currency": "EUR"
+   },
+   "device6": {
+    "amount": 9.49,
+    "currency": "EUR"
+   }
+  },
+  "MD": {
+   "annual": {
+    "amount": 18.46,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.7,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 7.38,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 11.08,
+    "currency": "USD"
+   }
+  },
+  "MK": {
+   "annual": {
+    "amount": 18.15,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.63,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 7.26,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 10.89,
+    "currency": "USD"
+   }
+  },
+  "ML": {
+   "annual": {
+    "amount": 13.32,
+    "currency": "EUR"
+   },
+   "device4": {
+    "amount": 2.66,
+    "currency": "EUR"
+   },
+   "device5": {
+    "amount": 5.33,
+    "currency": "EUR"
+   },
+   "device6": {
+    "amount": 7.99,
+    "currency": "EUR"
+   }
+  },
+  "MM": {
+   "annual": {
+    "amount": 32000.0,
+    "currency": "MMK"
+   },
+   "device4": {
+    "amount": 6000.0,
+    "currency": "MMK"
+   },
+   "device5": {
+    "amount": 13000.0,
+    "currency": "MMK"
+   },
+   "device6": {
+    "amount": 19000.0,
+    "currency": "MMK"
+   }
+  },
+  "MN": {
+   "annual": {
+    "amount": 55300.0,
+    "currency": "MNT"
+   },
+   "device4": {
+    "amount": 11100.0,
+    "currency": "MNT"
+   },
+   "device5": {
+    "amount": 22100.0,
+    "currency": "MNT"
+   },
+   "device6": {
+    "amount": 33200.0,
+    "currency": "MNT"
+   }
+  },
+  "MO": {
+   "annual": {
+    "amount": 128.0,
+    "currency": "MOP"
+   },
+   "device4": {
+    "amount": 24.88,
+    "currency": "MOP"
+   },
+   "device5": {
+    "amount": 49.88,
+    "currency": "MOP"
+   },
+   "device6": {
+    "amount": 74.88,
+    "currency": "MOP"
+   }
+  },
+  "MT": {
+   "annual": {
+    "amount": 15.72,
+    "currency": "EUR"
+   },
+   "device4": {
+    "amount": 3.14,
+    "currency": "EUR"
+   },
+   "device5": {
+    "amount": 6.29,
+    "currency": "EUR"
+   },
+   "device6": {
+    "amount": 9.43,
+    "currency": "EUR"
+   }
+  },
+  "MU": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "MV": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "MX": {
+   "annual": {
+    "amount": 305.0,
+    "currency": "MXN"
+   },
+   "device4": {
+    "amount": 59.0,
+    "currency": "MXN"
+   },
+   "device5": {
+    "amount": 125.0,
+    "currency": "MXN"
+   },
+   "device6": {
+    "amount": 185.0,
+    "currency": "MXN"
+   }
+  },
+  "MY": {
+   "annual": {
+    "amount": 67.99,
+    "currency": "MYR"
+   },
+   "device4": {
+    "amount": 13.99,
+    "currency": "MYR"
+   },
+   "device5": {
+    "amount": 26.99,
+    "currency": "MYR"
+   },
+   "device6": {
+    "amount": 40.99,
+    "currency": "MYR"
+   }
+  },
+  "MZ": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "NA": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "NE": {
+   "annual": {
+    "amount": 13.32,
+    "currency": "EUR"
+   },
+   "device4": {
+    "amount": 2.66,
+    "currency": "EUR"
+   },
+   "device5": {
+    "amount": 5.33,
+    "currency": "EUR"
+   },
+   "device6": {
+    "amount": 7.99,
+    "currency": "EUR"
+   }
+  },
+  "NG": {
+   "annual": {
+    "amount": 22000.0,
+    "currency": "NGN"
+   },
+   "device4": {
+    "amount": 4380.0,
+    "currency": "NGN"
+   },
+   "device5": {
+    "amount": 8770.0,
+    "currency": "NGN"
+   },
+   "device6": {
+    "amount": 13000.0,
+    "currency": "NGN"
+   }
+  },
+  "NI": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "NL": {
+   "annual": {
+    "amount": 15.99,
+    "currency": "EUR"
+   },
+   "device4": {
+    "amount": 3.19,
+    "currency": "EUR"
+   },
+   "device5": {
+    "amount": 6.49,
+    "currency": "EUR"
+   },
+   "device6": {
+    "amount": 9.49,
+    "currency": "EUR"
+   }
+  },
+  "NO": {
+   "annual": {
+    "amount": 179.0,
+    "currency": "NOK"
+   },
+   "device4": {
+    "amount": 36.0,
+    "currency": "NOK"
+   },
+   "device5": {
+    "amount": 69.0,
+    "currency": "NOK"
+   },
+   "device6": {
+    "amount": 109.0,
+    "currency": "NOK"
+   }
+  },
+  "NP": {
+   "annual": {
+    "amount": 17.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.48,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.95,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 10.43,
+    "currency": "USD"
+   }
+  },
+  "NZ": {
+   "annual": {
+    "amount": 30.99,
+    "currency": "NZD"
+   },
+   "device4": {
+    "amount": 5.99,
+    "currency": "NZD"
+   },
+   "device5": {
+    "amount": 11.99,
+    "currency": "NZD"
+   },
+   "device6": {
+    "amount": 17.99,
+    "currency": "NZD"
+   }
+  },
+  "OM": {
+   "annual": {
+    "amount": 15.99,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.19,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.49,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.49,
+    "currency": "USD"
+   }
+  },
+  "PA": {
+   "annual": {
+    "amount": 14.99,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.09,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 5.99,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 8.99,
+    "currency": "USD"
+   }
+  },
+  "PE": {
+   "annual": {
+    "amount": 51.99,
+    "currency": "PEN"
+   },
+   "device4": {
+    "amount": 9.99,
+    "currency": "PEN"
+   },
+   "device5": {
+    "amount": 20.99,
+    "currency": "PEN"
+   },
+   "device6": {
+    "amount": 30.99,
+    "currency": "PEN"
+   }
+  },
+  "PG": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "PH": {
+   "annual": {
+    "amount": 1100.0,
+    "currency": "PHP"
+   },
+   "device4": {
+    "amount": 215.0,
+    "currency": "PHP"
+   },
+   "device5": {
+    "amount": 435.0,
+    "currency": "PHP"
+   },
+   "device6": {
+    "amount": 650.0,
+    "currency": "PHP"
+   }
+  },
+  "PK": {
+   "annual": {
+    "amount": 4250.0,
+    "currency": "PKR"
+   },
+   "device4": {
+    "amount": 850.0,
+    "currency": "PKR"
+   },
+   "device5": {
+    "amount": 1700.0,
+    "currency": "PKR"
+   },
+   "device6": {
+    "amount": 2550.0,
+    "currency": "PKR"
+   }
+  },
+  "PL": {
+   "annual": {
+    "amount": 70.99,
+    "currency": "PLN"
+   },
+   "device4": {
+    "amount": 13.99,
+    "currency": "PLN"
+   },
+   "device5": {
+    "amount": 27.99,
+    "currency": "PLN"
+   },
+   "device6": {
+    "amount": 42.99,
+    "currency": "PLN"
+   }
+  },
+  "PT": {
+   "annual": {
+    "amount": 15.99,
+    "currency": "EUR"
+   },
+   "device4": {
+    "amount": 3.29,
+    "currency": "EUR"
+   },
+   "device5": {
+    "amount": 6.49,
+    "currency": "EUR"
+   },
+   "device6": {
+    "amount": 9.99,
+    "currency": "EUR"
+   }
+  },
+  "PY": {
+   "annual": {
+    "amount": 90000.0,
+    "currency": "PYG"
+   },
+   "device4": {
+    "amount": 20000.0,
+    "currency": "PYG"
+   },
+   "device5": {
+    "amount": 40000.0,
+    "currency": "PYG"
+   },
+   "device6": {
+    "amount": 50000.0,
+    "currency": "PYG"
+   }
+  },
+  "QA": {
+   "annual": {
+    "amount": 56.0,
+    "currency": "QAR"
+   },
+   "device4": {
+    "amount": 11.0,
+    "currency": "QAR"
+   },
+   "device5": {
+    "amount": 22.0,
+    "currency": "QAR"
+   },
+   "device6": {
+    "amount": 34.0,
+    "currency": "QAR"
+   }
+  },
+  "RO": {
+   "annual": {
+    "amount": 84.99,
+    "currency": "RON"
+   },
+   "device4": {
+    "amount": 16.99,
+    "currency": "RON"
+   },
+   "device5": {
+    "amount": 33.99,
+    "currency": "RON"
+   },
+   "device6": {
+    "amount": 49.99,
+    "currency": "RON"
+   }
+  },
+  "RS": {
+   "annual": {
+    "amount": 1899.0,
+    "currency": "RSD"
+   },
+   "device4": {
+    "amount": 399.0,
+    "currency": "RSD"
+   },
+   "device5": {
+    "amount": 749.0,
+    "currency": "RSD"
+   },
+   "device6": {
+    "amount": 1099.0,
+    "currency": "RSD"
+   }
+  },
+  "RU": {
+   "annual": {
+    "amount": 1290.0,
+    "currency": "RUB"
+   },
+   "device4": {
+    "amount": 259.0,
+    "currency": "RUB"
+   },
+   "device5": {
+    "amount": 499.0,
+    "currency": "RUB"
+   },
+   "device6": {
+    "amount": 790.0,
+    "currency": "RUB"
+   }
+  },
+  "RW": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "SA": {
+   "annual": {
+    "amount": 65.99,
+    "currency": "SAR"
+   },
+   "device4": {
+    "amount": 12.99,
+    "currency": "SAR"
+   },
+   "device5": {
+    "amount": 26.99,
+    "currency": "SAR"
+   },
+   "device6": {
+    "amount": 39.99,
+    "currency": "SAR"
+   }
+  },
+  "SB": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "SC": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "SE": {
+   "annual": {
+    "amount": 189.0,
+    "currency": "SEK"
+   },
+   "device4": {
+    "amount": 37.0,
+    "currency": "SEK"
+   },
+   "device5": {
+    "amount": 75.0,
+    "currency": "SEK"
+   },
+   "device6": {
+    "amount": 115.0,
+    "currency": "SEK"
+   }
+  },
+  "SG": {
+   "annual": {
+    "amount": 20.99,
+    "currency": "SGD"
+   },
+   "device4": {
+    "amount": 4.48,
+    "currency": "SGD"
+   },
+   "device5": {
+    "amount": 8.49,
+    "currency": "SGD"
+   },
+   "device6": {
+    "amount": 12.98,
+    "currency": "SGD"
+   }
+  },
+  "SI": {
+   "annual": {
+    "amount": 15.99,
+    "currency": "EUR"
+   },
+   "device4": {
+    "amount": 3.29,
+    "currency": "EUR"
+   },
+   "device5": {
+    "amount": 6.49,
+    "currency": "EUR"
+   },
+   "device6": {
+    "amount": 9.99,
+    "currency": "EUR"
+   }
+  },
+  "SK": {
+   "annual": {
+    "amount": 15.99,
+    "currency": "EUR"
+   },
+   "device4": {
+    "amount": 3.29,
+    "currency": "EUR"
+   },
+   "device5": {
+    "amount": 6.49,
+    "currency": "EUR"
+   },
+   "device6": {
+    "amount": 9.99,
+    "currency": "EUR"
+   }
+  },
+  "SL": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "SM": {
+   "annual": {
+    "amount": 12.99,
+    "currency": "EUR"
+   },
+   "device4": {
+    "amount": 2.69,
+    "currency": "EUR"
+   },
+   "device5": {
+    "amount": 5.49,
+    "currency": "EUR"
+   },
+   "device6": {
+    "amount": 7.99,
+    "currency": "EUR"
+   }
+  },
+  "SN": {
+   "annual": {
+    "amount": 10300.0,
+    "currency": "XOF"
+   },
+   "device4": {
+    "amount": 2100.0,
+    "currency": "XOF"
+   },
+   "device5": {
+    "amount": 4100.0,
+    "currency": "XOF"
+   },
+   "device6": {
+    "amount": 6200.0,
+    "currency": "XOF"
+   }
+  },
+  "SO": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "SR": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "SV": {
+   "annual": {
+    "amount": 14.99,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.09,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 5.99,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 8.99,
+    "currency": "USD"
+   }
+  },
+  "TC": {
+   "annual": {
+    "amount": 14.99,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.09,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 5.99,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 8.99,
+    "currency": "USD"
+   }
+  },
+  "TD": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "TG": {
+   "annual": {
+    "amount": 13.32,
+    "currency": "EUR"
+   },
+   "device4": {
+    "amount": 2.66,
+    "currency": "EUR"
+   },
+   "device5": {
+    "amount": 5.33,
+    "currency": "EUR"
+   },
+   "device6": {
+    "amount": 7.99,
+    "currency": "EUR"
+   }
+  },
+  "TH": {
+   "annual": {
+    "amount": 550.0,
+    "currency": "THB"
+   },
+   "device4": {
+    "amount": 110.0,
+    "currency": "THB"
+   },
+   "device5": {
+    "amount": 225.0,
+    "currency": "THB"
+   },
+   "device6": {
+    "amount": 325.0,
+    "currency": "THB"
+   }
+  },
+  "TJ": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "TM": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "TN": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "TO": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "TR": {
+   "annual": {
+    "amount": 899.99,
+    "currency": "TRY"
+   },
+   "device4": {
+    "amount": 179.99,
+    "currency": "TRY"
+   },
+   "device5": {
+    "amount": 359.99,
+    "currency": "TRY"
+   },
+   "device6": {
+    "amount": 539.99,
+    "currency": "TRY"
+   }
+  },
+  "TT": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "TW": {
+   "annual": {
+    "amount": 510.0,
+    "currency": "TWD"
+   },
+   "device4": {
+    "amount": 100.0,
+    "currency": "TWD"
+   },
+   "device5": {
+    "amount": 210.0,
+    "currency": "TWD"
+   },
+   "device6": {
+    "amount": 310.0,
+    "currency": "TWD"
+   }
+  },
+  "TZ": {
+   "annual": {
+    "amount": 41000.0,
+    "currency": "TZS"
+   },
+   "device4": {
+    "amount": 8000.0,
+    "currency": "TZS"
+   },
+   "device5": {
+    "amount": 16000.0,
+    "currency": "TZS"
+   },
+   "device6": {
+    "amount": 24000.0,
+    "currency": "TZS"
+   }
+  },
+  "UA": {
+   "annual": {
+    "amount": 819.99,
+    "currency": "UAH"
+   },
+   "device4": {
+    "amount": 164.99,
+    "currency": "UAH"
+   },
+   "device5": {
+    "amount": 329.99,
+    "currency": "UAH"
+   },
+   "device6": {
+    "amount": 494.99,
+    "currency": "UAH"
+   }
+  },
+  "UG": {
+   "annual": {
+    "amount": 18.15,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.63,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 7.26,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 10.89,
+    "currency": "USD"
+   }
+  },
+  "US": {
+   "annual": {
+    "amount": 14.99,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.09,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 5.99,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 8.99,
+    "currency": "USD"
+   }
+  },
+  "UY": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "UZ": {
+   "annual": {
+    "amount": 17.23,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.45,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.89,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 10.34,
+    "currency": "USD"
+   }
+  },
+  "VA": {
+   "annual": {
+    "amount": 12.99,
+    "currency": "EUR"
+   },
+   "device4": {
+    "amount": 2.69,
+    "currency": "EUR"
+   },
+   "device5": {
+    "amount": 5.49,
+    "currency": "EUR"
+   },
+   "device6": {
+    "amount": 7.99,
+    "currency": "EUR"
+   }
+  },
+  "VE": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "VG": {
+   "annual": {
+    "amount": 14.99,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.09,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 5.99,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 8.99,
+    "currency": "USD"
+   }
+  },
+  "VN": {
+   "annual": {
+    "amount": 400000.0,
+    "currency": "VND"
+   },
+   "device4": {
+    "amount": 80000.0,
+    "currency": "VND"
+   },
+   "device5": {
+    "amount": 160000.0,
+    "currency": "VND"
+   },
+   "device6": {
+    "amount": 240000.0,
+    "currency": "VND"
+   }
+  },
+  "VU": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "WS": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "YE": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "ZA": {
+   "annual": {
+    "amount": 250.0,
+    "currency": "ZAR"
+   },
+   "device4": {
+    "amount": 50.0,
+    "currency": "ZAR"
+   },
+   "device5": {
+    "amount": 100.0,
+    "currency": "ZAR"
+   },
+   "device6": {
+    "amount": 150.0,
+    "currency": "ZAR"
+   }
+  },
+  "ZM": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  },
+  "ZW": {
+   "annual": {
+    "amount": 15.38,
+    "currency": "USD"
+   },
+   "device4": {
+    "amount": 3.08,
+    "currency": "USD"
+   },
+   "device5": {
+    "amount": 6.15,
+    "currency": "USD"
+   },
+   "device6": {
+    "amount": 9.23,
+    "currency": "USD"
+   }
+  }
+ },
+ "source": "Google Play Developer API, base plan regional prices"
+}

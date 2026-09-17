@@ -347,6 +347,37 @@ code {
 
 .price-figure span:last-child { color: var(--muted); font-size: 1rem; }
 
+.price-figure { flex-wrap: wrap; row-gap: 4px; }
+.price-figure span:first-child { overflow-wrap: anywhere; }
+
+.price-country {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.price-country label {
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+
+.price-country input {
+  flex: 1;
+  min-width: 0;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--ink);
+  background: var(--ground);
+  border: 1px solid var(--field-line);
+  border-radius: 8px;
+  padding: 7px 11px;
+  color-scheme: dark;
+}
+
+.price-country input::placeholder { color: var(--muted); }
+.price-country input:focus-visible { outline-offset: 2px; border-radius: 8px; }
+
 .price ul {
   list-style: none;
   padding: 0;
