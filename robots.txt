@@ -6,5 +6,6 @@ Disallow: /link.html
 Disallow: /join.html
 Disallow: /join
 Disallow: /apk/
+Disallow: /admin.html
 
 Sitemap: https://familyfiltertv.com/sitemap.xml

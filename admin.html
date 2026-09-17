@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin — Family Filter TV</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0B0C0F">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap">
+<link rel="stylesheet" href="style.css">
+<style>
+  /* ---------- light/dark, additive to style.css's dark tokens ---------- */
+  @media (prefers-color-scheme: light) {
+    :root {
+      --ground: #F6F5F1;
+      --surface: #FFFFFF;
+      --field: #EAF0FA;
+      --field-line: #C7D7EE;
+      --ink: #15171C;
+      --ink-soft: #3A3D46;
+      --muted: #6B6E78;
+      --line: #E1E0DA;
+    }
+    .btn { color: #16181D; }
+    .tile b { color: var(--ink); }
+    .bars rect.bar { fill: #1B3A63; }
+  }
+
+  /* ---------- admin-only layout ---------- */
+  .admin-badge {
+    display: inline-block;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 3px 11px;
+    margin-left: 10px;
+    vertical-align: middle;
+  }
+
+  .demo-banner {
+    background: var(--field);
+    border: 1px solid var(--field-line);
+    border-radius: 10px;
+    padding: 10px 16px;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 0 0 24px;
+  }
+
+  .signin-panel {
+    text-align: center;
+    padding: 64px 20px;
+  }
+
+  .signin-panel p { margin: 0 auto 22px; }
+
+  #google-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--accent);
+    color: #16181D;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 13px 24px;
+    border-radius: 10px;
+    border: 0;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  #google-btn:hover { background: #FAC77F; }
+
+  .toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    margin: 26px 0 10px;
+  }
+
+  .toolbar .who {
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+
+  .toolbar .who a { color: var(--muted); }
+
+  .toolbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+
+  #refresh-btn {
+    font: inherit;
+    font-weight: 700;
+    font-size: 0.875rem;
+    color: var(--ink);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 7px 14px;
+    cursor: pointer;
+  }
+
+  #refresh-btn:hover { border-color: #3B404D; }
+  #refresh-btn:disabled { opacity: 0.5; cursor: default; }
+
+  .state-panel {
+    padding: 40px 0;
+    color: var(--ink-soft);
+  }
+
+  .state-panel.error { color: #E8836B; }
+
+  .tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin: 18px 0 34px;
+  }
+
+  .tile {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px 18px;
+  }
+
+  .tile span {
+    display: block;
+    font-size: 0.8125rem;
+    color: var(--muted);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-bottom: 6px;
+  }
+
+  .tile b {
+    display: block;
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+
+  .chart-panel {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 20px 22px 12px;
+    margin: 0 0 34px;
+  }
+
+  .chart-panel h3 { margin-bottom: 4px; }
+  .chart-note { color: var(--muted); font-size: 0.875rem; margin: 0 0 14px; }
+
+  .bars { display: block; width: 100%; height: auto; }
+  .bars rect.bar { fill: var(--signal); }
+  .bars text.axis { fill: var(--muted); font-size: 8px; font-family: inherit; }
+
+  .ladder-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+    margin: 18px 0 34px;
+  }
+
+  .ladder-card {
+    background: var(--field);
+    border: 1px solid var(--field-line);
+    border-radius: 12px;
+    padding: 20px 22px;
+  }
+
+  .ladder-card h3 { margin-bottom: 2px; }
+  .ladder-card .status {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    border-radius: 999px;
+    padding: 2px 10px;
+    margin-bottom: 14px;
+  }
+  .ladder-card .status.open { background: rgba(53, 207, 232, 0.18); color: var(--signal); }
+  .ladder-card .status.closed { background: rgba(154, 157, 168, 0.18); color: var(--muted); }
+
+  .ladder-card dl {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 6px 14px;
+    margin: 0;
+    font-size: 0.9375rem;
+  }
+  .ladder-card dt { color: var(--muted); }
+  .ladder-card dd { margin: 0; color: var(--ink); font-weight: 600; }
+
+  .updated-line {
+    color: var(--muted);
+    font-size: 0.875rem;
+    margin: -10px 0 30px;
+  }
+
+  section.block { margin-bottom: 40px; }
+  section.block h2 { margin-top: 0; }
+
+  #app { display: none; }
+  #app.ready { display: block; }
+</style>
+</head>
+<body>
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <img src="assets/icon-192.png" alt="" width="30" height="30">
+      Family Filter TV
+      <span class="admin-badge">Admin</span>
+    </a>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1 class="page-title">Owner dashboard</h1>
+
+  <div id="demo-banner" class="demo-banner" hidden>Sample data — this is not live. Remove <code>?demo=1</code> from the address bar to sign in for real.</div>
+
+  <div id="signin-panel" class="signin-panel" hidden>
+    <p>Sign in with the owner's Google account to view signups, subscribers, referrals and launch seats.</p>
+    <button id="google-btn" type="button">Sign in with Google</button>
+  </div>
+
+  <div id="state-panel" class="state-panel" hidden></div>
+
+  <div id="app">
+    <div class="toolbar">
+      <div class="who" id="who-line"></div>
+      <div class="toolbar-actions">
+        <span id="updated-line" class="updated-line" style="margin:0;"></span>
+        <button id="refresh-btn" type="button">Refresh</button>
+      </div>
+    </div>
+
+    <section class="block">
+      <div class="tiles" id="tiles"></div>
+    </section>
+
+    <section class="block">
+      <h2>Signups, last 30 days</h2>
+      <div class="chart-panel">
+        <p class="chart-note" id="chart-note"></p>
+        <svg id="bars" class="bars" viewBox="0 0 620 160" preserveAspectRatio="none" role="img" aria-label="Bar chart of signups per day for the last 30 days"></svg>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>Launch discount</h2>
+      <div class="ladder-grid" id="ladder-grid"></div>
+    </section>
+
+    <section class="block">
+      <h2>Top inviters</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Email</th><th>Code</th><th>Invites</th><th>Paid</th><th>Weeks earned</th><th>Weeks applied</th></tr>
+          </thead>
+          <tbody id="inviters-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>All invites</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Inviter</th><th>Friend</th><th>Status</th><th>Attached</th><th>Paid</th><th>Credited</th></tr>
+          </thead>
+          <tbody id="invites-body"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <p>Family Filter TV — owner-only page. Not indexed, not linked from the site.</p>
+  </div>
+</footer>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-functions-compat.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  var FIREBASE_CONFIG = {
+    apiKey: "AIzaSyBq8U4hlAuO-Gv3Uel-p-FJuMeCVSfzhRw",
+    authDomain: "familyfiltertv.firebaseapp.com",
+    projectId: "familyfiltertv",
+    appId: "1:384866246151:web:2a4b1712b2ca1d2c8554a2",
+    messagingSenderId: "384866246151"
+  };
+  var FUNCTIONS_REGION = "europe-west1";
+
+  var isDemo = /(?:^|[?&])demo=1(?:&|$)/.test(window.location.search);
+
+  var elDemoBanner = document.getElementById("demo-banner");
+  var elSigninPanel = document.getElementById("signin-panel");
+  var elStatePanel = document.getElementById("state-panel");
+  var elApp = document.getElementById("app");
+  var elGoogleBtn = document.getElementById("google-btn");
+  var elRefreshBtn = document.getElementById("refresh-btn");
+  var elWhoLine = document.getElementById("who-line");
+  var elUpdatedLine = document.getElementById("updated-line");
+  var elTiles = document.getElementById("tiles");
+  var elChartNote = document.getElementById("chart-note");
+  var elBars = document.getElementById("bars");
+  var elLadderGrid = document.getElementById("ladder-grid");
+  var elInvitersBody = document.getElementById("inviters-body");
+  var elInvitesBody = document.getElementById("invites-body");
+
+  function showState(html, isError) {
+    elStatePanel.innerHTML = html;
+    elStatePanel.hidden = false;
+    elStatePanel.className = "state-panel" + (isError ? " error" : "");
+    elApp.classList.remove("ready");
+    elSigninPanel.hidden = true;
+  }
+
+  function hideState() {
+    elStatePanel.hidden = true;
+  }
+
+  function escapeHtml(s) {
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+
+  function fmtInt(n) {
+    n = Number(n);
+    if (!isFinite(n)) return "—";
+    return n.toLocaleString("en-US");
+  }
+
+  function fmtDate(s) {
+    if (!s) return "—";
+    var d = new Date(s);
+    if (isNaN(d.getTime())) return escapeHtml(s);
+    return d.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
+  }
+
+  function fmtDateTime(s) {
+    if (!s) return "—";
+    var d = new Date(s);
+    if (isNaN(d.getTime())) return escapeHtml(s);
+    return d.toLocaleString("en-US", { year: "numeric", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" });
+  }
+
+  function weeks(days) {
+    if (days == null || !isFinite(Number(days))) return "—";
+    return Math.round(Number(days) / 7).toLocaleString("en-US");
+  }
+
+  // ---------- sample data for ?demo=1 ----------
+  function sampleData() {
+    var days = [];
+    for (var i = 29; i >= 0; i--) {
+      var d = new Date();
+      d.setDate(d.getDate() - i);
+      days.push({ date: d.toISOString().slice(0, 10), count: Math.max(0, Math.round(6 + 5 * Math.sin(i / 3) + (i % 7 === 0 ? 8 : 0))) });
+    }
+    return {
+      generatedAt: new Date().toISOString(),
+      signups: { total: 1842, last30Days: days },
+      households: { total: 1310, devOverride: 4 },
+      subscribers: { activeTrial: 96, activePaid: 512, lapsed: 210, unknown: 40 },
+      referrals: {
+        rows: [
+          { referrerEmail: "priya@example.com", referrerUid: "u1", referredLabel: "j***@gmail.com", status: "credited", attachedAt: "2026-09-01T10:00:00Z", paidAt: "2026-09-05T10:00:00Z", creditedAt: "2026-09-06T10:00:00Z", creditDays: 14 },
+          { referrerEmail: "sam@example.com", referrerUid: "u2", referredLabel: "l***@outlook.com", status: "paid", attachedAt: "2026-09-10T10:00:00Z", paidAt: "2026-09-12T10:00:00Z", creditedAt: null, creditDays: 14 },
+          { referrerEmail: "priya@example.com", referrerUid: "u1", referredLabel: "t***@yahoo.com", status: "attached", attachedAt: "2026-09-15T10:00:00Z", paidAt: null, creditedAt: null, creditDays: null },
+          { referrerEmail: "noma@example.com", referrerUid: "u3", referredLabel: "k***@gmail.com", status: "credited", attachedAt: "2026-08-20T10:00:00Z", paidAt: "2026-08-22T10:00:00Z", creditedAt: "2026-08-23T10:00:00Z", creditDays: 14 }
+        ],
+        byReferrer: [
+          { referrerEmail: "priya@example.com", code: "PRIYA4F2", paidCount: 6, daysEarned: 84, daysApplied: 70, daysAvailable: 14, invites: 9 },
+          { referrerEmail: "noma@example.com", code: "NOMA91C", paidCount: 4, daysEarned: 56, daysApplied: 56, daysAvailable: 0, invites: 5 },
+          { referrerEmail: "sam@example.com", code: "SAM7K3", paidCount: 1, daysEarned: 14, daysApplied: 0, daysAvailable: 14, invites: 3 }
+        ]
+      },
+      ladder: {
+        open: true,
+        opensAt: "2026-09-01T00:00:00Z",
+        endsAt: "2026-10-01T00:00:00Z",
+        seatsPerTier: 50,
+        tiers: [50, 40, 30, 20, 10],
+        ladders: {
+          ZA: { tier: 40, percentOff: 40, seatsLeftInTier: 18, count: 82 },
+          WORLD: { tier: 50, percentOff: 50, seatsLeftInTier: 6, count: 44 }
+        }
+      }
+    };
+  }
+
+  // ---------- rendering ----------
+  function renderTiles(data) {
+    var signups = data.signups || {};
+    var subs = data.subscribers || {};
+    var referrals = data.referrals || {};
+    var paidReferrals = 0;
+    (referrals.rows || []).forEach(function (r) {
+      if (r && (r.status === "paid" || r.status === "credited")) paidReferrals++;
+    });
+
+    var tiles = [
+      { label: "Signups total", value: fmtInt(signups.total) },
+      { label: "Active trials", value: fmtInt(subs.activeTrial) },
+      { label: "Paying", value: fmtInt(subs.activePaid) },
+      { label: "Lapsed", value: fmtInt(subs.lapsed) },
+      { label: "Paid referrals", value: fmtInt(paidReferrals) }
+    ];
+
+    elTiles.innerHTML = tiles.map(function (t) {
+      return '<div class="tile"><span>' + escapeHtml(t.label) + '</span><b>' + escapeHtml(t.value) + '</b></div>';
+    }).join("");
+  }
+
+  function renderChart(data) {
+    var days = (data.signups && data.signups.last30Days) || [];
+    elChartNote.textContent = days.length
+      ? (days.length + " days, " + fmtDate(days[0].date) + " – " + fmtDate(days[days.length - 1].date))
+      : "No signup data available.";
+
+    var max = 1;
+    days.forEach(function (d) { if (d && isFinite(Number(d.count)) && Number(d.count) > max) max = Number(d.count); });
+
+    var w = 620, h = 160, padBottom = 18, padTop = 4;
+    var n = Math.max(days.length, 1);
+    var gap = 2;
+    var barW = Math.max(2, (w - gap * (n - 1)) / n);
+
+    var svg = "";
+    days.forEach(function (d, i) {
+      var count = d && isFinite(Number(d.count)) ? Number(d.count) : 0;
+      var barH = Math.round(((h - padTop - padBottom) * count) / max);
+      var x = Math.round(i * (barW + gap));
+      var y = h - padBottom - barH;
+      svg += '<rect class="bar" x="' + x + '" y="' + y + '" width="' + Math.max(1, Math.round(barW)) + '" height="' + Math.max(0, barH) + '"><title>' + escapeHtml(d && d.date) + ": " + count + '</title></rect>';
+    });
+    svg += '<line x1="0" y1="' + (h - padBottom) + '" x2="' + w + '" y2="' + (h - padBottom) + '" stroke="currentColor" stroke-opacity="0.15" />';
+
+    elBars.setAttribute("viewBox", "0 0 " + w + " " + h);
+    elBars.innerHTML = svg;
+  }
+
+  function renderLadder(data) {
+    var ladder = data.ladder || {};
+    var ladders = ladder.ladders || {};
+    var order = ["ZA", "WORLD"];
+    var names = { ZA: "South Africa", WORLD: "Rest of world" };
+
+    var html = "";
+    order.forEach(function (key) {
+      var l = ladders[key] || {};
+      var isOpen = !!ladder.open;
+      html += '<div class="ladder-card">'
+        + '<h3>' + escapeHtml(names[key] || key) + '</h3>'
+        + '<span class="status ' + (isOpen ? "open" : "closed") + '">' + (isOpen ? "Open" : "Closed") + '</span>'
+        + '<dl>'
+        + '<dt>Current tier</dt><dd>' + (l.percentOff != null ? escapeHtml(l.percentOff) + "% off" : "—") + '</dd>'
+        + '<dt>Seats left in tier</dt><dd>' + fmtInt(l.seatsLeftInTier) + '</dd>'
+        + '<dt>Total claimed</dt><dd>' + fmtInt(l.count) + '</dd>'
+        + '<dt>Opens</dt><dd>' + fmtDate(ladder.opensAt) + '</dd>'
+        + '<dt>Ends</dt><dd>' + fmtDate(ladder.endsAt) + '</dd>'
+        + '</dl>'
+        + '</div>';
+    });
+    elLadderGrid.innerHTML = html || '<p class="muted">No launch ladder data.</p>';
+  }
+
+  function renderInviters(data) {
+    var rows = (data.referrals && data.referrals.byReferrer) || [];
+    if (!rows.length) {
+      elInvitersBody.innerHTML = '<tr><td colspan="6" class="muted">No referrers yet.</td></tr>';
+      return;
+    }
+    var sorted = rows.slice().sort(function (a, b) { return (b.paidCount || 0) - (a.paidCount || 0); });
+    elInvitersBody.innerHTML = sorted.map(function (r) {
+      return "<tr>"
+        + "<td>" + escapeHtml(r.referrerEmail) + "</td>"
+        + "<td><code>" + escapeHtml(r.code) + "</code></td>"
+        + "<td>" + fmtInt(r.invites) + "</td>"
+        + "<td>" + fmtInt(r.paidCount) + "</td>"
+        + "<td>" + weeks(r.daysEarned) + "</td>"
+        + "<td>" + weeks(r.daysApplied) + "</td>"
+        + "</tr>";
+    }).join("");
+  }
+
+  function renderInvites(data) {
+    var rows = (data.referrals && data.referrals.rows) || [];
+    if (!rows.length) {
+      elInvitesBody.innerHTML = '<tr><td colspan="6" class="muted">No invites yet.</td></tr>';
+      return;
+    }
+    var sorted = rows.slice().sort(function (a, b) {
+      return new Date(b.attachedAt || 0).getTime() - new Date(a.attachedAt || 0).getTime();
+    });
+    elInvitesBody.innerHTML = sorted.map(function (r) {
+      return "<tr>"
+        + "<td>" + escapeHtml(r.referrerEmail) + "</td>"
+        + "<td>" + escapeHtml(r.referredLabel) + "</td>"
+        + "<td>" + escapeHtml(r.status) + "</td>"
+        + "<td>" + fmtDate(r.attachedAt) + "</td>"
+        + "<td>" + fmtDate(r.paidAt) + "</td>"
+        + "<td>" + fmtDate(r.creditedAt) + "</td>"
+        + "</tr>";
+    }).join("");
+  }
+
+  function renderAll(data) {
+    hideState();
+    renderTiles(data);
+    renderChart(data);
+    renderLadder(data);
+    renderInviters(data);
+    renderInvites(data);
+    elUpdatedLine.textContent = "Updated " + fmtDateTime(data.generatedAt || new Date().toISOString());
+    elApp.classList.add("ready");
+  }
+
+  // ---------- demo mode: no Firebase needed ----------
+  if (isDemo) {
+    elDemoBanner.hidden = false;
+    elWhoLine.textContent = "Sample data";
+    elRefreshBtn.addEventListener("click", function () { renderAll(sampleData()); });
+    renderAll(sampleData());
+    return;
+  }
+
+  // ---------- real mode: Firebase auth + callable function ----------
+  if (typeof firebase === "undefined") {
+    showState("Firebase failed to load. Check your connection and reload.", true);
+    return;
+  }
+
+  firebase.initializeApp(FIREBASE_CONFIG);
+  var auth = firebase.auth();
+  var loading = false;
+
+  function callDashboard() {
+    if (loading) return;
+    loading = true;
+    elRefreshBtn.disabled = true;
+    showState("Loading…", false);
+    var fn = firebase.app().functions(FUNCTIONS_REGION).httpsCallable("adminDashboard");
+    fn()
+      .then(function (result) {
+        loading = false;
+        elRefreshBtn.disabled = false;
+        renderAll((result && result.data) || {});
+      })
+      .catch(function (err) {
+        loading = false;
+        elRefreshBtn.disabled = false;
+        if (err && err.code === "functions/permission-denied") {
+          showState('This page is for the owner only. <a href="#" id="signout-link">Sign out</a>', true);
+          var link = document.getElementById("signout-link");
+          if (link) {
+            link.addEventListener("click", function (e) {
+              e.preventDefault();
+              auth.signOut();
+            });
+          }
+          return;
+        }
+        showState("Could not load the dashboard: " + escapeHtml((err && err.message) || "unknown error") + ".", true);
+      });
+  }
+
+  elGoogleBtn.addEventListener("click", function () {
+    var provider = new firebase.auth.GoogleAuthProvider();
+    elSigninPanel.hidden = true;
+    showState("Signing in…", false);
+    auth.signInWithPopup(provider).catch(function (err) {
+      showState("Sign-in failed: " + escapeHtml((err && err.message) || "unknown error") + ".", true);
+    });
+  });
+
+  elRefreshBtn.addEventListener("click", callDashboard);
+
+  auth.onAuthStateChanged(function (user) {
+    if (!user) {
+      hideState();
+      elApp.classList.remove("ready");
+      elSigninPanel.hidden = false;
+      elWhoLine.textContent = "";
+      return;
+    }
+    elSigninPanel.hidden = true;
+    elWhoLine.innerHTML = escapeHtml(user.email) + ' · <a href="#" id="signout-link-2">Sign out</a>';
+    var link2 = document.getElementById("signout-link-2");
+    if (link2) {
+      link2.addEventListener("click", function (e) {
+        e.preventDefault();
+        auth.signOut();
+      });
+    }
+    callDashboard();
+  });
+})();
+</script>
+</body>
+</html>
