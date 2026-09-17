@@ -1,4 +1,4 @@
-# FamilyFilterTV
+# Family Filter TV
 
 > A profanity filter that runs on the television itself — an Android TV, an Android TV box, or an
 > Android phone — rather than in a desktop browser. It plays what you start in Stremio and mutes the
@@ -8,11 +8,11 @@
 
 ## What it is
 
-FamilyFilterTV is an app installed on the television a family actually watches together — an Android
+Family Filter TV is an app installed on the television a family actually watches together — an Android
 TV, an Android TV box, or an Android phone. It is not a browser extension and there is no computer
 in the loop: nothing is cast, mirrored or streamed from a laptop. The app is used as Stremio's
 external player, so you start a film or episode in Stremio the way you normally would, hand it to
-FamilyFilterTV, and it plays the same stream on the TV with the swearing muted. Because it reads the
+Family Filter TV, and it plays the same stream on the TV with the swearing muted. Because it reads the
 subtitle track to know when to mute, a title with no subtitles plays unfiltered, and the app says so
 on screen rather than pretending otherwise.
 
@@ -43,7 +43,7 @@ devices, and up to three more can be added, to a limit of six.
 ## Devices
 
 Android TVs, Android TV boxes, and Android phones. A small number of TV boxes are not served by the
-Google Play Store at all; FamilyFilterTV can be installed directly on those from the download page,
+Google Play Store at all; Family Filter TV can be installed directly on those from the download page,
 and it updates itself from there afterwards.
 
 ## Pages
@@ -64,5 +64,5 @@ and it updates itself from there afterwards.
 
 ## Not affiliated
 
-FamilyFilterTV is an independent app. It is not affiliated with, endorsed by, or connected to
+Family Filter TV is an independent app. It is not affiliated with, endorsed by, or connected to
 Stremio, Google, or any streaming service.

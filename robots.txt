@@ -1,4 +1,4 @@
-# FamilyFilterTV — everything here is public and may be indexed, by search
+# Family Filter TV — everything here is public and may be indexed, by search
 # engines and by AI crawlers alike. See llms.txt for a plain-text summary.
 User-agent: *
 Allow: /
