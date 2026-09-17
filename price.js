@@ -38,13 +38,25 @@
     "Pacific/Auckland": "NZ"
   };
 
+  // Launch ladder (#153): a time-limited discount for the first 200 subscribers per tier.
+  // Fetched only after prices.json resolves; any failure, timeout, or open:false leaves
+  // this block hidden and the rest of the page exactly as it is without it.
+  var LADDER_URL = "https://europe-west1-familyfiltertv.cloudfunctions.net/launchLadderState";
+  var LADDER_TIMEOUT_MS = 4000;
+
   var box = document.getElementById("price-country");
   var input = document.getElementById("price-country-input");
   var list = document.getElementById("price-country-list");
   var annual = document.getElementById("price-annual");
   var devices = document.getElementById("price-devices");
   var noteCountry = document.getElementById("price-note-country");
+  var launchBox = document.getElementById("price-launch");
+  var launchPct = document.getElementById("price-launch-pct");
+  var launchSeats = document.getElementById("price-launch-seats");
+  var launchPrice = document.getElementById("price-launch-price");
+  var launchEnd = document.getElementById("price-launch-end");
   if (!box || !input || !list || !annual || !devices || !window.fetch || !window.Intl) return;
+  var launchReady = !!(launchBox && launchPct && launchSeats && launchPrice && launchEnd);
 
   var names;
   try { names = new Intl.DisplayNames(["en"], { type: "region" }); } catch (e) { names = null; }
@@ -62,6 +74,37 @@
       try { return new Intl.NumberFormat("en", opts).format(price.amount); }
       catch (e2) { return price.currency + " " + price.amount; }
     }
+  }
+
+  // Local fixture for testing the ladder without touching the (not-yet-live) endpoint:
+  // ?ladderFixture=1 -> data/ladder-fixture.json (open); ?ladderFixture=closed ->
+  // data/ladder-fixture-closed.json; any other value -> data/ladder-fixture-<value>.json.
+  function ladderFixtureUrl() {
+    var m = /[?&]ladderFixture=([^&]*)/.exec(window.location.search);
+    if (!m) return null;
+    var v = decodeURIComponent(m[1] || "");
+    return (!v || v === "1") ? "data/ladder-fixture.json" : "data/ladder-fixture-" + v + ".json";
+  }
+
+  function fetchWithTimeout(url, ms) {
+    if (!window.AbortController) return fetch(url, { cache: "no-cache" });
+    var ctrl = new AbortController();
+    var timer = setTimeout(function () { ctrl.abort(); }, ms);
+    function done(v) { clearTimeout(timer); return v; }
+    return fetch(url, { cache: "no-cache", signal: ctrl.signal }).then(
+      function (r) { return done(r); },
+      function (e) { done(); throw e; }
+    );
+  }
+
+  function round2(n) { return Math.round(n * 100) / 100; }
+
+  function ladderEndDate(iso) {
+    try {
+      return new Intl.DateTimeFormat("en-GB", {
+        day: "numeric", month: "long", year: "numeric", timeZone: "Africa/Johannesburg"
+      }).format(new Date(iso));
+    } catch (e) { return ""; }
   }
 
   function storedChoice() {
@@ -104,6 +147,33 @@
         byName[e.name.toLowerCase()] = e.code;
       });
 
+      var selectedCode = null;
+      var ladderState = null; // set once launchLadderState succeeds and open:true; else stays null
+
+      function renderLadder() {
+        if (!launchReady) return;
+        var ladder = ladderState && selectedCode && regions[selectedCode] &&
+          ladderState.ladders && ladderState.ladders[selectedCode === "ZA" ? "ZA" : "WORLD"];
+        if (!ladderState || ladderState.open !== true || !ladder || !(ladder.percentOff > 0)) {
+          launchBox.hidden = true;
+          return;
+        }
+        var isZA = selectedCode === "ZA";
+        var annualPrice = regions[selectedCode].annual;
+        var firstYearAmount = round2(annualPrice.amount * (1 - ladder.percentOff / 100));
+        var firstYearText = money({ amount: firstYearAmount, currency: annualPrice.currency }, selectedCode);
+        if (!isZA) firstYearText = "about " + firstYearText;
+        var renewalText = money(annualPrice, selectedCode);
+
+        launchPct.textContent = ladder.percentOff + "%";
+        launchSeats.textContent = ladder.seatsLeftInTier + " of " + ladderState.seatsPerTier +
+          " seats left at this price " + (isZA ? "in South Africa" : "for the rest of the world") + ".";
+        launchPrice.textContent = firstYearText + " for your first year, then " + renewalText +
+          " a year. 14-day free trial first.";
+        launchEnd.textContent = "Ends " + ladderEndDate(ladderState.endsAt) + ".";
+        launchBox.hidden = false;
+      }
+
       function show(code) {
         var p = regions[code];
         input.value = countryName(code);
@@ -111,6 +181,8 @@
         devices.textContent = "A 4th, 5th or 6th device adds " + money(p.device4, code) + ", " +
           money(p.device5, code) + " or " + money(p.device6, code) + " a year.";
         if (noteCountry) noteCountry.textContent = " for the selected country";
+        selectedCode = code;
+        renderLadder();
       }
 
       // While typing, only a full country name counts; a two-letter code is accepted on commit.
@@ -126,6 +198,13 @@
       var current = guess(regions);
       show(current);
       box.hidden = false;
+
+      if (launchReady) {
+        fetchWithTimeout(ladderFixtureUrl() || LADDER_URL, LADDER_TIMEOUT_MS)
+          .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+          .then(function (data) { ladderState = data; renderLadder(); })
+          .catch(function () { ladderState = null; renderLadder(); });
+      }
 
       input.addEventListener("input", function () { pick(false); });
       input.addEventListener("change", function () {

@@ -1,0 +1,9 @@
+{
+  "promo": "launch2026", "open": true,
+  "opensAt": "2026-10-01T00:00:00Z", "endsAt": "2026-12-31T21:59:59Z",
+  "seatsPerTier": 200, "tiers": [50, 40, 30, 20, 10],
+  "ladders": {
+    "ZA":    { "tier": 1, "percentOff": 50, "seatsLeftInTier": 137, "count": 63 },
+    "WORLD": { "tier": 2, "percentOff": 40, "seatsLeftInTier": 200, "count": 200 }
+  }
+}
