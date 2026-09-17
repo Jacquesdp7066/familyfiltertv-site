@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,follow">
+<title>You've been invited — Family Filter TV</title>
+<meta name="description" content="You've been invited to Family Filter TV, the language filter that runs on your television. 14-day free trial.">
+<meta name="theme-color" content="#0B0C0F">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="assets/icon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="You've been invited to Family Filter TV">
+<meta property="og:description" content="It mutes the swearing in what you watch on the TV. 14-day free trial.">
+<meta property="og:image" content="https://familyfiltertv.com/assets/feature-graphic.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <img src="assets/icon-192.png" alt="" width="30" height="30">
+      Family Filter TV
+    </a>
+    <nav class="site-nav" aria-label="Pages">
+      <a href="index.html">Home</a>
+      <a href="download.html">Download</a>
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1 class="page-title">You've been invited to Family Filter TV</h1>
+  <p class="lead">It mutes the swearing in what you watch on the TV. 14-day free trial, then
+  <!-- ponytail: static price only, no price.js country widget here — keep this landing page
+  small; wire the full country picker (see index.html) later if the fixed price is a problem. -->
+  R250 a year.</p>
+
+  <div class="code-plate" id="code-plate" hidden>
+    <p class="code-note">If the app asks for an invite code, enter <code id="code-text"></code>.</p>
+  </div>
+
+  <div class="actions">
+    <a class="btn" id="play-btn" href="https://play.google.com/store/apps/details?id=com.familyfiltertv.app">Get it on Google Play</a>
+    <a class="btn-quiet" id="open-app-btn" href="#" hidden>Already installed? Open the app</a>
+  </div>
+  <p><a class="btn-quiet" href="download.html">Other ways to install</a></p>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <p>Family Filter TV is made by Jacques du Preez in South Africa.</p>
+    <p><a href="mailto:jacquesjdupreez@gmail.com">jacquesjdupreez@gmail.com</a></p>
+    <nav class="foot-nav" aria-label="Footer">
+      <a href="download.html">Download</a>
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </nav>
+    <p class="fine">An independent app. Not affiliated with, or endorsed by, Stremio or Google.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+  var ALPHABET_RE = /^[23456789ABCDEFGHJKLMNPQRSTUVWXYZ]{6}$/;
+  var params = new URLSearchParams(window.location.search);
+  var raw = (params.get('ref') || '').trim().toUpperCase();
+  var code = ALPHABET_RE.test(raw) ? raw : null;
+
+  var playBtn = document.getElementById('play-btn');
+  var playUrl = 'https://play.google.com/store/apps/details?id=com.familyfiltertv.app';
+
+  if (!code) {
+    playBtn.href = playUrl;
+    return;
+  }
+
+  try { localStorage.setItem('ffRef', code); } catch (e) { /* private mode: ignore */ }
+
+  document.getElementById('code-text').textContent = code;
+  document.getElementById('code-plate').hidden = false;
+
+  playBtn.href = playUrl + '&referrer=' + encodeURIComponent('ref=' + code);
+
+  var joinUrl = 'https://familyfiltertv.com/join?ref=' + code;
+  var openAppBtn = document.getElementById('open-app-btn');
+  openAppBtn.href = 'intent://familyfiltertv.com/join?ref=' + code +
+    '#Intent;scheme=https;package=com.familyfiltertv.app;S.browser_fallback_url=' +
+    encodeURIComponent(joinUrl) + ';end';
+  openAppBtn.hidden = false;
+})();
+</script>
+</body>
+</html>
