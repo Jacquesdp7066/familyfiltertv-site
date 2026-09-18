@@ -38,7 +38,11 @@ version existing.
 
 US$14.99 a year, with the first 14 days free. Google Play shows and charges the price in the
 customer's own currency, at the price Google sets for their country. One account covers three
-devices, and up to three more can be added, to a limit of six.
+devices, and up to three more can be added, to a limit of six. A launch discount currently
+applies to the first year, for the first 200 subscribers in South Africa and the first 200
+elsewhere, stepping down from 50% to 10% off as each group of 200 fills, until 31 December 2026.
+Every subscriber can also invite friends from the app's Invite a friend screen: 10 weeks free per
+friend who subscribes, with no cap, credited 3 days after the friend's first payment.
 
 ## Devices
 
