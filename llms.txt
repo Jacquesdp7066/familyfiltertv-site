@@ -50,6 +50,8 @@ and it updates itself from there afterwards.
 
 - [Home](https://familyfiltertv.com/): what it does, how to start, pricing, common questions.
 - [Download](https://familyfiltertv.com/download.html): Google Play, and direct install for boxes without Play.
+- [Get set up](https://familyfiltertv.com/setup.html): the full walkthrough for someone who has just
+  been sent the app — Stremio, Family Filter TV, linking a TV, add-ons, subtitles.
 - [Support](https://familyfiltertv.com/support.html): setup steps, known limits, how to get help.
 - [Terms of use](https://familyfiltertv.com/terms.html): subscription, trial, device limits, cancellation.
 - [Privacy policy](https://familyfiltertv.com/privacy.html): what is stored, what payment involves, what third parties see.
