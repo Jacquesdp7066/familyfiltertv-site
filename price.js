@@ -54,9 +54,10 @@
   var launchPct = document.getElementById("price-launch-pct");
   var launchSeats = document.getElementById("price-launch-seats");
   var launchPrice = document.getElementById("price-launch-price");
+  var launchNext = document.getElementById("price-launch-next");
   var launchEnd = document.getElementById("price-launch-end");
   if (!box || !input || !list || !annual || !devices || !window.fetch || !window.Intl) return;
-  var launchReady = !!(launchBox && launchPct && launchSeats && launchPrice && launchEnd);
+  var launchReady = !!(launchBox && launchPct && launchSeats && launchPrice && launchNext && launchEnd);
 
   var names;
   try { names = new Intl.DisplayNames(["en"], { type: "region" }); } catch (e) { names = null; }
@@ -105,6 +106,25 @@
         day: "numeric", month: "long", year: "numeric", timeZone: "Africa/Johannesburg"
       }).format(new Date(iso));
     } catch (e) { return ""; }
+  }
+
+  // Rest of the ladder, derived from tiers/tier/seatsPerTier rather than hardcoded — e.g.
+  // "Next 200: 40% off. Then 30%, 20%, 10%, and full price after that." Once the current tier
+  // is the last one in the list, there is nothing left to step down to.
+  function ladderNextText(state, ladder) {
+    var tiers = state && state.tiers;
+    var seatsPerTier = state && state.seatsPerTier;
+    if (!tiers || !tiers.length || !ladder || !(ladder.tier > 0) || !(seatsPerTier > 0)) return "";
+    var currentIdx = ladder.tier - 1;
+    if (currentIdx >= tiers.length - 1) {
+      return "After these " + seatsPerTier + " seats it's full price.";
+    }
+    var nextIdx = currentIdx + 1;
+    var remaining = tiers.slice(nextIdx + 1);
+    var tail = remaining.length
+      ? "Then " + remaining.map(function (p) { return p + "%"; }).join(", ") + ", and full price after that."
+      : "Then full price after that.";
+    return "Next " + seatsPerTier + ": " + tiers[nextIdx] + "% off. " + tail;
   }
 
   function storedChoice() {
@@ -170,6 +190,9 @@
           " seats left at this price " + (isZA ? "in South Africa" : "for the rest of the world") + ".";
         launchPrice.textContent = firstYearText + " for your first year, then " + renewalText +
           " a year. 14-day free trial first.";
+        var nextText = ladderNextText(ladderState, ladder);
+        launchNext.textContent = nextText;
+        launchNext.hidden = !nextText;
         launchEnd.textContent = "Ends " + ladderEndDate(ladderState.endsAt) + ".";
         launchBox.hidden = false;
       }
