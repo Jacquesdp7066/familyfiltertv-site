@@ -91,6 +91,22 @@
 
   try { localStorage.setItem('ffRef', code); } catch (e) { /* private mode: ignore */ }
 
+  // Count this open against the code (#197): once per browser per code, fire-and-forget,
+  // never blocks the page. See privacy.html "What we store" - nothing about the visitor
+  // is sent or stored, just the code.
+  try {
+    var pingKey = 'ffOpenPinged:' + code;
+    if (!sessionStorage.getItem(pingKey)) {
+      sessionStorage.setItem(pingKey, '1');
+      fetch('https://europe-west1-familyfiltertv.cloudfunctions.net/referralOpen', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code: code }),
+        keepalive: true
+      }).catch(function () { /* best effort: ignore */ });
+    }
+  } catch (e) { /* private mode / storage blocked: ignore */ }
+
   document.getElementById('code-text').textContent = code;
   document.getElementById('code-plate').hidden = false;
 
