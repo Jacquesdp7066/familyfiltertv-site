@@ -275,7 +275,7 @@
       <div class="table-scroll">
         <table>
           <thead>
-            <tr><th>Email</th><th>Code</th><th>Invites</th><th>Paid</th><th>Weeks earned</th><th>Weeks applied</th></tr>
+            <tr><th>Email</th><th>Code</th><th>Link opened</th><th>Shared</th><th>Invites</th><th>Paid</th><th>Weeks earned</th><th>Weeks applied</th></tr>
           </thead>
           <tbody id="inviters-body"></tbody>
         </table>
@@ -399,8 +399,9 @@
           { referrerEmail: "noma@example.com", referrerUid: "u3", referredLabel: "k***@gmail.com", status: "credited", attachedAt: "2026-08-20T10:00:00Z", paidAt: "2026-08-22T10:00:00Z", creditedAt: "2026-08-23T10:00:00Z", creditDays: 14 }
         ],
         byReferrer: [
-          { referrerEmail: "priya@example.com", code: "PRIYA4F2", paidCount: 6, daysEarned: 84, daysApplied: 70, daysAvailable: 14, invites: 9 },
-          { referrerEmail: "noma@example.com", code: "NOMA91C", paidCount: 4, daysEarned: 56, daysApplied: 56, daysAvailable: 0, invites: 5 },
+          { referrerEmail: "priya@example.com", code: "PRIYA4F2", paidCount: 6, daysEarned: 84, daysApplied: 70, daysAvailable: 14, invites: 9, opens: 41, shareTaps: 12 },
+          { referrerEmail: "noma@example.com", code: "NOMA91C", paidCount: 4, daysEarned: 56, daysApplied: 56, daysAvailable: 0, invites: 5, opens: 18, shareTaps: 6 },
+          // No opens/shareTaps here on purpose: exercises the "blank when absent" case (#197).
           { referrerEmail: "sam@example.com", code: "SAM7K3", paidCount: 1, daysEarned: 14, daysApplied: 0, daysAvailable: 14, invites: 3 }
         ]
       },
@@ -497,7 +498,7 @@
   function renderInviters(data) {
     var rows = (data.referrals && data.referrals.byReferrer) || [];
     if (!rows.length) {
-      elInvitersBody.innerHTML = '<tr><td colspan="6" class="muted">No referrers yet.</td></tr>';
+      elInvitersBody.innerHTML = '<tr><td colspan="8" class="muted">No referrers yet.</td></tr>';
       return;
     }
     var sorted = rows.slice().sort(function (a, b) { return (b.paidCount || 0) - (a.paidCount || 0); });
@@ -505,6 +506,9 @@
       return "<tr>"
         + "<td>" + escapeHtml(r.referrerEmail) + "</td>"
         + "<td><code>" + escapeHtml(r.code) + "</code></td>"
+        // opens / shareTaps (#197): older backend responses omit them - fmtInt blanks to "—".
+        + "<td>" + fmtInt(r.opens) + "</td>"
+        + "<td>" + fmtInt(r.shareTaps) + "</td>"
         + "<td>" + fmtInt(r.invites) + "</td>"
         + "<td>" + fmtInt(r.paidCount) + "</td>"
         + "<td>" + weeks(r.daysEarned) + "</td>"
