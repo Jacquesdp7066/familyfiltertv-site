@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Profanity Filter for Android TV | Family Filter TV</title>
-<meta name="description" content="Automatically mute profanity and swear words on Android TV. Family Filter TV plays what you start in Stremio, briefly mutes profane subtitle lines, and keeps the video playing.">
+<meta name="description" content="Automatically mute profanity and swear words on Android TV while the picture keeps playing. Family Filter TV works with Stremio and gives families simple household filter controls.">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta name="theme-color" content="#0B0C0F">
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
@@ -13,7 +13,7 @@
 <meta property="og:url" content="https://familyfiltertv.com/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Profanity Filter for Android TV | Family Filter TV">
-<meta property="og:description" content="Automatically mute profanity on Android TV while the picture keeps playing. Built for the Stremio external-player workflow.">
+<meta property="og:description" content="Automatically mute profanity on Android TV while the picture keeps playing. Works with Stremio on Android TV and TV boxes.">
 <meta property="og:image" content="https://familyfiltertv.com/assets/feature-graphic.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,7 +30,7 @@
   "alternateName": "FamilyFilterTV",
   "operatingSystem": "Android, Android TV",
   "applicationCategory": "MultimediaApplication",
-  "description": "Family Filter TV runs on the television itself: an Android TV, a TV box, or an Android phone. It plays what you start in Stremio and mutes the audio for the few seconds a subtitle line contains profanity. Nothing is cut or skipped; only the sound drops. Filter strength is set once on a parent's phone - off, mild, family or strict - and every linked television in the household follows it.",
+  "description": "Family Filter TV is a profanity filter for Android TV, Android TV boxes and Android phones. It works with Stremio to automatically mute unwanted language while the picture keeps playing. Filter strength is set once on a parent's phone - off, mild, family or strict - and every linked television in the household follows it.",
   "url": "https://familyfiltertv.com/",
   "downloadUrl": "https://play.google.com/store/apps/details?id=com.familyfiltertv.app",
   "installUrl": "https://familyfiltertv.com/download.html",
@@ -67,7 +67,7 @@
       "name": "What happens if a title has no subtitles?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Filtering reads the subtitle line to know when to mute, so a title with no subtitles plays unfiltered. Family Filter TV tells you on screen when that is the case."
+        "text": "Filtering availability varies by title. Family Filter TV tells you on screen when a title cannot be filtered."
       }
     },
     {
@@ -115,7 +115,7 @@
       "name": "What does it play?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "It plays what you start in Stremio, which hands the title to Family Filter TV as its external player. It is a player, not a library and not a way into any subscription streaming service, and it cannot reach the sound inside another app's own player."
+        "text": "It works with titles you start in Stremio. It is not a streaming library and does not provide access to subscription streaming services."
       }
     },
     {
@@ -160,9 +160,9 @@
   <div class="hero">
     <div>
       <h1>Automatically mute profanity on your Android TV.</h1>
-      <p class="lead">Family Filter TV is a profanity filter for Android TV and TV boxes. It plays
-      what you start in Stremio, detects profane subtitle lines and briefly mutes the audio while
-      the picture keeps playing. Choose how strict the filter should be from your phone.</p>
+      <p class="lead">Family Filter TV automatically mutes unwanted language on Android TV and TV
+      boxes while the picture keeps playing. It works with Stremio, and you choose how strict the
+      household filter should be from your phone.</p>
       <div class="actions">
         <a class="btn" href="https://play.google.com/store/apps/details?id=com.familyfiltertv.app">Get it on Google Play</a>
         <a class="btn-quiet" href="download.html">Other ways to install</a>
@@ -243,25 +243,21 @@
     <div class="panel">
       <ul>
         <li><a href="android-tv-profanity-filter.html"><strong>Profanity filter for Android TV</strong></a> — what it does, what you need and the current limits.</li>
-        <li><a href="stremio-profanity-filter.html"><strong>Stremio profanity filter</strong></a> — how to hand playback to Family Filter TV as the external player.</li>
-        <li><a href="mute-swearing-on-tv.html"><strong>How to mute swearing on TV</strong></a> — how subtitle-timed muting works without cutting the video.</li>
+        <li><a href="stremio-profanity-filter.html"><strong>Stremio profanity filter</strong></a> — how to watch with automatic language filtering on Android TV.</li>
+        <li><a href="mute-swearing-on-tv.html"><strong>How to mute swearing on TV</strong></a> — what the viewing experience looks like when language is filtered.</li>
       </ul>
     </div>
   </section>
 
-  <h2>What it plays</h2>
-  <p>Family Filter TV is the player, not the library. You start a film or an episode in Stremio the
-  way you always do, hand it over, and Family Filter TV plays that same stream on the TV with the
-  swearing muted.</p>
+  <h2>What it works with</h2>
+  <p>Family Filter TV works with supported Stremio playback on Android TV and Android TV boxes.
+  Start watching in Stremio and use Family Filter TV for a cleaner language experience.</p>
   <div class="panel">
     <ul>
-      <li>It plays what you start in <strong>Stremio</strong>. That is the one thing it takes over
-        from.</li>
-      <li>It does not open, unlock or filter subscription streaming apps. Those play inside their
-        own players, and nothing else on the television can reach their sound.</li>
-      <li>Filtering reads the subtitle track, so a title with no subtitles plays unfiltered — and
-        the app says so on screen rather than pretending otherwise.</li>
-      <li>It mutes swearing in speech. It does nothing about violence or nudity.</li>
+      <li><strong>Stremio on Android TV and TV boxes</strong> is supported today.</li>
+      <li>Family Filter TV is not a streaming library and does not provide films, series or subscription access.</li>
+      <li>Filtering availability can vary by title; the app tells you when filtering is unavailable.</li>
+      <li>It filters profanity in speech. Violence and nudity are not currently filtered.</li>
     </ul>
   </div>
 
@@ -284,13 +280,13 @@
     <li>
       <div>
         <h3>Start watching</h3>
-        <p>In Stremio, start a title and hand it to Family Filter TV as the player. Pick how strict
-        the filter should be — off, mild, family or strict.</p>
+        <p>Start a title in Stremio and choose Family Filter TV for playback. Pick how strict the
+        filter should be — off, mild, family or strict.</p>
       </div>
     </li>
   </ol>
-  <p><a href="setup.html">The full walkthrough</a> covers add-ons, subtitles, and what to expect the
-  first time you watch something.</p>
+  <p><a href="setup.html">The full walkthrough</a> covers installation, linking your TV and the
+  few settings needed before you start watching.</p>
 
   <h2>One filter for the whole house</h2>
   <p>The filter belongs to the household, not to the device. Set it once on your phone and every
@@ -354,8 +350,8 @@
   <div class="faq">
     <div>
       <h3>What happens if a title has no subtitles?</h3>
-      <p>Filtering reads the subtitle line to know when to mute, so a title with no subtitles plays
-      unfiltered. Family Filter TV tells you on screen when that is the case.</p>
+      <p>Filtering availability varies by title. Family Filter TV tells you on screen when filtering
+      is unavailable.</p>
     </div>
     <div>
       <h3>Does it cut or skip anything?</h3>
@@ -369,8 +365,8 @@
     </div>
     <div>
       <h3>What does it play?</h3>
-      <p>What you start in Stremio. It's a player, not a library and not a way into any
-      subscription streaming service.</p>
+      <p>Supported playback you start in Stremio. Family Filter TV is not a streaming library and
+      does not provide access to subscription services.</p>
     </div>
     <div>
       <h3>Does it do anything about violence or nudity?</h3>
