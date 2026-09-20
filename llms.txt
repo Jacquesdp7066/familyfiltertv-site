@@ -1,72 +1,55 @@
 # Family Filter TV
 
-> A profanity filter that runs on the television itself — an Android TV, an Android TV box, or an
-> Android phone — rather than in a desktop browser. It plays what you start in Stremio and mutes the
-> audio for the few seconds a subtitle line contains profanity. Nothing is cut and nothing is
-> skipped: only the sound drops, and only for the length of that line. The filter is set once on a
-> parent's phone and every linked television in the household follows it.
+> Family Filter TV is a profanity filter for Android TV, Android TV boxes and Android phones.
+> It works with supported Stremio playback to automatically mute unwanted language while the
+> picture keeps playing. Families choose how strict the filter should be and can manage linked TVs
+> from an Android phone.
 
-## What it is
+Official site: https://familyfiltertv.com/
 
-Family Filter TV is an app installed on the television a family actually watches together — an Android
-TV, an Android TV box, or an Android phone. It is not a browser extension and there is no computer
-in the loop: nothing is cast, mirrored or streamed from a laptop. The app is used as Stremio's
-external player, so you start a film or episode in Stremio the way you normally would, hand it to
-Family Filter TV, and it plays the same stream on the TV with the swearing muted. Because it reads the
-subtitle track to know when to mute, a title with no subtitles plays unfiltered, and the app says so
-on screen rather than pretending otherwise.
+## What it does
 
-The filter is a household setting rather than a per-device one. A parent chooses the strength on
-their phone, and every television linked to the account follows, which is what makes it usable in a
-house where the people watching are not the people deciding.
+- Automatically mutes profanity in supported playback.
+- Keeps the picture playing; it does not cut or skip the video.
+- Supports off, mild, family and strict filter levels.
+- Lets one household manage linked TVs from a phone.
+- Runs on Android TV, Android TV boxes and Android phones.
+- Works with supported Stremio playback.
 
-It is aimed at parents and other adults who want to watch ordinary films and series on the living
-room television without the language, and who do not want to give up on a title or rely on an edited
-version existing.
+## What it does not do
 
-## How it works
+- It is not a streaming library and does not provide films, series or subscription access.
+- It does not currently filter violence or nudity.
+- Filtering availability varies by title, and the app tells the viewer when filtering is unavailable.
+- It does not currently filter playback inside subscription streaming apps.
 
-- It runs on the television itself, as the player Stremio hands playback to.
-- You choose how strict the filter is: off, mild, family or strict.
-- The filter reads the subtitle line, works out the seconds that line is on screen, and mutes for
-  that window with a small margin either side.
-- Settings changed on the phone apply to every device linked to the same household.
-- A television is linked from the phone by typing in a short code shown on the TV screen.
-- When the next episode is part of the same download, it plays straight afterwards, already filtered.
+## Price
 
-## What it costs
+US$14.99 a year with a 14-day free trial. Google Play shows and charges the local listed price.
+Three devices are included; additional device options are available up to six total devices.
 
-US$14.99 a year, with the first 14 days free. Google Play shows and charges the price in the
-customer's own currency, at the price Google sets for their country. One account covers three
-devices, and up to three more can be added, to a limit of six. A launch discount starts 1 October 2026 and
-applies to the first year, for the first 200 subscribers in South Africa and the first 200
-elsewhere, stepping down from 50% to 10% off as each group of 200 fills, until 31 December 2026.
-Every subscriber can also invite friends from the app's Invite a friend screen: 10 weeks free per
-friend who subscribes, with no cap, credited 3 days after the friend's first payment.
+A launch discount starts 1 October 2026 for the first 200 subscribers in South Africa and the first
+200 elsewhere, then steps down by tier until 31 December 2026.
+
+Subscribers can invite friends from the app. A successful subscribing referral earns account credit,
+and the invited friend receives a longer free trial.
 
 ## Devices
 
-Android TVs, Android TV boxes, and Android phones. A small number of TV boxes are not served by the
-Google Play Store at all; Family Filter TV can be installed directly on those from the download page,
-and it updates itself from there afterwards.
+Android TVs, Android TV boxes and Android phones. Direct installation is available for supported
+TV boxes that do not offer Google Play.
 
 ## Pages
 
-- [Home](https://familyfiltertv.com/): what it does, how to start, pricing, common questions.
-- [Download](https://familyfiltertv.com/download.html): Google Play, and direct install for boxes without Play.
-- [Get set up](https://familyfiltertv.com/setup.html): the full walkthrough for someone who has just
-  been sent the app — Stremio, Family Filter TV, linking a TV, add-ons, subtitles.
-- [Support](https://familyfiltertv.com/support.html): setup steps, known limits, how to get help.
-- [Terms of use](https://familyfiltertv.com/terms.html): subscription, trial, device limits, cancellation.
-- [Privacy policy](https://familyfiltertv.com/privacy.html): what is stored, what payment involves, what third parties see.
-
-## Honest limits
-
-- Filtering depends on a subtitle track existing for the title being played.
-- It mutes profanity in speech. It does not detect or act on violence, nudity or other visual content.
-- It is a player, not a source of films or series. You bring your own, through Stremio.
-- It plays what you start in Stremio only. It does not open, unlock or filter subscription streaming
-  services, whose apps play inside their own players that nothing else on the television can reach.
+- https://familyfiltertv.com/ — product overview and pricing
+- https://familyfiltertv.com/android-tv-profanity-filter.html — Android TV profanity filtering
+- https://familyfiltertv.com/stremio-profanity-filter.html — using Family Filter TV with Stremio
+- https://familyfiltertv.com/mute-swearing-on-tv.html — muting unwanted language on TV
+- https://familyfiltertv.com/download.html — download and installation options
+- https://familyfiltertv.com/setup.html — setup walkthrough
+- https://familyfiltertv.com/support.html — support and known limits
+- https://familyfiltertv.com/privacy.html — privacy policy
+- https://familyfiltertv.com/terms.html — terms of use
 
 ## Not affiliated
 
