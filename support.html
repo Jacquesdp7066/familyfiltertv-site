@@ -66,12 +66,9 @@
     <li>Pick <strong>Family Filter TV</strong> from Android's "Open with" chooser and tap
       <strong>Always</strong> so this happens automatically next time.</li>
     <li>On Android TV: <strong>OK</strong> pauses/resumes, <strong>◀ / ▶</strong> seek 10 seconds,
-      <strong>▲</strong> opens the subtitle and audio-track menu, <strong>Back</strong> returns to
-      Stremio and hands your playback position back to it. On phone, use the on-screen touch
-      controls.</li>
-    <li>Watch the banner in the first few seconds of playback — it tells you where subtitles came
-      from, or says plainly if none were found for that title (filtering can't work without a
-      subtitle to read).</li>
+      <strong>▲</strong> opens the subtitle and audio-track menu, and <strong>Back</strong> returns
+      to Stremio. On phone, use the on-screen touch controls.</li>
+    <li>Family Filter TV tells you on screen if filtering is unavailable for the title.</li>
   </ol>
 
   <h2>Known limits</h2>
@@ -79,9 +76,8 @@
     <li><strong>HEVC 10-bit video</strong> — some Android phones and boxes lack hardware decoding
       for 10-bit HEVC streams. Playback may stutter, drop frames, or fail to start regardless of
       Family Filter TV; this is a device/codec limitation, not something the app can filter around.</li>
-    <li><strong>Subtitles are required</strong> — filtering only works where a subtitle track exists,
-      either embedded in the video or found by Stremio's OpenSubtitles add-on. No subtitle means no
-      filtering, and the app tells you when that's the case.</li>
+    <li><strong>Filtering availability varies by title</strong> — supported subtitles are required,
+      and the app tells you when filtering is unavailable.</li>
     <li><strong>Notification-listener permission</strong> — the optional Diagnostics screen needs
       this Android permission to read what other apps are currently playing. It's only requested if
       you open Diagnostics, and you can revoke it any time in Android's notification-access settings.</li>
