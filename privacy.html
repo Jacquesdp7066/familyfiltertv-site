@@ -42,18 +42,17 @@
 
 <main class="wrap">
   <h1 class="page-title">Privacy policy</h1>
-  <p class="muted">Last updated: 15 September 2026</p>
+  <p class="muted">Last updated: 20 September 2026</p>
 
   <p>This policy covers the Family Filter TV Android app (TV and phone). It explains what an account
   involves, what we store, how payment works, and what the third-party services the app relies on
   see. It's written in plain language on purpose.</p>
 
   <h2>What Family Filter TV does</h2>
-  <p>Family Filter TV plays streams handed to it by Stremio and mutes its own audio during subtitle
-  lines that match the profanity profile you choose. It fetches subtitles from Stremio's
-  OpenSubtitles add-on and title information from Stremio's Cinemeta service so subtitles can be
-  matched correctly — both are third-party services, not ours. Family Filter TV is not affiliated with
-  Stremio, Google, or OpenSubtitles.</p>
+  <p>Family Filter TV works with supported Stremio playback and automatically mutes unwanted
+  language according to the filter profile you choose. To support playback and filtering, the app
+  may use Stremio metadata and subtitle services. Those services are operated by third parties, not
+  by Family Filter TV. Family Filter TV is not affiliated with Stremio, Google, or OpenSubtitles.</p>
 
   <h2>Your account</h2>
   <p>Since version 0.2, using Family Filter TV requires an account, created with Firebase
@@ -89,32 +88,29 @@
   does not receive your card details, and neither do we. No card, bank, or payment-card information
   ever reaches Family Filter TV's own servers.</p>
 
-  <h2>Network requests the app makes during playback</h2>
-  <p>Besides talking to our own account and billing backend, Family Filter TV talks to two third-party
-  services, both necessary for it to function as Stremio's external player:</p>
+  <h2>Network requests during playback</h2>
+  <p>Besides our own account and billing systems, Family Filter TV may contact third-party Stremio
+  services needed for supported playback and filtering:</p>
   <div class="table-scroll">
     <table>
-      <thead><tr><th>Destination</th><th>Purpose</th><th>What is sent</th></tr></thead>
+      <thead><tr><th>Service</th><th>Purpose</th><th>What may be sent</th></tr></thead>
       <tbody>
         <tr>
-          <td><code>v3-cinemeta.strem.io</code> (Stremio's public metadata service)</td>
-          <td>Look up a title's canonical name/episode so subtitles can be matched correctly</td>
-          <td>The release name and/or IMDb id of the title being played</td>
+          <td>Stremio metadata services</td>
+          <td>Identify the title or episode being played</td>
+          <td>Title, episode or other playback identifiers needed for the request</td>
         </tr>
         <tr>
-          <td><code>opensubtitles-v3.strem.io</code> (Stremio's OpenSubtitles add-on)</td>
-          <td>Fetch a matching subtitle file when the video has no built-in subtitle track</td>
-          <td>The video's file hash and file size, and/or the IMDb id and episode number, used to find
-            a matching subtitle</td>
+          <td>Stremio subtitle services</td>
+          <td>Check or obtain subtitle support used by the filtering feature</td>
+          <td>Playback identifiers needed to request a compatible subtitle</td>
         </tr>
       </tbody>
     </table>
   </div>
-  <p>Stremio's own local server on your device (<code>127.0.0.1</code>) hands Family Filter TV the
-  stream to play — that traffic never leaves the device. No video, audio, or subtitle content you
-  watch is ever uploaded anywhere by Family Filter TV; subtitle files are only <em>downloaded</em>, to
-  be read locally during playback, and are cached in the app's private storage so the same title
-  isn't re-fetched every time. That cache never leaves your device.</p>
+  <p>Family Filter TV does not upload the video or audio you watch to our servers. Subtitle data used
+  by the filtering feature is handled on-device and may be cached locally to avoid unnecessary
+  repeat requests. That local cache is not uploaded to Family Filter TV.</p>
 
   <h2>No advertising, no analytics, no selling data</h2>
   <p>Family Filter TV contains no advertising SDK and does not use an advertising ID. It contains no
