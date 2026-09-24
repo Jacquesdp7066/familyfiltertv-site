@@ -81,6 +81,12 @@
   var raw = (params.get('ref') || '').trim().toUpperCase();
   var code = ALPHABET_RE.test(raw) ? raw : null;
 
+  // #232: FREE26 is the public free voucher, not a friend referral. Same code
+  // format so it flows through the invite-code field untouched, but it doesn't
+  // count as a referral open and gets its own pitch below.
+  var VOUCHER_CODE = 'FREE26';
+  var isVoucher = code === VOUCHER_CODE;
+
   var playBtn = document.getElementById('play-btn');
   var playUrl = 'https://play.google.com/store/apps/details?id=com.familyfiltertv.app';
 
@@ -91,21 +97,28 @@
 
   try { localStorage.setItem('ffRef', code); } catch (e) { /* private mode: ignore */ }
 
-  // Count this open against the code (#197): once per browser per code, fire-and-forget,
-  // never blocks the page. See privacy.html "What we store" - nothing about the visitor
-  // is sent or stored, just the code.
-  try {
-    var pingKey = 'ffOpenPinged:' + code;
-    if (!sessionStorage.getItem(pingKey)) {
-      sessionStorage.setItem(pingKey, '1');
-      fetch('https://europe-west1-familyfiltertv.cloudfunctions.net/referralOpen', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ code: code }),
-        keepalive: true
-      }).catch(function () { /* best effort: ignore */ });
+  if (isVoucher) {
+    var lead = document.querySelector('.lead');
+    if (lead) {
+      lead.textContent = 'It mutes the swearing in what you watch on the TV. Free until 31 December 2026, no card needed — then a special price.';
     }
-  } catch (e) { /* private mode / storage blocked: ignore */ }
+  } else {
+    // Count this open against the code (#197): once per browser per code, fire-and-forget,
+    // never blocks the page. See privacy.html "What we store" - nothing about the visitor
+    // is sent or stored, just the code.
+    try {
+      var pingKey = 'ffOpenPinged:' + code;
+      if (!sessionStorage.getItem(pingKey)) {
+        sessionStorage.setItem(pingKey, '1');
+        fetch('https://europe-west1-familyfiltertv.cloudfunctions.net/referralOpen', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ code: code }),
+          keepalive: true
+        }).catch(function () { /* best effort: ignore */ });
+      }
+    } catch (e) { /* private mode / storage blocked: ignore */ }
+  }
 
   document.getElementById('code-text').textContent = code;
   document.getElementById('code-plate').hidden = false;
