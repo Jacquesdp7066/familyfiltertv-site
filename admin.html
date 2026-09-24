@@ -214,8 +214,45 @@
     margin: -10px 0 30px;
   }
 
+  #meta-line { margin: 0 0 20px; }
+
+  .test-accounts-note {
+    font-size: 0.8125rem;
+    opacity: 0.85;
+    margin-left: 8px;
+  }
+
   section.block { margin-bottom: 40px; }
   section.block h2 { margin-top: 0; }
+
+  /* ---------- status pills + flag badges (households table, #199) ---------- */
+  .pill {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    border-radius: 999px;
+    padding: 2px 10px;
+    white-space: nowrap;
+  }
+  .pill-trial { background: rgba(53, 207, 232, 0.18); color: var(--signal); }
+  .pill-paid { background: rgba(122, 201, 137, 0.18); color: #6FBF7B; }
+  .pill-lapsed { background: rgba(232, 131, 107, 0.18); color: #E8836B; }
+  .pill-owner { background: rgba(244, 182, 92, 0.18); color: var(--accent); }
+  .pill-none { background: rgba(154, 157, 168, 0.18); color: var(--muted); }
+
+  .flag-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: rgba(232, 131, 107, 0.12);
+    color: #E8836B;
+    border: 1px solid rgba(232, 131, 107, 0.3);
+    border-radius: 6px;
+    padding: 2px 8px;
+    white-space: nowrap;
+  }
 
   #app { display: none; }
   #app.ready { display: block; }
@@ -252,6 +289,8 @@
         <button id="refresh-btn" type="button">Refresh</button>
       </div>
     </div>
+
+    <div id="meta-line" class="updated-line"></div>
 
     <section class="block">
       <div class="tiles" id="tiles"></div>
@@ -293,6 +332,18 @@
         </table>
       </div>
     </section>
+
+    <section class="block">
+      <h2>Households</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Signed up</th><th>Email domain</th><th>Devices</th><th>TV</th><th>Status</th><th>Code</th><th>Flags</th></tr>
+          </thead>
+          <tbody id="households-body"></tbody>
+        </table>
+      </div>
+    </section>
   </div>
 </main>
 
@@ -328,12 +379,14 @@
   var elRefreshBtn = document.getElementById("refresh-btn");
   var elWhoLine = document.getElementById("who-line");
   var elUpdatedLine = document.getElementById("updated-line");
+  var elMetaLine = document.getElementById("meta-line");
   var elTiles = document.getElementById("tiles");
   var elChartNote = document.getElementById("chart-note");
   var elBars = document.getElementById("bars");
   var elLadderGrid = document.getElementById("ladder-grid");
   var elInvitersBody = document.getElementById("inviters-body");
   var elInvitesBody = document.getElementById("invites-body");
+  var elHouseholdsBody = document.getElementById("households-body");
 
   function showState(html, isError) {
     elStatePanel.innerHTML = html;
@@ -378,6 +431,35 @@
     return Math.round(Number(days) / 7).toLocaleString("en-US");
   }
 
+  // "3 hours ago" / "2 days ago" / etc. - null for a missing or unparsable timestamp.
+  function fmtRelative(s) {
+    if (!s) return null;
+    var d = new Date(s);
+    if (isNaN(d.getTime())) return null;
+    var diffMs = Date.now() - d.getTime();
+    if (diffMs < 0) diffMs = 0;
+    var minutes = Math.floor(diffMs / 60000);
+    if (minutes < 1) return "just now";
+    if (minutes < 60) return minutes + (minutes === 1 ? " minute ago" : " minutes ago");
+    var hours = Math.floor(minutes / 60);
+    if (hours < 24) return hours + (hours === 1 ? " hour ago" : " hours ago");
+    var days = Math.floor(hours / 24);
+    if (days < 30) return days + (days === 1 ? " day ago" : " days ago");
+    var months = Math.floor(days / 30);
+    if (months < 12) return months + (months === 1 ? " month ago" : " months ago");
+    var years = Math.floor(months / 12);
+    return years + (years === 1 ? " year ago" : " years ago");
+  }
+
+  // households.rows.subscriber -> table pill.
+  var SUBSCRIBER_LABELS = { trial: "Trial", paid: "Paid", lapsed: "Lapsed", none: "None", owner: "Owner/dev" };
+
+  // households.rows.flags entries -> table badge text.
+  var FLAG_LABELS = { "same-model-single-visit": "same phone, seen once" };
+  function flagLabel(flag) {
+    return FLAG_LABELS[flag] || flag;
+  }
+
   // ---------- sample data for ?demo=1 ----------
   function sampleData() {
     var days = [];
@@ -386,11 +468,92 @@
       d.setDate(d.getDate() - i);
       days.push({ date: d.toISOString().slice(0, 10), count: Math.max(0, Math.round(6 + 5 * Math.sin(i / 3) + (i % 7 === 0 ? 8 : 0))) });
     }
+    // A same-model-single-visit cluster (#199): 5 households on the same phone
+    // model, each seen once within minutes of linking - review-farm noise.
+    var clusterRows = [];
+    for (var c = 0; c < 5; c++) {
+      var seenAt = new Date();
+      seenAt.setDate(seenAt.getDate() - 1);
+      seenAt.setMinutes(seenAt.getMinutes() - c);
+      clusterRows.push({
+        uid: "farm" + c,
+        createdAt: seenAt.toISOString(),
+        emailDomain: "gmail.com",
+        devOverride: false,
+        devices: [{ kind: "phone", model: "OnePlus8Pro", appVersion: "1.4.0", lastSeen: seenAt.toISOString() }],
+        linkedTv: false,
+        subscriber: "none",
+        joinedWithCode: null,
+        flags: ["same-model-single-visit"]
+      });
+    }
+
+    var householdRows = [
+      {
+        uid: "a1b2c3",
+        createdAt: "2026-09-20T09:00:00Z",
+        emailDomain: "gmail.com",
+        devOverride: false,
+        devices: [
+          { kind: "tv", model: "SWTV-55", appVersion: "1.4.0", lastSeen: "2026-09-23T18:00:00Z" },
+          { kind: "phone", model: "SM-A505F", appVersion: "1.4.0", lastSeen: "2026-09-23T18:05:00Z" }
+        ],
+        linkedTv: true,
+        subscriber: "paid",
+        joinedWithCode: "PRIYA4F2",
+        flags: []
+      },
+      {
+        uid: "d4e5f6",
+        createdAt: "2026-09-19T14:30:00Z",
+        emailDomain: "outlook.com",
+        devOverride: false,
+        devices: [{ kind: "tv", model: "AFTKA", appVersion: "1.3.2", lastSeen: "2026-09-23T20:00:00Z" }],
+        linkedTv: true,
+        subscriber: "trial",
+        joinedWithCode: null,
+        flags: []
+      },
+      {
+        uid: "g7h8i9",
+        createdAt: "2026-08-10T08:15:00Z",
+        emailDomain: "yahoo.com",
+        devOverride: false,
+        devices: [],
+        linkedTv: false,
+        subscriber: "lapsed",
+        joinedWithCode: "NOMA91C",
+        flags: []
+      },
+      {
+        uid: "j1k2l3",
+        createdAt: null,
+        emailDomain: null,
+        devOverride: false,
+        devices: [{ kind: "phone", model: null, appVersion: null, lastSeen: null }],
+        linkedTv: false,
+        subscriber: "none",
+        joinedWithCode: null,
+        flags: []
+      },
+      {
+        uid: "m4n5o6",
+        createdAt: "2026-06-01T00:00:00Z",
+        emailDomain: "familyfiltertv.test",
+        devOverride: true,
+        devices: [{ kind: "firetv", model: "AFTKA", appVersion: "1.4.0", lastSeen: "2026-09-24T07:00:00Z" }],
+        linkedTv: false,
+        subscriber: "owner",
+        joinedWithCode: null,
+        flags: []
+      }
+    ].concat(clusterRows);
+
     return {
       generatedAt: new Date().toISOString(),
-      signups: { total: 1842, last30Days: days },
-      households: { total: 1310, devOverride: 4 },
-      subscribers: { activeTrial: 96, activePaid: 512, lapsed: 210, unknown: 40 },
+      signups: { total: 1842, lastSignupAt: new Date(Date.now() - 42 * 60 * 1000).toISOString(), testAccounts: 6, last30Days: days },
+      households: { total: 1310, devOverride: 4, rows: householdRows },
+      subscribers: { activeTrial: 96, activePaid: 512, lapsed: 210, unknown: 40, owner: 4 },
       referrals: {
         rows: [
           { referrerEmail: "priya@example.com", referrerUid: "u1", referredLabel: "j***@gmail.com", status: "credited", attachedAt: "2026-09-01T10:00:00Z", paidAt: "2026-09-05T10:00:00Z", creditedAt: "2026-09-06T10:00:00Z", creditDays: 14 },
@@ -433,13 +596,31 @@
       { label: "Signups total", value: fmtInt(signups.total) },
       { label: "Active trials", value: fmtInt(subs.activeTrial) },
       { label: "Paying", value: fmtInt(subs.activePaid) },
-      { label: "Lapsed", value: fmtInt(subs.lapsed) },
-      { label: "Paid referrals", value: fmtInt(paidReferrals) }
+      { label: "Lapsed", value: fmtInt(subs.lapsed) }
     ];
+    // Owner/dev (#199): only shown when there's something to show - devOverride
+    // households (Jacques's own sandbox, QA rigs) are excluded from the counts above.
+    if (Number(subs.owner) > 0) {
+      tiles.push({ label: "Owner/dev", value: fmtInt(subs.owner) });
+    }
+    tiles.push({ label: "Paid referrals", value: fmtInt(paidReferrals) });
 
     elTiles.innerHTML = tiles.map(function (t) {
       return '<div class="tile"><span>' + escapeHtml(t.label) + '</span><b>' + escapeHtml(t.value) + '</b></div>';
     }).join("");
+  }
+
+  // "Last signup: 3 hours ago" under the toolbar, plus a small "Test accounts
+  // excluded: N" note when there were any (#199).
+  function renderMeta(data) {
+    var signups = data.signups || {};
+    var rel = fmtRelative(signups.lastSignupAt);
+    var html = "Last signup: " + escapeHtml(rel || "—");
+    var testAccounts = Number(signups.testAccounts);
+    if (isFinite(testAccounts) && testAccounts > 0) {
+      html += ' <span class="test-accounts-note">Test accounts excluded: ' + fmtInt(testAccounts) + '</span>';
+    }
+    elMetaLine.innerHTML = html;
   }
 
   function renderChart(data) {
@@ -538,6 +719,43 @@
     }).join("");
   }
 
+  function renderHouseholds(data) {
+    var rows = (data.households && data.households.rows) || [];
+    if (!rows.length) {
+      elHouseholdsBody.innerHTML = '<tr><td colspan="7" class="muted">No households yet.</td></tr>';
+      return;
+    }
+    var sorted = rows.slice().sort(function (a, b) {
+      return new Date((b && b.createdAt) || 0).getTime() - new Date((a && a.createdAt) || 0).getTime();
+    });
+    elHouseholdsBody.innerHTML = sorted.map(function (r) {
+      var devices = (r && r.devices) || [];
+      var deviceText = devices.map(function (d) {
+        var label = (d && d.kind) || "device";
+        if (d && d.model) label += ": " + d.model;
+        return label;
+      }).join(" · ");
+
+      var status = (r && r.subscriber) || "";
+      var statusLabel = SUBSCRIBER_LABELS[status] || status;
+
+      var flags = (r && r.flags) || [];
+      var flagsHtml = flags.map(function (f) {
+        return '<span class="flag-badge">' + escapeHtml(flagLabel(f)) + '</span>';
+      }).join(" ");
+
+      return "<tr>"
+        + "<td>" + fmtDate(r && r.createdAt) + "</td>"
+        + "<td>" + (r && r.emailDomain ? escapeHtml(r.emailDomain) : "—") + "</td>"
+        + "<td>" + (deviceText ? escapeHtml(deviceText) : "—") + "</td>"
+        + "<td>" + (r && r.linkedTv ? "✓" : "–") + "</td>"
+        + "<td>" + (statusLabel ? '<span class="pill pill-' + escapeHtml(status) + '">' + escapeHtml(statusLabel) + "</span>" : "—") + "</td>"
+        + "<td>" + (r && r.joinedWithCode ? "<code>" + escapeHtml(r.joinedWithCode) + "</code>" : "—") + "</td>"
+        + "<td>" + (flagsHtml || "—") + "</td>"
+        + "</tr>";
+    }).join("");
+  }
+
   function renderAll(data) {
     hideState();
     renderTiles(data);
@@ -545,7 +763,9 @@
     renderLadder(data);
     renderInviters(data);
     renderInvites(data);
+    renderHouseholds(data);
     elUpdatedLine.textContent = "Updated " + fmtDateTime(data.generatedAt || new Date().toISOString());
+    renderMeta(data);
     elApp.classList.add("ready");
   }
 
