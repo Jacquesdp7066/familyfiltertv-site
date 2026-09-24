@@ -39,6 +39,13 @@ and the invited friend receives a longer free trial.
 Android TVs, Android TV boxes and Android phones. Direct installation is available for supported
 TV boxes that do not offer Google Play.
 
+## Language Ratings add-on
+
+Language Ratings is a separate, free Stremio add-on (not Family Filter TV itself, though made by
+the same person) that shows how much swearing is in a film or episode, counted from its English
+subtitles, as one line on the Stremio streams screen before you press play. It only counts; it
+does not mute anything — Family Filter TV is the app that mutes.
+
 ## Pages
 
 - https://familyfiltertv.com/ — product overview and pricing
@@ -49,11 +56,12 @@ TV boxes that do not offer Google Play.
 - https://familyfiltertv.com/vidangel-clearplay-alternative.html — comparison with VidAngel and ClearPlay
 - https://familyfiltertv.com/download.html — download and installation options
 - https://familyfiltertv.com/setup.html — setup walkthrough
+- https://familyfiltertv.com/stremio.html — the Language Ratings Stremio add-on
 - https://familyfiltertv.com/support.html — support and known limits
 - https://familyfiltertv.com/privacy.html — privacy policy
 - https://familyfiltertv.com/terms.html — terms of use
 
 ## Not affiliated
 
-Family Filter TV is an independent app. It is not affiliated with, endorsed by, or connected to
-Stremio, Google, or any streaming service.
+Family Filter TV and Language Ratings are independent projects. Neither is affiliated with,
+endorsed by, or connected to Stremio, Google, OpenSubtitles, or any streaming service.

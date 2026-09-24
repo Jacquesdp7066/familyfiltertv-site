@@ -297,6 +297,12 @@
     </section>
 
     <section class="block">
+      <h2>Stremio addon</h2>
+      <p class="chart-note" id="addon-note"></p>
+      <div class="tiles" id="addon-tiles"></div>
+    </section>
+
+    <section class="block">
       <h2>Signups, last 30 days</h2>
       <div class="chart-panel">
         <p class="chart-note" id="chart-note"></p>
@@ -381,6 +387,8 @@
   var elUpdatedLine = document.getElementById("updated-line");
   var elMetaLine = document.getElementById("meta-line");
   var elTiles = document.getElementById("tiles");
+  var elAddonTiles = document.getElementById("addon-tiles");
+  var elAddonNote = document.getElementById("addon-note");
   var elChartNote = document.getElementById("chart-note");
   var elBars = document.getElementById("bars");
   var elLadderGrid = document.getElementById("ladder-grid");
@@ -578,6 +586,17 @@
           ZA: { tier: 40, percentOff: 40, seatsLeftInTier: 18, count: 82 },
           WORLD: { tier: 50, percentOff: 50, seatsLeftInTier: 6, count: 44 }
         }
+      },
+      // Stremio addon stats (#204 unit 7): trailing-7-day totals, no per-user data.
+      addon: {
+        windowDays: 7,
+        manifestFetches: 214,
+        streamRequests: 1380,
+        streamRated: 960,
+        streamNone: 420,
+        catalogRequests: 96,
+        landingOpens: 58,
+        storeClicks: 9
       }
     };
   }
@@ -606,6 +625,29 @@
     tiles.push({ label: "Paid referrals", value: fmtInt(paidReferrals) });
 
     elTiles.innerHTML = tiles.map(function (t) {
+      return '<div class="tile"><span>' + escapeHtml(t.label) + '</span><b>' + escapeHtml(t.value) + '</b></div>';
+    }).join("");
+  }
+
+  // Stremio "Language Ratings" addon tile group (#204 unit 7): manifest fetches over-count real
+  // installs (Stremio re-fetches manifests on start), so the note says "fetches/window", not
+  // "installs" - same caveat the plan calls out for this counter.
+  function renderAddonTiles(data) {
+    var addon = data.addon || {};
+    var windowDays = fmtInt(addon.windowDays);
+    elAddonNote.textContent = "Trailing " + windowDays + " days. Manifest fetches over-count installs (Stremio re-fetches on start).";
+
+    var tiles = [
+      { label: "Manifest fetches", value: fmtInt(addon.manifestFetches) },
+      { label: "Stream requests", value: fmtInt(addon.streamRequests) },
+      { label: "Rated", value: fmtInt(addon.streamRated) },
+      { label: "No subtitle found", value: fmtInt(addon.streamNone) },
+      { label: "Catalog requests", value: fmtInt(addon.catalogRequests) },
+      { label: "Landing page opens", value: fmtInt(addon.landingOpens) },
+      { label: "Store clicks", value: fmtInt(addon.storeClicks) }
+    ];
+
+    elAddonTiles.innerHTML = tiles.map(function (t) {
       return '<div class="tile"><span>' + escapeHtml(t.label) + '</span><b>' + escapeHtml(t.value) + '</b></div>';
     }).join("");
   }
@@ -759,6 +801,7 @@
   function renderAll(data) {
     hideState();
     renderTiles(data);
+    renderAddonTiles(data);
     renderChart(data);
     renderLadder(data);
     renderInviters(data);
