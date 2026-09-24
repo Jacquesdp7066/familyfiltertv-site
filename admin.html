@@ -241,6 +241,7 @@
   .pill-lapsed { background: rgba(232, 131, 107, 0.18); color: #E8836B; }
   .pill-owner { background: rgba(244, 182, 92, 0.18); color: var(--accent); }
   .pill-none { background: rgba(154, 157, 168, 0.18); color: var(--muted); }
+  .pill-voucher { background: rgba(155, 140, 255, 0.18); color: #9B8CFF; }
 
   .flag-badge {
     display: inline-block;
@@ -294,6 +295,11 @@
 
     <section class="block">
       <div class="tiles" id="tiles"></div>
+    </section>
+
+    <section class="block" id="voucher-section" hidden>
+      <h2>Vouchers</h2>
+      <div class="tiles" id="voucher-tiles"></div>
     </section>
 
     <section class="block">
@@ -381,6 +387,8 @@
   var elUpdatedLine = document.getElementById("updated-line");
   var elMetaLine = document.getElementById("meta-line");
   var elTiles = document.getElementById("tiles");
+  var elVoucherSection = document.getElementById("voucher-section");
+  var elVoucherTiles = document.getElementById("voucher-tiles");
   var elChartNote = document.getElementById("chart-note");
   var elBars = document.getElementById("bars");
   var elLadderGrid = document.getElementById("ladder-grid");
@@ -452,7 +460,7 @@
   }
 
   // households.rows.subscriber -> table pill.
-  var SUBSCRIBER_LABELS = { trial: "Trial", paid: "Paid", lapsed: "Lapsed", none: "None", owner: "Owner/dev" };
+  var SUBSCRIBER_LABELS = { trial: "Trial", paid: "Paid", lapsed: "Lapsed", none: "None", owner: "Owner/dev", voucher: "Voucher" };
 
   // households.rows.flags entries -> table badge text.
   var FLAG_LABELS = { "same-model-single-visit": "same phone, seen once" };
@@ -546,6 +554,19 @@
         subscriber: "owner",
         joinedWithCode: null,
         flags: []
+      },
+      {
+        // #232: free voucher redemption - own subscriber bucket, not lumped
+        // into "unknown".
+        uid: "p7q8r9",
+        createdAt: "2026-09-22T11:00:00Z",
+        emailDomain: "gmail.com",
+        devOverride: false,
+        devices: [{ kind: "tv", model: "SWTV-43", appVersion: "1.4.0", lastSeen: "2026-09-23T21:00:00Z" }],
+        linkedTv: true,
+        subscriber: "voucher",
+        joinedWithCode: "FREE26",
+        flags: []
       }
     ].concat(clusterRows);
 
@@ -554,6 +575,7 @@
       signups: { total: 1842, lastSignupAt: new Date(Date.now() - 42 * 60 * 1000).toISOString(), testAccounts: 6, last30Days: days },
       households: { total: 1310, devOverride: 4, rows: householdRows },
       subscribers: { activeTrial: 96, activePaid: 512, lapsed: 210, unknown: 40, owner: 4 },
+      vouchers: [ { code: "FREE26", redemptions: 23, activeHouseholds: 21 } ],
       referrals: {
         rows: [
           { referrerEmail: "priya@example.com", referrerUid: "u1", referredLabel: "j***@gmail.com", status: "credited", attachedAt: "2026-09-01T10:00:00Z", paidAt: "2026-09-05T10:00:00Z", creditedAt: "2026-09-06T10:00:00Z", creditDays: 14 },
@@ -606,6 +628,35 @@
     tiles.push({ label: "Paid referrals", value: fmtInt(paidReferrals) });
 
     elTiles.innerHTML = tiles.map(function (t) {
+      return '<div class="tile"><span>' + escapeHtml(t.label) + '</span><b>' + escapeHtml(t.value) + '</b></div>';
+    }).join("");
+  }
+
+  // #232: free voucher tiles (one pair per code). Older dashboard responses
+  // won't have data.vouchers at all - render nothing rather than throw.
+  function renderVoucherTiles(data) {
+    var vouchers = (data && data.vouchers) || [];
+    if (!vouchers.length) {
+      elVoucherSection.hidden = true;
+      elVoucherTiles.innerHTML = "";
+      return;
+    }
+
+    var tiles = [];
+    vouchers.forEach(function (v) {
+      if (!v || !v.code) return;
+      tiles.push({ label: v.code + " redemptions", value: fmtInt(v.redemptions) });
+      tiles.push({ label: v.code + " active households", value: fmtInt(v.activeHouseholds) });
+    });
+
+    if (!tiles.length) {
+      elVoucherSection.hidden = true;
+      elVoucherTiles.innerHTML = "";
+      return;
+    }
+
+    elVoucherSection.hidden = false;
+    elVoucherTiles.innerHTML = tiles.map(function (t) {
       return '<div class="tile"><span>' + escapeHtml(t.label) + '</span><b>' + escapeHtml(t.value) + '</b></div>';
     }).join("");
   }
@@ -759,6 +810,7 @@
   function renderAll(data) {
     hideState();
     renderTiles(data);
+    renderVoucherTiles(data);
     renderChart(data);
     renderLadder(data);
     renderInviters(data);
