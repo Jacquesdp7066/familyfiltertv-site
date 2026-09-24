@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Language Ratings for Stremio — Family Filter TV</title>
+<meta name="description" content="See how much swearing is in a film or episode before you press play, right inside Stremio. Language Ratings is a free, independent add-on that counts profanity from English subtitles.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<meta name="theme-color" content="#0B0C0F">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="assets/icon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta property="og:url" content="https://familyfiltertv.com/stremio.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Language Ratings for Stremio">
+<meta property="og:description" content="A free, independent Stremio add-on that shows how much swearing is in a title before you press play.">
+<meta property="og:image" content="https://familyfiltertv.com/assets/feature-graphic.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap">
+<link rel="canonical" href="https://familyfiltertv.com/stremio.html">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <img src="assets/icon-192.png" alt="" width="30" height="30">
+      Family Filter TV
+    </a>
+    <nav class="site-nav" aria-label="Pages">
+      <a href="index.html">Home</a>
+      <a href="download.html">Download</a>
+      <a href="setup.html">Get set up</a>
+      <a href="stremio.html" aria-current="page">Stremio add-on</a>
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1 class="page-title">Language Ratings for Stremio</h1>
+  <p class="lead">A free add-on for Stremio that shows how much swearing is in a film or episode —
+  counted from its English subtitles — right on the streams screen, before you press play.</p>
+
+  <div class="actions">
+    <a class="btn" id="add-to-stremio-btn" href="stremio://addon.familyfiltertv.com/manifest.json">Add to Stremio</a>
+  </div>
+
+  <div class="panel">
+    <p>If the button above doesn't do anything — some browsers and TVs block app links — open
+    Stremio, go to <strong>Add-ons</strong>, and paste this into the search box at the top:</p>
+    <p><code>https://addon.familyfiltertv.com/manifest.json</code></p>
+  </div>
+
+  <h2>What you'll see</h2>
+  <p>Once it's added, open any film or episode in Stremio and look at the streams list. Language
+  Ratings adds one line, alongside whatever else you have installed:</p>
+  <div class="panel">
+    <p><strong>Language rating</strong></p>
+    <p class="muted">Strong · 41 words in 33 lines<br>
+    Muted lines by profile: Mild 12 · Family 29 · Strict 33<br>
+    Watch it muted with Family Filter TV — familyfiltertv.com/stremio</p>
+  </div>
+  <p>Tap it and you'll land back on this page — it isn't a video, just a note. If a title has no
+  English subtitles available anywhere, it says so plainly instead of staying silent.</p>
+
+  <h2>What the labels mean</h2>
+  <p>Every count is against the Family Filter TV app's own filter profiles — Mild, Family, and
+  Strict, from least to most muted. A title is labelled by how many lines each profile would mute:</p>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th>Label</th><th>What it means</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Clean</td><td>The Strict profile mutes nothing.</td></tr>
+        <tr><td>Mild</td><td>The Mild profile mutes nothing, and Strict mutes 5 lines or fewer.</td></tr>
+        <tr><td>Moderate</td><td>The Mild profile mutes some lines, or Strict mutes 6–30.</td></tr>
+        <tr><td>Strong</td><td>The Mild profile mutes 10 or more lines, or Strict mutes more than 30.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>How it's counted, and its limits</h2>
+  <p>Counts come from a title's English subtitles only, using the same word-matching Family Filter
+  TV's own app uses to decide what to mute. That means:</p>
+  <ul>
+    <li>No English subtitle track, no count — the entry says so instead of guessing.</li>
+    <li>Different cuts of the same film (theatrical vs. extended, different releases) can have
+      different subtitle timing, so a count reflects the specific release it was measured on, not
+      every version that exists.</li>
+    <li>Only language is counted here. Violence and nudity are not measured by this add-on or by
+      the Family Filter TV app.</li>
+    <li>It's a count, not a judgement — the same numbers, shown plainly, so you can decide for
+      yourself before you press play.</li>
+  </ul>
+  <p class="muted">Counts are made from OpenSubtitles.com subtitles. No subtitle text is stored or
+  shown anywhere — only the counts.</p>
+
+  <h2>Want the language actually muted, not just counted?</h2>
+  <p>That's what the Family Filter TV app does: it plays alongside Stremio as an external player
+  and mutes the audio live, for the exact seconds a line is profane, while the picture keeps
+  playing.</p>
+  <div class="actions">
+    <a class="btn" id="play-store-btn" href="https://play.google.com/store/apps/details?id=com.familyfiltertv.app">Get it on Google Play</a>
+    <a class="btn-quiet" id="setup-link" href="setup.html">See the full setup</a>
+  </div>
+
+  <p class="fine">Language Ratings and Family Filter TV are both independent projects made by the
+  same person. Neither is affiliated with, endorsed by, or connected to Stremio, Google, or
+  OpenSubtitles.</p>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <p>Family Filter TV is made by Jacques du Preez in South Africa.</p>
+    <p><a href="mailto:jacquesjdupreez@gmail.com">jacquesjdupreez@gmail.com</a></p>
+    <nav class="foot-nav" aria-label="Footer">
+      <a href="download.html">Download</a>
+      <a href="setup.html">Get set up</a>
+      <a href="stremio.html">Stremio add-on</a>
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </nav>
+    <p class="fine">An independent app. Not affiliated with, or endorsed by, Stremio or Google.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // Stats ping (#204 unit 7): a landing open, once per browser per page-load session, and a
+  // store-click ping from the Play button / setup link. Same shape as join.html's referralOpen
+  // ping - fire-and-forget, never blocks the page, nothing about the visitor is sent or stored,
+  // just which of the two kinds happened. See backend/functions/src/addonOpen.ts.
+  var ADDON_OPEN_URL = 'https://europe-west1-familyfiltertv.cloudfunctions.net/addonOpen';
+
+  function ping(kind) {
+    try {
+      fetch(ADDON_OPEN_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ kind: kind }),
+        keepalive: true
+      }).catch(function () { /* best effort: ignore */ });
+    } catch (e) { /* private mode / fetch unavailable: ignore */ }
+  }
+
+  try {
+    if (!sessionStorage.getItem('ffAddonLandingPinged')) {
+      sessionStorage.setItem('ffAddonLandingPinged', '1');
+      ping('landing');
+    }
+  } catch (e) { /* private mode: ignore */ }
+
+  ['play-store-btn', 'setup-link'].forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el) el.addEventListener('click', function () { ping('storeClick'); });
+  });
+})();
+</script>
+</body>
+</html>
