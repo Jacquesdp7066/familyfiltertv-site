@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Profanity filter for Android TV: how it works and what it can't do</title>
+<meta name="description" content="How a profanity filter for Android TV actually works with Family Filter TV and Stremio — reading subtitles, muting the audio, and the real limits: no violence/nudity filtering, subtitles required.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<meta name="theme-color" content="#0B0C0F">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="assets/icon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta property="og:url" content="https://familyfiltertv.com/profanity-filter-android-tv.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Profanity filter for Android TV: how it works and what it can't do">
+<meta property="og:description" content="How the filtering actually works on Android TV, and the honest limits — no violence/nudity filtering, subtitles required, Stremio only.">
+<meta property="og:image" content="https://familyfiltertv.com/assets/feature-graphic.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap">
+<link rel="canonical" href="https://familyfiltertv.com/profanity-filter-android-tv.html">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How does a profanity filter on Android TV actually work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Family Filter TV runs as the player on your Android TV and reads the subtitle track of whatever you start in Stremio. When a line matches the filter strength you set, the audio mutes for the length of that line and comes straight back. The picture never stops, skips or cuts."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it need subtitles to work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Filtering depends entirely on a subtitle track being available for that title. If there isn't one, Family Filter TV tells you on screen that filtering isn't available for what's playing."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it filter violence or nudity on Android TV?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. It filters spoken profanity only. Violence and nudity are not currently filtered, and nothing in the picture is blurred, cut or skipped."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it work with Netflix or DStv on Android TV?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Family Filter TV works with supported playback started in Stremio. It does not filter Netflix, DStv, or any other subscription streaming app, and it is not affiliated with any of them."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What Android TV devices does it run on?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Android TVs and Android TV boxes, plus Android phones — the app runs on the television itself, with no computer in the loop and nothing to cast."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can one setting cover every TV in the house?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The filter strength is set once on a parent's phone, and every television linked to that account follows it. A television links by typing in the short code it shows on screen."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <img src="assets/icon-192.png" alt="" width="30" height="30">
+      Family Filter TV
+    </a>
+    <nav class="site-nav" aria-label="Pages">
+      <a href="index.html">Home</a>
+      <a href="download.html">Download</a>
+      <a href="setup.html">Get set up</a>
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1 class="page-title">Profanity filter for Android TV: how it works and what it can't do</h1>
+  <p class="lead">"Profanity filter for Android TV" gets searched a lot more than it gets
+  explained. Here's what actually happens on screen when Family Filter TV mutes a line, what it
+  needs to work, and the limits worth knowing before you install anything.</p>
+
+  <h2>What's actually doing the filtering</h2>
+  <p>Family Filter TV is a separate app that sits on your Android TV or TV box as the player for
+  titles you start in Stremio. It isn't a browser extension and it isn't a setting hidden inside
+  another app — it's the thing that plays the video once you choose it as the external player.
+  That matters for Android TV specifically, because most filtering tools built for streaming are
+  Chrome extensions or web dashboards that assume there's a computer involved. On a television,
+  there usually isn't one.</p>
+
+  <h2>How the filtering itself works</h2>
+  <p>Every title in Stremio that has a subtitle track also has a timed transcript of what's being
+  said, and when. Family Filter TV reads that subtitle track while the title plays. When a line
+  matches the filter strength you've chosen — off, mild, family or strict — the audio mutes for
+  exactly the length of that line, then comes straight back. The video itself is never touched:
+  nothing is cut, skipped, or blurred. Only the sound briefly drops.</p>
+
+  <h2>What it needs to work</h2>
+  <div class="panel">
+    <ul>
+      <li>A title started in <strong>Stremio</strong>, with Family Filter TV set as the player.</li>
+      <li>A <strong>subtitle track</strong> for that title. No subtitles means no filtering — the
+        app tells you on screen when that's the case.</li>
+      <li>The filter strength set once on a parent's phone, with the television linked to that
+        account by typing in the short code it shows.</li>
+    </ul>
+  </div>
+
+  <h2>Built for the television, not a browser</h2>
+  <p>It runs on the Android TV or TV box itself, and on Android phones — there's no computer to
+  keep on, and nothing to cast from another device. Three televisions are included on one
+  account, and up to six can be linked. Change the filter strength once on the phone, and every
+  linked television follows automatically; nobody has to touch a setting on the TV itself.</p>
+
+  <h2>What it can't do</h2>
+  <p>This is the part most product pages skip, so it's worth being direct about:</p>
+  <div class="panel">
+    <ul>
+      <li><strong>It doesn't filter violence or nudity.</strong> Only spoken profanity is muted.
+        Nothing on screen is blurred, cut or skipped.</li>
+      <li><strong>It doesn't work with Netflix, DStv, or any subscription streaming app.</strong>
+        Current filtering is for supported playback started in Stremio. Family Filter TV is not
+        affiliated with Stremio, Google, or any streaming service.</li>
+      <li><strong>It isn't a streaming library.</strong> It doesn't provide films, series, or
+        access to any subscription content — Stremio, and whatever add-ons someone chooses inside
+        it, is entirely separate and the user's own responsibility.</li>
+      <li><strong>Filtering availability varies by title.</strong> It depends on a usable subtitle
+        track existing for what's playing. When one isn't available, the app says so on screen
+        rather than guessing.</li>
+    </ul>
+  </div>
+
+  <h2>Setting it up</h2>
+  <p>The short version: install Stremio and Family Filter TV on the same Android TV, install
+  Family Filter TV on a parent's phone too, link the TV by typing in its code, and choose a
+  filter strength. <a href="setup.html">The full setup walkthrough</a> covers every step, and
+  <a href="stremio-profanity-filter.html">muting swearing in Stremio specifically</a> is a
+  shorter, Stremio-focused version of the same steps.</p>
+
+  <div class="actions">
+    <a class="btn" href="download.html">Download Family Filter TV</a>
+    <a class="btn-quiet" href="join.html">See the current offer</a>
+  </div>
+
+  <h2>Questions</h2>
+  <div class="faq">
+    <div>
+      <h3>How does a profanity filter on Android TV actually work?</h3>
+      <p>Family Filter TV reads the subtitle track of whatever's playing in Stremio. A matching
+      line mutes the audio for its length, then sound returns automatically. The picture keeps
+      playing throughout.</p>
+    </div>
+    <div>
+      <h3>Does it need subtitles to work?</h3>
+      <p>Yes — filtering depends on a subtitle track existing for that title. Without one, the
+      app tells you filtering isn't available rather than guessing.</p>
+    </div>
+    <div>
+      <h3>Does it filter violence or nudity on Android TV?</h3>
+      <p>No. It filters spoken profanity only. Nothing is blurred, cut or skipped.</p>
+    </div>
+    <div>
+      <h3>Does it work with Netflix or DStv on Android TV?</h3>
+      <p>No. It works with supported playback started in Stremio, and isn't affiliated with any
+      subscription streaming service.</p>
+    </div>
+    <div>
+      <h3>What Android TV devices does it run on?</h3>
+      <p>Android TVs, Android TV boxes, and Android phones — the app itself, no computer needed.</p>
+    </div>
+    <div>
+      <h3>Can one setting cover every TV in the house?</h3>
+      <p>Yes. Set the filter strength once on a phone and every linked television follows it.</p>
+    </div>
+  </div>
+
+  <p class="fine">Family Filter TV is an independent app. It is not affiliated with, endorsed by,
+  or connected to Stremio, Google, or any streaming service.</p>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <p>Family Filter TV is made by Jacques du Preez in South Africa.</p>
+    <p><a href="mailto:jacquesjdupreez@gmail.com">jacquesjdupreez@gmail.com</a></p>
+    <nav class="foot-nav" aria-label="Footer">
+      <a href="download.html">Download</a>
+      <a href="setup.html">Get set up</a>
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </nav>
+    <p class="fine">An independent app. Not affiliated with, or endorsed by, Stremio or Google.</p>
+  </div>
+</footer>
+</body>
+</html>

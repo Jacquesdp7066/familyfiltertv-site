@@ -43,8 +43,10 @@ TV boxes that do not offer Google Play.
 
 - https://familyfiltertv.com/ — product overview and pricing
 - https://familyfiltertv.com/android-tv-profanity-filter.html — Android TV profanity filtering
-- https://familyfiltertv.com/stremio-profanity-filter.html — using Family Filter TV with Stremio
+- https://familyfiltertv.com/profanity-filter-android-tv.html — how Android TV filtering works and its limits
+- https://familyfiltertv.com/stremio-profanity-filter.html — muting swearing in Stremio, step-by-step
 - https://familyfiltertv.com/mute-swearing-on-tv.html — muting unwanted language on TV
+- https://familyfiltertv.com/vidangel-clearplay-alternative.html — comparison with VidAngel and ClearPlay
 - https://familyfiltertv.com/download.html — download and installation options
 - https://familyfiltertv.com/setup.html — setup walkthrough
 - https://familyfiltertv.com/support.html — support and known limits
