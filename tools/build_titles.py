@@ -164,7 +164,7 @@ def analysis_panel(t, category_labels):
     return f'''  <section class="panel" aria-labelledby="ffa-heading">
     <h2 id="ffa-heading">Family Filter TV analysis</h2>
     <p><strong>Language level:</strong> {esc(t["labelText"])}</p>
-    <p><strong>Total flagged lines:</strong> {t["totalFlagged"]}</p>
+    <p><strong>Total flagged words:</strong> {t["totalFlagged"]}</p>
 {cat_block}
     <h3>Lines muted per filter profile</h3>
     <ul>
