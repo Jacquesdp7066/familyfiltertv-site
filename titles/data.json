@@ -1,0 +1,740 @@
+{
+  "generatedNote": "FamilyFilterTV title SEO index test (#269). Data from our own subtitle analysis export (ratings-export.json) and Cinemeta metadata lookups. No competitor data, no invented figures.",
+  "categoryLabels": {
+    "strong_profanity": "Strong profanity",
+    "mild_profanity": "Mild profanity",
+    "religious": "Religious exclamations",
+    "crude": "Crude language",
+    "sexual_explicit": "Explicit sexual language",
+    "suggestive": "Suggestive language",
+    "slurs": "Slurs"
+  },
+  "titles": [
+    {
+      "videoId": "tt3521164",
+      "title": "Moana",
+      "year": 2016,
+      "type": "movie",
+      "slug": "moana-2016",
+      "genres": [
+        "Animation",
+        "Adventure",
+        "Comedy"
+      ],
+      "runtime": "107 min",
+      "imdbUrl": "https://www.imdb.com/title/tt3521164/",
+      "label": "clean",
+      "labelText": "Clean",
+      "counts": {},
+      "totalFlagged": 0,
+      "cueCount": 1233,
+      "profiles": {
+        "mild": 0,
+        "family": 0,
+        "strict": 0
+      },
+      "release": "Moana.2016.720p.BluRay.x264-SPARKS",
+      "computedAt": "2026-09-25T00:08:03.509Z",
+      "intro": "Moana follows a teenage wayfinder who sets sail across the Pacific to save her island, accompanied by the once-mighty demigod Maui. It's a bright, music-driven adventure built around courage and identity rather than romance or crude humour, making it a common pick for family movie nights.",
+      "related": [
+        "tt2294629",
+        "tt0110357",
+        "tt22022452"
+      ]
+    },
+    {
+      "videoId": "tt1490017",
+      "title": "The Lego Movie",
+      "year": 2014,
+      "type": "movie",
+      "slug": "the-lego-movie-2014",
+      "genres": [
+        "Animation",
+        "Action",
+        "Adventure"
+      ],
+      "runtime": "100 min",
+      "imdbUrl": "https://www.imdb.com/title/tt1490017/",
+      "label": "clean",
+      "labelText": "Clean",
+      "counts": {},
+      "totalFlagged": 0,
+      "cueCount": 1976,
+      "profiles": {
+        "mild": 0,
+        "family": 0,
+        "strict": 0
+      },
+      "release": "The.Lego.Movie.2014.720p.BluRay.x264-BLOW",
+      "computedAt": "2026-09-28T00:09:00.532Z",
+      "intro": "An ordinary construction worker is mistaken for “The Special” and swept into a cross-universe quest to stop a tyrant obsessed with gluing everything permanently in place. The humour runs on rapid-fire visual gags and jokes about creativity rather than innuendo, and it plays well across a wide age range.",
+      "related": [
+        "tt0114709",
+        "tt22022452",
+        "tt3521164"
+      ]
+    },
+    {
+      "videoId": "tt0114709",
+      "title": "Toy Story",
+      "year": 1995,
+      "type": "movie",
+      "slug": "toy-story-1995",
+      "genres": [
+        "Animation",
+        "Adventure",
+        "Comedy"
+      ],
+      "runtime": "81 min",
+      "imdbUrl": "https://www.imdb.com/title/tt0114709/",
+      "label": "clean",
+      "labelText": "Clean",
+      "counts": {},
+      "totalFlagged": 0,
+      "cueCount": 1144,
+      "profiles": {
+        "mild": 0,
+        "family": 0,
+        "strict": 0
+      },
+      "release": "Bluray.1080p.DTSMA.x264.dxva-FraMeSToR",
+      "computedAt": "2026-09-27T00:03:02.102Z",
+      "intro": "A cowboy doll's world is upended when a flashy space-ranger action figure becomes his owner's new favourite toy. The original Pixar feature keeps its conflict centred on jealousy and friendship, playing out mostly inside a kid's bedroom and backyard — one of the more dependable choices for younger viewers.",
+      "related": [
+        "tt1490017",
+        "tt0110357",
+        "tt22022452"
+      ]
+    },
+    {
+      "videoId": "tt2294629",
+      "title": "Frozen",
+      "year": 2013,
+      "type": "movie",
+      "slug": "frozen-2013",
+      "genres": [
+        "Animation",
+        "Adventure",
+        "Comedy"
+      ],
+      "runtime": "102 min",
+      "imdbUrl": "https://www.imdb.com/title/tt2294629/",
+      "label": "mild",
+      "labelText": "Mild",
+      "counts": {
+        "crude": 1
+      },
+      "totalFlagged": 1,
+      "cueCount": 1982,
+      "profiles": {
+        "mild": 0,
+        "family": 0,
+        "strict": 1
+      },
+      "release": "Frozen.2013.720p.BluRay.x264-SPARKS",
+      "computedAt": "2026-09-29T00:08:31.666Z",
+      "intro": "Two royal sisters are separated by a magical secret, and it takes an act of true love between them — not romance — to thaw their kingdom's eternal winter. Frozen is built for sing-along family viewing, and parents searching for its language content are usually checking before a group watch rather than ruling it out.",
+      "related": [
+        "tt3521164",
+        "tt0110357",
+        "tt22022452"
+      ]
+    },
+    {
+      "videoId": "tt0110357",
+      "title": "The Lion King",
+      "year": 1994,
+      "type": "movie",
+      "slug": "the-lion-king-1994",
+      "genres": [
+        "Animation",
+        "Adventure",
+        "Drama"
+      ],
+      "runtime": "89 min",
+      "imdbUrl": "https://www.imdb.com/title/tt0110357/",
+      "label": "mild",
+      "labelText": "Mild",
+      "counts": {
+        "crude": 1
+      },
+      "totalFlagged": 1,
+      "cueCount": 1175,
+      "profiles": {
+        "mild": 0,
+        "family": 0,
+        "strict": 1
+      },
+      "release": "Lion King, The (1994)",
+      "computedAt": "2026-09-25T00:12:04.690Z",
+      "intro": "A young lion prince flees his kingdom after a tragedy he believes he caused, growing up far from home before being called back to reclaim his place. It's a classic coming-of-age story that's stayed a go-to family pick across multiple generations.",
+      "related": [
+        "tt3521164",
+        "tt0114709",
+        "tt2294629"
+      ]
+    },
+    {
+      "videoId": "tt22022452",
+      "title": "Inside Out 2",
+      "year": 2024,
+      "type": "movie",
+      "slug": "inside-out-2-2024",
+      "genres": [
+        "Animation",
+        "Adventure",
+        "Comedy"
+      ],
+      "runtime": "97 min",
+      "imdbUrl": "https://www.imdb.com/title/tt22022452/",
+      "label": "mild",
+      "labelText": "Mild",
+      "counts": {
+        "crude": 2
+      },
+      "totalFlagged": 2,
+      "cueCount": 2146,
+      "profiles": {
+        "mild": 0,
+        "family": 0,
+        "strict": 2
+      },
+      "release": "Inside.Out.2.2024.BluRay.x264.AAC5.1-[YTS.MX]",
+      "computedAt": "2026-09-29T00:11:44.826Z",
+      "intro": "Riley's emotions get a new, chaotic arrival — Anxiety — just as adolescence turns her inner world upside down. The sequel keeps its focus on feelings and friendship rather than mature content, and it's become a popular choice for pre-teens and the parents watching alongside them.",
+      "related": [
+        "tt3521164",
+        "tt2294629",
+        "tt0114709"
+      ]
+    },
+    {
+      "videoId": "tt1517268",
+      "title": "Barbie",
+      "year": 2023,
+      "type": "movie",
+      "slug": "barbie-2023",
+      "genres": [
+        "Adventure",
+        "Comedy",
+        "Fantasy"
+      ],
+      "runtime": "114 min",
+      "imdbUrl": "https://www.imdb.com/title/tt1517268/",
+      "label": "moderate",
+      "labelText": "Moderate",
+      "counts": {
+        "religious": 13,
+        "mild_profanity": 12,
+        "sexual_explicit": 5,
+        "crude": 1,
+        "strong_profanity": 4
+      },
+      "totalFlagged": 35,
+      "cueCount": 2543,
+      "profiles": {
+        "mild": 9,
+        "family": 28,
+        "strict": 29
+      },
+      "release": "Barbie.2023.720p.iT.HC.WEBRip.800MB.x264-GalaxyRG",
+      "computedAt": "2026-09-30T00:01:39.116Z",
+      "intro": "Barbie leaves the plastic perfection of Barbieland for the real world, dragging Ken and a few uncomfortable truths about womanhood along with her. It became one of the most talked-about films in years, and parents searching for its language content are often surprised the humour leans sharper than the toy-box premise suggests.",
+      "related": [
+        "tt6791350",
+        "tt10954600",
+        "tt10872600"
+      ]
+    },
+    {
+      "videoId": "tt10872600",
+      "title": "Spider-Man: No Way Home",
+      "year": 2021,
+      "type": "movie",
+      "slug": "spider-man-no-way-home-2021",
+      "genres": [
+        "Action",
+        "Adventure",
+        "Fantasy"
+      ],
+      "runtime": "148 min",
+      "imdbUrl": "https://www.imdb.com/title/tt10872600/",
+      "label": "moderate",
+      "labelText": "Moderate",
+      "counts": {
+        "religious": 16,
+        "mild_profanity": 16,
+        "strong_profanity": 5,
+        "crude": 1
+      },
+      "totalFlagged": 38,
+      "cueCount": 2189,
+      "profiles": {
+        "mild": 5,
+        "family": 30,
+        "strict": 31
+      },
+      "release": "1080p.Bluray.DTS-HD.MA.5.1.X264-EVO",
+      "computedAt": "2026-09-29T00:00:30.210Z",
+      "intro": "Peter Parker's identity goes public and a spell gone wrong pulls villains — and heroes — from other Spider-Man universes into his own. It's a big, emotional send-off for a trilogy that plays to a wide family audience, which is exactly why its language content gets searched so often.",
+      "related": [
+        "tt9362722",
+        "tt6791350",
+        "tt10954600"
+      ]
+    },
+    {
+      "videoId": "tt9362722",
+      "title": "Spider-Man: Across the Spider-Verse",
+      "year": 2023,
+      "type": "movie",
+      "slug": "spider-man-across-the-spider-verse-2023",
+      "genres": [
+        "Animation",
+        "Action",
+        "Adventure"
+      ],
+      "runtime": "140 min",
+      "imdbUrl": "https://www.imdb.com/title/tt9362722/",
+      "label": "moderate",
+      "labelText": "Moderate",
+      "counts": {
+        "sexual_explicit": 1,
+        "religious": 4,
+        "mild_profanity": 8
+      },
+      "totalFlagged": 13,
+      "cueCount": 2241,
+      "profiles": {
+        "mild": 1,
+        "family": 11,
+        "strict": 11
+      },
+      "release": "1080p.WEBRip.x264.AAC5.1-[YTS.MX]",
+      "computedAt": "2026-09-29T00:01:23.163Z",
+      "intro": "Miles Morales journeys across the multiverse and collides with a society of Spider-People whose rules he refuses to follow. The animation style pushes genre boundaries more than the dialogue does, and it's a common pick for older kids and teens already following the series.",
+      "related": [
+        "tt10872600",
+        "tt6791350",
+        "tt10954600"
+      ]
+    },
+    {
+      "videoId": "tt6791350",
+      "title": "Guardians of the Galaxy Vol. 3",
+      "year": 2023,
+      "type": "movie",
+      "slug": "guardians-of-the-galaxy-vol-3-2023",
+      "genres": [
+        "Action",
+        "Adventure",
+        "Comedy"
+      ],
+      "runtime": "150 min",
+      "imdbUrl": "https://www.imdb.com/title/tt6791350/",
+      "label": "moderate",
+      "labelText": "Moderate",
+      "counts": {
+        "mild_profanity": 23,
+        "religious": 11,
+        "crude": 15,
+        "strong_profanity": 5,
+        "sexual_explicit": 4
+      },
+      "totalFlagged": 58,
+      "cueCount": 2788,
+      "profiles": {
+        "mild": 8,
+        "family": 35,
+        "strict": 48
+      },
+      "release": "1080p.WEB-DL.DDP5.1.Atmos.H.264-CMRG",
+      "computedAt": "2026-09-25T00:09:30.330Z",
+      "intro": "The Guardians go on a dangerous rescue mission to save one of their own, confronting a difficult chapter from Rocket's past along the way. True to the series, it mixes genuine emotional weight with wisecracking banter, which is part of why parents check its language before a family watch.",
+      "related": [
+        "tt10872600",
+        "tt10954600",
+        "tt12361974"
+      ]
+    },
+    {
+      "videoId": "tt0311289",
+      "title": "Holes",
+      "year": 2003,
+      "type": "movie",
+      "slug": "holes-2003",
+      "genres": [
+        "Adventure",
+        "Comedy",
+        "Drama"
+      ],
+      "runtime": "117 min",
+      "imdbUrl": "https://www.imdb.com/title/tt0311289/",
+      "label": "moderate",
+      "labelText": "Moderate",
+      "counts": {
+        "mild_profanity": 10,
+        "religious": 23,
+        "crude": 2
+      },
+      "totalFlagged": 35,
+      "cueCount": 2250,
+      "profiles": {
+        "mild": 0,
+        "family": 23,
+        "strict": 25
+      },
+      "release": "Holes.2003.DVDRip.ENG-SPA.x264.WRAITH",
+      "computedAt": "2026-09-28T00:05:28.998Z",
+      "intro": "A teenager wrongly sent to a brutal juvenile detention camp starts digging holes in the desert for reasons nobody will explain, slowly uncovering a decades-old family mystery. It's a popular tween read-then-watch pick, and schools and parents alike often want to know what's in it before a group viewing.",
+      "related": [
+        "tt0104694",
+        "tt1517268",
+        "tt10872600"
+      ]
+    },
+    {
+      "videoId": "tt12361974",
+      "title": "Zack Snyder's Justice League",
+      "year": 2021,
+      "type": "movie",
+      "slug": "zack-snyders-justice-league-2021",
+      "genres": [
+        "Action",
+        "Adventure",
+        "Fantasy"
+      ],
+      "runtime": "242 min",
+      "imdbUrl": "https://www.imdb.com/title/tt12361974/",
+      "label": "moderate",
+      "labelText": "Moderate",
+      "counts": {
+        "religious": 15,
+        "strong_profanity": 9,
+        "mild_profanity": 9,
+        "crude": 1
+      },
+      "totalFlagged": 34,
+      "cueCount": 2808,
+      "profiles": {
+        "mild": 8,
+        "family": 23,
+        "strict": 24
+      },
+      "release": "1080p.HDRip.AAC2.0.x264-PD",
+      "computedAt": "2026-09-26T00:08:22.301Z",
+      "intro": "This extended cut reassembles Batman, Wonder Woman and the rest of the League to stop an invading force before Superman's absence leaves Earth defenceless. At four hours, it has considerably more dialogue than the theatrical cut, which is part of why its language content differs from the version most people remember.",
+      "related": [
+        "tt6791350",
+        "tt10872600",
+        "tt10954600"
+      ]
+    },
+    {
+      "videoId": "tt0104694",
+      "title": "A League of Their Own",
+      "year": 1992,
+      "type": "movie",
+      "slug": "a-league-of-their-own-1992",
+      "genres": [
+        "Comedy",
+        "Drama",
+        "Sport"
+      ],
+      "runtime": "128 min",
+      "imdbUrl": "https://www.imdb.com/title/tt0104694/",
+      "label": "moderate",
+      "labelText": "Moderate",
+      "counts": {
+        "mild_profanity": 13,
+        "strong_profanity": 7,
+        "crude": 5,
+        "religious": 9,
+        "sexual_explicit": 2
+      },
+      "totalFlagged": 36,
+      "cueCount": 2631,
+      "profiles": {
+        "mild": 9,
+        "family": 29,
+        "strict": 34
+      },
+      "release": "A League of Their Own (1992).DVDRip.NonHI.cc.en.CLTRSTR",
+      "computedAt": "2026-09-26T00:11:19.239Z",
+      "intro": "Two sisters join the first professional women's baseball league formed during World War II, navigating rivalry, a tough coach and a sport nobody expects them to be taken seriously in. It's a beloved sports classic that still gets picked for family movie nights, with some locker-room language mixed into the comedy.",
+      "related": [
+        "tt0311289",
+        "tt1517268",
+        "tt10872600"
+      ]
+    },
+    {
+      "videoId": "tt10954600",
+      "title": "Ant-Man and the Wasp: Quantumania",
+      "year": 2023,
+      "type": "movie",
+      "slug": "ant-man-and-the-wasp-quantumania-2023",
+      "genres": [
+        "Action",
+        "Adventure",
+        "Comedy"
+      ],
+      "runtime": "125 min",
+      "imdbUrl": "https://www.imdb.com/title/tt10954600/",
+      "label": "moderate",
+      "labelText": "Moderate",
+      "counts": {
+        "strong_profanity": 8,
+        "mild_profanity": 18,
+        "religious": 17,
+        "crude": 4
+      },
+      "totalFlagged": 47,
+      "cueCount": 2157,
+      "profiles": {
+        "mild": 5,
+        "family": 31,
+        "strict": 35
+      },
+      "release": "1080p.WEB-DL.DDP5.1.Atmos.H.264-CMRG",
+      "computedAt": "2026-09-27T00:13:20.319Z",
+      "intro": "Scott Lang and his family are pulled into the Quantum Realm and face off against a powerful new threat to the wider Marvel universe. The tone stays comic-adventure throughout, and it's a frequent pick for families already working through the Marvel catalogue together.",
+      "related": [
+        "tt6791350",
+        "tt10872600",
+        "tt12361974"
+      ]
+    },
+    {
+      "videoId": "tt0478311",
+      "title": "Knocked Up",
+      "year": 2007,
+      "type": "movie",
+      "slug": "knocked-up-2007",
+      "genres": [
+        "Comedy",
+        "Romance"
+      ],
+      "runtime": "129 min",
+      "imdbUrl": "https://www.imdb.com/title/tt0478311/",
+      "label": "strong",
+      "labelText": "Strong",
+      "counts": {
+        "strong_profanity": 206,
+        "religious": 68,
+        "mild_profanity": 27,
+        "crude": 40,
+        "suggestive": 4,
+        "sexual_explicit": 30,
+        "slurs": 2
+      },
+      "totalFlagged": 377,
+      "cueCount": 2704,
+      "profiles": {
+        "mild": 213,
+        "family": 277,
+        "strict": 310
+      },
+      "release": "Knocked.Up[2007][Unrated.Edition]DvDrip[Eng]-aXXo",
+      "computedAt": "2026-09-29T00:08:07.598Z",
+      "intro": "A one-night encounter between a career-focused journalist and an easygoing slacker leads to an unplanned pregnancy and a relationship neither of them is quite ready for. It's a well-known R-rated comedy, and its reputation for blunt, constant profanity is exactly why people search for its language content before watching.",
+      "related": [
+        "tt12593682",
+        "tt2267998",
+        "tt0139654"
+      ]
+    },
+    {
+      "videoId": "tt5727208",
+      "title": "Uncut Gems",
+      "year": 2019,
+      "type": "movie",
+      "slug": "uncut-gems-2019",
+      "genres": [
+        "Crime",
+        "Drama",
+        "Thriller"
+      ],
+      "runtime": "136 min",
+      "imdbUrl": "https://www.imdb.com/title/tt5727208/",
+      "label": "strong",
+      "labelText": "Strong",
+      "counts": {
+        "strong_profanity": 628,
+        "slurs": 41,
+        "crude": 16,
+        "religious": 101,
+        "mild_profanity": 27,
+        "sexual_explicit": 8
+      },
+      "totalFlagged": 821,
+      "cueCount": 2584,
+      "profiles": {
+        "mild": 555,
+        "family": 610,
+        "strict": 617
+      },
+      "release": "Uncut.Gems.2019.1080p.NF.WEB-DL.DDP5.1.x264-NTG",
+      "computedAt": "2026-09-26T00:09:38.072Z",
+      "intro": "A New York jeweller with a serious gambling habit juggles debts, a rare gemstone and one bet too many across a relentless, anxiety-inducing few days. Famous for its overlapping, high-pressure dialogue, it's one of the more heavily profane mainstream dramas of its decade.",
+      "related": [
+        "tt2267998",
+        "tt0105236",
+        "tt0139654"
+      ]
+    },
+    {
+      "videoId": "tt2267998",
+      "title": "Gone Girl",
+      "year": 2014,
+      "type": "movie",
+      "slug": "gone-girl-2014",
+      "genres": [
+        "Drama",
+        "Mystery",
+        "Thriller"
+      ],
+      "runtime": "149 min",
+      "imdbUrl": "https://www.imdb.com/title/tt2267998/",
+      "label": "strong",
+      "labelText": "Strong",
+      "counts": {
+        "mild_profanity": 10,
+        "strong_profanity": 91,
+        "sexual_explicit": 9,
+        "religious": 18,
+        "crude": 2
+      },
+      "totalFlagged": 130,
+      "cueCount": 2555,
+      "profiles": {
+        "mild": 89,
+        "family": 110,
+        "strict": 112
+      },
+      "release": "Gone.Girl.2014.1080p.BluRay.x264-SPARKS",
+      "computedAt": "2026-09-26T00:00:33.501Z",
+      "intro": "When a woman vanishes on her wedding anniversary, her husband quickly becomes the prime suspect in a media frenzy that spirals far beyond a missing-persons case. The thriller's sharp, often cold dialogue includes frequent strong profanity, consistent with its R rating.",
+      "related": [
+        "tt5727208",
+        "tt0139654",
+        "tt0105236"
+      ]
+    },
+    {
+      "videoId": "tt0105236",
+      "title": "Reservoir Dogs",
+      "year": 1992,
+      "type": "movie",
+      "slug": "reservoir-dogs-1992",
+      "genres": [
+        "Crime",
+        "Thriller"
+      ],
+      "runtime": "99 min",
+      "imdbUrl": "https://www.imdb.com/title/tt0105236/",
+      "label": "strong",
+      "labelText": "Strong",
+      "counts": {
+        "crude": 21,
+        "strong_profanity": 292,
+        "sexual_explicit": 5,
+        "slurs": 7,
+        "mild_profanity": 39,
+        "religious": 19
+      },
+      "totalFlagged": 383,
+      "cueCount": 2156,
+      "profiles": {
+        "mild": 286,
+        "family": 334,
+        "strict": 349
+      },
+      "release": "Reservoir Dogs (1992) DVD.US.Retail",
+      "computedAt": "2026-09-25T00:10:35.076Z",
+      "intro": "A jewellery heist goes catastrophically wrong, and the surviving crew holes up in a warehouse trying to work out who the police informant among them is. This breakout crime classic is famous for dialogue built almost entirely on blunt, constant profanity — a reputation the subtitle data backs up.",
+      "related": [
+        "tt0139654",
+        "tt5727208",
+        "tt12593682"
+      ]
+    },
+    {
+      "videoId": "tt0139654",
+      "title": "Training Day",
+      "year": 2001,
+      "type": "movie",
+      "slug": "training-day-2001",
+      "genres": [
+        "Crime",
+        "Drama",
+        "Thriller"
+      ],
+      "runtime": "122 min",
+      "imdbUrl": "https://www.imdb.com/title/tt0139654/",
+      "label": "strong",
+      "labelText": "Strong",
+      "counts": {
+        "crude": 16,
+        "mild_profanity": 59,
+        "strong_profanity": 264,
+        "slurs": 2,
+        "sexual_explicit": 2,
+        "religious": 6
+      },
+      "totalFlagged": 349,
+      "cueCount": 2265,
+      "profiles": {
+        "mild": 246,
+        "family": 298,
+        "strict": 306
+      },
+      "release": "Training.Day.2001.720p.BRRip.XviD.AC3-wD",
+      "computedAt": "2026-09-26T00:04:28.616Z",
+      "intro": "A rookie LAPD narcotics officer spends his first day shadowing a veteran detective whose methods turn out to be far more corrupt than anyone warned him about. The Oscar-winning performance at its centre comes wrapped in dialogue that's blunt and frequently profane throughout.",
+      "related": [
+        "tt0105236",
+        "tt5727208",
+        "tt2267998"
+      ]
+    },
+    {
+      "videoId": "tt12593682",
+      "title": "Bullet Train",
+      "year": 2022,
+      "type": "movie",
+      "slug": "bullet-train-2022",
+      "genres": [
+        "Action",
+        "Comedy",
+        "Thriller"
+      ],
+      "runtime": "126 min",
+      "imdbUrl": "https://www.imdb.com/title/tt12593682/",
+      "label": "strong",
+      "labelText": "Strong",
+      "counts": {
+        "strong_profanity": 203,
+        "crude": 11,
+        "mild_profanity": 27,
+        "sexual_explicit": 5,
+        "religious": 18
+      },
+      "totalFlagged": 264,
+      "cueCount": 2695,
+      "profiles": {
+        "mild": 186,
+        "family": 210,
+        "strict": 219
+      },
+      "release": "Bullet.Train.2022.2160p.WEB-DL.DD5.1.HDR.HEVC-EVO",
+      "computedAt": "2026-09-25T00:07:33.100Z",
+      "intro": "A reluctant assassin boards a bullet train for what should be a simple job, only to discover several other killers on board with overlapping, conflicting missions. The action-comedy's banter is blunt and frequently profane, consistent with its R rating and its ensemble of foul-mouthed killers.",
+      "related": [
+        "tt0105236",
+        "tt0478311",
+        "tt5727208"
+      ]
+    }
+  ]
+}
