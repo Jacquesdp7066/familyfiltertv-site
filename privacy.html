@@ -128,6 +128,27 @@
   stores remotely, or shares anything it reads this way. It reads media-session metadata (what's
   playing, not notification content), and it never reads the text of your notifications.</p>
 
+  <h2>Following another app on your TV (beta)</h2>
+  <p>Follow mode lets Family Filter TV mute swearing while you watch in another app on your Android
+  TV. It uses the same notification-listener access described above, which you grant yourself, and
+  reads only the other app's playback position and state (playing, paused), never notification
+  text.</p>
+  <ul>
+    <li><strong>What is stored in your household account</strong> while you follow something: the
+    title and episode you picked on your phone, which subtitle file is used and its timing
+    correction, and the TV's current playback position and status, so your phone can show what the
+    TV is doing. Only devices signed in to your household can read it.</li>
+    <li><strong>Microphone (phone only, when you tap Listen to sync).</strong> The phone listens for
+    up to 20 seconds to line the subtitles up with what is playing. The sound is turned into words
+    on the phone itself and compared there. No audio or words are stored or sent anywhere. The
+    speech model is downloaded once from its publisher and runs offline. You can deny or revoke the
+    microphone permission at any time; the rest of follow mode still works.</li>
+    <li><strong>Shared timing corrections.</strong> When a household confirms the timing of a
+    subtitle file, that file's id and the correction (a number of milliseconds) are added to a shared
+    table so other households start in sync. No account, device or viewing history is attached to
+    it.</li>
+  </ul>
+
   <h2>Direct-install updates</h2>
   <p>Copies of Family Filter TV installed directly (not through Google Play) check a small version
   file hosted on this site to see if an update is available. That check does not send any personal
