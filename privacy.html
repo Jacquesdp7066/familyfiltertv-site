@@ -43,7 +43,7 @@
 
 <main class="wrap">
   <h1 class="page-title">Privacy policy</h1>
-  <p class="muted">Last updated: 5 October 2026</p>
+  <p class="muted">Last updated: 8 October 2026</p>
 
   <p>This policy covers the Family Filter TV Android app (TV and phone). It explains what an account
   involves, what we store, how payment works, and what the third-party services the app relies on
@@ -128,7 +128,7 @@
   stores remotely, or shares anything it reads this way. It reads media-session metadata (what's
   playing, not notification content), and it never reads the text of your notifications.</p>
 
-  <h2>Following another app on your TV (beta)</h2>
+  <h2 id="follow-mode">Following another app on your TV (beta)</h2>
   <p>Follow mode lets Family Filter TV mute swearing while you watch in another app on your Android
   TV. It uses the same notification-listener access described above, which you grant yourself, and
   reads only the other app's playback position and state (playing, paused), never notification
@@ -138,11 +138,19 @@
     title and episode you picked on your phone, which subtitle file is used and its timing
     correction, and the TV's current playback position and status, so your phone can show what the
     TV is doing. Only devices signed in to your household can read it.</li>
-    <li><strong>Microphone (phone only, when you tap Listen to sync).</strong> The phone listens for
-    up to 20 seconds to line the subtitles up with what is playing. The sound is turned into words
-    on the phone itself and compared there. No audio or words are stored or sent anywhere. The
-    speech model is downloaded once from its publisher and runs offline. You can deny or revoke the
-    microphone permission at any time; the rest of follow mode still works.</li>
+    <li><strong>Microphone (phone only).</strong> When the TV or computer cannot tell where you are
+    in a film, your phone finds the place by listening. Once you have allowed the microphone, the
+    phone starts listening by itself when you follow a title, and keeps listening while the Follow
+    screen is open so it can correct itself after a pause or a skip. It only listens while the
+    Follow screen is open and something is playing, never in the background. The sound is turned
+    into words on the phone itself and compared there with the subtitles. No audio and no words are
+    stored or sent anywhere. The speech model is downloaded once from its publisher and runs
+    offline. You can press Stop at any time, or deny or remove the microphone permission in
+    Android's settings; follow mode with a TV app that reports its own position still works
+    without it.</li>
+    <li><strong>Windows computer (early beta).</strong> The Windows app also listens to the
+    computer's own sound output, to catch spoken swearing that the subtitles miss. That sound is
+    processed on the computer itself and is not stored or sent anywhere.</li>
     <li><strong>Shared timing corrections.</strong> When a household confirms the timing of a
     subtitle file, that file's id and the correction (a number of milliseconds) are added to a shared
     table so other households start in sync. No account, device or viewing history is attached to
