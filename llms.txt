@@ -58,6 +58,7 @@ does not mute anything — Family Filter TV is the app that mutes.
 - https://familyfiltertv.com/download.html — download and installation options
 - https://familyfiltertv.com/setup.html — setup walkthrough
 - https://familyfiltertv.com/stremio.html — the Language Ratings Stremio add-on
+- https://familyfiltertv.com/which-tvs.html — will it work on my TV: which TV brands and systems are supported
 - https://familyfiltertv.com/support.html — support and known limits
 - https://familyfiltertv.com/privacy.html — privacy policy
 - https://familyfiltertv.com/terms.html — terms of use
