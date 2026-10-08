@@ -14,7 +14,7 @@ Official site: https://familyfiltertv.com/
 - Supports off, mild, family and strict filter levels.
 - Lets one household manage linked TVs from a phone.
 - Runs on Android TV, Android TV boxes and Android phones.
-- Works with supported Stremio playback.
+- Works with supported Stremio playback, and follows along while you watch Netflix and other apps on your Android TV or Google TV. Not affiliated with Netflix.
 
 ## What it does not do
 
