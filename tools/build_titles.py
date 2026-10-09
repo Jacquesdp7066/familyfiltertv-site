@@ -24,6 +24,10 @@ SITEMAP_PATH = os.path.join(ROOT, "sitemap.xml")
 LLMS_PATH = os.path.join(ROOT, "llms.txt")
 SITE = "https://familyfiltertv.com"
 
+# Date the page template last changed. Sitemap lastmod is the later of this and a
+# title's analysis date, so a wording change gets recrawled.
+TEMPLATE_UPDATED = "2026-10-09"
+
 CATEGORY_ORDER = [
     "strong_profanity", "mild_profanity", "religious", "crude",
     "sexual_explicit", "suggestive", "slurs",
@@ -140,6 +144,20 @@ def category_rows(counts, category_labels):
     return rows
 
 
+def language_summary(t, category_labels, limit=None):
+    """One plain sentence answering "how much swearing is in this film?"."""
+    name = t["title"]
+    total = t["totalFlagged"]
+    if not total:
+        return f"We found no flagged swearing in the English subtitles of {name}."
+    rows = category_rows(t["counts"], category_labels)
+    if limit:
+        rows = sorted(rows, key=lambda r: -r[1])[:limit]
+    cats = ", ".join(f"{val} {label.lower()}" for label, val in rows)
+    words = "word" if total == 1 else "words"
+    return f"We counted {total} flagged {words} in the English subtitles of {name}: {cats}."
+
+
 def analysis_panel(t, category_labels):
     rows = category_rows(t["counts"], category_labels)
     last_analysed = t["computedAt"][:10]
@@ -162,7 +180,8 @@ def analysis_panel(t, category_labels):
     )
 
     return f'''  <section class="panel" aria-labelledby="ffa-heading">
-    <h2 id="ffa-heading">Family Filter TV analysis</h2>
+    <h2 id="ffa-heading">How much swearing is in {esc(t["title"])}?</h2>
+    <p>{esc(language_summary(t, category_labels))}</p>
     <p><strong>Language level:</strong> {esc(t["labelText"])}</p>
     <p><strong>Total flagged words:</strong> {t["totalFlagged"]}</p>
 {cat_block}
@@ -201,10 +220,19 @@ def title_page_html(t, by_id, category_labels):
     name = t["title"]
     year = t["year"]
     canonical = f"{SITE}/titles/{slug}/"
-    page_title = f"Is {name} Safe for Kids? Profanity & Family Viewing Guide | Family Filter TV"
+    page_title = f"{name} ({year}) Parents Guide: Swearing and Language | Family Filter TV"
+    total = t["totalFlagged"]
+    if total:
+        top = ", ".join(
+            f"{val} {label.lower()}"
+            for label, val in sorted(category_rows(t["counts"], category_labels), key=lambda r: -r[1])[:2]
+        )
+        found = f"{total} flagged {'word' if total == 1 else 'words'} in the subtitles ({top})"
+    else:
+        found = "no flagged swearing found in the subtitles"
     description = (
-        f"Family Filter TV's own subtitle analysis of {name} ({year}): language level, "
-        f"flagged word counts and how much gets muted per filter profile."
+        f"{name} ({year}) parents guide to swearing and language: {found}. "
+        f"Full count by category."
     )
 
     genres_jsonld = t["genres"]
@@ -265,8 +293,10 @@ def title_page_html(t, by_id, category_labels):
 
 <main class="wrap">
   {breadcrumb}
-  <h1 class="page-title">Is {esc(name)} suitable for family viewing?</h1>
+  <h1 class="page-title">{esc(name)} ({year}) parents guide: swearing and language</h1>
   <p class="lead">{esc(t["intro"])}</p>
+  <p class="muted">This guide covers spoken language only. It does not rate violence, nudity or
+  frightening scenes.</p>
 
 {analysis_panel(t, category_labels)}
 
@@ -312,10 +342,10 @@ def title_page_html(t, by_id, category_labels):
 
 def index_page_html(titles, category_labels):
     canonical = f"{SITE}/titles/"
-    page_title = "Family Viewing Guides by Title | Family Filter TV"
+    page_title = "Parents Guides to Swearing in Films | Family Filter TV"
     description = (
-        "Browse Family Filter TV's title-by-title family viewing guides: language level and "
-        "flagged word counts from our own subtitle analysis, for films parents search for."
+        "Parents guides to the swearing and language in specific films: exact flagged word "
+        "counts by category, from Family Filter TV's own subtitle analysis."
     )
 
     jsonld_breadcrumb = breadcrumb_jsonld([
@@ -365,9 +395,10 @@ def index_page_html(titles, category_labels):
 
 <main class="wrap">
   {breadcrumb}
-  <h1 class="page-title">Family viewing guides by title</h1>
-  <p class="lead">Language level and flagged-word data for specific films, from Family Filter
-  TV's own subtitle analysis &mdash; not a competitor's ratings or a generic parental guide.</p>
+  <h1 class="page-title">Parents guides: swearing and language by film</h1>
+  <p class="lead">How much swearing is in a film, counted word by word from Family Filter TV's
+  own subtitle analysis. These guides cover spoken language only, not violence, nudity or
+  frightening scenes.</p>
 
   <p>
     <label for="title-search" class="muted">Search titles</label><br>
@@ -403,13 +434,13 @@ def update_sitemap(titles):
     kept = [ln for ln in lines if "/titles/" not in ln]
 
     # last-known-good lastmod for the index = most recent analysis date in the cohort
-    index_lastmod = max(t["computedAt"][:10] for t in titles)
+    index_lastmod = max(TEMPLATE_UPDATED, max(t["computedAt"][:10] for t in titles))
 
     new_entries = [
         f'  <url><loc>{SITE}/titles/</loc><lastmod>{index_lastmod}</lastmod><priority>0.8</priority></url>'
     ]
     for t in sorted(titles, key=lambda x: x["slug"]):
-        lastmod = t["computedAt"][:10]
+        lastmod = max(TEMPLATE_UPDATED, t["computedAt"][:10])
         new_entries.append(
             f'  <url><loc>{SITE}/titles/{t["slug"]}/</loc><lastmod>{lastmod}</lastmod><priority>0.6</priority></url>'
         )
@@ -434,7 +465,7 @@ def update_llms(titles):
     if marker in content:
         return False
 
-    line = f"- {SITE}/titles/ — title-by-title family viewing guides, from our own subtitle analysis\n"
+    line = f"- {SITE}/titles/ — title-by-title parents guides to swearing and language, from our own subtitle analysis\n"
     # insert after the stremio-profanity-filter.html line in the ## Pages section, else just before "## Not affiliated"
     anchor = f"- {SITE}/stremio-profanity-filter.html — muting swearing in Stremio, step-by-step\n"
     if anchor in content:
