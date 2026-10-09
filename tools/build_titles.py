@@ -64,12 +64,16 @@ def nav(active, depth):
 def foot_nav(depth):
     up = "../" * depth
     links = [
+        f'      <a href="{up}guides.html">Guides</a>',
         f'      <a href="{up}titles/index.html">Titles</a>',
         f'      <a href="{up}download.html">Download</a>',
         f'      <a href="{up}setup.html">Get set up</a>',
         f'      <a href="{up}support.html">Support</a>',
         f'      <a href="{up}privacy.html">Privacy</a>',
         f'      <a href="{up}terms.html">Terms</a>',
+        '      <a href="https://www.youtube.com/@FamilyFilterTV">YouTube</a>',
+        '      <a href="https://www.instagram.com/familyfiltertv/">Instagram</a>',
+        '      <a href="https://www.tiktok.com/@familyfiltertvapp">TikTok</a>',
     ]
     return "\n".join(links)
 
