@@ -14,7 +14,7 @@ Official site: https://familyfiltertv.com/
 - Supports off, mild, family and strict filter levels.
 - Lets one household manage linked TVs from a phone.
 - Runs on Android TV, Android TV boxes and Android phones.
-- Works with supported Stremio playback.
+- Works with supported Stremio playback, and follows along while you watch Netflix and other apps on your Android TV or Google TV. Not affiliated with Netflix.
 
 ## What it does not do
 
@@ -54,6 +54,7 @@ does not mute anything — Family Filter TV is the app that mutes.
 - https://familyfiltertv.com/stremio-profanity-filter.html — muting swearing in Stremio, step-by-step
 - https://familyfiltertv.com/titles/ — title-by-title family viewing guides, from our own subtitle analysis
 - https://familyfiltertv.com/mute-swearing-on-tv.html — muting unwanted language on TV
+- https://familyfiltertv.com/mute-swearing-on-netflix.html — how to mute swearing on Netflix on Android TV and Google TV (not affiliated with Netflix)
 - https://familyfiltertv.com/vidangel-clearplay-alternative.html — comparison with VidAngel and ClearPlay
 - https://familyfiltertv.com/download.html — download and installation options
 - https://familyfiltertv.com/setup.html — setup walkthrough

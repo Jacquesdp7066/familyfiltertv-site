@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Profanity filter for Android TV: how it works and what it can't do</title>
-<meta name="description" content="How a profanity filter for Android TV actually works with Family Filter TV and Stremio — reading subtitles, muting the audio, and the real limits: no violence/nudity filtering, subtitles required.">
+<meta name="description" content="How a profanity filter for Android TV actually works with Family Filter TV and Stremio, plus follow mode for Netflix and other apps. Reading subtitles, muting the audio, and the real limits: no violence/nudity filtering, subtitles required.">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta name="theme-color" content="#0B0C0F">
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
@@ -13,7 +13,7 @@
 <meta property="og:url" content="https://familyfiltertv.com/profanity-filter-android-tv.html">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Profanity filter for Android TV: how it works and what it can't do">
-<meta property="og:description" content="How the filtering actually works on Android TV, and the honest limits — no violence/nudity filtering, subtitles required, Stremio only.">
+<meta property="og:description" content="How the filtering actually works on Android TV, and the honest limits: no violence/nudity filtering, subtitles required for Stremio, and the limits of follow mode.">
 <meta property="og:image" content="https://familyfiltertv.com/assets/feature-graphic.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -55,7 +55,7 @@
       "name": "Does it work with Netflix or DStv on Android TV?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No. Family Filter TV works with supported playback started in Stremio. It does not filter Netflix, DStv, or any other subscription streaming app, and it is not affiliated with any of them."
+        "text": "Netflix, yes on Android TV and Google TV, through follow mode. Pick the title on your Android phone and the TV mutes the swearing while you watch, then follows the next episode by itself. Muting is best effort. It needs Family Filter TV on the TV and on an Android phone, works with English titles only for now, and does not work with the built-in apps of Samsung, LG and other non-Android TVs. DStv is not supported. Family Filter TV is not affiliated with Netflix, DStv or any other streaming service."
       }
     },
     {
@@ -105,7 +105,7 @@
 
   <h2>What's actually doing the filtering</h2>
   <p>Family Filter TV is a separate app that sits on your Android TV or TV box as the player for
-  titles you start in Stremio. It isn't a browser extension and it isn't a setting hidden inside
+  titles you start in Stremio. It can also follow along while you watch Netflix and other apps on your Android TV, which is covered under follow mode below. It isn't a browser extension and it isn't a setting hidden inside
   another app — it's the thing that plays the video once you choose it as the external player.
   That matters for Android TV specifically, because most filtering tools built for streaming are
   Chrome extensions or web dashboards that assume there's a computer involved. On a television,
@@ -121,7 +121,7 @@
   <h2>What it needs to work</h2>
   <div class="panel">
     <ul>
-      <li>A title started in <strong>Stremio</strong>, with Family Filter TV set as the player.</li>
+      <li>A title started in <strong>Stremio</strong>, with Family Filter TV set as the player. Or, for Netflix and other apps on your Android TV, follow mode: Family Filter TV on the TV and on an Android phone, and an English title.</li>
       <li>A <strong>subtitle track</strong> for that title. No subtitles means no filtering — the
         app tells you on screen when that's the case.</li>
       <li>The filter strength set once on a parent's phone, with the television linked to that
@@ -141,9 +141,11 @@
     <ul>
       <li><strong>It doesn't filter violence or nudity.</strong> Only spoken profanity is muted.
         Nothing on screen is blurred, cut or skipped.</li>
-      <li><strong>It doesn't work with Netflix, DStv, or any subscription streaming app.</strong>
-        Current filtering is for supported playback started in Stremio. Family Filter TV is not
-        affiliated with Stremio, Google, or any streaming service.</li>
+      <li><strong>Follow mode has limits.</strong> It works on Android TV and Google TV only, with
+        Family Filter TV on the TV and on an Android phone, for English titles only for now. It does
+        not work with the built-in apps of Samsung, LG and other non-Android TVs, and it does not
+        work with DStv. Muting is best effort. Family Filter TV is not affiliated with Stremio,
+        Netflix, Google, or any streaming service.</li>
       <li><strong>It isn't a streaming library.</strong> It doesn't provide films, series, or
         access to any subscription content — Stremio, and whatever add-ons someone chooses inside
         it, is entirely separate and the user's own responsibility.</li>
@@ -184,8 +186,10 @@
     </div>
     <div>
       <h3>Does it work with Netflix or DStv on Android TV?</h3>
-      <p>No. It works with supported playback started in Stremio, and isn't affiliated with any
-      subscription streaming service.</p>
+      <p>Netflix, yes on Android TV and Google TV, through follow mode: pick the title on your
+      Android phone and the TV <a href="mute-swearing-on-tv.html">mutes the swearing</a>. It also works with supported playback started
+      in Stremio. DStv is not supported, and Family Filter TV isn't affiliated with Netflix or any
+      other streaming service.</p>
     </div>
     <div>
       <h3>What Android TV devices does it run on?</h3>
@@ -198,7 +202,7 @@
   </div>
 
   <p class="fine">Family Filter TV is an independent app. It is not affiliated with, endorsed by,
-  or connected to Stremio, Google, or any streaming service.</p>
+  or connected to Stremio, Netflix, Google, or any streaming service.</p>
 </main>
 
 <footer class="site-foot">
@@ -213,7 +217,7 @@
       <a href="privacy.html">Privacy</a>
       <a href="terms.html">Terms</a>
     </nav>
-    <p class="fine">An independent app. Not affiliated with, or endorsed by, Stremio or Google.</p>
+    <p class="fine">An independent app. Not affiliated with, or endorsed by, Stremio, Netflix or Google.</p>
   </div>
 </footer>
 </body>

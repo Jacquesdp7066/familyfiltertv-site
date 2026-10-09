@@ -296,6 +296,7 @@ def title_page_html(t, by_id, category_labels):
     <a class="btn" href="../../download.html">Watch with Family Filter TV</a>
     <a class="btn-quiet" href="../../setup.html">Get set up</a>
     <a class="btn-quiet" href="../../stremio.html">About the Stremio add-on</a>
+    <a class="btn-quiet" href="../../mute-swearing-on-tv.html">How muting swearing on TV works</a>
   </div>
 
 {related}
