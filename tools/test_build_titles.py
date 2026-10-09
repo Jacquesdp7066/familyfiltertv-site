@@ -10,6 +10,7 @@ import unittest
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import build_titles as bt  # noqa: E402
+import weekly_refresh as wr  # noqa: E402
 
 LABELS = {"strong_profanity": "Strong profanity", "mild_profanity": "Mild profanity", "religious": "Religious exclamations"}
 
@@ -203,6 +204,42 @@ class UntrustedExport(unittest.TestCase):
         with self.assertRaises(SystemExit):
             bt.check_titles([dict(TITLE, counts={"mild_profanity": self.HOSTILE})])
         bt.check_titles([TITLE])
+
+
+class ExportValues(unittest.TestCase):
+    def test_turns_a_database_query_result_into_plain_rows(self):
+        results = [
+            {"readTime": "2026-10-09T00:00:00Z"},
+            {"document": {
+                "name": "projects/p/databases/(default)/documents/ratings/tt1",
+                "fields": {
+                    "status": {"stringValue": "rated"},
+                    "cueCount": {"integerValue": "1000"},
+                    "counts": {"mapValue": {"fields": {"mild_profanity": {"integerValue": "3"}}}},
+                    "computedAt": {"timestampValue": "2026-10-09T00:00:00.000Z"},
+                    "fit": {"mapValue": {"fields": {"ratio": {"doubleValue": 1.0}, "classification": {"stringValue": "good"}}}},
+                    "timeline": {"mapValue": {"fields": {
+                        "bucketMs": {"integerValue": "600000"},
+                        "words": {"arrayValue": {"values": [{"integerValue": "3"}, {"integerValue": "0"}]}},
+                        "strongProfanity": {"arrayValue": {"values": [{"integerValue": "0"}, {"integerValue": "0"}]}},
+                    }}},
+                    "terms": {"mapValue": {}},
+                },
+            }},
+        ]
+        self.assertEqual(wr.rows_from_query(results), [{
+            "videoId": "tt1", "status": "rated", "cueCount": 1000, "counts": {"mild_profanity": 3},
+            "computedAt": "2026-10-09T00:00:00.000Z", "fit": {"ratio": 1.0, "classification": "good"},
+            "timeline": {"bucketMs": 600000, "words": [3, 0], "strongProfanity": [0, 0]}, "terms": {},
+        }])
+
+    def test_the_report_lists_held_and_rejected_lines_and_never_accepts_them(self):
+        log = "updated  A: mild 3 -> mild 4\nHELD     B: mild 3 -> strong 40  (check)\nREJECTED C: counts\ngenerated 20"
+        body = wr.report_body(log, 3)
+        self.assertIn("Files changed: 3", body)
+        for line in ("updated  A", "HELD     B", "REJECTED C"):
+            self.assertIn(line, body)
+        self.assertNotIn("generated 20", body)
 
 
 if __name__ == "__main__":
