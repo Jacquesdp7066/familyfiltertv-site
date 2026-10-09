@@ -13,9 +13,11 @@ Stdlib only. Re-running this script with unchanged data.json must produce
 no further changes (idempotent) — see tools/README or docs/SEO_TITLE_INDEX_TEST.md
 in the app repo for the verification protocol.
 """
+import bisect
 import json
 import os
 import re
+import sys
 import xml.sax.saxutils as sax
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -158,6 +160,77 @@ def language_summary(t, category_labels, limit=None):
     return f"We counted {total} flagged {words} in the English subtitles of {name}: {cats}."
 
 
+def build_benchmark(export_path):
+    """Flagged-word totals for every usable film in the subtitle-analysis export.
+
+    Same selection bar as the cohort (site PR #20): a good runtime fit, at least 400
+    subtitle lines, and no commentary/CD1/trailer/sample releases.
+    """
+    with open(export_path, "r") as f:
+        export = json.load(f)
+    skip = re.compile(r"commentary|cd ?[12]\b|trailer|sample|\bextras?\b", re.I)
+    totals = sorted(
+        sum(e["counts"].values())
+        for e in export
+        if (e.get("fit") or {}).get("classification") == "good"
+        and (e.get("cueCount") or 0) >= 400
+        and not skip.search(e.get("release") or "")
+    )
+    return {"filmCount": len(totals), "totals": totals}
+
+
+def comparison_section(t, benchmark):
+    """How this film's language compares with every film we have analysed."""
+    if not benchmark:
+        return ""
+    totals = benchmark["totals"]
+    n = benchmark["filmCount"]
+    total = t["totalFlagged"]
+    name = esc(t["title"])
+    lines = []
+
+    if total == 0:
+        clean = bisect.bisect_right(totals, 0)
+        lines.append(
+            f"{name} is one of {clean} films with no flagged language, out of the {n} "
+            f"films we have analysed."
+        )
+    else:
+        below = 100 * bisect.bisect_left(totals, total) / n
+        above = 100 * (n - bisect.bisect_right(totals, total)) / n
+        if below >= above:
+            lines.append(
+                f"{name} has more flagged language than {min(99, round(below))}% of the {n} "
+                f"films we have analysed."
+            )
+        else:
+            lines.append(
+                f"{name} has less flagged language than {min(99, round(above))}% of the {n} "
+                f"films we have analysed."
+            )
+        m = re.search(r"(\d+)", str(t.get("runtime") or ""))
+        if m:
+            per_hour = total / (int(m.group(1)) / 60)
+            rate = f"{per_hour:.0f}" if per_hour >= 10 else f"{per_hour:.1f}"
+            lines.append(f"That works out to about {rate} flagged words an hour.")
+
+    family = t["profiles"].get("family", 0)
+    cues = t["cueCount"]
+    if family:
+        share = 100 * family / cues
+        pct = f"{share:.0f}" if share >= 10 else f"{share:.1f}"
+        lines.append(
+            f"With the family filter on, {family} of {cues} subtitle lines are muted ({pct}%), "
+            f"so the rest of the dialogue plays as normal."
+        )
+
+    body = "\n".join(f"    <p>{ln}</p>" for ln in lines)
+    return f'''  <section aria-labelledby="compare-heading">
+    <h2 id="compare-heading">How {name} compares</h2>
+{body}
+  </section>'''
+
+
 def analysis_panel(t, category_labels):
     rows = category_rows(t["counts"], category_labels)
     last_analysed = t["computedAt"][:10]
@@ -215,7 +288,7 @@ def related_section(t, by_id, depth_up):
   </section>'''
 
 
-def title_page_html(t, by_id, category_labels):
+def title_page_html(t, by_id, category_labels, benchmark=None):
     slug = t["slug"]
     name = t["title"]
     year = t["year"]
@@ -300,6 +373,8 @@ def title_page_html(t, by_id, category_labels):
 
 {analysis_panel(t, category_labels)}
 
+{comparison_section(t, benchmark)}
+
   <section aria-labelledby="can-filter-heading">
     <h2 id="can-filter-heading">What Family Filter TV can filter</h2>
     <ul>
@@ -358,7 +433,8 @@ def index_page_html(titles, category_labels):
         rows.append(
             f'      <li class="title-row" data-search="{esc(t["title"].lower())}">'
             f'<a href="{t["slug"]}/">{esc(t["title"])} ({t["year"]})</a> '
-            f'<span class="muted">&mdash; {esc(t["labelText"])}</span></li>'
+            f'<span class="muted">&mdash; {esc(t["labelText"])}, '
+            f'{t["totalFlagged"]} flagged {"word" if t["totalFlagged"] == 1 else "words"}</span></li>'
         )
 
     breadcrumb = breadcrumb_html(1, title=None)
@@ -482,8 +558,15 @@ def main():
     with open(DATA_PATH, "r") as f:
         data = json.load(f)
 
+    # --benchmark <ratings-export.json> refreshes the all-films comparison data
+    if "--benchmark" in sys.argv:
+        data["benchmark"] = build_benchmark(sys.argv[sys.argv.index("--benchmark") + 1])
+        with open(DATA_PATH, "w") as f:
+            f.write(json.dumps(data, indent=2, ensure_ascii=False))
+
     titles = data["titles"]
     category_labels = data["categoryLabels"]
+    benchmark = data.get("benchmark")
     by_id = {t["videoId"]: t for t in titles}
 
     titles_dir = os.path.join(ROOT, "titles")
@@ -492,7 +575,7 @@ def main():
         page_dir = os.path.join(titles_dir, t["slug"])
         os.makedirs(page_dir, exist_ok=True)
         page_path = os.path.join(page_dir, "index.html")
-        html = title_page_html(t, by_id, category_labels)
+        html = title_page_html(t, by_id, category_labels, benchmark)
         if not os.path.exists(page_path) or open(page_path).read() != html:
             with open(page_path, "w") as f:
                 f.write(html)
