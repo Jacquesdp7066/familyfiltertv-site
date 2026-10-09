@@ -60,6 +60,10 @@ does not mute anything — Family Filter TV is the app that mutes.
 - https://familyfiltertv.com/setup.html — setup walkthrough
 - https://familyfiltertv.com/stremio.html — the Language Ratings Stremio add-on
 - https://familyfiltertv.com/which-tvs.html — will it work on my TV: which TV brands and systems are supported
+- https://familyfiltertv.com/windows-profanity-filter.html — profanity filter for a Windows PC (early beta): what it does, what you need, its limits
+- https://familyfiltertv.com/google-tv-profanity-filter.html — profanity filter for Google TV sets, sticks and boxes, and how to set it up
+- https://familyfiltertv.com/family-movie-night-without-swearing.html — a parent's guide to the options for a family movie night without swearing
+- https://familyfiltertv.com/parental-controls-vs-profanity-filter.html — what parental controls do versus what a profanity filter does
 - https://familyfiltertv.com/support.html — support and known limits
 - https://familyfiltertv.com/privacy.html — privacy policy
 - https://familyfiltertv.com/terms.html — terms of use
