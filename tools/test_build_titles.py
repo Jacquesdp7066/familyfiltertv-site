@@ -189,6 +189,11 @@ class UntrustedExport(unittest.TestCase):
     def test_a_true_false_value_is_not_a_count(self):
         self.assert_rejected(export_record(counts={"mild_profanity": True}))
 
+    def test_series_episodes_are_left_out_of_the_film_comparison(self):
+        film = export_record(type="movie")
+        episode = export_record(videoId="tt9:1:1", type="series")
+        self.assertEqual(bt.build_benchmark([film, episode]), {"filmCount": 1, "totals": [6]})
+
     def test_a_malformed_record_is_left_out_of_the_comparison_data(self):
         good = export_record()
         bad = export_record(videoId="tt2", counts={"mild_profanity": self.HOSTILE})

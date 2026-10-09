@@ -264,8 +264,16 @@ def usable(e):
 
 
 def build_benchmark(export):
-    """Flagged-word totals for every usable film in the subtitle-analysis export."""
-    totals = sorted(sum(e["counts"].values()) for e in export if isinstance(e, dict) and usable(e))
+    """Flagged-word totals for every usable film in the subtitle-analysis export.
+
+    Films only: the pages say "of the N films we have analysed", and the export also holds
+    series episodes. A record with no type predates the field and was a film.
+    """
+    totals = sorted(
+        sum(e["counts"].values())
+        for e in export
+        if isinstance(e, dict) and usable(e) and e.get("type", "movie") == "movie"
+    )
     return {"filmCount": len(totals), "totals": totals}
 
 
