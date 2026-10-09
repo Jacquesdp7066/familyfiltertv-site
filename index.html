@@ -28,18 +28,19 @@
   "@type": "SoftwareApplication",
   "name": "Family Filter TV",
   "alternateName": "FamilyFilterTV",
-  "operatingSystem": "Android, Android TV",
+  "operatingSystem": "Android, Android TV, Windows",
   "applicationCategory": "MultimediaApplication",
-  "description": "Family Filter TV is a profanity filter for Android TV, Android TV boxes and Android phones. It works with Stremio and follows along with Netflix and other apps on Android TV to automatically mute unwanted language while the picture keeps playing. Filter strength is set once on a parent's phone - off, mild, family or strict - and every linked television in the household follows it.",
+  "description": "Family Filter TV is a profanity filter for Android TV, Android TV boxes and Android phones, with an early-beta companion for Windows PCs. It works with Stremio and follows along with Netflix and other apps on Android TV to automatically mute unwanted language while the picture keeps playing. Filter strength is set once on a parent's phone - off, mild, family or strict - and every linked television in the household follows it.",
   "url": "https://familyfiltertv.com/",
   "downloadUrl": "https://play.google.com/store/apps/details?id=com.familyfiltertv.app",
   "installUrl": "https://familyfiltertv.com/download.html",
   "featureList": [
     "Runs on the television itself: Android TVs, Android TV boxes and Android phones",
+    "Windows PC companion (early beta): mutes the computer's sound while a flagged word is spoken",
     "Plays what you start in Stremio, with the swearing muted",
     "Follows along while you watch Netflix and other apps on Android TV",
-    "One filter setting on a parent's phone applies to every linked television",
-    "Link a television by typing in the short code it shows on screen",
+    "One filter setting on a parent's phone applies to every linked device",
+    "Link a television or PC by typing in the short code it shows on screen",
     "Filter strength: off, mild, family or strict",
     "Three devices included on one account, up to six",
     "Plays the next episode of the same download automatically",
@@ -54,7 +55,9 @@
   },
   "publisher": {
     "@type": "Organization",
-    "name": "Family Filter TV"
+    "name": "Family Filter TV",
+    "url": "https://familyfiltertv.com/",
+    "sameAs": ["https://www.youtube.com/@FamilyFilterTV"]
   }
 }
 </script>
@@ -84,7 +87,7 @@
       "name": "Which devices does it run on?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The television itself: Android TVs and Android TV boxes, as well as Android phones. There is no computer in the loop and nothing to cast. A few TV boxes do not offer the Play Store at all, and Family Filter TV can be installed directly on those."
+        "text": "The television itself: Android TVs and Android TV boxes, as well as Android phones. A few TV boxes do not offer the Play Store at all, and Family Filter TV can be installed directly on those. There is also an early-beta companion for Windows PCs that mutes the computer's sound while a flagged word is spoken, for anything you watch in a browser or an app on the PC."
       }
     },
     {
@@ -168,6 +171,7 @@
       <div class="actions">
         <a class="btn" href="https://play.google.com/store/apps/details?id=com.familyfiltertv.app">Get it on Google Play</a>
         <a class="btn-quiet" href="setup.html#quick-start">Quick start: set up in 5 minutes</a>
+        <a class="btn-quiet" href="download.html#windows">Windows PC (early beta)</a>
         <a class="btn-quiet" href="download.html">Other ways to install</a>
       </div>
     </div>
@@ -236,6 +240,8 @@
     </div>
     <p class="meter-note">Nothing is cut, blurred or skipped. The picture carries on and the sound
     comes straight back.</p>
+    <p class="meter-note"><a href="https://youtu.be/4Mra6u1hmuI">Watch the 30-second video</a>: a real
+    film line, with the one word muted.</p>
   </div>
 
 
@@ -266,9 +272,27 @@
       Family Filter TV mutes the swearing on the TV while you watch. Needs Family Filter TV on an
       Android TV or Google TV device and on an Android phone. English titles only for now. It does
       not work with the built-in apps of Samsung, LG and other non-Android TVs.</li>
+      <li><strong>Windows PCs</strong> have an <a href="download.html#windows">early-beta companion</a> that mutes the computer's sound for anything you watch in a browser or an app.</li>
       <li>Family Filter TV is not a streaming library and does not provide films, series or subscription access.</li>
       <li>Filtering availability can vary by title; the app tells you when filtering is unavailable.</li>
       <li>It filters profanity in speech. Violence and nudity are not currently filtered.</li>
+    </ul>
+  </div>
+
+  <h2 id="windows">Watching on a Windows PC?</h2>
+  <p>Family Filter TV now has an early-beta companion for Windows. It links to your household the
+  same way a TV does — type the short code into the phone app — and mutes the computer's sound while
+  a flagged word is spoken, for whatever you're watching in a browser or an app. You still pick the
+  show and set the filter from your phone.</p>
+  <div class="panel">
+    <div class="actions">
+      <a class="btn" href="download.html#windows">Get the Windows beta</a>
+    </div>
+    <ul>
+      <li>Windows 10 or 11. Installs for your user only, no admin prompt.</li>
+      <li>A PC counts as one of your household's devices, on the same subscription as your TVs.</li>
+      <li>It's an early beta — it checks the sound every couple of seconds, so help us test it and
+        tell us what to fix.</li>
     </ul>
   </div>
 
@@ -374,7 +398,8 @@
       <h3>Which devices does it run on?</h3>
       <p>The television itself — Android TVs and TV boxes — and Android phones. A few TV boxes
       don't offer the Play Store at all; <a href="download.html">install it directly</a> on
-      those.</p>
+      those. There's also an <a href="download.html#windows">early-beta companion for Windows
+      PCs</a>.</p>
     </div>
     <div>
       <h3>What does it play?</h3>
@@ -421,6 +446,7 @@
     <p>Family Filter TV is made by Jacques du Preez in South Africa.</p>
     <p><a href="mailto:jacquesjdupreez@gmail.com">jacquesjdupreez@gmail.com</a></p>
     <nav class="foot-nav" aria-label="Footer">
+      <a href="https://www.youtube.com/@FamilyFilterTV">YouTube</a>
       <a href="titles/index.html">Titles</a>
       <a href="download.html">Download</a>
       <a href="setup.html">Get set up</a>
