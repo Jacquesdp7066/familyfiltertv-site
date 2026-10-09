@@ -57,7 +57,7 @@ def nav(active, depth):
         return f'      <a href="{up}{href}"{current}>{label}</a>'
     links = [
         item("index.html", "Home", "home"),
-        item("titles/index.html", "Titles", "titles"),
+        item("titles/", "Titles", "titles"),
         item("download.html", "Download", "download"),
         item("setup.html", "Get set up", "setup"),
         item("support.html", "Support", "support"),
@@ -70,7 +70,7 @@ def nav(active, depth):
 def foot_nav(depth):
     up = "../" * depth
     links = [
-        f'      <a href="{up}titles/index.html">Titles</a>',
+        f'      <a href="{up}titles/">Titles</a>',
         f'      <a href="{up}download.html">Download</a>',
         f'      <a href="{up}setup.html">Get set up</a>',
         f'      <a href="{up}support.html">Support</a>',
@@ -115,7 +115,7 @@ def breadcrumb_html(depth, title=None):
     if title is None:
         parts.append('<span aria-current="page">Titles</span>')
     else:
-        parts.append(f'<a href="{up}titles/index.html">Titles</a>')
+        parts.append(f'<a href="{up}titles/">Titles</a>')
         parts.append(f'<span aria-current="page">{esc(title)}</span>')
     return '<nav class="breadcrumb muted" aria-label="Breadcrumb">' + ' &rsaquo; '.join(parts) + '</nav>'
 
