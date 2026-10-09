@@ -9,6 +9,10 @@ analysis export and Cinemeta metadata lookups) and emits:
   - sitemap.xml                updated with /titles/ + the 20 detail pages
   - llms.txt                   updated with a /titles/ entry
 
+Refresh from the analysis export (see refresh_titles):
+
+  tools/build_titles.py --refresh <ratings-export.json> [--accept-changes]
+
 Stdlib only. Re-running this script with unchanged data.json must produce
 no further changes (idempotent) — see tools/README or docs/SEO_TITLE_INDEX_TEST.md
 in the app repo for the verification protocol.
@@ -135,15 +139,12 @@ def breadcrumb_jsonld(items):
     }
 
 
+def category_keys(counts):
+    return [k for k in CATEGORY_ORDER if k in counts] + [k for k in counts if k not in CATEGORY_ORDER]
+
+
 def category_rows(counts, category_labels):
-    rows = []
-    for key in CATEGORY_ORDER:
-        if key in counts:
-            rows.append((category_labels.get(key, key), counts[key]))
-    for key, val in counts.items():
-        if key not in CATEGORY_ORDER:
-            rows.append((category_labels.get(key, key), val))
-    return rows
+    return [(category_labels.get(key, key), counts[key]) for key in category_keys(counts)]
 
 
 def language_summary(t, category_labels, limit=None):
@@ -160,23 +161,130 @@ def language_summary(t, category_labels, limit=None):
     return f"We counted {total} flagged {words} in the English subtitles of {name}: {cats}."
 
 
-def build_benchmark(export_path):
-    """Flagged-word totals for every usable film in the subtitle-analysis export.
+SKIP_RELEASE = re.compile(r"commentary|cd ?[12]\b|trailer|sample|\bextras?\b", re.I)
 
-    Same selection bar as the cohort (site PR #20): a good runtime fit, at least 400
-    subtitle lines, and no commentary/CD1/trailer/sample releases.
-    """
-    with open(export_path, "r") as f:
-        export = json.load(f)
-    skip = re.compile(r"commentary|cd ?[12]\b|trailer|sample|\bextras?\b", re.I)
-    totals = sorted(
-        sum(e["counts"].values())
-        for e in export
-        if (e.get("fit") or {}).get("classification") == "good"
+# Fields copied from an export record onto a title. computedAt is handled separately so a
+# page's date only moves when one of these actually changed.
+ANALYSIS_FIELDS = ("label", "counts", "profiles", "cueCount", "release", "terms", "timeline")
+
+
+def usable(e):
+    """The cohort's selection bar (site PR #20): a good runtime fit, at least 400 subtitle
+    lines, and no commentary/CD1/trailer/sample releases."""
+    return (
+        e.get("status") == "rated"
+        and (e.get("fit") or {}).get("classification") == "good"
         and (e.get("cueCount") or 0) >= 400
-        and not skip.search(e.get("release") or "")
+        and not SKIP_RELEASE.search(e.get("release") or "")
     )
+
+
+def build_benchmark(export):
+    """Flagged-word totals for every usable film in the subtitle-analysis export."""
+    totals = sorted(sum(e["counts"].values()) for e in export if usable(e))
     return {"filmCount": len(totals), "totals": totals}
+
+
+def refresh_titles(titles, export, accept_changes=False):
+    """Bring each title's analysis up to date with the export.
+
+    A change that would surprise a parent is held back for a human look instead of being
+    published: a different language level, or a total that moved by more than 10 words and
+    more than half. Pass accept_changes=True (--accept-changes) once someone has checked.
+    Returns (updated, held) lists of human-readable lines.
+    """
+    by_id = {e.get("videoId"): e for e in export}
+    updated, held = [], []
+    for t in titles:
+        e = by_id.get(t["videoId"])
+        if not e or not usable(e):
+            continue
+        new = {k: e[k] for k in ANALYSIS_FIELDS if k in e}
+        if all(t.get(k) == v for k, v in new.items()):
+            continue
+        old_total, new_total = t["totalFlagged"], sum(e["counts"].values())
+        delta = abs(new_total - old_total)
+        surprising = new["label"] != t["label"] or (delta > 10 and delta > 0.5 * max(old_total, 1))
+        line = f'{t["title"]}: {t["label"]} {old_total} -> {new["label"]} {new_total}'
+        if surprising and not accept_changes:
+            held.append(line)
+            continue
+        t.update(new)
+        t["labelText"] = new["label"].capitalize()
+        t["totalFlagged"] = new_total
+        t["computedAt"] = e["computedAt"]
+        updated.append(line)
+    return updated, held
+
+
+def mask_term(term, category):
+    """'f***' for display. Religious exclamations are ordinary words, so they stay readable."""
+    if category == "religious":
+        return term
+    return " ".join(w if len(w) <= 2 else w[0] + "*" * (len(w) - 1) for w in term.split(" "))
+
+
+def term_list(t, category):
+    terms = (t.get("terms") or {}).get(category) or {}
+    if not terms:
+        return ""
+    ordered = sorted(terms.items(), key=lambda kv: (-kv[1], kv[0]))
+    return " (" + ", ".join(f"{esc(mask_term(term, category))} {n}" for term, n in ordered) + ")"
+
+
+def minutes_label(index, bucket_ms):
+    size = bucket_ms // 60000
+    return f"{index * size} to {(index + 1) * size}"
+
+
+def timeline_section(t):
+    """When the language happens: first flagged word, first strong word, heaviest stretch."""
+    timeline = t.get("timeline")
+    if not timeline or not t["totalFlagged"] or not sum(timeline["words"]):
+        return ""
+    words, strong, bucket_ms = timeline["words"], timeline["strongProfanity"], timeline["bucketMs"]
+    name = esc(t["title"])
+    size = bucket_ms // 60000
+
+    def first(slots):
+        return next((i for i, n in enumerate(slots) if n), None)
+
+    def when(i):
+        return f"in the first {size} minutes" if i == 0 else f"between minute {minutes_label(i, bucket_ms).replace(' to ', ' and ')}"
+
+    lines = [f"The first flagged word in {name} comes {when(first(words))}."]
+    first_strong = first(strong)
+    if first_strong is None:
+        lines.append("There is no strong profanity anywhere in the film.")
+    else:
+        lines.append(f"The first strong profanity comes {when(first_strong)}.")
+    peak = max(range(len(words)), key=lambda i: (words[i], -i))
+    peak_words = "word" if words[peak] == 1 else "words"
+    lines.append(
+        f"The heaviest stretch is minute {minutes_label(peak, bucket_ms)}, with {words[peak]} flagged {peak_words}."
+    )
+    quiet = sum(1 for n in words if not n)
+    if quiet:
+        span = "ten" if size == 10 else str(size)
+        lines.append(f"{quiet} of the film's {len(words)} {span}-minute stretches have none at all.")
+
+    body = "\n".join(f"    <p>{ln}</p>" for ln in lines)
+    rows = "\n".join(
+        f"          <tr><td>{minutes_label(i, bucket_ms)}</td><td>{words[i]}</td><td>{strong[i]}</td></tr>"
+        for i in range(len(words))
+    )
+    return f'''  <section aria-labelledby="timeline-heading">
+    <h2 id="timeline-heading">When the swearing happens in {name}</h2>
+{body}
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Minutes</th><th>Flagged words</th><th>Strong profanity</th></tr></thead>
+        <tbody>
+{rows}
+        </tbody>
+      </table>
+    </div>
+  </section>'''
 
 
 def comparison_section(t, benchmark):
@@ -232,11 +340,12 @@ def comparison_section(t, benchmark):
 
 
 def analysis_panel(t, category_labels):
-    rows = category_rows(t["counts"], category_labels)
+    keys = category_keys(t["counts"])
     last_analysed = t["computedAt"][:10]
-    if rows:
+    if keys:
         cat_html = "\n".join(
-            f'      <li>{esc(label)}: {val}</li>' for label, val in rows
+            f'      <li>{esc(category_labels.get(key, key))}: {t["counts"][key]}{term_list(t, key)}</li>'
+            for key in keys
         )
         cat_block = f'''    <h3>Flagged by category</h3>
     <ul>
@@ -330,6 +439,9 @@ def title_page_html(t, by_id, category_labels, benchmark=None):
 
     breadcrumb = breadcrumb_html(2, title=name)
     related = related_section(t, by_id, "../")
+    detail = "\n\n".join(
+        part for part in (timeline_section(t), comparison_section(t, benchmark)) if part
+    )
 
     return f'''<!doctype html>
 <html lang="en">
@@ -373,7 +485,7 @@ def title_page_html(t, by_id, category_labels, benchmark=None):
 
 {analysis_panel(t, category_labels)}
 
-{comparison_section(t, benchmark)}
+{detail}
 
   <section aria-labelledby="can-filter-heading">
     <h2 id="can-filter-heading">What Family Filter TV can filter</h2>
@@ -558,11 +670,20 @@ def main():
     with open(DATA_PATH, "r") as f:
         data = json.load(f)
 
-    # --benchmark <ratings-export.json> refreshes the all-films comparison data
-    if "--benchmark" in sys.argv:
-        data["benchmark"] = build_benchmark(sys.argv[sys.argv.index("--benchmark") + 1])
+    # --refresh <ratings-export.json>: update each title's analysis and the all-films
+    # comparison data from the export. --benchmark is the older name for the same thing.
+    flag = next((a for a in ("--refresh", "--benchmark") if a in sys.argv), None)
+    if flag:
+        with open(sys.argv[sys.argv.index(flag) + 1], "r") as f:
+            export = json.load(f)
+        updated, held = refresh_titles(data["titles"], export, "--accept-changes" in sys.argv)
+        data["benchmark"] = build_benchmark(export)
         with open(DATA_PATH, "w") as f:
             f.write(json.dumps(data, indent=2, ensure_ascii=False))
+        for line in updated:
+            print(f"updated  {line}")
+        for line in held:
+            print(f"HELD     {line}  (check it, then rerun with --accept-changes)")
 
     titles = data["titles"]
     category_labels = data["categoryLabels"]
