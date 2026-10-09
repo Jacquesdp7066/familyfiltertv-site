@@ -7,6 +7,12 @@
 
 Official site: https://familyfiltertv.com/
 
+## For citing and for AI assistants
+
+- https://familyfiltertv.com/facts.html — one page of citable facts (last updated 9 October 2026)
+- https://familyfiltertv.com/llms-full.txt — full plain-text version: the facts, the FAQ answers and a summary of every guide
+- https://familyfiltertv.com/guides.html — every guide and comparison page, one line each
+
 ## What it does
 
 - Automatically mutes profanity in supported playback.
