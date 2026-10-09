@@ -137,5 +137,73 @@ class Refresh(unittest.TestCase):
             self.assertEqual((t, updated, held), (TITLE, [], []))
 
 
+class UntrustedExport(unittest.TestCase):
+    """The export comes from the database, so nothing in it reaches a page unchecked."""
+
+    HOSTILE = "<script>alert(1)</script>"
+
+    def assert_rejected(self, record):
+        titles = [copy.deepcopy(TITLE)]
+        updated, held = bt.refresh_titles(titles, [record], accept_changes=True)
+        self.assertEqual(updated, [])
+        self.assertEqual(len(held), 1)
+        self.assertIn("REJECTED", held[0])
+        self.assertEqual(titles[0], TITLE)
+
+    def test_a_well_formed_record_has_no_problems(self):
+        record = export_record(
+            terms={"strong_profanity": {"fuck": 2}},
+            timeline={"bucketMs": 600000, "words": [2, 4], "strongProfanity": [2, 0]},
+        )
+        self.assertEqual(bt.analysis_problems(record), [])
+
+    def test_markup_in_a_count_is_rejected(self):
+        self.assert_rejected(export_record(counts={"mild_profanity": self.HOSTILE}))
+
+    def test_an_unknown_category_is_rejected(self):
+        self.assert_rejected(export_record(counts={self.HOSTILE: 4}))
+
+    def test_markup_in_a_profile_name_is_rejected(self):
+        self.assert_rejected(export_record(profiles={self.HOSTILE: 1, "family": 5, "strict": 5}))
+
+    def test_markup_in_a_profile_count_is_rejected(self):
+        self.assert_rejected(export_record(profiles={"mild": self.HOSTILE, "family": 5, "strict": 5}))
+
+    def test_markup_in_the_line_count_is_rejected(self):
+        self.assert_rejected(export_record(cueCount=self.HOSTILE))
+
+    def test_an_unknown_language_level_is_rejected(self):
+        self.assert_rejected(export_record(label=self.HOSTILE))
+
+    def test_markup_in_a_term_count_is_rejected(self):
+        self.assert_rejected(export_record(terms={"strong_profanity": {"fuck": self.HOSTILE}}))
+
+    def test_markup_in_the_timeline_is_rejected(self):
+        self.assert_rejected(export_record(timeline={"bucketMs": 600000, "words": [self.HOSTILE], "strongProfanity": [0]}))
+        self.assert_rejected(export_record(timeline={"bucketMs": self.HOSTILE, "words": [1], "strongProfanity": [0]}))
+
+    def test_markup_in_the_date_is_rejected(self):
+        self.assert_rejected(export_record(computedAt=self.HOSTILE, counts={"mild_profanity": 4}))
+
+    def test_a_true_false_value_is_not_a_count(self):
+        self.assert_rejected(export_record(counts={"mild_profanity": True}))
+
+    def test_a_malformed_record_is_left_out_of_the_comparison_data(self):
+        good = export_record()
+        bad = export_record(videoId="tt2", counts={"mild_profanity": self.HOSTILE})
+        self.assertEqual(bt.build_benchmark([good, bad]), {"filmCount": 1, "totals": [6]})
+
+    def test_a_term_name_with_markup_is_escaped_on_the_page(self):
+        t = dict(TITLE, terms={"religious": {self.HOSTILE: 1}})
+        html = bt.analysis_panel(t, LABELS)
+        self.assertNotIn("<script>", html)
+        self.assertIn("&lt;script&gt;", html)
+
+    def test_a_title_file_with_a_malformed_analysis_stops_the_build(self):
+        with self.assertRaises(SystemExit):
+            bt.check_titles([dict(TITLE, counts={"mild_profanity": self.HOSTILE})])
+        bt.check_titles([TITLE])
+
+
 if __name__ == "__main__":
     unittest.main()

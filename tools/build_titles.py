@@ -44,6 +44,11 @@ def esc(s):
     return sax.escape(str(s))
 
 
+def jsonld(obj):
+    """JSON for a <script type="application/ld+json"> block; "</" cannot end the element."""
+    return json.dumps(obj, indent=2).replace("</", "<\\/")
+
+
 def runtime_to_iso(runtime):
     if not runtime:
         return None
@@ -168,20 +173,99 @@ SKIP_RELEASE = re.compile(r"commentary|cd ?[12]\b|trailer|sample|\bextras?\b", r
 ANALYSIS_FIELDS = ("label", "counts", "profiles", "cueCount", "release", "terms", "timeline")
 
 
+LABELS = ("clean", "mild", "moderate", "strong")
+PROFILE_KEYS = ("mild", "family", "strict")
+COMPUTED_AT = re.compile(r"\d{4}-\d{2}-\d{2}T[\d:.]+Z")
+SLUG = re.compile(r"[a-z0-9]+(-[a-z0-9]+)*")
+
+
+def is_count(v):
+    return isinstance(v, int) and not isinstance(v, bool) and v >= 0
+
+
+def count_map(v, keys=None):
+    return (
+        isinstance(v, dict)
+        and all(isinstance(k, str) and is_count(n) for k, n in v.items())
+        and (keys is None or all(k in keys for k in v))
+    )
+
+
+def analysis_problems(r):
+    """Why a record's analysis fields must not be published, or [] if they are well formed.
+
+    The export is read from the database and these values are written into page HTML, so
+    anything that is not exactly the expected shape is refused rather than escaped and hoped
+    about. Messages name the field only; they never echo the offending value.
+    """
+    problems = []
+    if r.get("label") not in LABELS:
+        problems.append("label is not a known language level")
+    if not count_map(r.get("counts"), CATEGORY_ORDER):
+        problems.append("counts is not a map of known categories to whole numbers")
+    profiles = r.get("profiles")
+    if not count_map(profiles) or sorted(profiles) != sorted(PROFILE_KEYS):
+        problems.append("profiles is not exactly mild/family/strict whole numbers")
+    if not is_count(r.get("cueCount")) or r["cueCount"] == 0:
+        problems.append("cueCount is not a positive whole number")
+    if not isinstance(r.get("release", ""), str):
+        problems.append("release is not text")
+    if not isinstance(r.get("computedAt"), str) or not COMPUTED_AT.fullmatch(r["computedAt"]):
+        problems.append("computedAt is not a timestamp")
+    if "terms" in r:
+        terms = r["terms"]
+        if not isinstance(terms, dict) or not all(
+            k in CATEGORY_ORDER and count_map(v) for k, v in terms.items()
+        ):
+            problems.append("terms is not known categories mapping words to whole numbers")
+    if "timeline" in r:
+        tl = r["timeline"]
+        ok = (
+            isinstance(tl, dict)
+            and is_count(tl.get("bucketMs"))
+            and tl["bucketMs"] > 0
+            and tl["bucketMs"] % 60000 == 0
+            and isinstance(tl.get("words"), list)
+            and isinstance(tl.get("strongProfanity"), list)
+            and len(tl["words"]) == len(tl["strongProfanity"])
+            and all(is_count(n) for n in tl["words"] + tl["strongProfanity"])
+        )
+        if not ok:
+            problems.append("timeline is not whole-minute slots of whole numbers")
+    return problems
+
+
+def check_titles(titles):
+    """Stop the build if titles/data.json holds anything that is not safe to publish."""
+    bad = []
+    for t in titles:
+        problems = analysis_problems(t)
+        if not isinstance(t.get("slug"), str) or not SLUG.fullmatch(t["slug"]):
+            problems.append("slug is not lowercase words joined by hyphens")
+        if not is_count(t.get("year")):
+            problems.append("year is not a whole number")
+        if not isinstance(t.get("title"), str) or not t["title"]:
+            problems.append("title is missing")
+        bad += [f'{t.get("videoId")}: {p}' for p in problems]
+    if bad:
+        sys.exit("titles/data.json is not safe to publish:\n  " + "\n  ".join(bad))
+
+
 def usable(e):
-    """The cohort's selection bar (site PR #20): a good runtime fit, at least 400 subtitle
-    lines, and no commentary/CD1/trailer/sample releases."""
+    """The cohort's selection bar (site PR #20): a well-formed rated record with a good runtime
+    fit, at least 400 subtitle lines, and no commentary/CD1/trailer/sample releases."""
     return (
         e.get("status") == "rated"
+        and not analysis_problems(e)
         and (e.get("fit") or {}).get("classification") == "good"
-        and (e.get("cueCount") or 0) >= 400
+        and e["cueCount"] >= 400
         and not SKIP_RELEASE.search(e.get("release") or "")
     )
 
 
 def build_benchmark(export):
     """Flagged-word totals for every usable film in the subtitle-analysis export."""
-    totals = sorted(sum(e["counts"].values()) for e in export if usable(e))
+    totals = sorted(sum(e["counts"].values()) for e in export if isinstance(e, dict) and usable(e))
     return {"filmCount": len(totals), "totals": totals}
 
 
@@ -191,13 +275,20 @@ def refresh_titles(titles, export, accept_changes=False):
     A change that would surprise a parent is held back for a human look instead of being
     published: a different language level, or a total that moved by more than 10 words and
     more than half. Pass accept_changes=True (--accept-changes) once someone has checked.
+    A malformed record is never applied, whatever the flag; its line starts with REJECTED.
     Returns (updated, held) lists of human-readable lines.
     """
-    by_id = {e.get("videoId"): e for e in export}
+    by_id = {e.get("videoId"): e for e in export if isinstance(e, dict)}
     updated, held = [], []
     for t in titles:
         e = by_id.get(t["videoId"])
-        if not e or not usable(e):
+        if not isinstance(e, dict) or e.get("status") != "rated":
+            continue
+        problems = analysis_problems(e)
+        if problems:
+            held.append(f'REJECTED {t["title"]}: {problems[0]}')
+            continue
+        if not usable(e):
             continue
         new = {k: e[k] for k in ANALYSIS_FIELDS if k in e}
         if all(t.get(k) == v for k, v in new.items()):
@@ -229,7 +320,7 @@ def term_list(t, category):
     if not terms:
         return ""
     ordered = sorted(terms.items(), key=lambda kv: (-kv[1], kv[0]))
-    return " (" + ", ".join(f"{esc(mask_term(term, category))} {n}" for term, n in ordered) + ")"
+    return " (" + ", ".join(f"{esc(mask_term(term, category))} {esc(n)}" for term, n in ordered) + ")"
 
 
 def minutes_label(index, bucket_ms):
@@ -270,7 +361,7 @@ def timeline_section(t):
 
     body = "\n".join(f"    <p>{ln}</p>" for ln in lines)
     rows = "\n".join(
-        f"          <tr><td>{minutes_label(i, bucket_ms)}</td><td>{words[i]}</td><td>{strong[i]}</td></tr>"
+        f"          <tr><td>{esc(minutes_label(i, bucket_ms))}</td><td>{esc(words[i])}</td><td>{esc(strong[i])}</td></tr>"
         for i in range(len(words))
     )
     return f'''  <section aria-labelledby="timeline-heading">
@@ -344,7 +435,7 @@ def analysis_panel(t, category_labels):
     last_analysed = t["computedAt"][:10]
     if keys:
         cat_html = "\n".join(
-            f'      <li>{esc(category_labels.get(key, key))}: {t["counts"][key]}{term_list(t, key)}</li>'
+            f'      <li>{esc(category_labels.get(key, key))}: {esc(t["counts"][key])}{term_list(t, key)}</li>'
             for key in keys
         )
         cat_block = f'''    <h3>Flagged by category</h3>
@@ -357,7 +448,7 @@ def analysis_panel(t, category_labels):
     profiles = t["profiles"]
     cue_count = t["cueCount"]
     profile_html = "\n".join(
-        f'      <li>{name.capitalize()} filter: {muted} of {cue_count} subtitle lines muted</li>'
+        f'      <li>{esc(name.capitalize())} filter: {esc(muted)} of {esc(cue_count)} subtitle lines muted</li>'
         for name, muted in profiles.items()
     )
 
@@ -365,7 +456,7 @@ def analysis_panel(t, category_labels):
     <h2 id="ffa-heading">How much swearing is in {esc(t["title"])}?</h2>
     <p>{esc(language_summary(t, category_labels))}</p>
     <p><strong>Language level:</strong> {esc(t["labelText"])}</p>
-    <p><strong>Total flagged words:</strong> {t["totalFlagged"]}</p>
+    <p><strong>Total flagged words:</strong> {esc(t["totalFlagged"])}</p>
 {cat_block}
     <h3>Lines muted per filter profile</h3>
     <ul>
@@ -467,10 +558,10 @@ def title_page_html(t, by_id, category_labels, benchmark=None):
 <link rel="canonical" href="{canonical}">
 <link rel="stylesheet" href="../../style.css">
 <script type="application/ld+json">
-{json.dumps(jsonld_work, indent=2)}
+{jsonld(jsonld_work)}
 </script>
 <script type="application/ld+json">
-{json.dumps(jsonld_breadcrumb, indent=2)}
+{jsonld(jsonld_breadcrumb)}
 </script>
 </head>
 <body>
@@ -546,7 +637,7 @@ def index_page_html(titles, category_labels):
             f'      <li class="title-row" data-search="{esc(t["title"].lower())}">'
             f'<a href="{t["slug"]}/">{esc(t["title"])} ({t["year"]})</a> '
             f'<span class="muted">&mdash; {esc(t["labelText"])}, '
-            f'{t["totalFlagged"]} flagged {"word" if t["totalFlagged"] == 1 else "words"}</span></li>'
+            f'{esc(t["totalFlagged"])} flagged {"word" if t["totalFlagged"] == 1 else "words"}</span></li>'
         )
 
     breadcrumb = breadcrumb_html(1, title=None)
@@ -575,7 +666,7 @@ def index_page_html(titles, category_labels):
 <link rel="canonical" href="{canonical}">
 <link rel="stylesheet" href="../style.css">
 <script type="application/ld+json">
-{json.dumps(jsonld_breadcrumb, indent=2)}
+{jsonld(jsonld_breadcrumb)}
 </script>
 </head>
 <body>
@@ -683,9 +774,13 @@ def main():
         for line in updated:
             print(f"updated  {line}")
         for line in held:
-            print(f"HELD     {line}  (check it, then rerun with --accept-changes)")
+            if line.startswith("REJECTED"):
+                print(f"{line}  (malformed in the export; not applied)")
+            else:
+                print(f"HELD     {line}  (check it, then rerun with --accept-changes)")
 
     titles = data["titles"]
+    check_titles(titles)
     category_labels = data["categoryLabels"]
     benchmark = data.get("benchmark")
     by_id = {t["videoId"]: t for t in titles}
