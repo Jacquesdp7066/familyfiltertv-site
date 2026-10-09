@@ -9,3 +9,5 @@ Disallow: /apk/
 Disallow: /admin.html
 
 Sitemap: https://familyfiltertv.com/sitemap.xml
+
+# IndexNow key (Bing, Yandex, Seznam, Naver): https://familyfiltertv.com/4ad2adafa64621f92399c85be15f01bb.txt
