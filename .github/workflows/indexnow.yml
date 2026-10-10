@@ -1,0 +1,24 @@
+name: IndexNow
+
+# After a push to main, wait for GitHub Pages to publish, then tell
+# IndexNow search engines about every URL in sitemap.xml.
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: indexnow
+  cancel-in-progress: true
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Wait for GitHub Pages to publish
+        run: sleep 180
+      - name: Submit URLs to IndexNow
+        run: python3 tools/indexnow.py
