@@ -52,10 +52,14 @@ does not mute anything — Family Filter TV is the app that mutes.
 - https://familyfiltertv.com/android-tv-profanity-filter.html — Android TV profanity filtering
 - https://familyfiltertv.com/profanity-filter-android-tv.html — how Android TV filtering works and its limits
 - https://familyfiltertv.com/stremio-profanity-filter.html — muting swearing in Stremio, step-by-step
-- https://familyfiltertv.com/titles/ — title-by-title family viewing guides, from our own subtitle analysis
+- https://familyfiltertv.com/titles/ — title-by-title parents guides to swearing and language, from our own subtitle analysis
 - https://familyfiltertv.com/mute-swearing-on-tv.html — muting unwanted language on TV
 - https://familyfiltertv.com/mute-swearing-on-netflix.html — how to mute swearing on Netflix on Android TV and Google TV (not affiliated with Netflix)
 - https://familyfiltertv.com/vidangel-clearplay-alternative.html — comparison with VidAngel and ClearPlay
+- https://familyfiltertv.com/tvguardian-alternative.html — comparison with TVGuardian
+- https://familyfiltertv.com/cleancut-alternative-android-tv.html — CleanCut is for Apple TV; the Android TV and Google TV option
+- https://familyfiltertv.com/enjoy-movies-your-way-alternative.html — comparison with Enjoy Movies Your Way
+- https://familyfiltertv.com/profanity-filter-browser-extension-vs-tv.html — browser extension versus television profanity filtering
 - https://familyfiltertv.com/download.html — download and installation options
 - https://familyfiltertv.com/setup.html — setup walkthrough
 - https://familyfiltertv.com/stremio.html — the Language Ratings Stremio add-on
