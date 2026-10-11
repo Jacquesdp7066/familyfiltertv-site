@@ -21,7 +21,7 @@ Official site: https://familyfiltertv.com/
 - It is not a streaming library and does not provide films, series or subscription access.
 - It does not currently filter violence or nudity.
 - Filtering availability varies by title, and the app tells the viewer when filtering is unavailable.
-- It does not currently filter playback inside subscription streaming apps.
+- It does not run inside or change subscription streaming apps. On Android TV and Google TV it follows along with what is playing and briefly lowers the TV sound.
 
 ## Price
 
@@ -49,7 +49,6 @@ does not mute anything — Family Filter TV is the app that mutes.
 ## Pages
 
 - https://familyfiltertv.com/ — product overview and pricing
-- https://familyfiltertv.com/android-tv-profanity-filter.html — Android TV profanity filtering
 - https://familyfiltertv.com/profanity-filter-android-tv.html — how Android TV filtering works and its limits
 - https://familyfiltertv.com/stremio-profanity-filter.html — muting swearing in Stremio, step-by-step
 - https://familyfiltertv.com/install.html — step-by-step install guides: Android TV and Google TV, Android phone and Windows, from Google Play or directly with the APK
