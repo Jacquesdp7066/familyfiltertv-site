@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TikTok connected — Family Filter TV</title>
+<meta name="description" content="Result of connecting the Family Filter TV TikTok account.">
+<meta name="robots" content="noindex,follow">
+<meta name="theme-color" content="#0B0C0F">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="assets/icon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta property="og:url" content="https://familyfiltertv.com/tiktok-callback.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="TikTok connected — Family Filter TV">
+<meta property="og:description" content="Result of connecting the Family Filter TV TikTok account.">
+<meta property="og:image" content="https://familyfiltertv.com/assets/feature-graphic.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap">
+<link rel="canonical" href="https://familyfiltertv.com/tiktok-callback.html">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <img src="assets/icon-192.png" alt="" width="30" height="30">
+      Family Filter TV
+    </a>
+    <nav class="site-nav" aria-label="Pages">
+      <a href="index.html">Home</a>
+      <a href="titles/">Titles</a>
+      <a href="download.html">Download</a>
+      <a href="setup.html">Get set up</a>
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1 class="page-title">TikTok</h1>
+  <p class="lead" id="status">Checking the result…</p>
+  <p id="detail"></p>
+  <div class="actions"><a class="btn-quiet" href="tiktok-publisher.html">Back to the TikTok publisher</a></div>
+
+</main>
+<script>
+(function(){
+  var q=new URLSearchParams(location.search),s=document.getElementById('status'),d=document.getElementById('detail'),saved=null;
+  try{saved=sessionStorage.getItem('tiktok_state')}catch(e){}
+  if(q.get('error')){s.textContent='TikTok did not connect.';d.textContent=(q.get('error_description')||q.get('error'));return}
+  if(!q.get('code')){s.textContent='Nothing to show here.';return}
+  if(!saved||saved!==q.get('state')){s.textContent='This sign-in did not start on our publisher page, so it was ignored.';return}
+  s.textContent='TikTok account connected.';
+  d.innerHTML='Copy this one-time code into the upload tool on the team computer: <code id="code"></code>';
+  document.getElementById('code').textContent=q.get('code');
+  history.replaceState(null,'',location.pathname);
+})();
+</script>
+</body>
+</html>

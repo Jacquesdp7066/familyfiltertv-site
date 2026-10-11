@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TikTok publisher — Family Filter TV</title>
+<meta name="description" content="Connect the Family Filter TV TikTok account so our short videos can be sent to it as drafts.">
+<meta name="robots" content="noindex,follow">
+<meta name="theme-color" content="#0B0C0F">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="assets/icon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta property="og:url" content="https://familyfiltertv.com/tiktok-publisher.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="TikTok publisher — Family Filter TV">
+<meta property="og:description" content="Connect the Family Filter TV TikTok account so our short videos can be sent to it as drafts.">
+<meta property="og:image" content="https://familyfiltertv.com/assets/feature-graphic.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap">
+<link rel="canonical" href="https://familyfiltertv.com/tiktok-publisher.html">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <img src="assets/icon-192.png" alt="" width="30" height="30">
+      Family Filter TV
+    </a>
+    <nav class="site-nav" aria-label="Pages">
+      <a href="index.html">Home</a>
+      <a href="titles/">Titles</a>
+      <a href="download.html">Download</a>
+      <a href="setup.html">Get set up</a>
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1 class="page-title">TikTok publisher</h1>
+  <p class="lead">This page is only for the Family Filter TV team. It connects our own TikTok account so a finished video can be sent to it as a draft.</p>
+  <p>We ask for two permissions: <strong>user.info.basic</strong> (to show which account is connected) and <strong>video.upload</strong> (to put one video in that account's drafts). We never post without the account owner opening the draft in TikTok and publishing it. No other TikTok user's data is read or stored.</p>
+  <div class="actions"><button class="btn" id="login" type="button">Log in with TikTok</button></div>
+
+</main>
+<script>
+(function(){
+  var state=Array.from(crypto.getRandomValues(new Uint8Array(12))).map(function(b){return b.toString(16).padStart(2,'0')}).join('');
+  try{sessionStorage.setItem('tiktok_state',state)}catch(e){}
+  document.getElementById('login').addEventListener('click',function(){
+    var p=new URLSearchParams({client_key:(new URLSearchParams(location.search).get('env')==='sandbox'?'sbawjk4la5mgidfyhg':'aws0vs8g4rm8rmr1'),scope:'user.info.basic,video.upload',response_type:'code',redirect_uri:'https://familyfiltertv.com/tiktok-callback.html',state:state});
+    location.href='https://www.tiktok.com/v2/auth/authorize/?'+p.toString();
+  });
+})();
+</script>
+</body>
+</html>
