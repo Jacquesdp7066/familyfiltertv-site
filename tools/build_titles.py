@@ -21,6 +21,7 @@ import bisect
 import json
 import os
 import re
+import statistics
 import sys
 import xml.sax.saxutils as sax
 
@@ -32,12 +33,28 @@ SITE = "https://familyfiltertv.com"
 
 # Date the page template last changed. Sitemap lastmod is the later of this and a
 # title's analysis date, so a wording change gets recrawled.
-TEMPLATE_UPDATED = "2026-10-09"
+TEMPLATE_UPDATED = "2026-10-11"
 
 CATEGORY_ORDER = [
     "strong_profanity", "mild_profanity", "religious", "crude",
     "sexual_explicit", "suggestive", "slurs",
 ]
+
+METHODOLOGY_SLUG = "methodology"
+TITLE_LIMIT = 65  # longest <title> that keeps the " | Family Filter TV" suffix
+
+# Which categories each filter profile mutes. Mirrors addon/src/profile.ts (itself a port of the
+# app's core Profile.kt), so the pages explain the same profiles the app applies.
+_MILD = ("strong_profanity", "slurs", "sexual_explicit")
+_FAMILY = _MILD + ("mild_profanity", "religious")
+PROFILE_CATEGORIES = {"mild": _MILD, "family": _FAMILY, "strict": tuple(CATEGORY_ORDER)}
+
+PUBLISHER = {
+    "@type": "Organization",
+    "name": "Family Filter TV",
+    "url": f"{SITE}/",
+    "logo": {"@type": "ImageObject", "url": f"{SITE}/assets/icon-192.png"},
+}
 
 
 def esc(s):
@@ -242,6 +259,8 @@ def check_titles(titles):
         problems = analysis_problems(t)
         if not isinstance(t.get("slug"), str) or not SLUG.fullmatch(t["slug"]):
             problems.append("slug is not lowercase words joined by hyphens")
+        elif t["slug"] == METHODOLOGY_SLUG:
+            problems.append("slug is reserved for the methodology page")
         if not is_count(t.get("year")):
             problems.append("year is not a whole number")
         if not isinstance(t.get("title"), str) or not t["title"]:
@@ -336,6 +355,17 @@ def minutes_label(index, bucket_ms):
     return f"{index * size} to {(index + 1) * size}"
 
 
+def first_slot(slots):
+    return next((i for i, n in enumerate(slots) if n), None)
+
+
+def slot_when(i, bucket_ms):
+    size = bucket_ms // 60000
+    if i == 0:
+        return f"in the first {size} minutes"
+    return f"between minute {minutes_label(i, bucket_ms).replace(' to ', ' and ')}"
+
+
 def timeline_section(t):
     """When the language happens: first flagged word, first strong word, heaviest stretch."""
     timeline = t.get("timeline")
@@ -345,14 +375,9 @@ def timeline_section(t):
     name = esc(t["title"])
     size = bucket_ms // 60000
 
-    def first(slots):
-        return next((i for i, n in enumerate(slots) if n), None)
-
-    def when(i):
-        return f"in the first {size} minutes" if i == 0 else f"between minute {minutes_label(i, bucket_ms).replace(' to ', ' and ')}"
-
-    lines = [f"The first flagged word in {name} comes {when(first(words))}."]
-    first_strong = first(strong)
+    when = lambda i: slot_when(i, bucket_ms)  # noqa: E731
+    lines = [f"The first flagged word in {name} comes {when(first_slot(words))}."]
+    first_strong = first_slot(strong)
     if first_strong is None:
         lines.append("There is no strong profanity anywhere in the film.")
     else:
@@ -386,35 +411,45 @@ def timeline_section(t):
   </section>'''
 
 
+def rank_sentence(t, benchmark):
+    """Where the film's total sits among every film we have analysed, in plain text."""
+    totals = benchmark["totals"]
+    n = benchmark["filmCount"]
+    total = t["totalFlagged"]
+    name = t["title"]
+    if total == 0:
+        clean = bisect.bisect_right(totals, 0)
+        return (
+            f"{name} is one of {clean} films with no flagged language, out of the {n} "
+            f"films we have analysed."
+        )
+    below = 100 * bisect.bisect_left(totals, total) / n
+    above = 100 * (n - bisect.bisect_right(totals, total)) / n
+    if below >= above:
+        return f"{name} has more flagged language than {min(99, round(below))}% of the {n} films we have analysed."
+    return f"{name} has less flagged language than {min(99, round(above))}% of the {n} films we have analysed."
+
+
+def typical_sentence(benchmark):
+    """The middle and the average film's total, so a single count has something to sit against."""
+    totals = benchmark["totals"]
+    median = statistics.median(totals)
+    mean = sum(totals) / len(totals)
+    return (
+        f"The middle film in our analysis has {median:g} flagged words and the average is "
+        f"{mean:.0f} (a few very heavy films pull the average up)."
+    )
+
+
 def comparison_section(t, benchmark):
     """How this film's language compares with every film we have analysed."""
     if not benchmark:
         return ""
-    totals = benchmark["totals"]
-    n = benchmark["filmCount"]
     total = t["totalFlagged"]
     name = esc(t["title"])
-    lines = []
+    lines = [rank_sentence(t, benchmark), typical_sentence(benchmark)]
 
-    if total == 0:
-        clean = bisect.bisect_right(totals, 0)
-        lines.append(
-            f"{name} is one of {clean} films with no flagged language, out of the {n} "
-            f"films we have analysed."
-        )
-    else:
-        below = 100 * bisect.bisect_left(totals, total) / n
-        above = 100 * (n - bisect.bisect_right(totals, total)) / n
-        if below >= above:
-            lines.append(
-                f"{name} has more flagged language than {min(99, round(below))}% of the {n} "
-                f"films we have analysed."
-            )
-        else:
-            lines.append(
-                f"{name} has less flagged language than {min(99, round(above))}% of the {n} "
-                f"films we have analysed."
-            )
+    if total:
         m = re.search(r"(\d+)", str(t.get("runtime") or ""))
         if m:
             per_hour = total / (int(m.group(1)) / 60)
@@ -431,7 +466,7 @@ def comparison_section(t, benchmark):
             f"so the rest of the dialogue plays as normal."
         )
 
-    body = "\n".join(f"    <p>{ln}</p>" for ln in lines)
+    body = "\n".join(f"    <p>{esc(ln)}</p>" for ln in lines)
     return f'''  <section aria-labelledby="compare-heading">
     <h2 id="compare-heading">How {name} compares</h2>
 {body}
@@ -496,39 +531,326 @@ def related_section(t, by_id, depth_up):
   </section>'''
 
 
+def plural(n, word):
+    return f"{n} {word}{'' if n == 1 else 's'}"
+
+
+def join_words(items):
+    """'a', 'a and b', 'a, b and c'."""
+    items = list(items)
+    return items[0] if len(items) == 1 else ", ".join(items[:-1]) + " and " + items[-1]
+
+
+def span_word(bucket_ms):
+    size = bucket_ms // 60000
+    return "ten" if size == 10 else str(size)
+
+
+def seo_title(t):
+    """What the page is called in search results. Count-first: that is the question people ask."""
+    name, year = t["title"], t["year"]
+    if t["totalFlagged"]:
+        head = f"How Many Swear Words in {name} ({year})? Parents Guide"
+    else:
+        head = f"Does {name} ({year}) Have Any Swearing? Parents Guide"
+    full = f"{head} | Family Filter TV"
+    short = head.removesuffix(" Parents Guide")
+    # Longest form that fits; a long film name keeps the question and drops the rest.
+    return next((c for c in (full, head) if len(c) <= TITLE_LIMIT), short)
+
+
+def seo_h1(t):
+    name, year = t["title"], t["year"]
+    if t["totalFlagged"]:
+        return f"How many swear words are in {name} ({year})?"
+    return f"Does {name} ({year}) have any swearing?"
+
+
+def fword_forms(t):
+    """[(masked term, count)] for every flagged term that contains the F-word, or None when the
+    record carries no per-word detail to answer from."""
+    terms = t.get("terms")
+    if terms is None:
+        return None if t["totalFlagged"] else []
+    forms = {}
+    for category, words in terms.items():
+        for term, n in words.items():
+            if "fuck" in term:
+                masked = mask_term(term, category)
+                forms[masked] = forms.get(masked, 0) + n  # masked forms of equal length merge
+    return sorted(forms.items(), key=lambda f: (-f[1], f[0]))
+
+
+def fword_count(t):
+    forms = fword_forms(t)
+    return None if forms is None else sum(n for _, n in forms)
+
+
+def answer_lead(t):
+    """The number first: (sentence, detail line). Everything comes from the record."""
+    name, year, total, cues = t["title"], t["year"], t["totalFlagged"], t["cueCount"]
+    if total:
+        sentence = (
+            f"{name} ({year}) has {plural(total, 'flagged word')} in its English subtitles, "
+            f"counted across {cues:,} subtitle lines."
+        )
+    else:
+        sentence = (
+            f"{name} ({year}) has no flagged swearing in its English subtitles: "
+            f"0 flagged words across {cues:,} subtitle lines."
+        )
+    detail = f"Strong profanity: {t['counts'].get('strong_profanity', 0)}."
+    fwords = fword_count(t)
+    if fwords is not None:
+        detail += f" F-word: {fwords}."
+    return sentence, detail
+
+
+def seo_description(t):
+    name, year, total, cues = t["title"], t["year"], t["totalFlagged"], t["cueCount"]
+    if not total:
+        return (
+            f"Does {name} ({year}) have any swearing? No: 0 flagged words in {cues:,} English "
+            f"subtitle lines. Parents guide with what we checked and how it compares."
+        )
+    detail = f"strong profanity: {t['counts'].get('strong_profanity', 0)}"
+    fwords = fword_count(t)
+    if fwords is not None:
+        detail += f", F-word: {fwords}"
+    return (
+        f"How many swear words are in {name} ({year})? {plural(total, 'flagged word')} in the "
+        f"English subtitles ({detail}). Parents guide with the count by category."
+    )
+
+
+def faq_items(t, category_labels, benchmark=None):
+    """[(question, answer)] as plain text. The visible FAQ and the FAQPage JSON-LD both come from
+    here, so the two cannot drift apart."""
+    name, total, cues = t["title"], t["totalFlagged"], t["cueCount"]
+    items = []
+
+    strong = t["counts"].get("strong_profanity", 0)
+    answer = language_summary(t, category_labels)
+    if not total:
+        answer += f" That is 0 flagged words across {cues:,} subtitle lines."
+    elif not strong:
+        answer += " It is not strong profanity." if total == 1 else " None of them is strong profanity."
+    items.append((f"How many swear words are in {name}?", answer))
+
+    forms = fword_forms(t)
+    if forms is not None:
+        n = sum(c for _, c in forms)
+        if n:
+            detail = ", ".join(f"{term} {c}" for term, c in forms)
+            answer = (
+                f"Yes. We counted {plural(n, 'flagged word')} containing the F-word in the "
+                f"English subtitles of {name}: {detail}."
+            )
+        elif total == 1:
+            answer = f"No. The one flagged word in {name} is not the F-word."
+        elif total:
+            answer = f"No. None of the {total} flagged words in {name} is the F-word."
+        else:
+            answer = f"No. We found no flagged words at all in the English subtitles of {name}."
+        if not n:
+            answer += " Words that are bleeped or left out of the subtitles cannot be counted."
+        items.append((f"Does {name} use the F-word?", answer))
+
+    timeline = t.get("timeline")
+    if total and timeline and sum(timeline["words"]):
+        words, bucket_ms = timeline["words"], timeline["bucketMs"]
+        peak = max(range(len(words)), key=lambda i: (words[i], -i))
+        first_strong = first_slot(timeline["strongProfanity"])
+        if first_strong is None:
+            strong_line = "There is no strong profanity anywhere in the film."
+        else:
+            strong_line = f"The first strong profanity comes {slot_when(first_strong, bucket_ms)}."
+        items.append((
+            f"Where in {name} is the swearing heaviest?",
+            f"The heaviest stretch is {slot_when(peak, bucket_ms)}, with "
+            f"{plural(words[peak], 'flagged word')}. {strong_line} Our timeline uses "
+            f"{span_word(bucket_ms)}-minute stretches, so that is as exact as we can be.",
+        ))
+
+    if benchmark:
+        items.append((
+            f"How does {name} compare with the average film?",
+            f"{rank_sentence(t, benchmark)} {typical_sentence(benchmark)}",
+        ))
+
+    family, strict = t["profiles"].get("family", 0), t["profiles"].get("strict", 0)
+    if family:
+        muted = f"With the family filter on, {family} of the {cues:,} subtitle lines in {name} would be muted"
+    else:
+        muted = f"With the family filter on, none of the {cues:,} subtitle lines in {name} would be muted"
+    muted += f"; with the strict filter, {strict} would be." if strict != family else "."
+    items.append((
+        f"Can I watch {name} with the swearing muted?",
+        "Family Filter TV mutes matching language automatically while a title plays through a "
+        "supported route such as Stremio, on Android TV and Android phones. The picture keeps "
+        "playing and only the sound briefly drops. You choose a mild, family or strict filter. "
+        f"{muted} Filtering availability varies by title, and the app tells you when it is unavailable.",
+    ))
+
+    items.append((
+        f"Why might another site give a different swear word count for {name}?",
+        "Our count comes from automated analysis of the English subtitles, and we count every time "
+        "a flagged word appears. A word that is bleeped, mumbled or not written in the subtitles "
+        "is not counted, a different subtitle release of the film can give a different number, "
+        "and every site decides for itself what counts as a swear word.",
+    ))
+    return items
+
+
+def faq_section(t, items):
+    name = esc(t["title"])
+    rows = "\n".join(
+        f"      <div>\n        <h3>{esc(q)}</h3>\n        <p>{esc(a)}</p>\n      </div>" for q, a in items
+    )
+    return f'''  <section aria-labelledby="faq-heading">
+    <h2 id="faq-heading">Questions about swearing in {name}</h2>
+    <div class="faq">
+{rows}
+    </div>
+  </section>'''
+
+
+def faq_jsonld(items):
+    return {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}}
+            for q, a in items
+        ],
+    }
+
+
+def methodology_box(depth_up):
+    return f'''  <section class="panel" aria-labelledby="method-heading">
+    <h2 id="method-heading">How we counted</h2>
+    <p>The count comes from automated analysis of the film's English subtitles, not from a person
+    listening to the film. Every time a flagged word appears it is counted, and each one is placed
+    in a category. Other guides can give a different number for the same film: a word that is
+    bleeped or not written in the subtitles cannot be counted, different subtitle releases of a
+    film differ, and each site decides for itself what counts as a swear word.</p>
+    <p><a href="{depth_up}{METHODOLOGY_SLUG}/">How we count swear words</a></p>
+  </section>'''
+
+
+def covering_profiles(category):
+    names = [p for p in PROFILE_CATEGORIES if category in PROFILE_CATEGORIES[p]]
+    if len(names) == 1:
+        return f"only the {names[0]} filter"
+    return f"the {join_words(names)} filters"
+
+
+def low_count_section(t, by_id, category_labels):
+    """Extra substance for a film with 0 to 3 flagged words: what was checked, what each filter
+    level would do with it, and the other low-language films in the set."""
+    if t["totalFlagged"] > 3:
+        return ""
+    name, total, cues = esc(t["title"]), t["totalFlagged"], t["cueCount"]
+    profiles = t["profiles"]
+    checked = f"We read all {cues:,} English subtitle lines of {name} and checked each one against our word list."
+    if total:
+        n = profiles.get("strict", 0)
+        checked += f" {n} of them {'contains' if n == 1 else 'contain'} a flagged word."
+    else:
+        checked += " None of them contains a flagged word, so no filter level would mute anything."
+    timeline = t.get("timeline")
+    if not total and timeline and timeline["words"] and not sum(timeline["words"]):
+        checked += (
+            f" That holds across the whole film: all {len(timeline['words'])} {span_word(timeline['bucketMs'])}-minute "
+            f"stretches of the subtitles have zero flagged words."
+        )
+
+    def labels(cats):
+        return join_words(category_labels.get(c, c).lower() for c in CATEGORY_ORDER if c in cats)
+
+    scopes = {
+        "mild": labels(PROFILE_CATEGORIES["mild"]),
+        "family": "the mild filter's categories plus "
+        + labels(set(PROFILE_CATEGORIES["family"]) - set(PROFILE_CATEGORIES["mild"])),
+        "strict": "every category",
+    }
+    profile_items = "\n".join(
+        f"      <li><strong>{p.capitalize()} filter</strong> mutes {scopes[p]}. In {name}: "
+        f"{profiles.get(p, 0)} of {cues:,} lines muted.</li>"
+        for p in PROFILE_CATEGORIES
+    )
+
+    found = ""
+    if t["counts"]:
+        present = "\n".join(
+            f"      <li>{esc(category_labels.get(c, c))} ({esc(t['counts'][c])}): muted by {covering_profiles(c)}.</li>"
+            for c in category_keys(t["counts"])
+        )
+        found = f"\n    <p>What was flagged, and which filters cover it:</p>\n    <ul>\n{present}\n    </ul>"
+
+    others = sorted(
+        (o for o in by_id.values() if o is not t and o["totalFlagged"] <= 3),
+        key=lambda o: (o["totalFlagged"], o["title"]),
+    )
+    other_html = ""
+    if others:
+        items = "\n".join(
+            f'      <li><a href="../{o["slug"]}/">{esc(o["title"])} ({o["year"]})</a> &mdash; '
+            f'{esc(plural(o["totalFlagged"], "flagged word"))} in {o["cueCount"]:,} subtitle lines</li>'
+            for o in others
+        )
+        other_html = f'''
+    <h3>Other films in our set with little or no flagged language</h3>
+    <ul>
+{items}
+    </ul>'''
+
+    return f'''  <section aria-labelledby="low-heading">
+    <h2 id="low-heading">What we checked in {name}</h2>
+    <p>{checked}</p>
+    <h3>What each filter level would do</h3>
+    <ul>
+{profile_items}
+    </ul>{found}{other_html}
+  </section>'''
+
+
 def title_page_html(t, by_id, category_labels, benchmark=None):
     slug = t["slug"]
     name = t["title"]
     year = t["year"]
     canonical = f"{SITE}/titles/{slug}/"
-    page_title = f"{name} ({year}) Parents Guide: Swearing and Language | Family Filter TV"
-    total = t["totalFlagged"]
-    if total:
-        top = ", ".join(
-            f"{val} {label.lower()}"
-            for label, val in sorted(category_rows(t["counts"], category_labels), key=lambda r: -r[1])[:2]
-        )
-        found = f"{total} flagged {'word' if total == 1 else 'words'} in the subtitles ({top})"
-    else:
-        found = "no flagged swearing found in the subtitles"
-    description = (
-        f"{name} ({year}) parents guide to swearing and language: {found}. "
-        f"Full count by category."
-    )
+    page_title = seo_title(t)
+    description = seo_description(t)
+    lead, lead_detail = answer_lead(t)
+    faq = faq_items(t, category_labels, benchmark)
 
-    genres_jsonld = t["genres"]
     runtime_iso = runtime_to_iso(t["runtime"])
 
     jsonld_work = {
         "@context": "https://schema.org",
         "@type": "Movie",
+        "@id": f"{canonical}#film",
         "name": name,
         "datePublished": str(year),
-        "genre": genres_jsonld,
+        "genre": t["genres"],
         "sameAs": t["imdbUrl"],
     }
     if runtime_iso:
         jsonld_work["duration"] = runtime_iso
+
+    jsonld_page = {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "url": canonical,
+        "name": page_title,
+        "description": description,
+        "inLanguage": "en",
+        "dateModified": t["computedAt"],
+        "about": {"@id": f"{canonical}#film"},
+        "publisher": PUBLISHER,
+        "isPartOf": {"@type": "WebSite", "name": "Family Filter TV", "url": f"{SITE}/"},
+    }
 
     jsonld_breadcrumb = breadcrumb_jsonld([
         ("Home", f"{SITE}/"),
@@ -539,7 +861,13 @@ def title_page_html(t, by_id, category_labels, benchmark=None):
     breadcrumb = breadcrumb_html(2, title=name)
     related = related_section(t, by_id, "../")
     detail = "\n\n".join(
-        part for part in (timeline_section(t), comparison_section(t, benchmark)) if part
+        part for part in (
+            low_count_section(t, by_id, category_labels),
+            timeline_section(t),
+            comparison_section(t, benchmark),
+            faq_section(t, faq),
+            methodology_box("../"),
+        ) if part
     )
 
     return f'''<!doctype html>
@@ -569,7 +897,13 @@ def title_page_html(t, by_id, category_labels, benchmark=None):
 {jsonld(jsonld_work)}
 </script>
 <script type="application/ld+json">
+{jsonld(jsonld_page)}
+</script>
+<script type="application/ld+json">
 {jsonld(jsonld_breadcrumb)}
+</script>
+<script type="application/ld+json">
+{jsonld(faq_jsonld(faq))}
 </script>
 </head>
 <body>
@@ -577,8 +911,11 @@ def title_page_html(t, by_id, category_labels, benchmark=None):
 
 <main class="wrap">
   {breadcrumb}
-  <h1 class="page-title">{esc(name)} ({year}) parents guide: swearing and language</h1>
-  <p class="lead">{esc(t["intro"])}</p>
+  <p class="muted">Parents guide: swearing and language</p>
+  <h1 class="page-title">{esc(seo_h1(t))}</h1>
+  <p class="lead">{esc(lead)}</p>
+  <p class="lead"><strong>{esc(lead_detail)}</strong></p>
+  <p>{esc(t["intro"])}</p>
   <p class="muted">This guide covers spoken language only. It does not rate violence, nudity or
   frightening scenes.</p>
 
@@ -616,6 +953,190 @@ def title_page_html(t, by_id, category_labels, benchmark=None):
   </div>
 
 {related}
+
+  <p class="fine">Family Filter TV is an independent app. It is not affiliated with, endorsed by,
+  or connected to Stremio, Google, or any streaming service.</p>
+</main>
+{footer(2)}
+</body>
+</html>
+'''
+
+
+def methodology_page_html(titles, category_labels):
+    canonical = f"{SITE}/titles/{METHODOLOGY_SLUG}/"
+    page_title = "How We Count Swear Words in Films | Family Filter TV"
+    description = (
+        "How Family Filter TV counts swear words: automated analysis of English subtitles, what "
+        "each category means for the filter profiles, and why our number can differ from other "
+        "parents guides."
+    )
+    jsonld_page = {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "url": canonical,
+        "name": "How we count swear words",
+        "description": description,
+        "inLanguage": "en",
+        "dateModified": TEMPLATE_UPDATED,
+        "publisher": PUBLISHER,
+        "isPartOf": {"@type": "WebSite", "name": "Family Filter TV", "url": f"{SITE}/"},
+    }
+    jsonld_breadcrumb = breadcrumb_jsonld([
+        ("Home", f"{SITE}/"),
+        ("Titles", f"{SITE}/titles/"),
+        ("How we count swear words", canonical),
+    ])
+
+    category_rows_html = "\n".join(
+        f"          <tr><td>{esc(category_labels.get(c, c))}</td>"
+        + "".join(f"<td>{'Yes' if c in PROFILE_CATEGORIES[p] else 'No'}</td>" for p in PROFILE_CATEGORIES)
+        + "</tr>"
+        for c in CATEGORY_ORDER
+        if c in category_labels
+    )
+    example = next((t for t in sorted(titles, key=lambda x: -x["totalFlagged"])), None)
+    example_link = (
+        f' For a worked example, see <a href="../{example["slug"]}/">{esc(example["title"])} ({example["year"]})</a>.'
+        if example else ""
+    )
+
+    return f'''<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{esc(page_title)}</title>
+<meta name="description" content="{esc(description)}">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<meta name="theme-color" content="#0B0C0F">
+<link rel="icon" href="../../assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="../../assets/icon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<meta property="og:url" content="{canonical}">
+<meta property="og:type" content="article">
+<meta property="og:title" content="{esc(page_title)}">
+<meta property="og:description" content="{esc(description)}">
+<meta property="og:image" content="{SITE}/assets/feature-graphic.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap">
+<link rel="canonical" href="{canonical}">
+<link rel="stylesheet" href="../../style.css">
+<script type="application/ld+json">
+{jsonld(jsonld_page)}
+</script>
+<script type="application/ld+json">
+{jsonld(jsonld_breadcrumb)}
+</script>
+</head>
+<body>
+{header("titles", 2)}
+
+<main class="wrap">
+  {breadcrumb_html(2, title="How we count swear words")}
+  <h1 class="page-title">How we count swear words</h1>
+  <p class="lead">Every number on a film page comes from software reading the film's English
+  subtitles. Nobody watches the film and tallies words by ear. This page explains what is counted,
+  what is not, and why our figure can differ from other parents guides.</p>
+
+  <section aria-labelledby="counted-heading">
+    <h2 id="counted-heading">What is counted</h2>
+    <ul>
+      <li>The text of the film's English subtitle file. Formatting tags and styling codes are
+      removed first, so only the words on screen are read.</li>
+      <li>Each subtitle line is checked against a word list. A word matches as a whole word,
+      ignoring capital letters, together with a fixed set of common endings such as -s, -ed and
+      -ing. Some entries also match inside a longer compound word. A list of exceptions stops
+      ordinary words that look similar from being flagged.</li>
+      <li>Every appearance counts. If a word is said ten times, it adds ten to the total. Nothing
+      is de-duplicated.</li>
+      <li>Each flagged word is filed under a category, and we keep the count for each word. On
+      the film pages the words are masked, for example f***, except for religious exclamations,
+      which are ordinary words.</li>
+      <li>The word list and the filter profiles are the same ones the Family Filter TV app uses
+      to mute, so the page counts what the app would act on.</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="categories-heading">
+    <h2 id="categories-heading">The categories and the filter profiles</h2>
+    <p>Flagged words fall into these categories. The table shows which categories each filter
+    profile mutes.</p>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Category</th><th>Mild filter</th><th>Family filter</th><th>Strict filter</th></tr></thead>
+        <tbody>
+{category_rows_html}
+        </tbody>
+      </table>
+    </div>
+    <p>Each film page also shows how many subtitle lines each profile would mute. That is a count
+    of lines, not words: a line with three flagged words is one muted line but adds three to the
+    word count, and a line is muted only if it holds a word in a category the profile covers.</p>
+  </section>
+
+  <section aria-labelledby="level-heading">
+    <h2 id="level-heading">The language level</h2>
+    <p>The level shown on each page (clean, mild, moderate or strong) comes from the number of
+    lines the filter profiles would mute, checked in this order:</p>
+    <ul>
+      <li><strong>Clean:</strong> the strict filter would mute no lines.</li>
+      <li><strong>Mild:</strong> the mild filter would mute no lines and the strict filter at most
+      5.</li>
+      <li><strong>Moderate:</strong> the mild filter would mute 1 to 9 lines, or the strict filter
+      6 to 30.</li>
+      <li><strong>Strong:</strong> anything above that.</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="timeline-method-heading">
+    <h2 id="timeline-method-heading">Where in the film</h2>
+    <p>Each flagged word is placed in a ten-minute stretch of the film, by the start time of the
+    subtitle line it is in. That is why the pages say &ldquo;between minute 20 and 30&rdquo; and
+    never give an exact time for a word.</p>
+  </section>
+
+  <section aria-labelledby="source-heading">
+    <h2 id="source-heading">Which subtitles we use</h2>
+    <p>We look for English subtitle files for the film. Where there is more than one, we use the
+    file whose last line best matches the film's running time, and a file that is clearly timed
+    for a different cut of the film is not used. Each film page shows the date it was last
+    analysed.</p>
+    <p>The comparisons with &ldquo;films we have analysed&rdquo; use only films where the subtitle
+    timing matched the running time closely and the subtitles have at least 400 lines.</p>
+  </section>
+
+  <section aria-labelledby="differ-heading">
+    <h2 id="differ-heading">Why our number can differ from other sites</h2>
+    <ul>
+      <li><strong>Bleeped or partly spoken words.</strong> We count words written in the
+      subtitles. A word that is bleeped, muffled or left out of the subtitle file cannot be
+      counted, even if a viewer hears it or another guide lists it.</li>
+      <li><strong>Different subtitle releases.</strong> Subtitle files for the same film are not
+      identical. A different release, or a different cut of the film, can give a different
+      number.</li>
+      <li><strong>What counts as a swear word.</strong> Our list has {len(PROFILE_CATEGORIES["strict"])} categories, including
+      religious exclamations and crude language alongside strong profanity. Other sites choose
+      their own scope, so totals are not directly comparable. To compare like with like, look at
+      the strong profanity figure, or at the F-word figure, which counts every flagged word that
+      contains it.</li>
+      <li><strong>Counting every appearance.</strong> We count each time a word appears, not
+      each scene it appears in.</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="not-heading">
+    <h2 id="not-heading">What these numbers do not cover</h2>
+    <p>They cover language only. They do not rate violence, nudity or frightening scenes, and we
+    do not recommend an age for any film.{example_link}</p>
+  </section>
+
+  <div class="actions">
+    <a class="btn-quiet" href="../">All titles</a>
+    <a class="btn" href="../../download.html">Watch with Family Filter TV</a>
+  </div>
 
   <p class="fine">Family Filter TV is an independent app. It is not affiliated with, endorsed by,
   or connected to Stremio, Google, or any streaming service.</p>
@@ -701,6 +1222,7 @@ def index_page_html(titles, category_labels):
   </ul>
 
   <p class="muted">This is a small, 20-title test set &mdash; not the full catalogue. See
+  <a href="{METHODOLOGY_SLUG}/">how we count swear words</a>,
   <a href="../stremio-profanity-filter.html">how Stremio filtering works</a> or
   <a href="../download.html">download Family Filter TV</a>.</p>
 
@@ -719,12 +1241,16 @@ def update_sitemap(titles):
 
     lines = content.splitlines()
     kept = [ln for ln in lines if "/titles/" not in ln]
+    # keep the entries where they already sit, so a rerun does not shuffle the file
+    first_titles = next((i for i, ln in enumerate(lines) if "/titles/" in ln), None)
+    insert_idx = None if first_titles is None else sum(1 for ln in lines[:first_titles] if "/titles/" not in ln)
 
     # last-known-good lastmod for the index = most recent analysis date in the cohort
     index_lastmod = max(TEMPLATE_UPDATED, max(t["computedAt"][:10] for t in titles))
 
     new_entries = [
-        f'  <url><loc>{SITE}/titles/</loc><lastmod>{index_lastmod}</lastmod><priority>0.8</priority></url>'
+        f'  <url><loc>{SITE}/titles/</loc><lastmod>{index_lastmod}</lastmod><priority>0.8</priority></url>',
+        f'  <url><loc>{SITE}/titles/{METHODOLOGY_SLUG}/</loc><lastmod>{TEMPLATE_UPDATED}</lastmod><priority>0.5</priority></url>',
     ]
     for t in sorted(titles, key=lambda x: x["slug"]):
         lastmod = max(TEMPLATE_UPDATED, t["computedAt"][:10])
@@ -732,8 +1258,8 @@ def update_sitemap(titles):
             f'  <url><loc>{SITE}/titles/{t["slug"]}/</loc><lastmod>{lastmod}</lastmod><priority>0.6</priority></url>'
         )
 
-    # insert before closing </urlset>
-    close_idx = next(i for i, ln in enumerate(kept) if "</urlset>" in ln)
+    # first run: before the closing </urlset>
+    close_idx = insert_idx if insert_idx is not None else next(i for i, ln in enumerate(kept) if "</urlset>" in ln)
     out_lines = kept[:close_idx] + new_entries + kept[close_idx:]
     out = "\n".join(out_lines) + "\n"
 
@@ -747,19 +1273,26 @@ def update_sitemap(titles):
 def update_llms(titles):
     with open(LLMS_PATH, "r") as f:
         content = f.read()
+    out = content
 
-    marker = f"{SITE}/titles/"
-    if marker in content:
+    titles_line = f"- {SITE}/titles/ — title-by-title parents guides to swearing and language, from our own subtitle analysis\n"
+    if f"{SITE}/titles/ " not in out:
+        # insert after the stremio-profanity-filter.html line in the ## Pages section, else at the end
+        anchor = f"- {SITE}/stremio-profanity-filter.html — muting swearing in Stremio, step-by-step\n"
+        if anchor in out:
+            out = out.replace(anchor, anchor + titles_line, 1)
+        else:
+            out = out.rstrip("\n") + "\n\n" + titles_line
+
+    method_line = (
+        f"- {SITE}/titles/{METHODOLOGY_SLUG}/ — how we count swear words: automated analysis of English "
+        f"subtitles, the categories, and why our numbers can differ from other guides\n"
+    )
+    if f"{SITE}/titles/{METHODOLOGY_SLUG}/" not in out and titles_line in out:
+        out = out.replace(titles_line, titles_line + method_line, 1)
+
+    if out == content:
         return False
-
-    line = f"- {SITE}/titles/ — title-by-title parents guides to swearing and language, from our own subtitle analysis\n"
-    # insert after the stremio-profanity-filter.html line in the ## Pages section, else just before "## Not affiliated"
-    anchor = f"- {SITE}/stremio-profanity-filter.html — muting swearing in Stremio, step-by-step\n"
-    if anchor in content:
-        out = content.replace(anchor, anchor + line, 1)
-    else:
-        out = content.rstrip("\n") + "\n\n" + line
-
     with open(LLMS_PATH, "w") as f:
         f.write(out)
     return True
@@ -810,6 +1343,15 @@ def main():
     if not os.path.exists(index_path) or open(index_path).read() != index_html:
         with open(index_path, "w") as f:
             f.write(index_html)
+        changed_pages += 1
+
+    method_dir = os.path.join(titles_dir, METHODOLOGY_SLUG)
+    os.makedirs(method_dir, exist_ok=True)
+    method_path = os.path.join(method_dir, "index.html")
+    method_html = methodology_page_html(titles, category_labels)
+    if not os.path.exists(method_path) or open(method_path).read() != method_html:
+        with open(method_path, "w") as f:
+            f.write(method_html)
         changed_pages += 1
 
     sitemap_changed = update_sitemap(titles)

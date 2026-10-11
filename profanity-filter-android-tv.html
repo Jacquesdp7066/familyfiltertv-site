@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Profanity filter for Android TV: how it works and what it can't do</title>
-<meta name="description" content="How a profanity filter (a swear word filter) for Android TV actually works with Family Filter TV and Stremio, plus follow mode for Netflix and other apps. Reading subtitles, muting the audio, and the real limits: no violence/nudity filtering, subtitles required.">
+<meta name="description" content="How a profanity filter for Android TV works with Family Filter TV and Stremio, plus follow mode for Netflix and other apps, and the real limits.">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta name="theme-color" content="#0B0C0F">
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
@@ -31,7 +31,7 @@
       "name": "How does a profanity filter on Android TV actually work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Family Filter TV runs as the player on your Android TV and reads the subtitle track of whatever you start in Stremio. When a line matches the filter strength you set, the audio mutes for the length of that line and comes straight back. The picture never stops, skips or cuts."
+        "text": "Family Filter TV reads the subtitle track of whatever's playing in Stremio. A matching line mutes the audio for its length, then sound returns automatically. The picture keeps playing throughout."
       }
     },
     {
@@ -39,7 +39,7 @@
       "name": "Does it need subtitles to work?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. Filtering depends entirely on a subtitle track being available for that title. If there isn't one, Family Filter TV tells you on screen that filtering isn't available for what's playing."
+        "text": "Yes — filtering depends on a subtitle track existing for that title. Without one, the app tells you filtering isn't available rather than guessing."
       }
     },
     {
@@ -47,7 +47,7 @@
       "name": "Does it filter violence or nudity on Android TV?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No. It filters spoken profanity only. Violence and nudity are not currently filtered, and nothing in the picture is blurred, cut or skipped."
+        "text": "No. It filters spoken profanity only. Nothing is blurred, cut or skipped."
       }
     },
     {
@@ -55,7 +55,7 @@
       "name": "Does it work with Netflix or DStv on Android TV?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Netflix, yes on Android TV and Google TV, through follow mode. Pick the title on your Android phone and the TV mutes the swearing while you watch, then follows the next episode by itself. Muting is best effort. It needs Family Filter TV on the TV and on an Android phone, works with English titles only for now, and does not work with the built-in apps of Samsung, LG and other non-Android TVs. DStv is not supported. Family Filter TV is not affiliated with Netflix, DStv or any other streaming service."
+        "text": "Netflix, yes on Android TV and Google TV, through follow mode: pick the title on your Android phone and the TV mutes the swearing. It also works with supported playback started in Stremio. DStv is not supported, and Family Filter TV isn't affiliated with Netflix or any other streaming service."
       }
     },
     {
@@ -63,7 +63,7 @@
       "name": "What Android TV devices does it run on?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Android TVs and Android TV boxes, plus Android phones — the app runs on the television itself, with no computer in the loop and nothing to cast."
+        "text": "Android TVs, Android TV boxes, and Android phones — the app itself, no computer needed."
       }
     },
     {
@@ -71,7 +71,7 @@
       "name": "Can one setting cover every TV in the house?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. The filter strength is set once on a parent's phone, and every television linked to that account follows it. A television links by typing in the short code it shows on screen."
+        "text": "Yes. Set the filter strength once on a phone and every linked television follows it."
       }
     }
   ]

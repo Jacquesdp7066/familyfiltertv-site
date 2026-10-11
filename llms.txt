@@ -21,7 +21,7 @@ Official site: https://familyfiltertv.com/
 - It is not a streaming library and does not provide films, series or subscription access.
 - It does not currently filter violence or nudity.
 - Filtering availability varies by title, and the app tells the viewer when filtering is unavailable.
-- It does not currently filter playback inside subscription streaming apps.
+- It does not run inside or change subscription streaming apps. On Android TV and Google TV it follows along with what is playing and briefly lowers the TV sound.
 
 ## Price
 
@@ -49,11 +49,11 @@ does not mute anything — Family Filter TV is the app that mutes.
 ## Pages
 
 - https://familyfiltertv.com/ — product overview and pricing
-- https://familyfiltertv.com/android-tv-profanity-filter.html — Android TV profanity filtering
 - https://familyfiltertv.com/profanity-filter-android-tv.html — how Android TV filtering works and its limits
 - https://familyfiltertv.com/stremio-profanity-filter.html — muting swearing in Stremio, step-by-step
 - https://familyfiltertv.com/install.html — step-by-step install guides: Android TV and Google TV, Android phone and Windows, from Google Play or directly with the APK
 - https://familyfiltertv.com/titles/ — title-by-title parents guides to swearing and language, from our own subtitle analysis
+- https://familyfiltertv.com/titles/methodology/ — how we count swear words: automated analysis of English subtitles, the categories, and why our numbers can differ from other guides
 - https://familyfiltertv.com/mute-swearing-on-tv.html — muting unwanted language on TV
 - https://familyfiltertv.com/mute-swearing-on-netflix.html — how to mute swearing on Netflix on Android TV and Google TV (not affiliated with Netflix)
 - https://familyfiltertv.com/vidangel-clearplay-alternative.html — comparison with VidAngel and ClearPlay
@@ -61,6 +61,8 @@ does not mute anything — Family Filter TV is the app that mutes.
 - https://familyfiltertv.com/cleancut-alternative-android-tv.html — CleanCut is for Apple TV; the Android TV and Google TV option
 - https://familyfiltertv.com/enjoy-movies-your-way-alternative.html — comparison with Enjoy Movies Your Way
 - https://familyfiltertv.com/profanity-filter-browser-extension-vs-tv.html — browser extension versus television profanity filtering
+- https://familyfiltertv.com/movie-filtering-services-compared.html — Family Filter TV, VidAngel, ClearPlay, Enjoy Movies Your Way and TVGuardian compared on price, devices, what they filter, country and trial (as of October 2026)
+- https://familyfiltertv.com/does-netflix-have-a-profanity-filter.html — does Netflix have a profanity filter: what its own controls do, and the options (not affiliated with Netflix)
 - https://familyfiltertv.com/download.html — download and installation options
 - https://familyfiltertv.com/setup.html — setup walkthrough
 - https://familyfiltertv.com/stremio.html — the Language Ratings Stremio add-on

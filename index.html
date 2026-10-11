@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Profanity Filter for Android TV: Mute Swear Words | Family Filter TV</title>
-<meta name="description" content="Automatically mute profanity and swear words on Android TV while the picture keeps playing. Family Filter TV works with Stremio and follows along with Netflix and other apps on Android TV, with simple household filter controls.">
+<meta name="description" content="Automatically mute profanity on Android TV while the picture keeps playing. Works with Stremio and follows along with Netflix and other apps on Android TV.">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta name="theme-color" content="#0B0C0F">
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
@@ -71,7 +71,7 @@
       "name": "What happens if a title has no subtitles?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Filtering availability varies by title. Family Filter TV tells you on screen when a title cannot be filtered."
+        "text": "Filtering availability varies by title. Family Filter TV tells you on screen when filtering is unavailable."
       }
     },
     {
@@ -87,7 +87,47 @@
       "name": "Which devices does it run on?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The television itself: Android TVs and Android TV boxes, as well as Android phones. A few TV boxes do not offer the Play Store at all, and Family Filter TV can be installed directly on those. There is also an early-beta companion for Windows PCs that mutes the computer's sound while a flagged word is spoken, for anything you watch in a browser or an app on the PC."
+        "text": "The television itself — Android TVs and TV boxes — and Android phones. A few TV boxes don't offer the Play Store at all; install it directly on those. There's also an early-beta companion for Windows PCs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does it play?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nothing itself. It filters supported playback you start in Stremio, and it can follow along while you watch Netflix and other apps on your Android TV. Family Filter TV is not a streaming library and does not provide access to subscription services."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it work with Netflix?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, on Android TV and Google TV. Start the episode or film in Netflix on the TV, pick the same title in Family Filter TV on your phone, and the TV mutes the swearing as you watch. When the TV cannot tell where you are in the film, the phone can find the place by listening; the sound is turned into words on the phone only and is never stored or sent. See the quick start. Family Filter TV is not affiliated with Netflix."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it do anything about violence or nudity?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. It mutes swearing in speech and nothing else. Nothing is blurred, cut or skipped."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a launch discount?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It starts 1 October 2026. The first 200 subscribers in South Africa and the first 200 elsewhere get 50% off their first year, stepping down to 40%, 30%, 20% and 10% as each group of 200 fills, until 31 December 2026. After that it's the full price."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does inviting a friend work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Every friend who subscribes through your link earns you 10 weeks free, credited 3 days after their first payment. Five friends is a free year, and there's no cap after that. Your friend gets 30 days free instead of the usual 14 and pays their own subscription, at the launch price while it lasts."
       }
     },
     {
@@ -100,14 +140,6 @@
     },
     {
       "@type": "Question",
-      "name": "Does it do anything about violence or nudity?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. Family Filter TV mutes swearing in speech and nothing else. Nothing is blurred, cut or skipped."
-      }
-    },
-    {
-      "@type": "Question",
       "name": "What does Family Filter TV cost?",
       "acceptedAnswer": {
         "@type": "Answer",
@@ -116,26 +148,18 @@
     },
     {
       "@type": "Question",
-      "name": "What does it play?",
+      "name": "Will it work on my TV?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "It works with titles you start in Stremio, and follows along while you watch Netflix and other apps on Android TV. It is not a streaming library and does not provide access to subscription streaming services."
+        "text": "It depends on the system your TV runs, not the brand. If your TV has the Google Play Store, yes. Which TVs has the brand-by-brand answer."
       }
     },
     {
       "@type": "Question",
-      "name": "Is there a launch discount?",
+      "name": "Something isn't working.",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The launch offer starts 1 October 2026. The first 200 subscribers in South Africa and the first 200 elsewhere get 50% off their first year, stepping down to 40%, 30%, 20% and 10% as each group of 200 fills, until 31 December 2026. After that it's the full price."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How does inviting a friend work?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Every friend who subscribes through your link earns you 10 weeks free, credited 3 days after their first payment. Five friends is a free year, and there's no cap after that. Your friend gets 30 days free instead of the usual 14 and pays their own subscription, at the launch price while it lasts."
+        "text": "Support has the setup steps, the known limits, and an address to write to."
       }
     }
   ]
@@ -251,15 +275,18 @@
     Android TV, Stremio and follow-along workflows.</p>
     <div class="panel">
       <ul>
-        <li><a href="android-tv-profanity-filter.html"><strong>Profanity filter for Android TV</strong></a> — what it does, what you need and the current limits.</li>
+        <li><a href="profanity-filter-android-tv.html"><strong>Profanity filter for Android TV</strong></a> — how the filtering works, what you need, and what it can't do.</li>
         <li><a href="stremio-profanity-filter.html"><strong>Stremio profanity filter</strong></a> — how to watch with automatic language filtering on Android TV.</li>
         <li><a href="mute-swearing-on-tv.html"><strong>How to mute swearing on TV</strong></a> — what the viewing experience looks like when language is filtered.</li>
         <li><a href="google-tv-profanity-filter.html"><strong>Profanity filter for Google TV</strong></a> — Google TV sets, sticks and boxes work the same as Android TV.</li>
         <li><a href="windows-profanity-filter.html"><strong>Profanity filter for a Windows PC</strong></a> — the early-beta companion, and its limits.</li>
         <li><a href="mute-swearing-on-netflix.html"><strong>How to mute swearing on Netflix</strong></a> — the steps for Android TV and Google TV, and what to expect.</li>
-        <li><a href="profanity-filter-android-tv.html"><strong>How the filtering actually works</strong></a> — and what it can't do, on Android TV.</li>
         <li><a href="vidangel-clearplay-alternative.html"><strong>VidAngel and ClearPlay alternative</strong></a> — a fair comparison for Stremio and Android TV households.</li>
         <li><a href="vidangel-clearplay-alternative.html#other-comparisons"><strong>Comparisons</strong></a> — TVGuardian, CleanCut, Enjoy Movies Your Way and browser extensions, side by side.</li>
+        <li><a href="movie-filtering-services-compared.html"><strong>Movie filtering services compared</strong></a> — Family Filter TV, VidAngel, ClearPlay, Enjoy Movies Your Way and TVGuardian on price, devices and what they filter.</li>
+        <li><a href="does-netflix-have-a-profanity-filter.html"><strong>Does Netflix have a profanity filter?</strong></a> — what Netflix's own controls do, and your options.</li>
+        <li><a href="parental-controls-vs-profanity-filter.html"><strong>Parental controls vs a profanity filter</strong></a> — what each one does and does not do.</li>
+        <li><a href="family-movie-night-without-swearing.html"><strong>Family movie night without the swearing</strong></a> — a parent's guide to the options.</li>
         <li><a href="install.html"><strong>Install guides</strong></a> — Android TV, Android phone and Windows, from Google Play or directly if the Play Store does not list it.</li>
         <li><a href="titles/"><strong>Parents guides to swearing in films</strong></a> — how much swearing is in a specific film, counted from our own subtitle analysis.</li>
       </ul>
@@ -438,6 +465,14 @@
       after their first payment. Five friends is a free year, and there's no cap after that. Your
       friend gets 30 days free instead of the usual 14 and pays their own subscription, at the
       launch price while it lasts.</p>
+    </div>
+    <div>
+      <h3>Does one setting cover every television in the house?</h3>
+      <p>Yes. The filter belongs to the household, not to the device. You set it on your phone and every linked television follows. A television is linked by typing in the short code it shows on screen. Three devices are included on one account, and up to six can be linked.</p>
+    </div>
+    <div>
+      <h3>What does Family Filter TV cost?</h3>
+      <p>US$14.99 a year, with the first 14 days free. Google Play shows and charges the price in your own currency. One account covers three devices, and more can be added up to six.</p>
     </div>
     <div>
       <h3>Will it work on my TV?</h3>
