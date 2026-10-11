@@ -312,6 +312,11 @@ class SearchTitle(unittest.TestCase):
         self.assertEqual(bt.seo_title(CLEAN), "Does Clean Film (2020) Have Any Swearing? Parents Guide")
         self.assertEqual(bt.seo_h1(CLEAN), "Does Clean Film (2020) have any swearing?")
 
+    def test_a_very_long_title_keeps_only_the_question(self):
+        t = dict(FULL, title="Ant-Man and the Wasp: Quantumania", year=2023)
+        self.assertEqual(
+            bt.seo_title(t), "How Many Swear Words in Ant-Man and the Wasp: Quantumania (2023)?")
+
     def test_the_page_carries_the_title_h1_and_a_parents_guide_description(self):
         page = bt.title_page_html(FULL, {FULL["videoId"]: FULL}, LABELS, BENCHMARK)
         self.assertIn(f"<title>{bt.seo_title(FULL)}</title>", page)

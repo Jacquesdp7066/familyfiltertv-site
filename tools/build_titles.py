@@ -554,7 +554,9 @@ def seo_title(t):
     else:
         head = f"Does {name} ({year}) Have Any Swearing? Parents Guide"
     full = f"{head} | Family Filter TV"
-    return full if len(full) <= TITLE_LIMIT else head
+    short = head.removesuffix(" Parents Guide")
+    # Longest form that fits; a long film name keeps the question and drops the rest.
+    return next((c for c in (full, head) if len(c) <= TITLE_LIMIT), short)
 
 
 def seo_h1(t):
