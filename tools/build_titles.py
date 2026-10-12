@@ -120,6 +120,7 @@ def header(active, depth):
     <nav class="site-nav" aria-label="Pages">
 {nav(active, depth)}
     </nav>
+    <a class="btn btn-sm head-cta" href="https://play.google.com/store/apps/details?id=com.familyfiltertv.app">Get the app</a>
   </div>
 </header>'''
 
