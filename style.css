@@ -284,8 +284,8 @@ code {
   gap: clamp(32px, 5vw, 64px);
 }
 
-.hero.split h1 { max-width: 13ch; }
-.hero.split .lead { max-width: 40ch; }
+.hero.split h1 { max-width: 15ch; font-size: clamp(2.35rem, 5vw, 3.6rem); }
+.hero.split .lead { max-width: 46ch; font-size: clamp(1.05rem, 1.6vw, 1.1875rem); }
 
 .hero-media { margin: 0; }
 
@@ -297,7 +297,7 @@ code {
     0 0 0 1px rgba(53, 207, 232, 0.06);
 }
 
-.hero-media figcaption { margin-top: 12px; }
+.hero-media figcaption { margin: 12px 0 0; color: var(--muted); font-size: 0.875rem; line-height: 1.5; max-width: 60ch; }
 
 @media (max-width: 900px) {
   .hero.split { grid-template-columns: 1fr; }
@@ -709,7 +709,8 @@ main.wrap.wide > * { max-width: var(--column); }
 main.wrap.wide > .hero,
 main.wrap.wide > .meter,
 main.wrap.wide > .steps,
-main.wrap.wide > .wide-block { max-width: none; }
+main.wrap.wide > .wide-block,
+main.wrap.wide > section[aria-labelledby="learn-more"] { max-width: none; }
 main.wrap.wide > .demo { max-width: 900px; }
 
 /* Three steps side by side, each a real step in a sequence. */
@@ -740,4 +741,11 @@ section[aria-labelledby="learn-more"] .panel ul { columns: 2; column-gap: 40px; 
 section[aria-labelledby="learn-more"] .panel li { break-inside: avoid; max-width: none; }
 @media (max-width: 760px) {
   section[aria-labelledby="learn-more"] .panel ul { columns: 1; }
+}
+
+.panel .actions { margin: 0 0 20px; }
+
+@media (max-width: 520px) {
+  .actions > a { flex: 1 1 100%; text-align: center; }
+  .hero.split .lead { font-size: 1.0625rem; }
 }
