@@ -416,6 +416,119 @@ class LowCount(unittest.TestCase):
 
 
 
+class ResultBlock(unittest.TestCase):
+    def test_total_label_and_one_bar_per_category(self):
+        html = bt.result_block(FULL, LABELS)
+        self.assertIn('<span class="result-figure">6</span>', html)
+        self.assertIn("pill pill-moderate", html)
+        nums = [int(n) for n in re.findall(r'<span class="bar-num">(\d+)</span>', html)]
+        self.assertEqual(nums, [2, 3, 1])
+        self.assertEqual(sum(nums), FULL["totalFlagged"])
+
+    def test_bars_are_relative_to_the_largest_category(self):
+        widths = [float(w) for w in re.findall(r"width:([\d.]+)%", bt.result_block(FULL, LABELS))]
+        self.assertEqual(widths, [66.7, 100.0, 33.3])
+
+    def test_a_clean_film_gets_a_calm_state_and_no_bars(self):
+        html = bt.result_block(CLEAN, LABELS)
+        self.assertIn("No flagged words", html)
+        self.assertIn("pill-clean", html)
+        self.assertNotIn("bar-row", html)
+        self.assertNotIn("result-figure", html)
+
+    def test_real_data_bars_sum_to_the_total(self):
+        with open(bt.DATA_PATH) as f:
+            data = json.load(f)
+        for t in data["titles"]:
+            html = bt.result_block(t, data["categoryLabels"])
+            if t["totalFlagged"]:
+                nums = [int(n) for n in re.findall(r'<span class="bar-num">(\d+)</span>', html)]
+                self.assertEqual(sum(nums), t["totalFlagged"], t["slug"])
+
+
+class Chart(unittest.TestCase):
+    WORDS, STRONG = [1, 0, 4, 1], [0, 0, 2, 0]
+
+    def chart(self, words=None, strong=None):
+        t = dict(FULL, timeline={"bucketMs": 600000, "words": words or self.WORDS, "strongProfanity": strong or self.STRONG})
+        return bt.timeline_chart(t)
+
+    def test_one_bar_group_per_bucket(self):
+        self.assertEqual(self.chart().count("<g><title>"), 4)
+        self.assertEqual(self.chart([1] * 13, [0] * 13).count("<g><title>"), 13)
+
+    def test_strong_buckets_are_hushed_and_marked(self):
+        html = self.chart()
+        self.assertEqual(html.count('class="mark"'), 1)
+        self.assertIn('class="hush"', html)
+        self.assertEqual(html.count('class="bar"'), 2)
+
+    def test_tallest_bar_fills_the_plot_and_others_scale_to_it(self):
+        heights = [float(h) for h in re.findall(r'class="bar" [^>]*height="([\d.]+)"', self.chart([4, 2, 0, 1], [0] * 4))]
+        self.assertEqual(heights[0], bt.CHART_H - bt.CHART_TOP - bt.CHART_BOTTOM)
+        self.assertAlmostEqual(heights[1] * 2, heights[0], places=0)
+
+    def test_aria_label_and_desc_come_from_the_data(self):
+        html = self.chart()
+        self.assertIn('role="img"', html)
+        label = re.search(r'aria-label="([^"]+)"', html).group(1)
+        self.assertIn("4 stretches, from 0 to 4 flagged words, busiest at minute 20 to 30", label)
+        self.assertIn("Strong profanity appears in 1 stretch, first between minute 20 and 30.", label)
+        self.assertIn(f"<desc>{label}</desc>", html)
+        self.assertIn("<title>Flagged words per ten-minute stretch of Test Film</title>", html)
+        self.assertIn("No stretch has strong profanity.", self.chart([2, 1], [0, 0]))
+
+    def test_axis_labels_are_whole_minutes_and_few(self):
+        html = self.chart([1] * 25, [0] * 25)
+        ticks = re.findall(r'class="axis" x="[\d.]+" y="[\d.]+" text-anchor="middle">(\d+)</text>', html)
+        self.assertEqual(ticks[:3], ["0", "40", "80"])
+        self.assertLessEqual(len(ticks), 8)
+
+    def test_table_stays_in_the_page_inside_a_disclosure(self):
+        html = bt.timeline_section(dict(FULL, timeline={"bucketMs": 600000, "words": self.WORDS, "strongProfanity": self.STRONG}))
+        self.assertIn("<summary>See the numbers</summary>", html)
+        self.assertIn("<tr><td>20 to 30</td><td>4</td><td>2</td></tr>", html)
+        self.assertLess(html.index("<svg"), html.index("<table>"))
+
+    def test_clean_film_has_no_chart(self):
+        self.assertEqual(bt.timeline_section(CLEAN), "")
+
+
+class ProfileTiles(unittest.TestCase):
+    def test_three_tiles_keep_the_same_words(self):
+        html = bt.analysis_panel(TITLE, LABELS)
+        self.assertEqual(html.count('class="tile"'), 3)
+        text = re.sub(r"<[^>]+>", "", html)
+        for line in ("Mild filter: 2 of 1000 subtitle lines muted", "Strict filter: 5 of 1000 subtitle lines muted"):
+            self.assertIn(line, re.sub(r"\s+", " ", text))
+
+
+class FilmCss(unittest.TestCase):
+    def test_film_pages_link_film_css_one_level_up(self):
+        page = bt.title_page_html(FULL, {FULL["videoId"]: FULL}, LABELS, BENCHMARK)
+        self.assertIn('<link rel="stylesheet" href="../film.css">', page)
+        self.assertIn('href="../../style.css"', page)
+        self.assertLess(page.index("<svg"), page.index("<table>"))
+
+    def test_result_block_sits_under_the_lead(self):
+        page = bt.title_page_html(FULL, {FULL["videoId"]: FULL}, LABELS, BENCHMARK)
+        self.assertLess(page.index('class="lead"'), page.index('class="result"'))
+        self.assertLess(page.index('class="result"'), page.index('<section class="panel"'))
+
+    def test_film_css_exists(self):
+        self.assertTrue(os.path.exists(os.path.join(bt.ROOT, "titles", "film.css")))
+
+    def test_index_links_film_css_and_keeps_search_rows(self):
+        titles = [dict(FULL), dict(CLEAN)]
+        page = bt.index_page_html(titles, LABELS)
+        self.assertIn('<link rel="stylesheet" href="film.css">', page)
+        self.assertEqual(page.count('class="title-row" data-search="'), 2)
+        self.assertIn('data-search="test film"', page)
+        self.assertIn("6 flagged words", page)
+        self.assertIn("0 flagged words", page)
+        self.assertIn("document.querySelectorAll('.title-row')", page)
+
+
 class SitemapAndLlms(unittest.TestCase):
     def run_in_tmp(self, name, content, update):
         import tempfile
