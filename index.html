@@ -25,6 +25,19 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "Family Filter TV in 30 seconds",
+  "description": "A 30-second look at Family Filter TV: it mutes swear words on your Android TV while the picture keeps playing, you choose how strict the filter is from your phone, and one setting covers every linked TV in the house.",
+  "thumbnailUrl": "https://familyfiltertv.com/assets/media/launch-poster.jpg",
+  "uploadDate": "2026-10-10",
+  "duration": "PT30S",
+  "contentUrl": "https://familyfiltertv.com/assets/media/launch-video.mp4",
+  "publisher": { "@type": "Organization", "name": "Family Filter TV", "url": "https://familyfiltertv.com/" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   "name": "Family Filter TV",
   "alternateName": "FamilyFilterTV",
@@ -57,7 +70,11 @@
     "@type": "Organization",
     "name": "Family Filter TV",
     "url": "https://familyfiltertv.com/",
-    "sameAs": ["https://www.youtube.com/@FamilyFilterTV"]
+    "sameAs": [
+      "https://www.youtube.com/@FamilyFilterTV",
+      "https://www.instagram.com/familyfiltertv/",
+      "https://www.tiktok.com/@familyfiltertvapp"
+    ]
   }
 }
 </script>
@@ -202,6 +219,15 @@
     <img class="hero-mark" src="assets/icon-512.png" width="152" height="152"
       alt="The Family Filter TV app icon: a shield over a television, with a muted-speaker badge.">
   </div>
+
+  <figure class="demo">
+    <video id="hero-loop" class="demo-video" width="1280" height="720" autoplay muted loop playsinline
+      preload="metadata" poster="assets/media/hero-poster.jpg"
+      aria-label="A film line plays, the sound meter drops on one swear word, the word is muted, and the sound comes straight back.">
+      <source src="assets/media/hero-loop.mp4" type="video/mp4">
+    </video>
+    <figcaption>Film: &ldquo;Tears of Steel&rdquo; &copy; Blender Foundation | mango.blender.org, <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>. One word is muted, with the filter on Strict. The picture keeps playing and the sound comes straight back.</figcaption>
+  </figure>
 
   <div class="meter">
     <div class="meter-bars" aria-hidden="true">
@@ -356,6 +382,16 @@
   <p><a href="setup.html">The full walkthrough</a> covers installation, linking your TV and the
   few settings needed before you start watching.</p>
 
+  <h2 id="video">See it in 30 seconds</h2>
+  <figure class="demo">
+    <video class="demo-video" width="1280" height="720" controls preload="none" playsinline
+      poster="assets/media/launch-poster.jpg">
+      <source src="assets/media/launch-video.mp4" type="video/mp4">
+      Your browser can&rsquo;t play this video. <a href="https://www.youtube.com/@FamilyFilterTV">Watch it on YouTube</a>.
+    </video>
+    <figcaption>The 30-second launch video, with sound. Also on <a href="https://www.youtube.com/@FamilyFilterTV" rel="me noopener">YouTube</a>, <a href="https://www.instagram.com/familyfiltertv/" rel="me noopener">Instagram</a> and <a href="https://www.tiktok.com/@familyfiltertvapp" rel="me noopener">TikTok</a>. Film: &ldquo;Tears of Steel&rdquo; &copy; Blender Foundation | mango.blender.org, <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</figcaption>
+  </figure>
+
   <h2>One filter for the whole house</h2>
   <p>The filter belongs to the household, not to the device. Set it once on your phone and every
   television linked to your account follows — the one in the lounge, the one in the spare room,
@@ -495,7 +531,9 @@
     <p>Family Filter TV is made by Jacques du Preez in South Africa.</p>
     <p><a href="mailto:jacquesjdupreez@gmail.com">jacquesjdupreez@gmail.com</a></p>
     <nav class="foot-nav" aria-label="Footer">
-      <a href="https://www.youtube.com/@FamilyFilterTV">YouTube</a>
+      <a href="https://www.youtube.com/@FamilyFilterTV" rel="me noopener">YouTube</a>
+      <a href="https://www.instagram.com/familyfiltertv/" rel="me noopener">Instagram</a>
+      <a href="https://www.tiktok.com/@familyfiltertvapp" rel="me noopener">TikTok</a>
       <a href="titles/">Titles</a>
       <a href="download.html">Download</a>
       <a href="setup.html">Get set up</a>
@@ -506,5 +544,14 @@
     <p class="fine">An independent app. Not affiliated with, or endorsed by, Stremio, Netflix or Google.</p>
   </div>
 </footer>
+<script>
+  // Respect reduced-motion: show the still poster instead of a looping animation.
+  (function () {
+    var v = document.getElementById("hero-loop");
+    if (v && window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      v.removeAttribute("autoplay"); v.pause();
+    }
+  })();
+</script>
 </body>
 </html>
