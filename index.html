@@ -379,14 +379,17 @@
       <datalist id="price-country-list"></datalist>
     </div>
     <p class="price-figure" aria-live="polite"><span id="price-annual">US$14.99</span> <span>a year</span></p>
-    <div class="price-launch" id="price-launch" hidden aria-live="polite">
+    <!-- price.js fills this for the viewer's country before showing it. Kept empty and out of
+         search snippets: the seat count and local price are live, per-country figures, and a
+         hard-coded example here was being quoted by Google's AI Overview as the price. -->
+    <div class="price-launch" id="price-launch" hidden aria-live="polite" data-nosnippet>
       <p class="price-launch-label">Launch offer</p>
-      <p class="price-figure price-launch-figure"><span id="price-launch-pct">50%</span> <span>off your first year</span></p>
+      <p class="price-figure price-launch-figure"><span id="price-launch-pct"></span> <span>off your first year</span></p>
       <ul>
-        <li id="price-launch-seats">137 of 200 seats left at this price in South Africa.</li>
-        <li id="price-launch-price">R125 for your first year, then R250 a year. 14-day free trial first.</li>
-        <li id="price-launch-next">Next 200: 40% off. Then 30%, 20%, 10%, and full price after that.</li>
-        <li id="price-launch-end">Ends 31 December 2026.</li>
+        <li id="price-launch-seats"></li>
+        <li id="price-launch-price"></li>
+        <li id="price-launch-next"></li>
+        <li id="price-launch-end"></li>
       </ul>
     </div>
     <ul>
