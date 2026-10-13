@@ -156,7 +156,6 @@
 .chart-svg .bar { fill: var(--signal); }
 .chart-svg .bar-q { fill: var(--field-line); }
 .chart-svg .hush { fill: var(--hush); stroke: var(--signal); stroke-width: 0.8; }
-.chart-svg .mark { fill: var(--ink); }
 .chart-svg .grid { stroke: var(--line-strong); stroke-width: 1; stroke-dasharray: 3 4; }
 .chart-svg .axis-line { stroke: var(--muted); stroke-width: 1; }
 .chart-svg .axis { fill: var(--muted); font-size: 13.5px; font-weight: 600; font-family: inherit; }

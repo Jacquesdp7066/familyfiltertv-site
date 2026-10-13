@@ -440,7 +440,7 @@ AXIS_STEPS = (1, 2, 3, 4, 5, 6, 8, 10)
 
 
 def timeline_chart(t):
-    """Inline SVG: one bar per bucket; strong-profanity buckets are hushed and gapped, with a marker."""
+    """Inline SVG: one bar per bucket, with the strong-profanity share drawn as a hushed, gapped top."""
     tl = t["timeline"]
     words, strong, bucket_ms = tl["words"], tl["strongProfanity"], tl["bucketMs"]
     n, top_word = len(words), max(words)
@@ -462,18 +462,19 @@ def timeline_chart(t):
             tip += f", {strong[i]} strong profanity"
         h = max(words[i] / top_word * plot_h, 3) if words[i] else 2
         y = base - h
-        if strong[i]:
-            # a hushed bar: stacked segments with gaps, so the sound visibly drops out
-            segs, bottom = [], base
+        body = ""
+        if words[i]:
+            # Stacked: the strong-profanity share sits on top as a hushed (gapped) stretch,
+            # so a film with strong words everywhere still shows how much of each bar they are.
+            sh = min(max(h * min(strong[i], words[i]) / words[i], 3), h) if strong[i] else 0
+            if h - sh > 0.5:
+                body += f'<rect class="bar" x="{x:.1f}" y="{y + sh:.1f}" width="{bw:.1f}" height="{h - sh:.1f}" rx="2"/>'
+            bottom = y + sh
             while bottom - y > 0.5:
                 seg_h = min(seg, bottom - y)
                 if seg_h >= 2:
-                    segs.append(f'<rect class="hush" x="{x:.1f}" y="{bottom - seg_h:.1f}" width="{bw:.1f}" height="{seg_h:.1f}" rx="1"/>')
+                    body += f'<rect class="hush" x="{x:.1f}" y="{bottom - seg_h:.1f}" width="{bw:.1f}" height="{seg_h:.1f}" rx="1"/>'
                 bottom -= seg + gap
-            segs.append(f'<path class="mark" d="M{cx - 4:.1f} {y - 10:.1f}h8l-4 7z"/>')
-            body = "".join(segs)
-        elif words[i]:
-            body = f'<rect class="bar" x="{x:.1f}" y="{y:.1f}" width="{bw:.1f}" height="{h:.1f}" rx="2"/>'
         else:
             body = f'<rect class="bar-q" x="{x:.1f}" y="{y:.1f}" width="{bw:.1f}" height="{h:.1f}" rx="1"/>'
         out.append(f"<g><title>{esc(tip)}</title>{body}</g>")
@@ -501,7 +502,7 @@ def timeline_chart(t):
       {svg}
       <figcaption>
         <span class="key"><i class="sw sw-bar" aria-hidden="true"></i>Flagged words</span>
-        <span class="key"><i class="sw sw-hush" aria-hidden="true"></i>Hushed bar with a marker: strong profanity in that stretch</span>
+        <span class="key"><i class="sw sw-hush" aria-hidden="true"></i>Hushed top of a bar: the strong profanity in that stretch</span>
         <span class="chart-note">Each bar is one {esc(span_word(bucket_ms))}-minute stretch, scaled to this film's busiest stretch ({esc(top_word)} flagged words). Bottom axis: minutes into the film.</span>
       </figcaption>
     </figure>'''
