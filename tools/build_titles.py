@@ -120,6 +120,7 @@ def header(active, depth):
     <nav class="site-nav" aria-label="Pages">
 {nav(active, depth)}
     </nav>
+    <a class="btn btn-sm head-cta" href="https://play.google.com/store/apps/details?id=com.familyfiltertv.app">Get the app</a>
   </div>
 </header>'''
 
@@ -369,6 +370,143 @@ def slot_when(i, bucket_ms):
     return f"between minute {minutes_label(i, bucket_ms).replace(' to ', ' and ')}"
 
 
+def label_pill(t):
+    label = t["label"] if t.get("label") in LABELS else "mild"
+    return f'<span class="pill pill-{label}"><span class="vh">Language level: </span>{esc(t["labelText"])}</span>'
+
+
+def result_block(t, category_labels):
+    """The answer at a glance: big total, language pill, one bar per category."""
+    total = t["totalFlagged"]
+    name = esc(t["title"])
+    if not total:
+        return f'''  <section class="result result-clean" aria-label="Result at a glance for {name}">
+    <div class="result-head">
+      <p class="result-calm">No flagged words</p>
+      {label_pill(t)}
+    </div>
+    <div class="calm-line" aria-hidden="true"></div>
+  </section>'''
+    keys = category_keys(t["counts"])
+    top = max(t["counts"][k] for k in keys) or 1
+    bars = "\n".join(
+        f'''      <li class="bar-row">
+        <span class="bar-label">{esc(category_labels.get(k, k))}</span>
+        <span class="bar-track" aria-hidden="true"><span class="bar-fill" style="width:{100 * t["counts"][k] / top:.1f}%"></span></span>
+        <span class="bar-num">{esc(t["counts"][k])}</span>
+      </li>'''
+        for k in keys
+    )
+    words = "flagged word" if total == 1 else "flagged words"
+    return f'''  <section class="result" aria-label="Result at a glance for {name}">
+    <div class="result-head">
+      <p class="result-total"><span class="result-figure">{esc(total)}</span> <span class="result-unit">{words}</span></p>
+      {label_pill(t)}
+    </div>
+    <ul class="bars" aria-label="Flagged words by category">
+{bars}
+    </ul>
+  </section>'''
+
+
+def stretch_word(n):
+    return "stretch" if n == 1 else "stretches"
+
+
+def chart_summary(t):
+    """The chart in words, derived only from the timeline data."""
+    tl = t["timeline"]
+    words, strong, bucket_ms = tl["words"], tl["strongProfanity"], tl["bucketMs"]
+    n = len(words)
+    peak = max(range(n), key=lambda i: (words[i], -i))
+    parts = [
+        f"Bar chart of flagged words in each {span_word(bucket_ms)}-minute stretch of {t['title']}: "
+        f"{n} stretches, from {min(words)} to {words[peak]} flagged words, busiest at minute "
+        f"{minutes_label(peak, bucket_ms)}."
+    ]
+    strong_n = sum(1 for x in strong if x)
+    if strong_n:
+        parts.append(
+            f"Strong profanity appears in {strong_n} {stretch_word(strong_n)}, first {slot_when(first_slot(strong), bucket_ms)}."
+        )
+    else:
+        parts.append("No stretch has strong profanity.")
+    return " ".join(parts)
+
+
+CHART_W, CHART_H = 400, 190
+CHART_LEFT, CHART_RIGHT, CHART_TOP, CHART_BOTTOM = 34, 8, 20, 26
+AXIS_STEPS = (1, 2, 3, 4, 5, 6, 8, 10)
+
+
+def timeline_chart(t):
+    """Inline SVG: one bar per bucket; strong-profanity buckets are hushed and gapped, with a marker."""
+    tl = t["timeline"]
+    words, strong, bucket_ms = tl["words"], tl["strongProfanity"], tl["bucketMs"]
+    n, top_word = len(words), max(words)
+    size = bucket_ms // 60000
+    plot_w = CHART_W - CHART_LEFT - CHART_RIGHT
+    plot_h = CHART_H - CHART_TOP - CHART_BOTTOM
+    base = CHART_TOP + plot_h
+    slot = plot_w / n
+    bw = min(slot * 0.66, 22)
+    seg, gap = 9, 5
+    summary = chart_summary(t)
+
+    out = []
+    for i in range(n):
+        cx = CHART_LEFT + slot * (i + 0.5)
+        x = cx - bw / 2
+        tip = f"Minute {minutes_label(i, bucket_ms)}: {plural(words[i], 'flagged word')}"
+        if strong[i]:
+            tip += f", {strong[i]} strong profanity"
+        h = max(words[i] / top_word * plot_h, 3) if words[i] else 2
+        y = base - h
+        if strong[i]:
+            # a hushed bar: stacked segments with gaps, so the sound visibly drops out
+            segs, bottom = [], base
+            while bottom - y > 0.5:
+                seg_h = min(seg, bottom - y)
+                if seg_h >= 2:
+                    segs.append(f'<rect class="hush" x="{x:.1f}" y="{bottom - seg_h:.1f}" width="{bw:.1f}" height="{seg_h:.1f}" rx="1"/>')
+                bottom -= seg + gap
+            segs.append(f'<path class="mark" d="M{cx - 4:.1f} {y - 10:.1f}h8l-4 7z"/>')
+            body = "".join(segs)
+        elif words[i]:
+            body = f'<rect class="bar" x="{x:.1f}" y="{y:.1f}" width="{bw:.1f}" height="{h:.1f}" rx="2"/>'
+        else:
+            body = f'<rect class="bar-q" x="{x:.1f}" y="{y:.1f}" width="{bw:.1f}" height="{h:.1f}" rx="1"/>'
+        out.append(f"<g><title>{esc(tip)}</title>{body}</g>")
+
+    step = next(s for s in AXIS_STEPS if -(-n // s) <= 8)
+    ticks = "".join(
+        f'<text class="axis" x="{CHART_LEFT + slot * i:.1f}" y="{CHART_H - 7}" text-anchor="middle">{i * size}</text>'
+        for i in range(0, n, step)
+    )
+    y_labels = (
+        f'<text class="axis" x="{CHART_LEFT - 6}" y="{CHART_TOP + 4}" text-anchor="end">{top_word}</text>'
+        f'<text class="axis" x="{CHART_LEFT - 6}" y="{base + 4}" text-anchor="end">0</text>'
+    )
+    grid = (
+        f'<line class="grid" x1="{CHART_LEFT}" x2="{CHART_W - CHART_RIGHT}" y1="{CHART_TOP}" y2="{CHART_TOP}"/>'
+        f'<line class="axis-line" x1="{CHART_LEFT}" x2="{CHART_W - CHART_RIGHT}" y1="{base}" y2="{base}"/>'
+    )
+    svg = (
+        f'<svg class="chart-svg" viewBox="0 0 {CHART_W} {CHART_H}" role="img" aria-label="{esc(summary)}" '
+        f'preserveAspectRatio="xMidYMid meet">'
+        f"<title>Flagged words per {span_word(bucket_ms)}-minute stretch of {esc(t['title'])}</title>"
+        f"<desc>{esc(summary)}</desc>{grid}{y_labels}{''.join(out)}{ticks}</svg>"
+    )
+    return f'''    <figure class="chart">
+      {svg}
+      <figcaption>
+        <span class="key"><i class="sw sw-bar" aria-hidden="true"></i>Flagged words</span>
+        <span class="key"><i class="sw sw-hush" aria-hidden="true"></i>Hushed bar with a marker: strong profanity in that stretch</span>
+        <span class="chart-note">Each bar is one {esc(span_word(bucket_ms))}-minute stretch, scaled to this film's busiest stretch ({esc(top_word)} flagged words). Bottom axis: minutes into the film.</span>
+      </figcaption>
+    </figure>'''
+
+
 def timeline_section(t):
     """When the language happens: first flagged word, first strong word, heaviest stretch."""
     timeline = t.get("timeline")
@@ -397,20 +535,24 @@ def timeline_section(t):
 
     body = "\n".join(f"    <p>{ln}</p>" for ln in lines)
     rows = "\n".join(
-        f"          <tr><td>{esc(minutes_label(i, bucket_ms))}</td><td>{esc(words[i])}</td><td>{esc(strong[i])}</td></tr>"
+        f"            <tr><td>{esc(minutes_label(i, bucket_ms))}</td><td>{esc(words[i])}</td><td>{esc(strong[i])}</td></tr>"
         for i in range(len(words))
     )
     return f'''  <section aria-labelledby="timeline-heading">
     <h2 id="timeline-heading">When the swearing happens in {name}</h2>
 {body}
-    <div class="table-scroll">
-      <table>
-        <thead><tr><th>Minutes</th><th>Flagged words</th><th>Strong profanity</th></tr></thead>
-        <tbody>
+{timeline_chart(t)}
+    <details class="numbers">
+      <summary>See the numbers</summary>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Minutes</th><th>Flagged words</th><th>Strong profanity</th></tr></thead>
+          <tbody>
 {rows}
-        </tbody>
-      </table>
-    </div>
+          </tbody>
+        </table>
+      </div>
+    </details>
   </section>'''
 
 
@@ -494,7 +636,9 @@ def analysis_panel(t, category_labels):
     profiles = t["profiles"]
     cue_count = t["cueCount"]
     profile_html = "\n".join(
-        f'      <li>{esc(name.capitalize())} filter: {esc(muted)} of {esc(cue_count)} subtitle lines muted</li>'
+        f'      <li class="tile"><span class="tile-name">{esc(name.capitalize())} filter:</span> '
+        f'<span class="tile-num">{esc(muted)}</span> '
+        f'<span class="tile-of">of {esc(cue_count)} subtitle lines muted</span></li>'
         for name, muted in profiles.items()
     )
 
@@ -505,7 +649,7 @@ def analysis_panel(t, category_labels):
     <p><strong>Total flagged words:</strong> {esc(t["totalFlagged"])}</p>
 {cat_block}
     <h3>Lines muted per filter profile</h3>
-    <ul>
+    <ul class="tiles">
 {profile_html}
     </ul>
     <p class="muted">Counted from English subtitles of a standard release; other cuts or versions
@@ -896,6 +1040,7 @@ def title_page_html(t, by_id, category_labels, benchmark=None):
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap">
 <link rel="canonical" href="{canonical}">
 <link rel="stylesheet" href="../../style.css">
+<link rel="stylesheet" href="../film.css">
 <script type="application/ld+json">
 {jsonld(jsonld_work)}
 </script>
@@ -918,6 +1063,9 @@ def title_page_html(t, by_id, category_labels, benchmark=None):
   <h1 class="page-title">{esc(seo_h1(t))}</h1>
   <p class="lead">{esc(lead)}</p>
   <p class="lead"><strong>{esc(lead_detail)}</strong></p>
+
+{result_block(t, category_labels)}
+
   <p>{esc(t["intro"])}</p>
   <p class="muted">This guide covers spoken language only. It does not rate violence, nudity or
   frightening scenes.</p>
@@ -1163,13 +1311,19 @@ def index_page_html(titles, category_labels):
         ("Titles", canonical),
     ])
 
+    top = max((t["totalFlagged"] for t in titles), default=0) or 1
     rows = []
     for t in sorted(titles, key=lambda x: x["title"]):
+        total = t["totalFlagged"]
+        # square-root scale: one very heavy film would otherwise flatten every other bar
+        pct = 100 * (total / top) ** 0.5 if total else 0
+        words = "word" if total == 1 else "words"
         rows.append(
             f'      <li class="title-row" data-search="{esc(t["title"].lower())}">'
-            f'<a href="{t["slug"]}/">{esc(t["title"])} ({t["year"]})</a> '
-            f'<span class="muted">&mdash; {esc(t["labelText"])}, '
-            f'{esc(t["totalFlagged"])} flagged {"word" if t["totalFlagged"] == 1 else "words"}</span></li>'
+            f'<a class="title-link" href="{t["slug"]}/">{esc(t["title"])} ({t["year"]})</a>'
+            f'<span class="title-meta">{label_pill(t)} '
+            f'<span class="title-count">{esc(total)} flagged {words}</span></span>'
+            f'<span class="title-bar" aria-hidden="true"><span style="width:{pct:.1f}%"></span></span></li>'
         )
 
     breadcrumb = breadcrumb_html(1, title=None)
@@ -1197,6 +1351,7 @@ def index_page_html(titles, category_labels):
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap">
 <link rel="canonical" href="{canonical}">
 <link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="film.css">
 <script type="application/ld+json">
 {jsonld(jsonld_breadcrumb)}
 </script>
@@ -1220,7 +1375,7 @@ def index_page_html(titles, category_labels):
       }}, this)">
   </p>
 
-  <ul id="title-list" class="panel" style="list-style:none;padding:22px 24px;">
+  <ul id="title-list" class="title-grid">
 {chr(10).join(rows)}
   </ul>
 
