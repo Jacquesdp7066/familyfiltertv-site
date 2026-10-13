@@ -1,0 +1,152 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1700" height="1560" viewBox="0 0 1700 1560" font-family="Manrope, Helvetica, Arial, sans-serif">
+  <title>Family Filter TV home page wireframe: desktop (left) and phone (right)</title>
+  <desc>Schematic boxes for the redesigned home page. Desktop at 1280 px wide scaled to 0.9; phone at 390 px wide scaled to 1.0. Blue boxes are video or image frames, amber boxes are the Google Play button, cyan strokes are the sound meter.</desc>
+  <style>
+    .page{fill:#0B0C0F;stroke:#262932}
+    .card{fill:#15171C;stroke:#262932}
+    .field{fill:#0B1E3A;stroke:#1B3A63}
+    .img{fill:#102A4F;stroke:#35CFE8;stroke-dasharray:4 3}
+    .btn{fill:#F4B65C}
+    .quiet{fill:none;stroke:#3B404D}
+    .t{fill:#F2F1EC;font-size:13px}
+    .h{fill:#F2F1EC;font-size:22px;font-weight:800}
+    .k{fill:#9A9DA8;font-size:10px;letter-spacing:1px}
+    .m{fill:#9A9DA8;font-size:11px}
+    .bar{stroke:#35CFE8;stroke-width:2}
+    .lbl{fill:#35CFE8;font-size:11px;font-weight:700}
+  </style>
+
+  <!-- ===================== DESKTOP 1280 x ~3600 scaled 0.9 ===================== -->
+  <g transform="translate(20,20) scale(0.9)">
+    <text class="lbl" x="0" y="-6">DESKTOP 1280 px (0.9 scale). Target height ≤ 3,800 px.</text>
+    <rect class="page" x="0" y="0" width="1280" height="1660"/>
+    <!-- header -->
+    <rect class="card" x="0" y="0" width="1280" height="64"/>
+    <text class="t" x="80" y="38">[icon] Family Filter TV</text>
+    <text class="m" x="700" y="38">Home   Titles   Download   Get set up   Support   Privacy   Terms</text>
+    <!-- hero: container 1120 centred => x 80..1200 -->
+    <text class="k" x="80" y="140">PROFANITY FILTER FOR ANDROID TV AND GOOGLE TV</text>
+    <text class="h" x="80" y="182">Automatically mute</text>
+    <text class="h" x="80" y="210">profanity on your</text>
+    <text class="h" x="80" y="238">Android TV.</text>
+    <text class="m" x="80" y="272">Family Filter TV mutes the swearing while the picture</text>
+    <text class="m" x="80" y="288">keeps playing. Nothing is cut, blurred or skipped. Set how</text>
+    <text class="m" x="80" y="304">strict on your phone, and every TV in the house follows.</text>
+    <rect class="btn" x="80" y="330" width="190" height="44" rx="10"/>
+    <text x="100" y="357" font-size="13" font-weight="700" fill="#16181D">Get it on Google Play</text>
+    <rect class="quiet" x="282" y="330" width="200" height="44" rx="10"/>
+    <text class="t" x="300" y="357">▶ Watch with sound (30 s)</text>
+    <text class="m" x="80" y="400">The first 14 days are free. Then US$14.99 a year. Other ways to install</text>
+    <!-- TV frame: 7/12 of 1120 = ~620 wide, x 580..1200 -->
+    <rect class="field" x="580" y="110" width="620" height="430" rx="18"/>
+    <rect class="img" x="590" y="120" width="600" height="338" rx="10"/>
+    <text class="m" x="700" y="290">hero-loop.mp4  (muted, loop, playsinline, poster hero-poster-1280.jpg)</text>
+    <text class="m" x="760" y="440">[subtitle … and a 🔇]</text>
+    <!-- soundbar -->
+    <line class="bar" x1="590" y1="476" x2="1190" y2="476" stroke="#1B3A63"/>
+    <text class="k" x="604" y="505">SOUND</text>
+    <g>
+      <line class="bar" x1="680" y1="510" x2="680" y2="492"/><line class="bar" x1="688" y1="512" x2="688" y2="486"/><line class="bar" x1="696" y1="508" x2="696" y2="498"/>
+      <line class="bar" x1="704" y1="514" x2="704" y2="482"/><line class="bar" x1="712" y1="510" x2="712" y2="494"/><line class="bar" x1="720" y1="512" x2="720" y2="488"/>
+      <line class="bar" x1="728" y1="506" x2="728" y2="500"/><line class="bar" x1="736" y1="514" x2="736" y2="480"/><line class="bar" x1="744" y1="510" x2="744" y2="492"/>
+      <line x1="760" y1="503" x2="900" y2="503" stroke="#2C4463" stroke-width="3" stroke-dasharray="4 4"/>
+      <line class="bar" x1="916" y1="510" x2="916" y2="492"/><line class="bar" x1="924" y1="514" x2="924" y2="482"/><line class="bar" x1="932" y1="508" x2="932" y2="498"/>
+      <line class="bar" x1="940" y1="512" x2="940" y2="488"/><line class="bar" x1="948" y1="510" x2="948" y2="494"/><line class="bar" x1="956" y1="514" x2="956" y2="480"/>
+    </g>
+    <text class="k" x="1140" y="505">MUTED</text>
+    <text class="m" x="580" y="562">A real film line with the filter on Strict. Film clip: Tears of Steel (CC) Blender Foundation | mango.blender.org</text>
+    <text class="m" x="80" y="590">▸ Transcript of the 30-second video</text>
+
+    <!-- how it works -->
+    <text class="h" x="80" y="680">How it works</text>
+    <text class="m" x="80" y="702">Set up in about five minutes.</text>
+    <g>
+      <rect class="card" x="80" y="720" width="357" height="300" rx="16"/>
+      <rect class="img" x="80" y="720" width="357" height="200" rx="16"/>
+      <text class="m" x="110" y="825">ASSET 3 step-install.jpg (fallback: icon)</text>
+      <text class="k" x="100" y="950">1</text>
+      <text class="t" x="100" y="972" font-weight="700">Put it on the TV and your phone</text>
+      <text class="m" x="100" y="992">Install on your Android TV or TV box, and on your phone…</text>
+      <rect class="card" x="461" y="720" width="357" height="300" rx="16"/>
+      <rect class="img" x="461" y="720" width="357" height="200" rx="16"/>
+      <text class="m" x="500" y="825">ASSET 4 step-link.mp4 (fallback: 7KD-M4Q)</text>
+      <text class="k" x="481" y="950">2</text>
+      <text class="t" x="481" y="972" font-weight="700">Link the TV from your phone</text>
+      <text class="m" x="481" y="992">The TV shows a short code. On the phone, tap Account…</text>
+      <rect class="card" x="842" y="720" width="358" height="300" rx="16"/>
+      <rect class="img" x="842" y="720" width="358" height="200" rx="16"/>
+      <text class="m" x="870" y="825">ASSET 5 step-levels.jpg (fallback: app-tv-settings.png)</text>
+      <text class="k" x="862" y="950">3</text>
+      <text class="t" x="862" y="972" font-weight="700">Pick how strict, then watch</text>
+      <text class="m" x="862" y="992">Off, mild, family or strict. Start a title in Stremio…</text>
+    </g>
+    <text class="m" x="80" y="1048">Follow-along needs version 0.2.21 or newer. Family Filter TV is not affiliated with Netflix.  The full walkthrough →</text>
+
+    <!-- household -->
+    <rect class="img" x="80" y="1110" width="1120" height="300" rx="18"/>
+    <text class="m" x="420" y="1260">ASSET 6 household-clean.jpg 16:9 (fallback: household.jpg cropped 16:6.75)</text>
+    <text class="h" x="80" y="1460">One filter for the whole house.</text>
+    <text class="m" x="80" y="1484">The filter belongs to the household, not to the device. Set it once on your phone and every television linked…</text>
+    <text class="t" x="80" y="1530" font-weight="700">Three devices included.</text><text class="m" x="80" y="1548">Add up to six.</text>
+    <text class="t" x="461" y="1530" font-weight="700">Nothing to change on the TV.</text><text class="m" x="461" y="1548">Choose off, mild, family or strict on your phone.</text>
+    <text class="t" x="842" y="1530" font-weight="700">Link a TV by typing its code.</text><text class="m" x="842" y="1548">The TV shows a short code. That is the whole setup.</text>
+    <text class="m" x="80" y="1626">… continues: What it works with | Good to know  →  What it costs (price card + copy + button)  →  Questions (11 details)  →  Guides (10 links)  →  Install band  →  footer</text>
+  </g>
+
+  <!-- ===================== PHONE 390 ===================== -->
+  <g transform="translate(1220,20)">
+    <text class="lbl" x="0" y="-6">PHONE 390 px (1:1). Fold at 844 px. Target height ≤ 6,200 px.</text>
+    <rect class="page" x="0" y="0" width="390" height="1500"/>
+    <rect class="card" x="0" y="0" width="390" height="60"/>
+    <text class="t" x="18" y="36">[icon] Family Filter TV</text>
+    <text class="m" x="250" y="36">Home Titles …</text>
+    <text class="k" x="18" y="100">PROFANITY FILTER FOR ANDROID TV</text>
+    <text class="h" x="18" y="134">Automatically mute</text>
+    <text class="h" x="18" y="160">profanity on your</text>
+    <text class="h" x="18" y="186">Android TV.</text>
+    <text class="m" x="18" y="214">Family Filter TV mutes the swearing while the</text>
+    <text class="m" x="18" y="230">picture keeps playing. Nothing is cut, blurred or</text>
+    <text class="m" x="18" y="246">skipped. Set how strict on your phone, and every</text>
+    <text class="m" x="18" y="262">TV in the house follows.</text>
+    <!-- TV frame 354 wide: screen 334x188 -->
+    <rect class="field" x="18" y="282" width="354" height="262" rx="16"/>
+    <rect class="img" x="28" y="292" width="334" height="188" rx="10"/>
+    <text class="m" x="110" y="390">hero-loop.mp4 (poster)</text>
+    <line x1="28" y1="490" x2="362" y2="490" stroke="#1B3A63"/>
+    <text class="k" x="36" y="518">SOUND</text>
+    <g>
+      <line class="bar" x1="100" y1="522" x2="100" y2="506"/><line class="bar" x1="106" y1="524" x2="106" y2="500"/><line class="bar" x1="112" y1="520" x2="112" y2="510"/>
+      <line class="bar" x1="118" y1="526" x2="118" y2="496"/><line class="bar" x1="124" y1="522" x2="124" y2="508"/>
+      <line x1="136" y1="515" x2="200" y2="515" stroke="#2C4463" stroke-width="3" stroke-dasharray="4 4"/>
+      <line class="bar" x1="212" y1="522" x2="212" y2="506"/><line class="bar" x1="218" y1="524" x2="218" y2="500"/><line class="bar" x1="224" y1="520" x2="224" y2="510"/>
+      <line class="bar" x1="230" y1="526" x2="230" y2="496"/><line class="bar" x1="236" y1="522" x2="236" y2="508"/>
+    </g>
+    <text class="k" x="318" y="518">MUTED</text>
+    <rect class="btn" x="18" y="564" width="354" height="46" rx="10"/>
+    <text x="118" y="593" font-size="13" font-weight="700" fill="#16181D">Get it on Google Play</text>
+    <rect class="quiet" x="18" y="620" width="354" height="46" rx="10"/>
+    <text class="t" x="118" y="649">▶ Watch with sound (30 s)</text>
+    <text class="m" x="18" y="692">The first 14 days are free. Then US$14.99 a year.</text>
+    <text class="m" x="18" y="708">Other ways to install</text>
+    <text class="m" x="18" y="736">A real film line with the filter on Strict. Film clip:</text>
+    <text class="m" x="18" y="752">Tears of Steel (CC) Blender Foundation | mango.blender.org</text>
+    <text class="m" x="18" y="780">▸ Transcript of the 30-second video</text>
+    <line x1="0" y1="844" x2="390" y2="844" stroke="#F4B65C" stroke-dasharray="6 4"/>
+    <text class="k" x="300" y="860" fill="#F4B65C">FOLD 844</text>
+
+    <text class="h" x="18" y="920">How it works</text>
+    <text class="m" x="18" y="942">Set up in about five minutes.</text>
+    <rect class="card" x="18" y="960" width="354" height="300" rx="16"/>
+    <rect class="img" x="18" y="960" width="354" height="199" rx="16"/>
+    <text class="m" x="60" y="1064">ASSET 3 step-install.jpg</text>
+    <text class="k" x="38" y="1190">1</text>
+    <text class="t" x="38" y="1212" font-weight="700">Put it on the TV and your phone</text>
+    <text class="m" x="38" y="1232">Install on your Android TV or TV box, and on your</text>
+    <text class="m" x="38" y="1248">phone as well, then sign in…</text>
+    <rect class="card" x="18" y="1276" width="354" height="200" rx="16"/>
+    <rect class="img" x="18" y="1276" width="354" height="199" rx="16"/>
+    <text class="m" x="60" y="1380">step 2 … then step 3, household (tall crop),</text>
+    <text class="m" x="60" y="1398">works with, good to know, price, questions,</text>
+    <text class="m" x="60" y="1416">guides, install band, footer: one column.</text>
+  </g>
+</svg>
