@@ -100,6 +100,7 @@ def foot_nav(depth):
         '      <a href="https://www.instagram.com/familyfiltertv/" rel="me noopener">Instagram</a>',
         '      <a href="https://www.tiktok.com/@familyfiltertvapp" rel="me noopener">TikTok</a>',
         f'      <a href="{up}titles/">Titles</a>',
+        f'      <a href="{up}guides.html">Guides</a>',
         f'      <a href="{up}download.html">Download</a>',
         f'      <a href="{up}setup.html">Get set up</a>',
         f'      <a href="{up}support.html">Support</a>',

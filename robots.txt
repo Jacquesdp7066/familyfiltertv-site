@@ -1,5 +1,6 @@
 # Family Filter TV — everything here is public and may be indexed, by search
 # engines and by AI crawlers alike. See llms.txt for a plain-text summary.
+# Full plain-text version: https://familyfiltertv.com/llms-full.txt
 User-agent: *
 Allow: /
 Disallow: /link.html
