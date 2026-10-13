@@ -457,11 +457,20 @@ class Chart(unittest.TestCase):
         self.assertEqual(self.chart().count("<g><title>"), 4)
         self.assertEqual(self.chart([1] * 13, [0] * 13).count("<g><title>"), 13)
 
-    def test_strong_buckets_are_hushed_and_marked(self):
+    def test_strong_share_is_a_hushed_top_on_a_solid_bar(self):
         html = self.chart()
-        self.assertEqual(html.count('class="mark"'), 1)
+        self.assertNotIn('class="mark"', html)
         self.assertIn('class="hush"', html)
-        self.assertEqual(html.count('class="bar"'), 2)
+        self.assertEqual(html.count('class="bar"'), 3)  # two plain bars plus the solid part of the 4-word bar
+
+    def test_strong_share_is_proportional_and_all_strong_bars_are_fully_hushed(self):
+        half = self.chart([4], [2])
+        bar_h = float(re.search(r'class="bar" [^>]*height="([\d.]+)"', half).group(1))
+        plot_h = bt.CHART_H - bt.CHART_TOP - bt.CHART_BOTTOM
+        self.assertAlmostEqual(bar_h, plot_h / 2, places=0)
+        every = self.chart([4], [4])
+        self.assertNotIn('class="bar"', every)
+        self.assertIn('class="hush"', every)
 
     def test_tallest_bar_fills_the_plot_and_others_scale_to_it(self):
         heights = [float(h) for h in re.findall(r'class="bar" [^>]*height="([\d.]+)"', self.chart([4, 2, 0, 1], [0] * 4))]
