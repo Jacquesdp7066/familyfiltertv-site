@@ -198,6 +198,23 @@ A: Less than the famous records suggest. In 1,286 films we counted from their En
 Q: Can I watch a movie with the swearing muted?
 A: On an Android TV or Google TV, yes. Family Filter TV mutes the swear words it finds in the subtitles while the picture keeps playing. It works with supported Stremio playback and follows along with Netflix and other apps. It covers spoken language only, English titles for now, and muting is best effort, so a word may slip through. Family Filter TV is not affiliated with Netflix.
 
+## Movies with no swearing (https://familyfiltertv.com/movies-with-no-swearing.html)
+
+Q: Which movies have no swearing?
+A: Of the 1,286 films we have analysed, 55 have no flagged words in their English subtitles, including Moana (2016), Toy Story (1995), The Lego Movie (2014), Finding Dory (2016) and Mary Poppins (1964). The full list is on the page. Zero means none in the subtitles of the one release we counted. It is not a rating, and it says nothing about violence or frightening scenes.
+
+Q: Does zero flagged words mean a movie is suitable for kids?
+A: No. It only means our word list found nothing in the English subtitles of that release. We did not assess violence, nudity, frightening scenes or themes, so a film with no flagged words can still be unsuitable for young children. The list includes horror films, for example. Check an age rating or a parents guide for those.
+
+Q: How much swearing does a typical movie have?
+A: In the 1,286 films we counted, half have 43 or fewer flagged words. About 4% have none, 14% have five or fewer, and about one in four has 100 or more. Flagged words include mild language such as damn and religious exclamations, not only strong profanity.
+
+Q: What counts as a flagged word?
+A: Any word in our dictionary found in a film's English subtitles, filed under strong profanity, mild profanity, religious exclamations, crude language, explicit sexual language, suggestive language or slurs. Every appearance counts, and bleeped or unsubtitled words cannot be counted. The rules are on our methodology page.
+
+Q: Can I watch other movies with the swearing muted?
+A: On an Android TV or Google TV, yes. Family Filter TV mutes the swear words it finds in the subtitles while the picture keeps playing. It works with supported Stremio playback and follows along with Netflix and other apps. It covers spoken language only, English titles for now, and muting is best effort, so a word may slip through. Family Filter TV is not affiliated with Netflix.
+
 ## VidAngel and ClearPlay alternative for Stremio households (https://familyfiltertv.com/vidangel-clearplay-alternative.html)
 
 Q: Does VidAngel work in South Africa?
@@ -486,6 +503,7 @@ A: Needs Family Filter TV on an Android TV or Google TV device and on an Android
 - How to mute swearing on Netflix: The steps for Android TV and Google TV, and what to expect. Not affiliated with Netflix. https://familyfiltertv.com/mute-swearing-on-netflix.html
 - Does Netflix have a profanity filter?: What Netflix's own controls do, and the real options, including muting on an Android TV or Google TV. https://familyfiltertv.com/does-netflix-have-a-profanity-filter.html
 - Swearing in movies: The Hays Code years, the first F-word in a studio film, the records, and how much swearing is typical in 1,286 films counted from their English subtitles. https://familyfiltertv.com/swearing-in-movies.html
+- Movies with no swearing: The 55 of 1,286 films we counted with no flagged words in their English subtitles, 129 more with one to five, and what zero does and does not mean. https://familyfiltertv.com/movies-with-no-swearing.html
 - VidAngel and ClearPlay alternative for Stremio households: A side-by-side comparison with VidAngel and ClearPlay for Stremio and Android TV households. https://familyfiltertv.com/vidangel-clearplay-alternative.html
 - Movie filtering services compared: Family Filter TV, VidAngel, ClearPlay, Enjoy Movies Your Way and TVGuardian compared on price, devices, what they filter, country and trial. https://familyfiltertv.com/movie-filtering-services-compared.html
 - Will it work on my TV?: Which TV brands and systems are supported, including Samsung, LG, Hisense, Roku and Fire TV. https://familyfiltertv.com/which-tvs.html
