@@ -180,6 +180,24 @@ A: No. Browser extensions run in a web browser on a computer. They do not run in
 Q: Does Family Filter TV filter violence or nudity on Netflix?
 A: No. Family Filter TV mutes spoken profanity only. It does not filter violence or nudity, and it works for English titles for now.
 
+
+## Swearing in movies (https://familyfiltertv.com/swearing-in-movies.html)
+
+Q: When was swearing first allowed in Hollywood movies?
+A: Not until the late 1960s. The Production Code, in force from 1934 to 1968, banned profanity in American studio films, with rare exceptions such as the word damn in Gone with the Wind (1939), which producer David O. Selznick won an exemption for. The ratings system that replaced the Code on 1 November 1968 let studios release films with stronger language, marked by their rating.
+
+Q: What was the first movie to use the F-word?
+A: It depends on what counts. Director Robert Altman said M*A*S*H (1970) was the first major American studio film to use the word, and the Wikipedia list of films that most use it describes M*A*S*H as the first mainstream American film under the ratings system to do so. Films from outside the major studios and from other countries may have used the word earlier.
+
+Q: Which movie has the most swearing?
+A: By reported count of the F-word, Swearnet: The Movie (2014) leads with 935, and the documentary Fuck (2005) follows with 857. Among narrative feature films, The Wolf of Wall Street (2013) is listed at 569, though sources give between 506 and 569. In our own subtitle analysis of 1,286 films, the heaviest has 837 flagged words of all kinds.
+
+Q: How much swearing is normal in a movie?
+A: Less than the famous records suggest. In 1,286 films we counted from their English subtitles, half have 43 or fewer flagged words, 4% have none, and about one in four has 100 or more. Flagged words include mild language such as damn and religious exclamations, not only strong profanity.
+
+Q: Can I watch a movie with the swearing muted?
+A: On an Android TV or Google TV, yes. Family Filter TV mutes the swear words it finds in the subtitles while the picture keeps playing. It works with supported Stremio playback and follows along with Netflix and other apps. It covers spoken language only, English titles for now, and muting is best effort, so a word may slip through. Family Filter TV is not affiliated with Netflix.
+
 ## VidAngel and ClearPlay alternative for Stremio households (https://familyfiltertv.com/vidangel-clearplay-alternative.html)
 
 Q: Does VidAngel work in South Africa?
@@ -467,6 +485,7 @@ A: Needs Family Filter TV on an Android TV or Google TV device and on an Android
 - Mute swearing on TV without cutting the video: What watching looks like when unwanted language is muted and the picture keeps playing. https://familyfiltertv.com/mute-swearing-on-tv.html
 - How to mute swearing on Netflix: The steps for Android TV and Google TV, and what to expect. Not affiliated with Netflix. https://familyfiltertv.com/mute-swearing-on-netflix.html
 - Does Netflix have a profanity filter?: What Netflix's own controls do, and the real options, including muting on an Android TV or Google TV. https://familyfiltertv.com/does-netflix-have-a-profanity-filter.html
+- Swearing in movies: The Hays Code years, the first F-word in a studio film, the records, and how much swearing is typical in 1,286 films counted from their English subtitles. https://familyfiltertv.com/swearing-in-movies.html
 - VidAngel and ClearPlay alternative for Stremio households: A side-by-side comparison with VidAngel and ClearPlay for Stremio and Android TV households. https://familyfiltertv.com/vidangel-clearplay-alternative.html
 - Movie filtering services compared: Family Filter TV, VidAngel, ClearPlay, Enjoy Movies Your Way and TVGuardian compared on price, devices, what they filter, country and trial. https://familyfiltertv.com/movie-filtering-services-compared.html
 - Will it work on my TV?: Which TV brands and systems are supported, including Samsung, LG, Hisense, Roku and Fire TV. https://familyfiltertv.com/which-tvs.html
