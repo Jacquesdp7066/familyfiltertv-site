@@ -21,6 +21,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap">
 <link rel="canonical" href="https://familyfiltertv.com/download.html">
 <link rel="stylesheet" href="style.css">
+<script src="signup.js" defer></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -177,6 +178,25 @@
         compare it to the value shown above.</li>
     </ul>
   </div>
+
+  <section class="signup" id="signup" data-signup data-source="download" hidden aria-labelledby="signup-title">
+    <h2 id="signup-title">Get launch updates</h2>
+    <p>Leave your email and we will let you know about Family Filter TV launch news, such as changes to the launch offer.</p>
+    <form class="signup-form" novalidate>
+      <label for="signup-email">Email address</label>
+      <div class="signup-row">
+        <input type="email" id="signup-email" name="email" autocomplete="email" inputmode="email" required placeholder="you@example.com">
+        <button type="submit">Send me updates</button>
+      </div>
+      <div class="hp" aria-hidden="true">
+        <label for="signup-website">Leave this field empty</label>
+        <input type="text" id="signup-website" name="website" tabindex="-1" autocomplete="off">
+      </div>
+      <p class="signup-status" role="status" aria-live="polite"></p>
+      <p class="fine">We will only email you about Family Filter TV launch updates. Unsubscribe any time. See the <a href="privacy.html#email-signup">privacy policy</a>.</p>
+    </form>
+    <p class="signup-thanks" tabindex="-1" hidden>Thanks, you are on the list. We will only email you about Family Filter TV launch updates, and every email has an unsubscribe link.</p>
+  </section>
 </main>
 
 <footer class="site-foot">
