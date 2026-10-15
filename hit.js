@@ -10,8 +10,10 @@
   var PLAY_URL = "https://play.google.com/store/apps/details?id=com.familyfiltertv.app";
 
   try {
-    if (navigator.doNotTrack === "1" || window.doNotTrack === "1" || navigator.msDoNotTrack === "1" ||
-        navigator.globalPrivacyControl === true) return;
+    // Older browsers say "yes" instead of "1"; either means the visitor opted out.
+    var dnt = [navigator.doNotTrack, window.doNotTrack, navigator.msDoNotTrack];
+    for (var i = 0; i < dnt.length; i++) if (dnt[i] === "1" || dnt[i] === "yes" || dnt[i] === 1) return;
+    if (navigator.globalPrivacyControl === true) return;
   } catch (e) { return; }
   if (!window.fetch) return;
 
