@@ -749,3 +749,6 @@ section[aria-labelledby="learn-more"] .panel li { break-inside: avoid; max-width
   .actions > a { flex: 1 1 100%; text-align: center; }
   .hero.split .lead { font-size: 1.0625rem; }
 }
+
+/* Timeline tables: a narrow year column, the text gets the room. */
+.first-narrow th:first-child, .first-narrow td:first-child { width: 9.5rem; white-space: nowrap; }
