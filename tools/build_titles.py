@@ -1042,6 +1042,7 @@ def title_page_html(t, by_id, category_labels, benchmark=None):
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap">
 <link rel="canonical" href="{canonical}">
 <link rel="stylesheet" href="../../style.css">
+<script src="../../hit.js" defer></script>
 <link rel="stylesheet" href="../film.css">
 <script type="application/ld+json">
 {jsonld(jsonld_work)}
@@ -1177,6 +1178,7 @@ def methodology_page_html(titles, category_labels):
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap">
 <link rel="canonical" href="{canonical}">
 <link rel="stylesheet" href="../../style.css">
+<script src="../../hit.js" defer></script>
 <script type="application/ld+json">
 {jsonld(jsonld_page)}
 </script>
@@ -1353,6 +1355,7 @@ def index_page_html(titles, category_labels):
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap">
 <link rel="canonical" href="{canonical}">
 <link rel="stylesheet" href="../style.css">
+<script src="../hit.js" defer></script>
 <link rel="stylesheet" href="film.css">
 <script type="application/ld+json">
 {jsonld(jsonld_breadcrumb)}
