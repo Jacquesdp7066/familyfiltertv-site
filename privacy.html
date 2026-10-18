@@ -65,7 +65,7 @@
 
 <main class="wrap">
   <h1 class="page-title">Privacy policy</h1>
-  <p class="muted">Last updated: 15 October 2026</p>
+  <p class="muted">Last updated: 18 October 2026</p>
 
   <p>This policy covers the Family Filter TV Android app (TV and phone). It explains what an account
   involves, what we store, how payment works, and what the third-party services the app relies on
@@ -135,10 +135,26 @@
   by the filtering feature is handled on-device and may be cached locally to avoid unnecessary
   repeat requests. That local cache is not uploaded to Family Filter TV.</p>
 
-  <h2>No advertising, no analytics, no selling data</h2>
-  <p>Family Filter TV contains no advertising SDK and does not use an advertising ID. It contains no
-  analytics SDK. (That is about the app. The website has a small counter, described below.) We do not sell your data, or any data about your household, to anyone, for any
-  purpose.</p>
+  <h2 id="usage-analytics">Usage analytics (app)</h2>
+  <p>The app uses Google Analytics for Firebase to count how the app is used, so
+  we can see which devices and versions people use and whether it keeps working for them. It records
+  things like app opens, session length, screens viewed, subscription purchase events (which plan
+  and its price, never card details), app version, device model, Android version, and an approximate
+  country worked out from a masked network address. Each install gets a random app-instance id;
+  it is not your name, email or advertising ID, and we do not link it to your account.</p>
+  <ul>
+    <li>We switched off advertising ID collection and ad personalisation signals, and we do not share
+    this data with Google for advertising.</li>
+    <li>We do not send what you watch, subtitle text, your filter words, or anything the phone hears
+    during listen-to-sync.</li>
+    <li>Google processes this data for us as a service provider under the
+    <a href="https://firebase.google.com/terms/data-processing-terms">Firebase data processing terms</a>.
+    Detailed event data is kept for two months; after that only totals remain.</li>
+  </ul>
+
+  <h2>No advertising, no selling data</h2>
+  <p>Family Filter TV contains no advertising SDK and does not use an advertising ID. We do not sell
+  your data, or any data about your household, to anyone, for any purpose.</p>
 
   <h2 id="email-signup">Launch updates sign-up (website)</h2>
   <p>The website can offer a short form to get launch updates by email. You do not need an account or
