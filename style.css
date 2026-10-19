@@ -490,7 +490,8 @@ code {
   font-size: 0.9375rem;
 }
 
-.price-country input {
+.price-country input,
+.price-country select {
   flex: 1;
   min-width: 0;
   font: inherit;
@@ -504,7 +505,8 @@ code {
 }
 
 .price-country input::placeholder { color: var(--muted); }
-.price-country input:focus-visible { outline-offset: 2px; border-radius: 10px; }
+.price-country input:focus-visible,
+.price-country select:focus-visible { outline-offset: 2px; border-radius: 10px; }
 
 .price ul {
   list-style: none;

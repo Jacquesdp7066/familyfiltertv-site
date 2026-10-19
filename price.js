@@ -46,7 +46,6 @@
 
   var box = document.getElementById("price-country");
   var input = document.getElementById("price-country-input");
-  var list = document.getElementById("price-country-list");
   var annual = document.getElementById("price-annual");
   var devices = document.getElementById("price-devices");
   var noteCountry = document.getElementById("price-note-country");
@@ -56,7 +55,7 @@
   var launchPrice = document.getElementById("price-launch-price");
   var launchNext = document.getElementById("price-launch-next");
   var launchEnd = document.getElementById("price-launch-end");
-  if (!box || !input || !list || !annual || !devices || !window.fetch || !window.Intl) return;
+  if (!box || !input || !annual || !devices || !window.fetch || !window.Intl) return;
   var launchReady = !!(launchBox && launchPct && launchSeats && launchPrice && launchNext && launchEnd);
 
   var names;
@@ -99,6 +98,16 @@
   }
 
   function round2(n) { return Math.round(n * 100) / 100; }
+
+  // Honest urgency: a countdown to the launch offer's real end date (never a fake timer).
+  function timeLeft(iso) {
+    var ms = new Date(iso).getTime() - Date.now();
+    if (!(ms > 0)) return "";
+    var mins = Math.floor(ms / 60000), days = Math.floor(mins / 1440), hrs = Math.floor((mins % 1440) / 60);
+    if (days >= 2) return days + " days left";
+    if (days === 1) return "1 day " + hrs + " hours left";
+    return hrs + " hours " + (mins % 60) + " minutes left";
+  }
 
   function ladderEndDate(iso) {
     try {
@@ -159,12 +168,13 @@
         return { code: code, name: countryName(code) };
       }).sort(function (a, b) { return a.name.localeCompare(b.name, "en"); });
 
-      var byName = {};
+      // A real <select>: a text box with a datalist only suggested names matching what was
+      // already typed, so with "South Africa" filled in it looked impossible to change.
       entries.forEach(function (e) {
         var opt = document.createElement("option");
-        opt.value = e.name;
-        list.appendChild(opt);
-        byName[e.name.toLowerCase()] = e.code;
+        opt.value = e.code;
+        opt.textContent = e.name;
+        input.appendChild(opt);
       });
 
       var selectedCode = null;
@@ -193,29 +203,20 @@
         var nextText = ladderNextText(ladderState, ladder);
         launchNext.textContent = nextText;
         launchNext.hidden = !nextText;
-        launchEnd.textContent = "Ends " + ladderEndDate(ladderState.endsAt) + ".";
+        var left = timeLeft(ladderState.endsAt);
+        launchEnd.textContent = "Ends " + ladderEndDate(ladderState.endsAt) + (left ? ": " + left + "." : ".");
         launchBox.hidden = false;
       }
 
       function show(code) {
         var p = regions[code];
-        input.value = countryName(code);
+        input.value = code;
         annual.textContent = money(p.annual, code);
         devices.textContent = "A 4th, 5th or 6th device adds " + money(p.device4, code) + ", " +
           money(p.device5, code) + " or " + money(p.device6, code) + " a year.";
         if (noteCountry) noteCountry.textContent = " for the selected country";
         selectedCode = code;
         renderLadder();
-      }
-
-      // While typing, only a full country name counts; a two-letter code is accepted on commit.
-      function pick(allowCode) {
-        var v = input.value.trim().toLowerCase();
-        var code = byName[v] || (allowCode && regions[v.toUpperCase()] ? v.toUpperCase() : null);
-        if (!code) return false;
-        show(code);
-        storeChoice(code);
-        return true;
       }
 
       var current = guess(regions);
@@ -225,18 +226,13 @@
       if (launchReady) {
         fetchWithTimeout(ladderFixtureUrl() || LADDER_URL, LADDER_TIMEOUT_MS)
           .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
-          .then(function (data) { ladderState = data; renderLadder(); })
+          .then(function (data) { ladderState = data; renderLadder(); setInterval(renderLadder, 60000); })
           .catch(function () { ladderState = null; renderLadder(); });
       }
 
-      input.addEventListener("input", function () { pick(false); });
       input.addEventListener("change", function () {
-        if (!pick(true)) {
-          var saved = storedChoice();
-          show(saved && regions[saved] ? saved : current);
-        }
+        if (regions[input.value]) { show(input.value); storeChoice(input.value); }
       });
-      input.addEventListener("focus", function () { input.select(); });
     })
     .catch(function () { /* keep the static US price */ });
 })();
