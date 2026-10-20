@@ -260,10 +260,10 @@ A: Press Home on the remote. If you see Google TV or the Google Play Store among
 ## Samsung and LG TVs: early access (https://familyfiltertv.com/samsung-lg/)
 
 Q: Can Family Filter TV mute a Samsung or LG TV?
-A: Early access, in early testing. Your Android phone follows the film and mutes the TV over your home Wi-Fi. Nothing is installed on the TV. We have not yet proven it on every model.
+A: Early access, in early testing. Your Android phone follows the film and mutes the TV over your home Wi-Fi. Nothing is installed on the TV. We have not yet proven it on every model. If the app says "This TV can't be muted from the phone yet", that Samsung set cannot report whether it is muted, so it is not supported yet.
 
 Q: Does it work with Netflix and other apps on a Samsung or LG TV?
-A: Yes, that is the idea. The phone mutes the TV's sound, so it works with whatever app is playing on the TV, including Netflix.
+A: It is designed to. The phone mutes the TV's sound, so it is meant to work with whatever app is playing on the TV, including Netflix. This is early access and not proven on every model.
 
 Q: What do I need for a Samsung or LG TV?
 A: An Android phone with Family Filter TV on the same Wi-Fi as the TV, a Family Filter TV account, and a TV setting switched on that lets the phone talk to it. For now the phone screen stays on while you watch.
