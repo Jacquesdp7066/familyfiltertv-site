@@ -252,10 +252,21 @@ Q: Will Family Filter TV work on my TV?
 A: It depends on the system your TV runs, not the brand. If your TV has the Google Play Store, yes.
 
 Q: Does it work on a Samsung or LG TV?
-A: Not on the TV itself. A Google TV or Android TV streaming stick or box in an HDMI port is the simplest way today.
+A: Not on the TV itself. A Google TV or Android TV streaming stick or box in an HDMI port is the simplest way today. Samsung and LG are in early access from your phone: your phone mutes the TV over Wi-Fi, in early testing.
 
 Q: How can I tell what my TV runs?
 A: Press Home on the remote. If you see Google TV or the Google Play Store among the apps, it works.
+
+## Samsung and LG TVs: early access (https://familyfiltertv.com/samsung-lg/)
+
+Q: Can Family Filter TV mute a Samsung or LG TV?
+A: Early access, in early testing. Your Android phone follows the film and mutes the TV over your home Wi-Fi. Nothing is installed on the TV. We have not yet proven it on every model.
+
+Q: Does it work with Netflix and other apps on a Samsung or LG TV?
+A: Yes, that is the idea. The phone mutes the TV's sound, so it works with whatever app is playing on the TV, including Netflix.
+
+Q: What do I need for a Samsung or LG TV?
+A: An Android phone with Family Filter TV on the same Wi-Fi as the TV, a Family Filter TV account, and a TV setting switched on that lets the phone talk to it. For now the phone screen stays on while you watch.
 
 ## TVGuardian alternative for Android TV and Google TV (https://familyfiltertv.com/tvguardian-alternative.html)
 
@@ -507,6 +518,7 @@ A: Needs Family Filter TV on an Android TV or Google TV device and on an Android
 - VidAngel and ClearPlay alternative for Stremio households: A side-by-side comparison with VidAngel and ClearPlay for Stremio and Android TV households. https://familyfiltertv.com/vidangel-clearplay-alternative.html
 - Movie filtering services compared: Family Filter TV, VidAngel, ClearPlay, Enjoy Movies Your Way and TVGuardian compared on price, devices, what they filter, country and trial. https://familyfiltertv.com/movie-filtering-services-compared.html
 - Will it work on my TV?: Which TV brands and systems are supported, including Samsung, LG, Hisense, Roku and Fire TV. https://familyfiltertv.com/which-tvs.html
+- Samsung and LG TVs, early access: The phone mutes a Samsung or LG TV over your home Wi-Fi: what to switch on, how pairing looks, and the limits. https://familyfiltertv.com/samsung-lg/
 - TVGuardian alternative for Android TV and Google TV: A fair comparison of TVGuardian and Family Filter TV: what each mutes, where it runs and what you need. https://familyfiltertv.com/tvguardian-alternative.html
 - CleanCut alternative for Android TV and Google TV: CleanCut is a profanity filter for Apple TV; a comparison with Family Filter TV on Android TV and Google TV. https://familyfiltertv.com/cleancut-alternative-android-tv.html
 - Enjoy Movies Your Way alternative for Android TV and Google TV: A fair comparison of Enjoy Movies Your Way and Family Filter TV for Android TV and Google TV. https://familyfiltertv.com/enjoy-movies-your-way-alternative.html
