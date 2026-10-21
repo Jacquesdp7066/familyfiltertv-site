@@ -33,7 +33,7 @@ SITE = "https://familyfiltertv.com"
 
 # Date the page template last changed. Sitemap lastmod is the later of this and a
 # title's analysis date, so a wording change gets recrawled.
-TEMPLATE_UPDATED = "2026-10-11"
+TEMPLATE_UPDATED = "2026-10-21"
 
 CATEGORY_ORDER = [
     "strong_profanity", "mild_profanity", "religious", "crude",
@@ -41,7 +41,8 @@ CATEGORY_ORDER = [
 ]
 
 METHODOLOGY_SLUG = "methodology"
-TITLE_LIMIT = 65  # longest <title> that keeps the " | Family Filter TV" suffix
+TITLE_LIMIT = 60  # longest <title> that shows in full in search results
+DESCRIPTION_LIMIT = 155
 
 # Which categories each filter profile mutes. Mirrors addon/src/profile.ts (itself a port of the
 # app's core Profile.kt), so the pages explain the same profiles the app applies.
@@ -695,24 +696,26 @@ def span_word(bucket_ms):
     return "ten" if size == 10 else str(size)
 
 
+SEVERITY = {"clean": "no swearing", "mild": "very mild language", "moderate": "moderate swearing",
+            "strong": "heavy swearing"}
+
+
+def severity_phrase(t):
+    """The label in plain words, for a parent who has not seen our pill."""
+    return SEVERITY.get(t.get("label"), SEVERITY["mild"])
+
+
 def seo_title(t):
-    """What the page is called in search results. Count-first: that is the question people ask."""
+    """What the page is called in search results: the question a parent types. Longest form that
+    fits TITLE_LIMIT; a very long film name keeps only the question."""
     name, year = t["title"], t["year"]
-    if t["totalFlagged"]:
-        head = f"How Many Swear Words in {name} ({year})? Parents Guide"
-    else:
-        head = f"Does {name} ({year}) Have Any Swearing? Parents Guide"
-    full = f"{head} | Family Filter TV"
-    short = head.removesuffix(" Parents Guide")
-    # Longest form that fits; a long film name keeps the question and drops the rest.
-    return next((c for c in (full, head) if len(c) <= TITLE_LIMIT), short)
+    q = f"Is {name} ({year}) OK for kids?"
+    candidates = (f"{q} Swearing and language count", f"{q} Swearing count", q)
+    return next((c for c in candidates if len(c) <= TITLE_LIMIT), q)
 
 
 def seo_h1(t):
-    name, year = t["title"], t["year"]
-    if t["totalFlagged"]:
-        return f"How many swear words are in {name} ({year})?"
-    return f"Does {name} ({year}) have any swearing?"
+    return f"Is {t['title']} ({t['year']}) OK for kids?"
 
 
 def fword_forms(t):
@@ -756,20 +759,18 @@ def answer_lead(t):
 
 
 def seo_description(t):
+    """At most DESCRIPTION_LIMIT characters: the real count, how bad it is in plain words, and that
+    the TV app can mute it. Drops detail, never the count, when a long film name needs room."""
     name, year, total, cues = t["title"], t["year"], t["totalFlagged"], t["cueCount"]
-    if not total:
-        return (
-            f"Does {name} ({year}) have any swearing? No: 0 flagged words in {cues:,} English "
-            f"subtitle lines. Parents guide with what we checked and how it compares."
-        )
-    detail = f"strong profanity: {t['counts'].get('strong_profanity', 0)}"
-    fwords = fword_count(t)
-    if fwords is not None:
-        detail += f", F-word: {fwords}"
-    return (
-        f"How many swear words are in {name} ({year})? {plural(total, 'flagged word')} in the "
-        f"English subtitles ({detail}). Parents guide with the count by category."
-    )
+    sev = severity_phrase(t)
+    if total:
+        head = f"{name} ({year}) has {plural(total, 'flagged swear word')} ({sev}) in its English subtitles."
+        them = "it" if total == 1 else "them"
+        tails = (f" Family Filter TV can mute {them} on Android TV.", f" The TV app can mute {them}.", "")
+    else:
+        head = f"{name} ({year}) has no swearing: 0 flagged words in {cues:,} English subtitle lines."
+        tails = (" Family Filter TV mutes swearing on Android TV.", " The TV app can mute it.", "")
+    return next((h for h in (head + x for x in tails) if len(h) <= DESCRIPTION_LIMIT), head + tails[-1])
 
 
 def faq_items(t, category_labels, benchmark=None):
@@ -785,6 +786,22 @@ def faq_items(t, category_labels, benchmark=None):
     elif not strong:
         answer += " It is not strong profanity." if total == 1 else " None of them is strong profanity."
     items.append((f"How many swear words are in {name}?", answer))
+
+    family = t["profiles"].get("family", 0)
+    if total:
+        kids = (
+            f"That is a call for you, and it depends on how old your kids are. On language alone, {name} has "
+            f"{severity_phrase(t)}: {plural(total, 'flagged word')} in {cues:,} subtitle lines"
+            f"{', none of them strong profanity' if not strong else f', {strong} of them strong profanity'}. "
+            f"With the family filter on, {family} lines would be muted."
+        )
+    else:
+        kids = (
+            f"On language, yes: we found no flagged swearing in the English subtitles of {name}, "
+            f"across {cues:,} subtitle lines."
+        )
+    kids += " We only check spoken language, not violence, nudity or frightening scenes."
+    items.append((f"Is {name} OK for kids?", kids))
 
     forms = fword_forms(t)
     if forms is not None:
@@ -834,7 +851,7 @@ def faq_items(t, category_labels, benchmark=None):
         muted = f"With the family filter on, none of the {cues:,} subtitle lines in {name} would be muted"
     muted += f"; with the strict filter, {strict} would be." if strict != family else "."
     items.append((
-        f"Can I watch {name} with the swearing muted?",
+        f"Can I watch {name} without the swearing?",
         "Family Filter TV mutes matching language automatically while a title plays through a "
         "supported route such as Stremio, on Android TV and Android phones. The picture keeps "
         "playing and only the sound briefly drops. You choose a mild, family or strict filter. "
