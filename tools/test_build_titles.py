@@ -295,20 +295,21 @@ def jsonld_blocks(page):
 
 
 class SearchTitle(unittest.TestCase):
-    def test_the_title_is_the_question_a_parent_types(self):
+    def test_the_title_leads_with_how_many_swear_words(self):
         t = dict(FULL, title="Moana", year=2016)
-        self.assertEqual(bt.seo_title(t), "Is Moana (2016) OK for kids? Swearing and language count")
-        self.assertEqual(bt.seo_h1(t), "Is Moana (2016) OK for kids?")
+        self.assertEqual(bt.seo_title(t), "How many swear words in Moana (2016)? Is it OK for kids?")
         self.assertEqual(bt.seo_title(dict(CLEAN, title="Moana", year=2016)), bt.seo_title(t))
+        self.assertEqual(bt.seo_h1(t), "Is Moana (2016) OK for kids?")
 
     def test_a_long_title_falls_back_to_a_shorter_form_within_the_limit(self):
         t = dict(FULL, title="Ant-Man and the Wasp: Quantumania", year=2023)
-        self.assertEqual(bt.seo_title(t), "Is Ant-Man and the Wasp: Quantumania (2023) OK for kids?")
-        t = dict(FULL, title="Spider-Man: Across the Spider-Verse", year=2023)
-        self.assertLessEqual(len(bt.seo_title(t)), bt.TITLE_LIMIT)
-        self.assertTrue(bt.seo_title(t).startswith("Is Spider-Man: Across the Spider-Verse (2023) OK for kids?"))
-        t = dict(FULL, title="X" * 60, year=2023)  # nothing fits: keep the question
-        self.assertEqual(bt.seo_title(t), f"Is {'X' * 60} (2023) OK for kids?")
+        self.assertEqual(bt.seo_title(t), "Swear words in Ant-Man and the Wasp: Quantumania (2023)")  # question is 62
+        t = dict(FULL, title="Gone Girl", year=2014)
+        self.assertEqual(bt.seo_title(t), "How many swear words in Gone Girl (2014)? Is it OK for kids?")  # exactly 60
+        t = dict(FULL, title="Bullet Train Express", year=2022)
+        self.assertEqual(bt.seo_title(t), "How many swear words in Bullet Train Express (2022)?")
+        for title in ("Up", "Toy Story", "Spider-Man: Across the Spider-Verse", "X" * 45):
+            self.assertLessEqual(len(bt.seo_title(dict(FULL, title=title, year=2023))), bt.TITLE_LIMIT)
 
     def test_the_description_has_the_count_the_severity_and_the_mute_promise_within_155(self):
         d = bt.seo_description(dict(FULL, label="moderate"))

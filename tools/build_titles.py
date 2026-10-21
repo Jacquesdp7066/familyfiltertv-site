@@ -706,12 +706,12 @@ def severity_phrase(t):
 
 
 def seo_title(t):
-    """What the page is called in search results: the question a parent types. Longest form that
-    fits TITLE_LIMIT; a very long film name keeps only the question."""
+    """What the page is called in search results. "How many swear words in X" is the pattern we can
+    win (competitor research, 2026-10-11), so it leads. Longest form that fits TITLE_LIMIT."""
     name, year = t["title"], t["year"]
-    q = f"Is {name} ({year}) OK for kids?"
-    candidates = (f"{q} Swearing and language count", f"{q} Swearing count", q)
-    return next((c for c in candidates if len(c) <= TITLE_LIMIT), q)
+    q = f"How many swear words in {name} ({year})?"
+    candidates = (f"{q} Is it OK for kids?", q)
+    return next((c for c in candidates if len(c) <= TITLE_LIMIT), f"Swear words in {name} ({year})")
 
 
 def seo_h1(t):
