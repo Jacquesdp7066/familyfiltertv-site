@@ -295,34 +295,38 @@ def jsonld_blocks(page):
 
 
 class SearchTitle(unittest.TestCase):
-    def test_a_title_with_words_asks_how_many_and_keeps_the_brand_when_it_fits(self):
-        t = dict(FULL, title="Up", year=2009)
-        with unittest.mock.patch.object(bt, "TITLE_LIMIT", 70):
-            self.assertEqual(bt.seo_title(t), "How Many Swear Words in Up (2009)? Parents Guide | Family Filter TV")
-        self.assertEqual(bt.seo_title(t), "How Many Swear Words in Up (2009)? Parents Guide")  # 67 > 65
-        self.assertEqual(bt.seo_h1(t), "How many swear words are in Up (2009)?")
+    def test_the_title_leads_with_how_many_swear_words(self):
+        t = dict(FULL, title="Moana", year=2016)
+        self.assertEqual(bt.seo_title(t), "How many swear words in Moana (2016)? Is it OK for kids?")
+        self.assertEqual(bt.seo_title(dict(CLEAN, title="Moana", year=2016)), bt.seo_title(t))
+        self.assertEqual(bt.seo_h1(t), "Is Moana (2016) OK for kids?")
 
-    def test_a_long_title_drops_the_brand_suffix(self):
-        self.assertEqual(bt.seo_title(FULL), "How Many Swear Words in Test Film (2020)? Parents Guide")
-
-    def test_a_film_with_no_flagged_words_asks_whether_it_has_any_swearing(self):
-        t = dict(CLEAN, title="Up", year=2009)
-        with unittest.mock.patch.object(bt, "TITLE_LIMIT", 70):
-            self.assertEqual(bt.seo_title(t), "Does Up (2009) Have Any Swearing? Parents Guide | Family Filter TV")
-        self.assertEqual(bt.seo_title(CLEAN), "Does Clean Film (2020) Have Any Swearing? Parents Guide")
-        self.assertEqual(bt.seo_h1(CLEAN), "Does Clean Film (2020) have any swearing?")
-
-    def test_a_very_long_title_keeps_only_the_question(self):
+    def test_a_long_title_falls_back_to_a_shorter_form_within_the_limit(self):
         t = dict(FULL, title="Ant-Man and the Wasp: Quantumania", year=2023)
-        self.assertEqual(
-            bt.seo_title(t), "How Many Swear Words in Ant-Man and the Wasp: Quantumania (2023)?")
+        self.assertEqual(bt.seo_title(t), "Swear words in Ant-Man and the Wasp: Quantumania (2023)")  # question is 62
+        t = dict(FULL, title="Gone Girl", year=2014)
+        self.assertEqual(bt.seo_title(t), "How many swear words in Gone Girl (2014)? Is it OK for kids?")  # exactly 60
+        t = dict(FULL, title="Bullet Train Express", year=2022)
+        self.assertEqual(bt.seo_title(t), "How many swear words in Bullet Train Express (2022)?")
+        for title in ("Up", "Toy Story", "Spider-Man: Across the Spider-Verse"):
+            self.assertLessEqual(len(bt.seo_title(dict(FULL, title=title, year=2023))), bt.TITLE_LIMIT)
+
+    def test_the_description_has_the_count_the_severity_and_the_mute_promise_within_155(self):
+        d = bt.seo_description(dict(FULL, label="moderate"))
+        self.assertIn(f"{FULL['totalFlagged']} flagged swear word", d)
+        self.assertIn("moderate swearing", d)
+        self.assertIn("mute", d)
+        self.assertIn("no swearing", bt.seo_description(CLEAN))
+        long_name = dict(FULL, title="Ant-Man and the Wasp: Quantumania", year=2023, label="moderate", totalFlagged=47)
+        for t in (FULL, CLEAN, long_name):
+            self.assertLessEqual(len(bt.seo_description(t)), bt.DESCRIPTION_LIMIT)
 
     def test_the_page_carries_the_title_h1_and_a_parents_guide_description(self):
         page = bt.title_page_html(FULL, {FULL["videoId"]: FULL}, LABELS, BENCHMARK)
         self.assertIn(f"<title>{bt.seo_title(FULL)}</title>", page)
         self.assertIn(f"<h1 class=\"page-title\">{bt.seo_h1(FULL)}</h1>", page)
         self.assertIn(f'<meta property="og:title" content="{bt.seo_title(FULL)}">', page)
-        self.assertIn("arents guide", re.search(r'name="description" content="([^"]*)"', page).group(1))
+        self.assertEqual(bt.seo_description(FULL), re.search(r'name="description" content="([^"]*)"', page).group(1))
         self.assertIn("Parents guide: swearing and language", page)
 
 
@@ -354,12 +358,20 @@ class Faq(unittest.TestCase):
         faq = next(b for b in jsonld_blocks(page) if b["@type"] == "FAQPage")
         expected = [x for q in faq["mainEntity"] for x in (q["name"], q["acceptedAnswer"]["text"])]
         self.assertEqual(parser.items, expected)
-        self.assertTrue(4 <= len(faq["mainEntity"]) <= 6)
+        self.assertTrue(4 <= len(faq["mainEntity"]) <= 8)
 
     def test_a_clean_film_gets_a_faq_too(self):
         items = bt.faq_items(CLEAN, LABELS, BENCHMARK)
-        self.assertTrue(4 <= len(items) <= 6)
+        self.assertTrue(4 <= len(items) <= 8)
         self.assertIn("No.", dict(items)["Does Clean Film use the F-word?"])
+        self.assertIn("On language, yes", dict(items)["Is Clean Film OK for kids?"])
+        self.assertIn("Can I watch Clean Film without the swearing?", dict(items))
+
+    def test_the_kids_answer_uses_the_record_and_makes_no_age_claim(self):
+        answer = dict(bt.faq_items(FULL, LABELS, BENCHMARK))[f"Is {FULL['title']} OK for kids?"]
+        self.assertIn(f"{FULL['totalFlagged']} flagged word", answer)
+        self.assertIn("not violence", answer)
+        self.assertIsNone(re.search(r"\bunder \d+|\bages? \d+|\d+\+", answer))
 
     def test_the_timeline_answer_names_a_ten_minute_stretch_and_no_exact_time(self):
         answer = dict(bt.faq_items(FULL, LABELS, BENCHMARK))["Where in Test Film is the swearing heaviest?"]
