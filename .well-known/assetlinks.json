@@ -1,0 +1,13 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.familyfiltertv.app",
+      "sha256_cert_fingerprints": [
+        "CC:95:22:0D:8E:C9:B2:1B:5F:FC:CA:60:28:31:46:B0:C6:94:C6:B5:0E:9A:C8:65:59:A5:4D:8F:31:FA:8F:AA",
+        "FE:08:8D:A0:8D:2D:62:E8:29:42:CE:01:29:68:F0:D7:35:4A:97:EF:16:99:2D:DA:5F:DB:1A:1C:37:0A:62:85"
+      ]
+    }
+  }
+]
