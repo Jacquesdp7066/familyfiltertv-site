@@ -705,17 +705,31 @@ def severity_phrase(t):
     return SEVERITY.get(t.get("label"), SEVERITY["mild"])
 
 
+def seo_style(t):
+    """"question" (default): the page answers "does X have bad words". "guide": it answers
+    "X parents guide". Set "seoStyle": "guide" on a title in titles/data.json for a film whose
+    Search Console queries say "parents guide" (refreshes leave the field alone)."""
+    return "guide" if t.get("seoStyle") == "guide" else "question"
+
+
 def seo_title(t):
-    """What the page is called in search results. "How many swear words in X" is the pattern we can
-    win (competitor research, 2026-10-11), so it leads. Longest form that fits TITLE_LIMIT."""
-    name, year = t["title"], t["year"]
-    q = f"How many swear words in {name} ({year})?"
-    candidates = (f"{q} Is it OK for kids?", q)
+    """What the page is called in search results: the question parents type (or "parents guide"
+    for a title set to that style) plus the real count. Longest form that fits TITLE_LIMIT."""
+    name, year, total = t["title"], t["year"], t["totalFlagged"]
+    count = plural(total, "swear word") if total else "no swearing"
+    if seo_style(t) == "guide":
+        base = f"{name} ({year}) parents guide"
+        candidates = (f"{base}: {count} by type", f"{base}: {count}", base) if total else (f"{base}: {count}", base)
+    else:
+        q = f"Does {name} ({year}) have bad words?"
+        candidates = (f"{q} {count}", q)
     return next((c for c in candidates if len(c) <= TITLE_LIMIT), f"Swear words in {name} ({year})")
 
 
 def seo_h1(t):
-    return f"Is {t['title']} ({t['year']}) OK for kids?"
+    if seo_style(t) == "guide":
+        return f"{t['title']} ({t['year']}) parents guide: swearing and language"
+    return f"Does {t['title']} ({t['year']}) have bad words?"
 
 
 def fword_forms(t):
@@ -738,39 +752,68 @@ def fword_count(t):
     return None if forms is None else sum(n for _, n in forms)
 
 
-def answer_lead(t):
-    """The number first: (sentence, detail line). Everything comes from the record."""
+def answer_lead(t, category_labels=None):
+    """The answer first: (sentence, detail line). Everything comes from the record."""
     name, year, total, cues = t["title"], t["year"], t["totalFlagged"], t["cueCount"]
     if total:
+        cats = ""
+        if category_labels:
+            rows = [(label.lower(), n) for label, n in category_rows(t["counts"], category_labels)]
+            cats = " (" + ", ".join(f"{n} {label}" for label, n in rows) + ")"
+        has = ("has bad words" if t["counts"].get("strong_profanity", 0)
+               else "has some swearing but no strong profanity")
         sentence = (
-            f"{name} ({year}) has {plural(total, 'flagged word')} in its English subtitles, "
-            f"counted across {cues:,} subtitle lines."
+            f"Yes, {name} ({year}) {has}: {plural(total, 'flagged word')} in its English "
+            f"subtitles{cats}, counted across {cues:,} subtitle lines."
         )
     else:
         sentence = (
-            f"{name} ({year}) has no flagged swearing in its English subtitles: "
+            f"No. {name} ({year}) has no flagged swearing in its English subtitles: "
             f"0 flagged words across {cues:,} subtitle lines."
         )
-    detail = f"Strong profanity: {t['counts'].get('strong_profanity', 0)}."
+    strong = t["counts"].get("strong_profanity", 0)
+    detail = f"Strong profanity: {strong}."
     fwords = fword_count(t)
     if fwords is not None:
         detail += f" F-word: {fwords}."
+    timeline = t.get("timeline")
+    if total > 1 and timeline and sum(timeline["words"]):
+        words, bucket_ms = timeline["words"], timeline["bucketMs"]
+        peak = max(range(len(words)), key=lambda i: (words[i], -i))
+        first_strong = first_slot(timeline["strongProfanity"])
+        if first_strong is not None:
+            detail += f" First strong profanity: {slot_when(first_strong, bucket_ms)}."
+        detail += f" Heaviest stretch: {slot_when(peak, bucket_ms)}."
     return sentence, detail
 
 
 def seo_description(t):
-    """At most DESCRIPTION_LIMIT characters: the real count, how bad it is in plain words, and that
-    the TV app can mute it. Drops detail, never the count, when a long film name needs room."""
+    """At most DESCRIPTION_LIMIT characters: the answer and the real count, how bad it is in plain
+    words, and that the TV app can mute it. Drops detail, never the count, when a long film name
+    needs room."""
     name, year, total, cues = t["title"], t["year"], t["totalFlagged"], t["cueCount"]
+    strong = t["counts"].get("strong_profanity", 0)
     sev = severity_phrase(t)
+    guide = seo_style(t) == "guide"
     if total:
-        head = f"{name} ({year}) has {plural(total, 'flagged swear word')} ({sev}) in its English subtitles."
-        them = "it" if total == 1 else "them"
-        tails = (f" Family Filter TV can mute {them} on Android TV.", f" The TV app can mute {them}.", "")
+        who = "it" if total == 1 else "them"
+        strong_bit = (f", {strong} of them strong profanity" if strong
+                      else ", not strong profanity" if total == 1 else ", none of them strong profanity")
+        count = plural(total, "flagged swear word")
+        if guide:
+            lead = f"{name} ({year}) parents guide to language: {count} ({sev}) in the English subtitles"
+            mid = (strong_bit + ", listed by category.", strong_bit + ".", ".")
+        else:
+            lead = f"Yes: {name} ({year}) has {count} ({sev}) in its English subtitles"
+            mid = (strong_bit + ".", ".")
+        tails = (f" Family Filter TV can mute {who} on Android TV.", f" The TV app can mute {who}.", "")
     else:
-        head = f"{name} ({year}) has no swearing: 0 flagged words in {cues:,} English subtitle lines."
+        lead = (f"{name} ({year}) parents guide to language: " if guide else f"No: {name} ({year}) has no swearing, ") + \
+            f"0 flagged words in {cues:,} English subtitle lines"
+        mid = (".",)
         tails = (" Family Filter TV mutes swearing on Android TV.", " The TV app can mute it.", "")
-    return next((h for h in (head + x for x in tails) if len(h) <= DESCRIPTION_LIMIT), head + tails[-1])
+    options = [lead + m + x for m in mid for x in tails]
+    return next((h for h in options if len(h) <= DESCRIPTION_LIMIT), lead + mid[-1])
 
 
 def faq_items(t, category_labels, benchmark=None):
@@ -786,6 +829,7 @@ def faq_items(t, category_labels, benchmark=None):
     elif not strong:
         answer += " It is not strong profanity." if total == 1 else " None of them is strong profanity."
     items.append((f"How many swear words are in {name}?", answer))
+    items.insert(0, (f"Does {name} have bad words?", " ".join(answer_lead(t, category_labels))))
 
     family = t["profiles"].get("family", 0)
     if total:
@@ -988,7 +1032,7 @@ def title_page_html(t, by_id, category_labels, benchmark=None):
     canonical = f"{SITE}/titles/{slug}/"
     page_title = seo_title(t)
     description = seo_description(t)
-    lead, lead_detail = answer_lead(t)
+    lead, lead_detail = answer_lead(t, category_labels)
     faq = faq_items(t, category_labels, benchmark)
 
     runtime_iso = runtime_to_iso(t["runtime"])
@@ -1081,8 +1125,10 @@ def title_page_html(t, by_id, category_labels, benchmark=None):
   {breadcrumb}
   <p class="muted">Parents guide: swearing and language</p>
   <h1 class="page-title">{esc(seo_h1(t))}</h1>
-  <p class="lead">{esc(lead)}</p>
-  <p class="lead"><strong>{esc(lead_detail)}</strong></p>
+  <section class="panel answer-box" aria-label="Short answer">
+    <p class="lead">{esc(lead)}</p>
+    <p class="lead"><strong>{esc(lead_detail)}</strong></p>
+  </section>
 
 {result_block(t, category_labels)}
 
