@@ -255,6 +255,73 @@
     white-space: nowrap;
   }
 
+  /* ---------- Codes section (per-code outreach table) ---------- */
+  .codes-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 18px;
+    margin: 0 0 12px;
+    font-size: 0.9375rem;
+  }
+  .codes-controls label { color: var(--muted); font-weight: 600; }
+  .codes-controls select {
+    font: inherit;
+    color: var(--ink);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 8px 10px;
+    min-height: 40px;
+  }
+  .codes-controls .due-only { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; }
+  .codes-controls .due-only input { width: 20px; height: 20px; }
+  table.codes-table th[data-sort] { cursor: pointer; user-select: none; white-space: nowrap; }
+  table.codes-table th[data-sort][aria-sort="ascending"]::after { content: " \25B2"; font-size: 0.7em; }
+  table.codes-table th[data-sort][aria-sort="descending"]::after { content: " \25BC"; font-size: 0.7em; }
+  table.codes-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  table.codes-table tr.due td:first-child { box-shadow: inset 3px 0 0 var(--accent); }
+  table.codes-table tr.due { background: rgba(244, 182, 92, 0.1); }
+  .pill-due { background: rgba(244, 182, 92, 0.22); color: var(--accent); }
+  .pill-declined { background: rgba(232, 131, 107, 0.18); color: #E8836B; }
+  .pill-contacted { background: rgba(53, 207, 232, 0.18); color: var(--signal); }
+  .pill-replied { background: rgba(122, 201, 137, 0.18); color: #6FBF7B; }
+  table.codes-table td code { white-space: nowrap; }
+  .codes-sub { display: block; color: var(--muted); font-size: 0.8125rem; }
+  /* Phone: each code becomes a card, labels come from data-label. */
+  @media (max-width: 720px) {
+    #codes-section .table-scroll { border: 0; background: none; overflow-x: visible; }
+    table.codes-table { min-width: 0; }
+    table.codes-table, table.codes-table tbody, table.codes-table tr, table.codes-table td { display: block; width: 100%; max-width: none; }
+    table.codes-table thead { display: none; }
+    table.codes-table tr {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 10px 14px;
+      margin: 0 0 12px;
+    }
+    table.codes-table tr.due { border-color: var(--accent); }
+    table.codes-table td {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 5px 0;
+      border: 0;
+      text-align: right;
+      overflow-wrap: anywhere;
+    }
+    table.codes-table td::before {
+      content: attr(data-label);
+      color: var(--muted);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      text-align: left;
+      flex: none;
+    }
+    table.codes-table td.num { text-align: right; }
+    table.codes-table tr.due td:first-child { box-shadow: none; }
+  }
   #app { display: none; }
   #app.ready { display: block; }
 </style>
@@ -300,6 +367,24 @@
     <section class="block" id="voucher-section" hidden>
       <h2>Vouchers</h2>
       <div class="tiles" id="voucher-tiles"></div>
+    </section>
+
+    <section class="block" id="codes-section">
+      <h2>Codes</h2>
+      <p class="chart-note" id="codes-note">Per creator, partner and voucher code: link opens, then sign-ups, trials and paying. Owner/dev households and sandbox purchases are excluded.</p>
+      <div class="tiles" id="codes-tiles"></div>
+      <div class="codes-controls">
+        <label for="codes-sort">Sort by</label>
+        <select id="codes-sort"></select>
+        <label class="due-only"><input type="checkbox" id="codes-due-only"> Follow-up due only</label>
+      </div>
+      <div id="codes-state" class="chart-note" hidden></div>
+      <div class="table-scroll">
+        <table class="codes-table">
+          <thead id="codes-head"></thead>
+          <tbody id="codes-body"></tbody>
+        </table>
+      </div>
     </section>
 
     <section class="block">
@@ -403,6 +488,12 @@
   var elInvitersBody = document.getElementById("inviters-body");
   var elInvitesBody = document.getElementById("invites-body");
   var elHouseholdsBody = document.getElementById("households-body");
+  var elCodesTiles = document.getElementById("codes-tiles");
+  var elCodesBody = document.getElementById("codes-body");
+  var elCodesHead = document.getElementById("codes-head");
+  var elCodesSort = document.getElementById("codes-sort");
+  var elCodesDueOnly = document.getElementById("codes-due-only");
+  var elCodesState = document.getElementById("codes-state");
 
   function showState(html, isError) {
     elStatePanel.innerHTML = html;
@@ -849,6 +940,182 @@
     }).join("");
   }
 
+  // ---------- Codes section (adminCodes callable) ----------
+  // Column key -> label, plus how to read a sortable value from a row. Text columns sort
+  // A-Z first, numeric columns largest first; click a header again (or flip the select) to reverse.
+  function money(c) {
+    return (c.currency || "") + " " + (Number(c.payable) || 0).toFixed(2);
+  }
+  function num(v) { v = Number(v); return isFinite(v) ? v : 0; }
+  var CODE_COLUMNS = [
+    { key: "code", label: "Code", text: true, val: function (r) { return r.code || ""; } },
+    { key: "who", label: "Who", text: true, val: function (r) { return (r.name || "").toLowerCase(); } },
+    { key: "status", label: "Status", text: true, val: function (r) { return r.followUpDue ? "0" : (r.status || "z"); } },
+    { key: "lastTouch", label: "Last touch", text: true, val: function (r) { return r.lastTouch || ""; } },
+    { key: "nextAction", label: "Next action", text: true, val: function (r) { return (r.nextAction || "").toLowerCase(); } },
+    { key: "opens7", label: "Opens 7d", num: true, val: function (r) { return num(r.opens && r.opens.d7); } },
+    { key: "opens28", label: "Opens 28d", num: true, val: function (r) { return num(r.opens && r.opens.d28); } },
+    { key: "opensAll", label: "Opens all", num: true, val: function (r) { return num(r.opens && r.opens.all); } },
+    { key: "signups", label: "Sign-ups", num: true, val: function (r) { return num(r.signups); } },
+    { key: "trials", label: "Trials", num: true, val: function (r) { return num(r.trialsStarted); } },
+    { key: "trialing", label: "Trialing", num: true, val: function (r) { return num(r.nowTrialing); } },
+    { key: "paid", label: "Paying", num: true, val: function (r) { return num(r.paidNow); } },
+    { key: "cancelled", label: "Cancelled", num: true, val: function (r) { return num(r.cancelled); } },
+    { key: "commission", label: "Commission", num: true, val: function (r) {
+      return (r.commission || []).reduce(function (t, c) { return t + num(c.payable); }, 0);
+    } }
+  ];
+  var STATUS_LABELS = { shortlisted: "Shortlisted", contacted: "Contacted", replied: "Replied", agreed: "Agreed", signed: "Signed", code_issued: "Code issued", declined: "Declined", follow_up_due: "Follow-up due" };
+  var KIND_LABELS = { creator: "Creator", partner: "Partner", voucher: "Voucher" };
+  // Default: follow-ups first, then the most sign-ups.
+  var codesSort = { key: "signups", dir: -1 };
+  var codesData = null;
+
+  function codeColumn(key) {
+    for (var i = 0; i < CODE_COLUMNS.length; i++) if (CODE_COLUMNS[i].key === key) return CODE_COLUMNS[i];
+    return CODE_COLUMNS[0];
+  }
+
+  function renderCodesTiles(totals) {
+    totals = totals || {};
+    var opens = totals.opens || {};
+    var tiles = [
+      { label: "Codes", value: fmtInt(totals.codes) },
+      { label: "Follow-ups due", value: fmtInt(totals.followUpsDue) },
+      { label: "Opens 7d", value: fmtInt(opens.d7) },
+      { label: "Opens 28d", value: fmtInt(opens.d28) },
+      { label: "Sign-ups", value: fmtInt(totals.signups) },
+      { label: "Trials started", value: fmtInt(totals.trialsStarted) },
+      { label: "Trialing now", value: fmtInt(totals.nowTrialing) },
+      { label: "Paying now", value: fmtInt(totals.paidNow) },
+      { label: "Cancelled", value: fmtInt(totals.cancelled) }
+    ];
+    elCodesTiles.innerHTML = tiles.map(function (t) {
+      return '<div class="tile"><span>' + escapeHtml(t.label) + '</span><b>' + escapeHtml(t.value) + '</b></div>';
+    }).join("");
+  }
+
+  function renderCodesHead() {
+    elCodesHead.innerHTML = "<tr>" + CODE_COLUMNS.map(function (c) {
+      var sort = codesSort.key === c.key ? ' aria-sort="' + (codesSort.dir > 0 ? "ascending" : "descending") + '"' : "";
+      return '<th data-sort="' + c.key + '"' + sort + ">" + escapeHtml(c.label) + "</th>";
+    }).join("") + "</tr>";
+    var options = [];
+    CODE_COLUMNS.forEach(function (c) {
+      options.push('<option value="' + c.key + ':' + (c.num ? -1 : 1) + '">' + escapeHtml(c.label) + (c.num ? " (high to low)" : " (A to Z)") + "</option>");
+    });
+    elCodesSort.innerHTML = options.join("");
+    elCodesSort.value = codesSort.key + ":" + codesSort.dir;
+    if (elCodesSort.value !== codesSort.key + ":" + codesSort.dir) {
+      // Header click reversed the default direction: show the column's default entry instead.
+      var col = codeColumn(codesSort.key);
+      elCodesSort.value = codesSort.key + ":" + (col.num ? -1 : 1);
+    }
+  }
+
+  function codeStatusCell(r) {
+    var html = "";
+    if (r.followUpDue) html += '<span class="pill pill-due">Follow-up due</span> ';
+    if (r.status && r.status !== "follow_up_due") {
+      html += '<span class="pill pill-' + escapeHtml(r.status) + '">' + escapeHtml(STATUS_LABELS[r.status] || r.status) + "</span>";
+    }
+    return html || "—";
+  }
+
+  function renderCodes() {
+    if (!codesData) return;
+    var rows = (codesData.rows || []).slice();
+    if (elCodesDueOnly.checked) rows = rows.filter(function (r) { return r.followUpDue; });
+    var col = codeColumn(codesSort.key);
+    rows.sort(function (a, b) {
+      var av = col.val(a), bv = col.val(b);
+      var cmp = col.num ? av - bv : (av < bv ? -1 : av > bv ? 1 : 0);
+      if (cmp === 0) cmp = (a.code < b.code ? -1 : 1);
+      return cmp * codesSort.dir;
+    });
+    renderCodesHead();
+    if (!rows.length) {
+      elCodesBody.innerHTML = '<tr><td colspan="' + CODE_COLUMNS.length + '" class="muted">'
+        + ((codesData.rows || []).length ? "No codes match." : "No codes yet. Create a promoCodes doc, then run tools/outreach_sync.py.") + "</td></tr>";
+      return;
+    }
+    elCodesBody.innerHTML = rows.map(function (r) {
+      var o = r.opens || {};
+      var who = r.name ? escapeHtml(r.name) : "—";
+      var sub = [KIND_LABELS[r.kind] || r.kind, r.org, r.channel].filter(Boolean).map(escapeHtml).join(" · ");
+      var commission = r.commission && r.commission.length
+        ? r.commission.map(function (c) {
+            return escapeHtml(money(c)) + (num(c.held) > 0 ? ' <span class="codes-sub">+' + escapeHtml(num(c.held).toFixed(2)) + " held</span>" : "");
+          }).join("<br>")
+        : "—";
+      return '<tr class="' + (r.followUpDue ? "due" : "") + '">'
+        + '<td data-label="Code"><code>' + escapeHtml(r.code) + "</code></td>"
+        + '<td data-label="Who"><span>' + who + '<span class="codes-sub">' + sub + "</span></span></td>"
+        + '<td data-label="Status">' + codeStatusCell(r) + "</td>"
+        + '<td data-label="Last touch">' + (r.lastTouch ? fmtDate(r.lastTouch + "T00:00:00") : "—") + "</td>"
+        + '<td data-label="Next action">' + (r.nextAction ? escapeHtml(r.nextAction) : "—") + "</td>"
+        + '<td class="num" data-label="Opens 7d">' + fmtInt(o.d7) + "</td>"
+        + '<td class="num" data-label="Opens 28d">' + fmtInt(o.d28) + "</td>"
+        + '<td class="num" data-label="Opens all">' + fmtInt(o.all) + "</td>"
+        + '<td class="num" data-label="Sign-ups">' + fmtInt(r.signups) + "</td>"
+        + '<td class="num" data-label="Trials">' + fmtInt(r.trialsStarted) + "</td>"
+        + '<td class="num" data-label="Trialing">' + fmtInt(r.nowTrialing) + "</td>"
+        + '<td class="num" data-label="Paying">' + fmtInt(r.paidNow) + "</td>"
+        + '<td class="num" data-label="Cancelled">' + fmtInt(r.cancelled) + "</td>"
+        + '<td class="num" data-label="Commission">' + commission + "</td>"
+        + "</tr>";
+    }).join("");
+  }
+
+  function setCodesData(data) {
+    codesData = data || { rows: [], totals: {} };
+    elCodesState.hidden = !codesData.commissionsTruncated;
+    if (codesData.commissionsTruncated) elCodesState.textContent = "The commission ledger read hit its cap, so commission may be incomplete.";
+    renderCodesTiles(codesData.totals);
+    renderCodes();
+  }
+
+  function setCodesError(message) {
+    codesData = null;
+    elCodesTiles.innerHTML = "";
+    elCodesBody.innerHTML = "";
+    elCodesHead.innerHTML = "";
+    elCodesState.hidden = false;
+    elCodesState.textContent = message;
+  }
+
+  elCodesHead.addEventListener("click", function (e) {
+    var th = e.target.closest ? e.target.closest("th[data-sort]") : null;
+    if (!th) return;
+    var key = th.getAttribute("data-sort");
+    if (codesSort.key === key) {
+      codesSort.dir = -codesSort.dir;
+    } else {
+      codesSort = { key: key, dir: codeColumn(key).num ? -1 : 1 };
+    }
+    renderCodes();
+  });
+  elCodesSort.addEventListener("change", function () {
+    var parts = elCodesSort.value.split(":");
+    codesSort = { key: parts[0], dir: Number(parts[1]) === -1 ? -1 : 1 };
+    renderCodes();
+  });
+  elCodesDueOnly.addEventListener("change", renderCodes);
+
+  // Sample rows for ?demo=1 (made-up codes and names).
+  function sampleCodes() {
+    var now = new Date();
+    function daysAgo(n) { return new Date(now.getTime() - n * 86400000).toISOString().slice(0, 10); }
+    var rows = [
+      { code: "MAMA24", kind: "creator", name: "Sample Mom Blog", org: "@samplemomblog", channel: "instagram", status: "contacted", lastTouch: daysAgo(6), nextAction: "Send the one follow-up", followUpDue: true, opens: { d7: 41, d28: 120, all: 160 }, signups: 9, trialsStarted: 6, nowTrialing: 2, paidNow: 3, cancelled: 1, commission: [{ currency: "ZAR", payable: 184.5, held: 60 }] },
+      { code: "GRACE2", kind: "partner", name: "Pastor Sample", org: "Sample Church", channel: "email", status: "replied", lastTouch: daysAgo(1), nextAction: "Send the flyer", followUpDue: false, opens: { d7: 12, d28: 30, all: 30 }, signups: 4, trialsStarted: 2, nowTrialing: 1, paidNow: 0, cancelled: 0, commission: null },
+      { code: "HOMEK9", kind: "creator", name: "Sample Homeschool", org: "@samplehomeschool", channel: "tiktok", status: "declined", lastTouch: daysAgo(10), nextAction: null, followUpDue: false, opens: { d7: 0, d28: 2, all: 2 }, signups: 0, trialsStarted: 0, nowTrialing: 0, paidNow: 0, cancelled: 0, commission: [] },
+      { code: "FREE26", kind: "voucher", name: null, org: null, channel: null, status: null, lastTouch: null, nextAction: null, followUpDue: false, opens: { d7: 0, d28: 0, all: 0 }, signups: 57, trialsStarted: 3, nowTrialing: 1, paidNow: 0, cancelled: 0, commission: null }
+    ];
+    var t = { codes: rows.length, followUpsDue: 1, opens: { d7: 53, d28: 152, all: 192 }, signups: 70, trialsStarted: 11, nowTrialing: 4, paidNow: 3, cancelled: 1, byStatus: {} };
+    return { generatedAt: now.toISOString(), rows: rows, totals: t, commissionsTruncated: false };
+  }
+
   function renderAll(data) {
     hideState();
     renderTiles(data);
@@ -868,8 +1135,9 @@
   if (isDemo) {
     elDemoBanner.hidden = false;
     elWhoLine.textContent = "Sample data";
-    elRefreshBtn.addEventListener("click", function () { renderAll(sampleData()); });
+    elRefreshBtn.addEventListener("click", function () { renderAll(sampleData()); setCodesData(sampleCodes()); });
     renderAll(sampleData());
+    setCodesData(sampleCodes());
     return;
   }
 
@@ -883,6 +1151,17 @@
   var auth = firebase.auth();
   var loading = false;
 
+  // The Codes table loads on its own so a failure there (for example adminCodes not
+  // deployed yet) never hides the rest of the dashboard.
+  function callCodes() {
+    var fn = firebase.app().functions(FUNCTIONS_REGION).httpsCallable("adminCodes");
+    return fn()
+      .then(function (result) { setCodesData((result && result.data) || {}); })
+      .catch(function (err) {
+        setCodesError("Could not load the codes table: " + ((err && err.message) || "unknown error") + ".");
+      });
+  }
+
   function callDashboard() {
     if (loading) return;
     loading = true;
@@ -894,6 +1173,7 @@
         loading = false;
         elRefreshBtn.disabled = false;
         renderAll((result && result.data) || {});
+        callCodes();
       })
       .catch(function (err) {
         loading = false;
