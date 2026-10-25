@@ -295,21 +295,29 @@ def jsonld_blocks(page):
 
 
 class SearchTitle(unittest.TestCase):
-    def test_the_title_leads_with_how_many_swear_words(self):
+    def test_the_title_asks_the_question_parents_type_with_the_real_count(self):
         t = dict(FULL, title="Moana", year=2016)
-        self.assertEqual(bt.seo_title(t), "How many swear words in Moana (2016)? Is it OK for kids?")
-        self.assertEqual(bt.seo_title(dict(CLEAN, title="Moana", year=2016)), bt.seo_title(t))
-        self.assertEqual(bt.seo_h1(t), "Is Moana (2016) OK for kids?")
+        self.assertEqual(bt.seo_title(t), "Does Moana (2016) have bad words? 6 swear words")
+        self.assertEqual(bt.seo_title(dict(CLEAN, title="Moana", year=2016)), "Does Moana (2016) have bad words? no swearing")
+        self.assertEqual(bt.seo_h1(t), "Does Moana (2016) have bad words?")
+
+    def test_a_title_set_to_the_guide_style_says_parents_guide(self):
+        t = dict(FULL, title="Gone Girl", year=2014, totalFlagged=130, seoStyle="guide")
+        self.assertEqual(bt.seo_title(t), "Gone Girl (2014) parents guide: 130 swear words by type")
+        self.assertEqual(bt.seo_h1(t), "Gone Girl (2014) parents guide: swearing and language")
+        d = bt.seo_description(t)
+        self.assertIn("parents guide", d)
+        self.assertIn("130 flagged swear words", d)
+        self.assertEqual(bt.seo_style(dict(FULL, seoStyle="nonsense")), "question")
 
     def test_a_long_title_falls_back_to_a_shorter_form_within_the_limit(self):
         t = dict(FULL, title="Ant-Man and the Wasp: Quantumania", year=2023)
         self.assertEqual(bt.seo_title(t), "Swear words in Ant-Man and the Wasp: Quantumania (2023)")  # question is 62
-        t = dict(FULL, title="Gone Girl", year=2014)
-        self.assertEqual(bt.seo_title(t), "How many swear words in Gone Girl (2014)? Is it OK for kids?")  # exactly 60
         t = dict(FULL, title="Bullet Train Express", year=2022)
-        self.assertEqual(bt.seo_title(t), "How many swear words in Bullet Train Express (2022)?")
-        for title in ("Up", "Toy Story", "Spider-Man: Across the Spider-Verse"):
-            self.assertLessEqual(len(bt.seo_title(dict(FULL, title=title, year=2023))), bt.TITLE_LIMIT)
+        self.assertEqual(bt.seo_title(t), "Does Bullet Train Express (2022) have bad words?")
+        for style in ("question", "guide"):
+            for title in ("Up", "Toy Story", "Spider-Man: Across the Spider-Verse", "Ant-Man and the Wasp: Quantumania"):
+                self.assertLessEqual(len(bt.seo_title(dict(FULL, title=title, year=2023, seoStyle=style))), bt.TITLE_LIMIT)
 
     def test_the_description_has_the_count_the_severity_and_the_mute_promise_within_155(self):
         d = bt.seo_description(dict(FULL, label="moderate"))
@@ -333,8 +341,14 @@ class SearchTitle(unittest.TestCase):
 class AnswerFirst(unittest.TestCase):
     def test_the_lead_gives_the_total_the_strong_count_and_the_f_word_count(self):
         sentence, detail = bt.answer_lead(FULL)
-        self.assertIn("has 6 flagged words", sentence)
-        self.assertEqual(detail, "Strong profanity: 2. F-word: 2.")
+        self.assertIn("Yes, Test Film (2020) has bad words: 6 flagged words", sentence)
+        self.assertTrue(detail.startswith("Strong profanity: 2. F-word: 2."))
+
+    def test_the_lead_splits_the_total_by_category_and_says_when_there_is_no_strong_profanity(self):
+        sentence, _ = bt.answer_lead(FULL, LABELS)
+        self.assertIn("(2 strong profanity, 3 mild profanity, 1 religious exclamations)", sentence)
+        mild = dict(FULL, counts={"mild_profanity": 3})
+        self.assertIn("some swearing but no strong profanity", bt.answer_lead(mild)[0])
 
     def test_the_f_word_counts_every_flagged_form_of_it(self):
         t = dict(FULL, terms={"strong_profanity": {"fuck": 3, "motherfucker": 2, "shit": 9}})
@@ -342,7 +356,8 @@ class AnswerFirst(unittest.TestCase):
 
     def test_the_f_word_line_is_left_out_when_the_record_has_no_per_word_detail(self):
         t = {k: v for k, v in FULL.items() if k != "terms"}
-        self.assertEqual(bt.answer_lead(t)[1], "Strong profanity: 2.")
+        self.assertTrue(bt.answer_lead(t)[1].startswith("Strong profanity: 2."))
+        self.assertNotIn("F-word", bt.answer_lead(t)[1])
 
     def test_a_film_with_none_says_so_in_the_first_sentence(self):
         sentence, detail = bt.answer_lead(CLEAN)
