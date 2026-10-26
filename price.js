@@ -199,7 +199,7 @@
         launchSeats.textContent = ladder.seatsLeftInTier + " of " + ladderState.seatsPerTier +
           " seats left at this price " + (isZA ? "in South Africa" : "for the rest of the world") + ".";
         launchPrice.textContent = firstYearText + " for your first year, then " + renewalText +
-          " a year. 14-day free trial first.";
+          " a year. Your first week is free, no card needed.";
         var nextText = ladderNextText(ladderState, ladder);
         launchNext.textContent = nextText;
         launchNext.hidden = !nextText;
