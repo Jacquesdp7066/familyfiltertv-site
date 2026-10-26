@@ -102,30 +102,34 @@
     return;
   }
 
+  // #611: FREE26 is closed to new households (its two redeemers keep their access), so its
+  // link must not promise anything: say it closed, offer the normal start, show no code to type.
+  if (isVoucher) {
+    var closedLead = document.querySelector('.lead');
+    if (closedLead) {
+      closedLead.textContent = 'It mutes the swearing in what you watch on the TV. The FREE26 offer has closed, but you can still start with 14 days free on Google Play, then R250 a year.';
+    }
+    playBtn.href = playUrl;
+    return;
+  }
+
   try { localStorage.setItem('ffRef', code); } catch (e) { /* private mode: ignore */ }
 
-  if (isVoucher) {
-    var lead = document.querySelector('.lead');
-    if (lead) {
-      lead.textContent = 'It mutes the swearing in what you watch on the TV. Free until 31 December 2026, no card needed — then a special price.';
+  // Count this open against the code (#197): once per browser per code, fire-and-forget,
+  // never blocks the page. See privacy.html "What we store" - nothing about the visitor
+  // is sent or stored, just the code.
+  try {
+    var pingKey = 'ffOpenPinged:' + code;
+    if (!sessionStorage.getItem(pingKey)) {
+      sessionStorage.setItem(pingKey, '1');
+      fetch('https://europe-west1-familyfiltertv.cloudfunctions.net/referralOpen', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code: code }),
+        keepalive: true
+      }).catch(function () { /* best effort: ignore */ });
     }
-  } else {
-    // Count this open against the code (#197): once per browser per code, fire-and-forget,
-    // never blocks the page. See privacy.html "What we store" - nothing about the visitor
-    // is sent or stored, just the code.
-    try {
-      var pingKey = 'ffOpenPinged:' + code;
-      if (!sessionStorage.getItem(pingKey)) {
-        sessionStorage.setItem(pingKey, '1');
-        fetch('https://europe-west1-familyfiltertv.cloudfunctions.net/referralOpen', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ code: code }),
-          keepalive: true
-        }).catch(function () { /* best effort: ignore */ });
-      }
-    } catch (e) { /* private mode / storage blocked: ignore */ }
-  }
+  } catch (e) { /* private mode / storage blocked: ignore */ }
 
   document.getElementById('code-text').textContent = code;
   document.getElementById('code-plate').hidden = false;
