@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="referrer" content="no-referrer">
+<title>Your numbers — Family Filter TV</title>
+<meta name="description" content="Your private Family Filter TV creator page.">
+<meta name="theme-color" content="#0B0C0F">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="assets/icon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap">
+<link rel="stylesheet" href="style.css">
+<style>
+  /* Page-local: the creator numbers. Same tokens as style.css. */
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 28px 0 8px; }
+  .stat { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 16px 16px 14px; }
+  .stat .n { font-size: clamp(1.7rem, 7vw, 2.4rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; margin: 0; font-variant-numeric: tabular-nums; }
+  .stat .l { margin: 6px 0 0; color: var(--muted); font-size: 0.875rem; line-height: 1.3; }
+  .money { background: linear-gradient(160deg, var(--field-2), var(--field)); border: 1px solid var(--field-line); border-radius: 22px; padding: 22px 20px; margin: 18px 0; }
+  .money h2 { margin: 0 0 4px; font-size: 1.2rem; }
+  .money h2::before { display: none; }
+  .next { font-size: clamp(2rem, 9vw, 2.8rem); font-weight: 800; letter-spacing: -0.03em; margin: 4px 0 2px; font-variant-numeric: tabular-nums; }
+  .next-note { color: var(--ink-soft); margin: 0 0 18px; }
+  .rows { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--field-line); }
+  .rows li { display: flex; justify-content: space-between; gap: 16px; padding: 11px 0; margin: 0; border-bottom: 1px solid var(--field-line); max-width: none; }
+  .rows li span:last-child { font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .rows li span:first-child { color: var(--ink-soft); }
+  .how { margin: 22px 0; }
+  .how p { color: var(--ink-soft); }
+  .pay-list { list-style: none; padding: 0; margin: 0 0 1.05em; }
+  .pay-list li { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; margin: 0; border-bottom: 1px solid var(--line); max-width: none; font-variant-numeric: tabular-nums; }
+  .notice { background: var(--surface-2); border: 1px solid var(--line-strong); border-radius: 14px; padding: 12px 16px; margin: 0 0 18px; color: var(--ink-soft); }
+  #state { margin-top: 28px; }
+  @media (max-width: 520px) { .stats { gap: 8px; } .stat { padding: 14px 12px 12px; border-radius: 14px; } }
+</style>
+</head>
+<body>
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <img src="assets/icon-192.png" alt="" width="30" height="30">
+      Family Filter TV
+    </a>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1 class="page-title">Your numbers</h1>
+  <p class="lead" id="lead">Loading your numbers…</p>
+
+  <div id="state" role="status" aria-live="polite" hidden></div>
+
+  <div id="page" hidden>
+    <div class="notice" id="demo-note" hidden>Example numbers, not real data.</div>
+
+    <section aria-label="Your link">
+      <div class="stats">
+        <div class="stat"><p class="n" id="s-opens">0</p><p class="l">people opened your link</p></div>
+        <div class="stat"><p class="n" id="s-signups">0</p><p class="l">signed up with your code</p></div>
+        <div class="stat"><p class="n" id="s-paying">0</p><p class="l">paying subscribers now</p></div>
+      </div>
+      <p class="muted" id="opens-note"></p>
+    </section>
+
+    <div id="money"></div>
+
+    <section class="how" aria-label="How you are paid">
+      <p><strong>On hold:</strong> each commission waits 30 days, in case the subscriber is refunded, and then becomes payable.</p>
+      <p><strong>Payouts:</strong> we pay by EFT once your payable balance reaches R250. Below that, it carries forward to the next month.</p>
+    </section>
+
+    <section aria-labelledby="paid-h">
+      <h2 id="paid-h">Last payouts</h2>
+      <ul class="pay-list" id="payouts"></ul>
+      <p class="muted" id="no-payouts" hidden>Nothing paid out yet.</p>
+    </section>
+
+    <p class="muted" id="updated"></p>
+  </div>
+
+  <p class="muted" style="margin-top:32px">Questions? Message Jacques at <a href="mailto:jacquesjdupreez@gmail.com">jacquesjdupreez@gmail.com</a>. This page shows counts and money only, never who signed up. Keep your link private: anyone who has it can see these numbers.</p>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <p>Family Filter TV is made by Jacques du Preez in South Africa.</p>
+    <nav class="foot-nav" aria-label="Footer">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+  // No analytics on this page, and the token is only ever sent in the body of one POST to our own
+  // function: never put in another URL, a log or a storage key.
+  var API = 'https://europe-west1-familyfiltertv.cloudfunctions.net/creatorPortal';
+  var params = new URLSearchParams(window.location.search);
+  var token = (params.get('k') || '').trim();
+  var demo = params.get('demo') === '1' && !token;
+
+  var lead = document.getElementById('lead');
+  var state = document.getElementById('state');
+  var page = document.getElementById('page');
+
+  function $(id) { return document.getElementById(id); }
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text !== undefined) e.textContent = text;
+    return e;
+  }
+
+  var SYMBOL = { ZAR: 'R', USD: '$' };
+  function money(amount, currency) {
+    var sym = SYMBOL[currency];
+    var n = Math.abs(amount).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(/ /g, ' ');
+    var s = sym ? sym + n : currency + ' ' + n;
+    return amount < 0 ? '-' + s : s;
+  }
+  function count(n) { return Number(n || 0).toLocaleString('en-GB').replace(/ /g, ' '); }
+
+  function say(message, isError) {
+    state.hidden = false;
+    state.textContent = message;
+    if (isError) state.className = 'notice';
+  }
+
+  var DEMO = {
+    ok: true, code: 'EXAMPLE', generatedAt: new Date().toISOString(),
+    opens: { last7: 41, last28: 188, all: 412 }, signups: 37, payingNow: 14,
+    commission: [{ currency: 'ZAR', earnedThisMonth: 96.5, earnedLifetime: 1184.25, onHold: 143.75, payable: 194.75, paidToDate: 845.75, minimumPayout: 250, belowMinimum: true }],
+    payouts: [{ paidOn: '2026-10-03', amount: 420.5, currency: 'ZAR' }, { paidOn: '2026-09-02', amount: 425.25, currency: 'ZAR' }]
+  };
+
+  function render(d) {
+    lead.textContent = 'Your code is ' + d.code + '. Counts and money only: we never show who signed up.';
+    $('s-opens').textContent = count(d.opens.all);
+    $('s-signups').textContent = count(d.signups);
+    $('s-paying').textContent = count(d.payingNow);
+    $('opens-note').textContent = count(d.opens.last7) + ' of those opens were in the last 7 days, ' + count(d.opens.last28) + ' in the last 28.';
+
+    var wrap = $('money');
+    wrap.textContent = '';
+    d.commission.forEach(function (c) {
+      var box = el('section', 'money');
+      box.setAttribute('aria-label', 'Commission in ' + c.currency);
+      if (d.commission.length > 1) box.appendChild(el('h2', '', 'Paid in ' + c.currency));
+      else box.appendChild(el('h2', '', 'Your commission'));
+
+      var minimum = c.minimumPayout;
+      box.appendChild(el('p', 'next', money(c.payable, c.currency)));
+      if (c.payable <= 0) {
+        box.appendChild(el('p', 'next-note', 'Payable at the next payout. Nothing is ready yet.'));
+      } else if (c.belowMinimum && minimum) {
+        box.appendChild(el('p', 'next-note', 'Payable, but not paid out yet: ' + money(minimum - c.payable, c.currency) + ' more reaches the ' + money(minimum, c.currency) + ' minimum. It carries forward.'));
+      } else {
+        box.appendChild(el('p', 'next-note', 'Payable at the next payout.'));
+      }
+
+      var rows = el('ul', 'rows');
+      [['Earned this month', c.earnedThisMonth], ['On hold (30 days)', c.onHold], ['Earned in total', c.earnedLifetime], ['Paid to you so far', c.paidToDate]].forEach(function (r) {
+        var li = el('li');
+        li.appendChild(el('span', '', r[0]));
+        li.appendChild(el('span', '', money(r[1], c.currency)));
+        rows.appendChild(li);
+      });
+      box.appendChild(rows);
+      wrap.appendChild(box);
+    });
+
+    var list = $('payouts');
+    list.textContent = '';
+    d.payouts.forEach(function (p) {
+      var li = el('li');
+      li.appendChild(el('span', '', p.paidOn));
+      li.appendChild(el('span', '', money(p.amount, p.currency)));
+      list.appendChild(li);
+    });
+    $('no-payouts').hidden = d.payouts.length > 0;
+
+    $('updated').textContent = 'Updated ' + new Date(d.generatedAt).toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short' }) + '.';
+    $('demo-note').hidden = !demo;
+    state.hidden = true;
+    page.hidden = false;
+  }
+
+  function fail(message) {
+    lead.textContent = 'We could not show your numbers.';
+    say(message, true);
+  }
+
+  if (demo) { render(DEMO); return; }
+  if (!token) { fail('This page needs your private link. Open the link Jacques sent you.'); return; }
+
+  fetch(API, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ token: token }),
+    referrerPolicy: 'no-referrer',
+    cache: 'no-store'
+  }).then(function (r) {
+    if (r.status === 404) { fail('This link is not working. It may have been replaced. Ask Jacques for a new one.'); return null; }
+    if (r.status === 429) { fail('Too many tries. Wait a minute and refresh.'); return null; }
+    if (!r.ok) { fail('Something went wrong on our side. Try again in a few minutes.'); return null; }
+    return r.json();
+  }).then(function (d) {
+    if (d && d.ok) render(d);
+  }).catch(function () {
+    fail('Could not reach the server. Check your connection and refresh.');
+  });
+})();
+</script>
+</body>
+</html>
