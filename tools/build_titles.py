@@ -1098,9 +1098,6 @@ def title_page_html(t, by_id, category_labels, benchmark=None):
 <meta property="og:description" content="{esc(description)}">
 <meta property="og:image" content="{SITE}/assets/feature-graphic.png">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap">
 <link rel="canonical" href="{canonical}">
 <link rel="stylesheet" href="../../style.css">
 <script src="../../hit.js" defer></script>
@@ -1236,9 +1233,6 @@ def methodology_page_html(titles, category_labels):
 <meta property="og:description" content="{esc(description)}">
 <meta property="og:image" content="{SITE}/assets/feature-graphic.png">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap">
 <link rel="canonical" href="{canonical}">
 <link rel="stylesheet" href="../../style.css">
 <script src="../../hit.js" defer></script>
@@ -1413,9 +1407,6 @@ def index_page_html(titles, category_labels):
 <meta property="og:description" content="{esc(description)}">
 <meta property="og:image" content="{SITE}/assets/feature-graphic.png">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap">
 <link rel="canonical" href="{canonical}">
 <link rel="stylesheet" href="../style.css">
 <script src="../hit.js" defer></script>
