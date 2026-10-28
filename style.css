@@ -3,6 +3,16 @@
    word drops out, the sound comes straight back. Colour follows the app icon
    (navy field, cyan signal) with a single amber for the one action on a page. */
 
+/* Manrope, self-hosted (SIL OFL, see assets/fonts/Manrope-OFL.txt). Variable
+   font, latin subset, so no font requests go to Google. */
+@font-face {
+  font-family: Manrope;
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url(assets/fonts/manrope-latin-variable.woff2) format("woff2");
+}
+
 :root {
   color-scheme: dark;
   --ground: #070B14;
