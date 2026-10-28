@@ -57,6 +57,7 @@
 
   <div id="page" hidden>
     <div class="notice" id="demo-note" hidden>Example numbers, not real data.</div>
+    <div class="notice" id="trunc-note" hidden>You have so many sign-ups and payments that these totals may be slightly out of date. Jacques can give you the exact figures.</div>
 
     <section aria-label="Your link">
       <div class="stats">
@@ -71,7 +72,7 @@
 
     <section class="how" aria-label="How you are paid">
       <p><strong>On hold:</strong> each commission waits 30 days, in case the subscriber is refunded, and then becomes payable.</p>
-      <p><strong>Payouts:</strong> we pay by EFT once your payable balance reaches R250. Below that, it carries forward to the next month.</p>
+      <p id="payout-rule"><strong>Payouts:</strong> we pay by EFT once your payable balance reaches the minimum. Below that, it carries forward to the next month.</p>
     </section>
 
     <section aria-labelledby="paid-h">
@@ -102,9 +103,14 @@
   // No analytics on this page, and the token is only ever sent in the body of one POST to our own
   // function: never put in another URL, a log or a storage key.
   var API = 'https://europe-west1-familyfiltertv.cloudfunctions.net/creatorPortal';
-  var params = new URLSearchParams(window.location.search);
-  var token = (params.get('k') || '').trim();
-  var demo = params.get('demo') === '1' && !token;
+  // The link is /creator#k=<token>: a fragment is never sent to any server, CDN or link-preview crawler.
+  // Read it once, then take it out of the address bar and history.
+  var token = (new URLSearchParams(window.location.hash.replace(/^#/, '')).get('k') || '').trim();
+  if (token) {
+    try { history.replaceState(null, '', window.location.pathname); } catch (e) { /* ignore */ }
+  }
+  var demoKind = new URLSearchParams(window.location.search).get('demo');
+  var demo = (demoKind === '1' || demoKind === 'refund') && !token;
 
   var lead = document.getElementById('lead');
   var state = document.getElementById('state');
@@ -125,6 +131,11 @@
     var s = sym ? sym + n : currency + ' ' + n;
     return amount < 0 ? '-' + s : s;
   }
+  // "R250" for a whole amount, "R250.50" otherwise.
+  function moneyShort(amount, currency) {
+    var m = money(amount, currency);
+    return m.replace(/\.00$/, '');
+  }
   function count(n) { return Number(n || 0).toLocaleString('en-GB').replace(/ /g, ' '); }
 
   function say(message, isError) {
@@ -137,8 +148,15 @@
     ok: true, code: 'EXAMPLE', generatedAt: new Date().toISOString(),
     opens: { last7: 41, last28: 188, all: 412 }, signups: 37, payingNow: 14,
     commission: [{ currency: 'ZAR', earnedThisMonth: 96.5, earnedLifetime: 1184.25, onHold: 143.75, payable: 194.75, paidToDate: 845.75, minimumPayout: 250, belowMinimum: true }],
+    truncated: false,
     payouts: [{ paidOn: '2026-10-03', amount: 420.5, currency: 'ZAR' }, { paidOn: '2026-09-02', amount: 425.25, currency: 'ZAR' }]
   };
+
+  // Same example with a refund taken from an earlier payout, to see the negative-balance wording.
+  var DEMO_REFUND = JSON.parse(JSON.stringify(DEMO));
+  DEMO_REFUND.commission[0].payable = -48.5;
+  DEMO_REFUND.commission[0].onHold = 0;
+  DEMO_REFUND.truncated = true;
 
   function render(d) {
     lead.textContent = 'Your code is ' + d.code + '. Counts and money only: we never show who signed up.';
@@ -156,11 +174,15 @@
       else box.appendChild(el('h2', '', 'Your commission'));
 
       var minimum = c.minimumPayout;
-      box.appendChild(el('p', 'next', money(c.payable, c.currency)));
-      if (c.payable <= 0) {
+      // A refund that landed after its purchase was paid out can take the balance below zero.
+      var owed = Math.max(0, c.payable);
+      box.appendChild(el('p', 'next', money(owed, c.currency)));
+      if (c.payable < 0) {
+        box.appendChild(el('p', 'next-note', 'A refund of ' + money(-c.payable, c.currency) + ' has been deducted from your earlier commission, so nothing is payable right now.'));
+      } else if (c.payable === 0) {
         box.appendChild(el('p', 'next-note', 'Payable at the next payout. Nothing is ready yet.'));
       } else if (c.belowMinimum && minimum) {
-        box.appendChild(el('p', 'next-note', 'Payable, but not paid out yet: ' + money(minimum - c.payable, c.currency) + ' more reaches the ' + money(minimum, c.currency) + ' minimum. It carries forward.'));
+        box.appendChild(el('p', 'next-note', 'Payable, but not paid out yet: ' + money(minimum - c.payable, c.currency) + ' more reaches the ' + moneyShort(minimum, c.currency) + ' minimum. It carries forward.'));
       } else {
         box.appendChild(el('p', 'next-note', 'Payable at the next payout.'));
       }
@@ -176,6 +198,12 @@
       wrap.appendChild(box);
     });
 
+    var mins = d.commission.filter(function (c) { return c.minimumPayout; }).map(function (c) { return moneyShort(c.minimumPayout, c.currency); });
+    var rule = $('payout-rule');
+    rule.textContent = '';
+    rule.appendChild(el('strong', '', 'Payouts: '));
+    rule.appendChild(document.createTextNode('we pay by EFT once your payable balance reaches ' + (mins.length === 1 ? mins[0] : mins.length ? 'the minimum for its currency (' + mins.join(', ') + ')' : 'the minimum') + '. Below that, it carries forward to the next month.'));
+
     var list = $('payouts');
     list.textContent = '';
     d.payouts.forEach(function (p) {
@@ -188,6 +216,7 @@
 
     $('updated').textContent = 'Updated ' + new Date(d.generatedAt).toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short' }) + '.';
     $('demo-note').hidden = !demo;
+    $('trunc-note').hidden = d.truncated !== true;
     state.hidden = true;
     page.hidden = false;
   }
@@ -197,8 +226,8 @@
     say(message, true);
   }
 
-  if (demo) { render(DEMO); return; }
-  if (!token) { fail('This page needs your private link. Open the link Jacques sent you.'); return; }
+  if (demo) { render(demoKind === 'refund' ? DEMO_REFUND : DEMO); return; }
+  if (!token) { fail('This page needs your private link. Open your private link again. For safety the page hides the link once it has loaded, so a refresh needs the original link.'); return; }
 
   fetch(API, {
     method: 'POST',
