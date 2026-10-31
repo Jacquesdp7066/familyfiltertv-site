@@ -257,14 +257,15 @@
   billing but does not by itself delete your account, and deleting your account does not cancel your
   subscription, so cancel there first.</p>
 
-  <p>When an account is deleted, the sign-in and the household are deleted, but a few records are kept because of a legal or
-  abuse-prevention reason: a one-way hash of the email address and of the device id with the date and kind of the free
-  week (the user id is removed from it, so a deleted account cannot be recreated to collect another one, under POPIA
-  section 11(1)(f)); creator commission records, which hold the amount the subscriber was charged, the tax and store shares, the commission
-  owed, the currency, the date, the creator's code and the store transaction id against the account's old random user id, with
-  no name or email; the subscription event log, which holds that user id,
-  the event type, the product and the time, with no email and no price; and aggregate counters. Those records still contain
-  the old user id, which we can no longer match to you through the app. The
+  <p>When an account is deleted, the sign-in and the household are deleted, but a few records are kept for a fixed time because of
+  a legal or abuse-prevention reason, and then deleted by a job that runs every day: <strong>2 years</strong> for a one-way hash of
+  the email address and of the device id with the date and kind of the free week (the user id is removed from it, so a deleted
+  account cannot be recreated to collect another one, under POPIA section 11(1)(f)) and for shared timing votes;
+  <strong>5 years</strong> for creator commission records, which hold the amount the subscriber was charged, the tax and store
+  shares, the commission owed, the currency, the date, the creator's code and the store transaction id against the account's old
+  random user id, with no name or email, and for the purchase-event log, which holds that user id, the event type, the product and
+  the time, with no email and no price. Those records still contain the old user id, which we can no longer match to you through
+  the app. Totals that hold no personal data are not deleted. The
   <a href="delete-account.html#kept">account deletion page</a> lists them and how long each is kept.</p>
 
   <h2>Your rights</h2>
