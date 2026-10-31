@@ -257,12 +257,15 @@
   billing but does not by itself delete your account, and deleting your account does not cancel your
   subscription, so cancel there first.</p>
 
-  <p>When an account is deleted, a few records are kept because they hold no readable personal data or
-  because of a legal or abuse-prevention reason: a one-way hash of the email address and of the device id
-  with the date and kind of the free week (so a deleted account cannot be recreated to collect another one,
-  under POPIA section 11(1)(f)); creator commission records and the subscription event log, which carry an
-  opaque id and no name, email or price; and aggregate counters. The
-  <a href="delete-account.html#kept">account deletion page</a> lists them.</p>
+  <p>When an account is deleted, the sign-in and the household are deleted, but a few records are kept because of a legal or
+  abuse-prevention reason: a one-way hash of the email address and of the device id with the date and kind of the free
+  week (the user id is removed from it, so a deleted account cannot be recreated to collect another one, under POPIA
+  section 11(1)(f)); creator commission records, which hold the amount the subscriber was charged, the tax and store shares, the commission
+  owed, the currency, the date, the creator's code and the store transaction id against the account's old random user id, with
+  no name or email; the subscription event log, which holds that user id,
+  the event type, the product and the time, with no email and no price; and aggregate counters. Those records still contain
+  the old user id, which we can no longer match to you through the app. The
+  <a href="delete-account.html#kept">account deletion page</a> lists them and how long each is kept.</p>
 
   <h2>Your rights</h2>
   <p>This app is operated from South Africa and this policy is written with South Africa's Protection

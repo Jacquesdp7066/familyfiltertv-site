@@ -90,7 +90,7 @@
 
   <h2 id="deleted">What is deleted</h2>
   <ul>
-    <li>Your account: the email address and sign-in (email and password, Google, or Apple), and your Firebase user id.</li>
+    <li>Your account: the sign-in (email and password, Google, or Apple) and the email address held with it. The random user id is not a thing we can delete from every record: see the next section for the few records that still contain it.</li>
     <li>Your household and everything in it: your devices (id, model, name, kind, last seen), your filter and playback settings, your invite code and invite list, link codes, notification-access flags, and the follow-mode data synced between your phone and TV (title, season and episode, subtitle file, position, timing).</li>
     <li>Your subscriber record at RevenueCat, our subscription service.</li>
     <li>Your name on friends' invite lists: if you were invited, the person who invited you keeps their count but sees "A friend". If you invited others, their rows stay but no longer point to you.</li>
@@ -98,14 +98,24 @@
   </ul>
   <p>Google Analytics for Firebase data is not linked to your account. It is random app-instance data, and detailed events are kept for two months, after which only totals remain.</p>
 
-  <h2 id="kept">What is kept after deletion, and why</h2>
-  <p>A few records stay because they contain no readable personal data, or because we have a legal or abuse-prevention reason:</p>
+  <h2 id="kept">What is kept after deletion, and for how long</h2>
+  <p>Deleting your account removes the sign-in and your household, so we can no longer match the account's old random user id to you
+  through the app. <strong>But that id is not erased from every record.</strong> These records stay, and they are the only ones:</p>
   <ul>
-    <li><strong>Free-week records.</strong> An unsalted one-way hash of the email address and of the device id, with the date and kind of the free week. They stop a deleted account being recreated with the same email or device to collect another free week. Kept as fraud and abuse prevention, a legitimate interest under section 11(1)(f) of South Africa's Protection of Personal Information Act (POPIA). The link to your user id is removed.</li>
-    <li><strong>Creator commission records.</strong> For creators who referred subscribers: what a creator is owed, against an opaque id with no name or email, kept for accounting and tax records.</li>
-    <li><strong>Subscription event log.</strong> The id, the type of event (for example started or ended) and when, with no email and no price, used to count how the service is doing.</li>
-    <li><strong>Counters.</strong> Totals such as launch-offer seats and shared timing votes, which must not change when someone leaves.</li>
-    <li><strong>Purchase records held by Google or Apple.</strong> Your payment history belongs to the store. Delete or manage it in your Google or Apple account.</li>
+    <li><strong>Free-week records.</strong> An unsalted one-way hash of the email address and of the device id, with the date and kind of the free week. The user id is removed from them. They stop a deleted account being recreated with the same email or device to collect another free week: fraud and abuse prevention, a legitimate interest under section 11(1)(f) of South Africa's Protection of Personal Information Act (POPIA). <em>Kept: no end date is set in the system.</em></li>
+    <li><strong>Creator commission records.</strong> For creators who referred subscribers: the amount the subscriber was charged, the tax and store shares, the commission owed to the creator, the currency, the date, the creator's code, the store transaction id and the account's old random user id. No name and no email. Kept for accounting and tax records. <em>Kept: no end date is set in the system; the period is the one the law requires for such records.</em></li>
+    <li><strong>Subscription event log.</strong> The account's old random user id, the type of event (for example started or ended), the product and the time. No email and no price. Used to count how the service is doing. <em>Kept: no end date is set in the system.</em></li>
+    <li><strong>Counters.</strong> Totals such as launch-offer seats and shared timing votes (the votes are keyed by a hash of the user id and hold a number). They must not change when someone leaves. <em>Kept as long as the totals are needed.</em></li>
+    <li><strong>Purchase records held by Google or Apple.</strong> Your payment history belongs to the store and follows its own rules. Delete or manage it in your Google or Apple account.</li>
+  </ul>
+
+  <h2 id="periods">How long things take</h2>
+  <ul>
+    <li><strong>Deleting in the app:</strong> the data under "What is deleted" is removed as part of the same request. When the screen says your account has been deleted, it is.</li>
+    <li><strong>Deleting by email:</strong> a person handles the request by hand. <em>No deadline is set in the system</em>; we reply to confirm when it is done.</li>
+    <li><strong>Link codes</strong> for activating a TV expire after 2 minutes.</li>
+    <li><strong>Google Analytics for Firebase:</strong> detailed events are kept for two months, after which only totals remain. They are not linked to your account.</li>
+    <li><strong>The kept records above:</strong> no automatic end date is set in the system today. We will add one where the law allows a shorter period; until then they are kept for the purpose given for each.</li>
   </ul>
 
   <h2>Questions</h2>
