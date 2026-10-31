@@ -251,10 +251,24 @@
   subscription snapshot for as long as needed to support billing queries. To delete your account and
   the data we hold about it, email
   <a href="mailto:jacquesjdupreez@gmail.com">jacquesjdupreez@gmail.com</a> from the address on the
-  account. On iPhone you can also delete your account in the app: open the Account tab and tap
-  Delete account. Cancelling your subscription in Google Play or your Apple Account settings stops
+  account. In the Android app and in the iPhone app you can also delete your account yourself: open the
+  Account tab and tap Delete account. The steps, what is deleted and what is kept are on the
+  <a href="delete-account.html">account deletion page</a>. Cancelling your subscription in Google Play or your Apple Account settings stops
   billing but does not by itself delete your account, and deleting your account does not cancel your
   subscription, so cancel there first.</p>
+
+  <p>When an account is deleted, the sign-in and the household are deleted, but a few records are kept for a fixed time because of
+  a legal or abuse-prevention reason, and then deleted by a job that runs every day: <strong>2 years</strong> for a one-way hash of
+  the email address and of the device id with the date and kind of the free week (the user id is removed from it, so a deleted
+  account cannot be recreated to collect another one, under POPIA section 11(1)(f));
+  <strong>5 years</strong> for paid creator commission records, which hold the amount the subscriber was charged, the tax and store
+  shares, the commission owed, the currency, the date, the creator's code and the store transaction id against the account's old
+  random user id, with no name or email (a commission record that is not paid yet is kept until it is paid), and for the
+  purchase-event log, which holds that user id, the event type, the product and the time, with no email and no price. Those
+  records still contain the old user id, which we can no longer match to you through the app. Shared timing votes, a plain
+  number filed under a hash of the user id, are kept with no deletion date, because removing old votes would let one new vote
+  overwrite the timing other households share. Totals that hold no personal data are not deleted. The
+  <a href="delete-account.html#kept">account deletion page</a> lists them and how long each is kept.</p>
 
   <h2>Your rights</h2>
   <p>This app is operated from South Africa and this policy is written with South Africa's Protection
