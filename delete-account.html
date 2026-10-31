@@ -104,9 +104,9 @@
   job deletes them. They are the only ones:</p>
   <ul>
     <li><strong>Free-week records. Kept 2 years</strong> from the free week. An unsalted one-way hash of the email address and of the device id, with the date and kind of the free week. The user id is removed from them. They stop a deleted account being recreated with the same email or device to collect another free week: fraud and abuse prevention, a legitimate interest under section 11(1)(f) of South Africa's Protection of Personal Information Act (POPIA).</li>
-    <li><strong>Creator commission records. Kept 5 years</strong> from the payment. For creators who referred subscribers: the amount the subscriber was charged, the tax and store shares, the commission owed to the creator, the currency, the date, the creator's code, the store transaction id and the account's old random user id. No name and no email. Kept for accounting and tax records. The marker of a subscriber's first payment, which decides the commission rate, goes once none of their entries is left.</li>
+    <li><strong>Creator commission records. Paid records are kept 5 years</strong> from the payment, then deleted. For creators who referred subscribers: the amount the subscriber was charged, the tax and store shares, the commission owed to the creator, the currency, the date, the creator's code, the store transaction id and the account's old random user id. No name and no email. Kept for accounting and tax records. A record that is not paid yet (held, waiting for review, or part of a balance below the payout minimum that carries forward) is never deleted until it is paid. The marker of a subscriber's first payment, which decides the commission rate, goes once none of their entries is left.</li>
     <li><strong>Purchase-event log. Kept 5 years</strong> from the event. The account's old random user id, the type of event (for example started or ended), the product and the time. No email and no price. Used to count how the service is doing.</li>
-    <li><strong>Shared timing votes. Kept 2 years</strong> from the vote. A number (how far a subtitle file was out) filed under a hash of the user id, which helps other households' timing.</li>
+    <li><strong>Shared timing votes. Kept, with no deletion date.</strong> A plain number (how far a subtitle file was out) filed under a hash of the user id, which helps other households' timing. It holds nothing else, and we do not use it to identify you. We do not delete these on a timer because removing old votes would let one new vote overwrite the timing everyone shares.</li>
     <li><strong>Totals.</strong> Counters such as launch-offer seats hold no personal data and are not deleted.</li>
     <li><strong>Purchase records held by Google or Apple.</strong> Your payment history belongs to the store and follows its own rules. Delete or manage it in your Google or Apple account.</li>
   </ul>
@@ -117,7 +117,7 @@
     <li><strong>Deleting by email:</strong> a person handles the request by hand. <em>No deadline is set in the system</em>; we reply to confirm when it is done.</li>
     <li><strong>Link codes</strong> for activating a TV expire after 2 minutes.</li>
     <li><strong>Google Analytics for Firebase:</strong> detailed events are kept for two months, after which only totals remain. They are not linked to your account.</li>
-    <li><strong>The kept records above:</strong> 5 years or 2 years as listed, then deleted by a job that runs every day.</li>
+    <li><strong>The kept records above:</strong> 5 years (paid commission records, purchase-event log) or 2 years (free-week hashes) as listed, then deleted by a job that runs every day. The shared timing votes have no deletion date.</li>
   </ul>
 
   <h2>Questions</h2>
