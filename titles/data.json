@@ -1891,6 +1891,84 @@
           3
         ]
       }
+    },
+    {
+      "videoId": "tt0319343",
+      "title": "Elf",
+      "year": 2003,
+      "type": "movie",
+      "slug": "elf-2003",
+      "genres": [
+        "Comedy",
+        "Family",
+        "Fantasy"
+      ],
+      "runtime": "97 min",
+      "imdbUrl": "https://www.imdb.com/title/tt0319343/",
+      "label": "moderate",
+      "labelText": "Moderate",
+      "counts": {
+        "religious": 3,
+        "mild_profanity": 5,
+        "crude": 3
+      },
+      "totalFlagged": 11,
+      "cueCount": 1792,
+      "profiles": {
+        "mild": 0,
+        "family": 8,
+        "strict": 11
+      },
+      "release": "BDRE.720p.x264.AC3-SiLUHD",
+      "computedAt": "2026-10-29T00:09:26.872Z",
+      "intro": "Buddy, a human raised as one of Santa's elves at the North Pole, travels to New York City to find his birth father and ends up spreading Christmas cheer through a skeptical, busy city. It is a Christmas comedy that many families put on every December, which is why parents often check the language first.",
+      "related": [
+        "tt0311289",
+        "tt0114709",
+        "tt1490017"
+      ],
+      "terms": {
+        "religious": {
+          "oh my god": 3
+        },
+        "mild_profanity": {
+          "pissed": 1,
+          "crappy": 2,
+          "hell": 1,
+          "damn": 1
+        },
+        "crude": {
+          "prick": 2,
+          "dick": 1
+        }
+      },
+      "timeline": {
+        "bucketMs": 600000,
+        "words": [
+          0,
+          0,
+          1,
+          1,
+          3,
+          0,
+          2,
+          4,
+          0,
+          0
+        ],
+        "strongProfanity": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
     }
   ],
   "benchmark": {
