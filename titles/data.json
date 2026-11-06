@@ -204,17 +204,18 @@
       "label": "mild",
       "labelText": "Mild",
       "counts": {
-        "crude": 1
+        "crude": 1,
+        "mild_profanity": 2
       },
-      "totalFlagged": 1,
-      "cueCount": 1982,
+      "totalFlagged": 3,
+      "cueCount": 1344,
       "profiles": {
         "mild": 0,
-        "family": 0,
-        "strict": 1
+        "family": 1,
+        "strict": 2
       },
-      "release": "Frozen.2013.720p.BluRay.x264-SPARKS",
-      "computedAt": "2026-10-09T17:30:42.957Z",
+      "release": "Frozen 2013 DVDScr XViD AC3-FiNGERBLaST",
+      "computedAt": "2026-11-05T00:08:25.613Z",
       "intro": "Two royal sisters are separated by a magical secret, and it takes an act of true love between them — not romance — to thaw their kingdom's eternal winter. Frozen is built for sing-along family viewing, and parents searching for its language content are usually checking before a group watch rather than ruling it out.",
       "related": [
         "tt3521164",
@@ -224,14 +225,16 @@
       "terms": {
         "crude": {
           "balls": 1
+        },
+        "mild_profanity": {
+          "hell": 2
         }
       },
       "timeline": {
         "bucketMs": 600000,
         "words": [
           0,
-          1,
-          0,
+          3,
           0,
           0,
           0,
@@ -242,7 +245,6 @@
           0
         ],
         "strongProfanity": [
-          0,
           0,
           0,
           0,
@@ -1687,22 +1689,22 @@
       "label": "strong",
       "labelText": "Strong",
       "counts": {
-        "crude": 16,
-        "mild_profanity": 59,
-        "strong_profanity": 264,
-        "slurs": 2,
-        "sexual_explicit": 2,
-        "religious": 6
+        "crude": 12,
+        "strong_profanity": 162,
+        "slurs": 13,
+        "mild_profanity": 36,
+        "religious": 5,
+        "sexual_explicit": 1
       },
-      "totalFlagged": 349,
-      "cueCount": 2265,
+      "totalFlagged": 229,
+      "cueCount": 1368,
       "profiles": {
-        "mild": 246,
-        "family": 298,
-        "strict": 306
+        "mild": 162,
+        "family": 192,
+        "strict": 201
       },
-      "release": "Training.Day.2001.720p.BRRip.XviD.AC3-wD",
-      "computedAt": "2026-10-09T17:30:42.957Z",
+      "release": "Training Day (2001)",
+      "computedAt": "2026-11-02T00:05:49.095Z",
       "intro": "A rookie LAPD narcotics officer spends his first day shadowing a veteran detective whose methods turn out to be far more corrupt than anyone warned him about. The Oscar-winning performance at its centre comes wrapped in dialogue that's blunt and frequently profane throughout.",
       "related": [
         "tt0105236",
@@ -1712,76 +1714,67 @@
       "terms": {
         "crude": {
           "screw this": 1,
-          "dick": 11,
-          "prick": 3,
-          "balls": 1
-        },
-        "mild_profanity": {
-          "hell": 8,
-          "ass": 36,
-          "damn": 13,
-          "piss": 2
+          "dick": 8,
+          "prick": 3
         },
         "strong_profanity": {
-          "fucked": 7,
-          "bullshit": 7,
-          "shit": 100,
-          "bitch": 20,
-          "fuck": 59,
-          "motherfuckers": 8,
-          "fucker": 1,
-          "shitty": 1,
-          "motherfucker": 22,
-          "fucking": 25,
-          "motherfucking": 6,
-          "asshole": 1,
-          "holy shit": 2,
-          "assholes": 2,
+          "fucked": 5,
+          "shit": 70,
+          "fuck": 43,
+          "bitch": 12,
+          "motherfucker": 10,
+          "fucking": 12,
+          "motherfuckers": 6,
           "cocksucker": 1,
           "son of a bitch": 1,
-          "bitches": 1
+          "bitches": 1,
+          "motherfucking": 1
         },
         "slurs": {
           "dyke": 1,
-          "faggot": 1
+          "nigga": 11,
+          "fag": 1
         },
-        "sexual_explicit": {
-          "pussy": 2
+        "mild_profanity": {
+          "ass": 30,
+          "damn": 4,
+          "piss": 2
         },
         "religious": {
           "jesus christ": 1,
-          "oh god": 1,
-          "god damn": 4
+          "goddamn": 3,
+          "god": 1
+        },
+        "sexual_explicit": {
+          "pussy": 1
         }
       },
       "timeline": {
         "bucketMs": 600000,
         "words": [
-          17,
-          32,
-          48,
-          58,
-          41,
-          20,
-          24,
+          15,
           25,
-          36,
-          22,
-          8,
-          18,
+          32,
+          46,
+          17,
+          13,
+          17,
+          12,
+          25,
+          6,
+          21,
           0
         ],
         "strongProfanity": [
-          8,
-          27,
-          35,
-          45,
-          28,
-          13,
-          21,
-          20,
-          28,
+          9,
           16,
+          20,
+          32,
+          10,
+          9,
+          13,
+          10,
+          20,
           6,
           17,
           0
