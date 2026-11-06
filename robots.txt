@@ -6,8 +6,9 @@ Allow: /
 Disallow: /link.html
 Disallow: /join.html
 Disallow: /join
-Disallow: /creator
+Disallow: /creator$
 Disallow: /creator.html
+Disallow: /creator/
 Disallow: /apk/
 Disallow: /admin.html
 
