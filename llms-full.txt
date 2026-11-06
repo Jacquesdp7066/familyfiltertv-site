@@ -4,7 +4,7 @@
 
 Official site: https://familyfiltertv.com/
 Short version: https://familyfiltertv.com/llms.txt
-Last updated 13 October 2026
+Last updated 6 November 2026
 
 # The facts (https://familyfiltertv.com/facts.html)
 
@@ -97,6 +97,25 @@ A: It depends on the system your TV runs, not the brand. If your TV has the Goog
 
 Q: Something isn't working.
 A: Support has the setup steps, the known limits, and an address to write to.
+
+## How automatic profanity filtering works (https://familyfiltertv.com/how-it-works.html)
+
+Q: How does Family Filter TV mute profanity?
+A: It finds the subtitles for what you are watching, checks each line against the filter strength you chose (off, mild, family or strict), and mutes the sound for that line only. The picture keeps playing and the sound comes straight back.
+
+Q: Is every swear word caught?
+A: No. Muting is best effort. A line can slip through, especially in songs or when the subtitles differ from what is said. It needs subtitles for the title and works with English titles only for now.
+
+Q: Does the phone record the TV?
+A: No. When follow-along needs to find your place in a film, the phone listens to a few seconds of dialogue, turns it into words on the phone and compares it there with the subtitles. Nothing is stored or sent.
+
+## Family Filter TV questions and answers (https://familyfiltertv.com/faq.html)
+
+One page of plain answers on what it does, which devices and apps it works with, the price (US$14.99 a year after a 14-day free trial, billed through Google Play), privacy and troubleshooting.
+
+## Demo video (https://familyfiltertv.com/demo.html)
+
+A 30-second produced launch video with English captions and a written transcript: a film line plays, one word is muted for the demo with the filter on Strict, and the sound comes straight back. Film: "Tears of Steel" (c) Blender Foundation, CC BY 3.0.
 
 ## Profanity filter for Android TV: how it works and what it can't do (https://familyfiltertv.com/profanity-filter-android-tv.html)
 
@@ -497,6 +516,9 @@ A: Needs Family Filter TV on an Android TV or Google TV device and on an Android
 
 # Guides
 
+- How automatic profanity filtering works: Subtitles, filter strength, follow-along and what it cannot catch. https://familyfiltertv.com/how-it-works.html
+- Family Filter TV questions and answers: Devices, price, free trial, privacy and troubleshooting. https://familyfiltertv.com/faq.html
+- Demo: Family Filter TV mutes swearing in 30 seconds: Launch video with captions and transcript. https://familyfiltertv.com/demo.html
 - Profanity filter for Android TV: how it works and what it can't do: How the filtering works on screen, what it needs and what it cannot do. https://familyfiltertv.com/profanity-filter-android-tv.html
 - Mute swearing in Stremio: step-by-step: Stremio has no built-in profanity filter; these steps add Family Filter TV as the external player. https://familyfiltertv.com/stremio-profanity-filter.html
 - Mute swearing on TV without cutting the video: What watching looks like when unwanted language is muted and the picture keeps playing. https://familyfiltertv.com/mute-swearing-on-tv.html

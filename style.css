@@ -908,3 +908,7 @@ main.wrap.wide > .signup { max-width: 560px; }
   .signup { padding: 22px 18px 18px; border-radius: 18px; }
   .signup button { flex: 1 1 100%; }
 }
+
+/* Visible breadcrumbs (new pages) */
+.crumbs { font-size: 0.875rem; color: var(--muted); margin: 0 0 12px; }
+.crumbs a { color: var(--ink-soft); }
