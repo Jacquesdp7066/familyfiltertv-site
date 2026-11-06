@@ -63,7 +63,7 @@ Current `assets/feature-graphic.png` is 1024 by 500, the required size. Recommen
 
 ## Trial messaging
 
-Same words everywhere: "Choose a 30-day or 1-year plan after your 14-day free trial — current prices are shown in Google Play. Cancel any time in Google Play." The website homepage, `faq.html`, `how-it-works.html`, `demo.html`, `facts.html` and the llms files use this wording; `terms.html` still states the old single annual amount and must be rewritten by Jacques for the two plans. Any change must change all four in the same PR.
+Same words everywhere: "Choose a 30-day or 1-year plan after your 14-day free trial — current prices are shown in Google Play. Cancel any time in Google Play." The website homepage, `faq.html`, `how-it-works.html`, `demo.html`, `facts.html` and the llms files use this wording; `terms.html` still states the old single annual amount and must be rewritten for the two plans (draft: `TERMS_DRAFT.md`). Any change must change all four in the same PR.
 
 ## Device compatibility
 

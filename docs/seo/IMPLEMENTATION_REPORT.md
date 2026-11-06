@@ -19,7 +19,8 @@ The home page now leads with "Automatically Mute Profanity in Movies & TV Shows"
 | Performance | Font preload on non-generated pages; hero poster halved (124 KB to 60 KB). |
 | Plans | Dollar amounts replaced by the plan sentence on the home page, new pages, facts, llms files and ten guide and comparison pages; SoftwareApplication Offer removed; `price.js` no longer loaded on the home page; "cheapest service" claim dropped. |
 | Consent and GA4 | `consent.js` (dormant), banner styles, `data-cta` attributes, generator updated so title pages load it. |
-| Docs | The eight files below. |
+| join.html | Old "R250 a year" replaced with the plan sentence. |
+| Docs | The eight files below plus `TERMS_DRAFT.md`. |
 
 Kept as is on purpose: all existing URLs, the cookie-free counter `hit.js`, robots.txt (nothing blocked that should be open), existing JSON-LD on other pages.
 
@@ -48,9 +49,9 @@ Responsive layout was checked on the 412-pixel mobile Lighthouse render of the h
 
 ## 4. Remaining issues
 
-1. **Dollar amounts still on four pages**: `terms.html` (US$14.99 a year and device add-on prices in the legal text), `creators.html` (R250 or US$15 payout threshold, which is a creator payout, not a price), `creator.html` and `join.html` (R250 a year and "14 days free" in the join flow). These are legal text and flows I did not edit. Terms must be rewritten for the two plans.
-2. **Launch-discount copy is still on the home FAQ and other pages** ("first 200 subscribers... 50% off their first year"). It has no amounts, but it is written for a yearly plan. Jacques should confirm it still applies with a 30-day plan. The live seat counter on the home page was removed with `price.js`.
-3. **Free-week PR #75** ("no-card free week replaces the 14-day trial", draft, do not merge) rewrites the same sentences in many of the same files. If it merges, my new pages, the home trial section, the faq and demo need the same change; if mine merges first, rebase #75 and extend its replacements to `how-it-works.html`, `faq.html`, `demo.html` and `consent.js` event names (`trial_*` still work).
+1. **`terms.html` still carries the old annual amount and device prices.** Left live on purpose (legal text). A draft rewrite for the two plans is in `docs/seo/TERMS_DRAFT.md` for Jacques to approve; publish it when 1.1.13 is live. `join.html` was updated (the "R250 a year" lines now say "choose a 30-day or 1-year plan, current prices are shown in Google Play", both in the page and in the closed-offer script text). `creators.html` and `creator.html` contain no subscription price; the R250 (or US$15) there is the creator payout minimum and was left.
+2. **Launch-discount copy stays** on the home FAQ and other pages (Jacques confirmed it still applies to the 1-year plan; no amounts). The live seat counter on the home page was removed with `price.js` and is not coming back.
+3. PR #75 (free week) was closed by the desk; the trial stays 14 days. Nothing to reconcile.
 4. Live demo recording: the page has a source comment where it goes, but the martial-arts video does not exist, so no live-filtering claim or VideoObject exists for it.
 5. The counter's reachability check logs an HTTP 405 console error on every page (Best Practices 96). Fix is a backend change (`HEAD` returns 204).
 6. `price.js` and `data/prices.json` are now unused on the home page; delete them when the plan prices are final.
@@ -68,11 +69,9 @@ Responsive layout was checked on the 412-pixel mobile Lighthouse render of the h
 1. Approve the home page headline and the broader "Movies & TV Shows" framing (it moves away from the "Android TV" H1 that the page had; Android TV stays in the title tag description, lead and table).
 2. Approve merging this PR (this is the production deploy).
 3. GA4: provide the ID; approve the privacy wording below; decide the optional counter events and the UTM referrer on Play links (`ANALYTICS_PLAN.md`).
-4. Confirm the launch-discount wording still applies to the 1-year plan (remaining issue 2).
-5. Terms page rewrite for the 30-day and 1-year plans.
-6. Order of merging against PR #75.
-7. Play listing edits after 1.1.13 (title option "Family Filter TV: Mute Swears", short description, full description sentence).
-8. Whether any streaming service beyond Netflix can be named once tested (Disney+, YouTube): none are claimed.
+4. Approve `docs/seo/TERMS_DRAFT.md` (and answer its questions) so `terms.html` can be updated when 1.1.13 is live.
+5. Play listing edits after 1.1.13 (title option "Family Filter TV: Mute Swears", short description, full description sentence).
+6. Whether any streaming service beyond Netflix can be named once tested (Disney+, YouTube): none are claimed.
 
 ## 7. TODO checklist: fill in the plan prices once 1.1.13 is live
 
