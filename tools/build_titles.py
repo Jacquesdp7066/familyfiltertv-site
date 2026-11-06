@@ -677,7 +677,7 @@ def analysis_panel(t, category_labels):
             f'      <li>{esc(category_labels.get(key, key))}: {esc(t["counts"][key])}{term_list(t, key)}</li>'
             for key in keys
         )
-        cat_heading = "Words counted in total, by category" if t["totalFlagged"] != muted_count(t) else "Flagged by category"
+        cat_heading = "Words counted in total, by category" if t["totalFlagged"] != muted_count(t) else "Words counted, by category"
         cat_block = f'''    <h3>{cat_heading}</h3>
     <ul>
 {cat_html}
@@ -919,7 +919,7 @@ def faq_items(t, category_labels, benchmark=None):
         elif total == 1:
             answer = f"No. The one flagged word in {name} is not the F-word."
         elif total:
-            answer = f"No. None of the {total} words counted in total in {name} is the F-word."
+            answer = f"No. None of the {total} words we counted in {name} is the F-word."
         else:
             answer = f"No. We found no flagged words at all in the English subtitles of {name}."
         if not n:
@@ -1066,7 +1066,7 @@ def low_count_section(t, by_id, category_labels):
     if others:
         items = "\n".join(
             f'      <li><a href="../{o["slug"]}/">{esc(o["title"])} ({o["year"]})</a> &mdash; '
-            f'{esc(cap(counts_phrase(o)))} in {o["cueCount"]:,} subtitle lines</li>'
+            f'{esc(cap(counts_phrase(o)))} ({o["cueCount"]:,} subtitle lines)</li>'
             for o in others
         )
         other_html = f'''
@@ -1347,12 +1347,13 @@ def methodology_page_html(titles, category_labels):
     <p>Each film page also shows how many subtitle lines each profile would mute. That is a count
     of lines, not words: a line with three flagged words is one muted line but adds three to the
     word count, and a line is muted only if it holds a word in a category the profile covers.</p>
-    <p>Each film page leads with how often the Family setting mutes it (&ldquo;the Family setting
-    mutes it 28 times&rdquo;). That is the Family filter's muted subtitle lines. &ldquo;Words
-    counted in total&rdquo; is every flagged word we found, in every category, including the ones
-    only the Strict filter covers, so it can be higher. It is shown only where it differs. A film
-    the Family setting mutes none of is labelled &ldquo;mild language only&rdquo;, with the number
-    counted and the note that the Strict setting mutes it.</p>
+    <p>Each film page leads with how often the Family setting mutes the film (&ldquo;the Family
+    setting mutes it 28 times&rdquo;). That is a count of subtitle lines. &ldquo;Words counted in
+    total&rdquo; is a count of words: every flagged word we found, in every category. It can be
+    higher because a line with several flagged words is muted once, and because some words are
+    covered only by the Strict filter. It is shown only where the two numbers differ. A film the
+    Family setting mutes none of is labelled &ldquo;mild language only&rdquo;, with the number of
+    words counted and a note that the Strict setting mutes it.</p>
   </section>
 
   <section aria-labelledby="level-heading">
