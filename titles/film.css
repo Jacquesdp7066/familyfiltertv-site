@@ -69,6 +69,7 @@
 }
 
 .result-unit { font-size: 1.125rem; font-weight: 700; color: var(--ink-soft); }
+.result .result-sub { margin: 10px 0 0; font-size: 1rem; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
 
 .result-calm {
   font-size: clamp(1.6rem, 6vw, 2.25rem);

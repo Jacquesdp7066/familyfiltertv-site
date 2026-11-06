@@ -63,6 +63,35 @@ class AnalysisPanel(unittest.TestCase):
         self.assertIn("<li>Strong profanity: 2</li>", bt.analysis_panel(TITLE, LABELS))
 
 
+class FamilySettingWording(unittest.TestCase):
+    """The pages lead with what the Family setting mutes and add the raw total only where it differs."""
+
+    def test_counts_phrase_leads_with_muted_and_adds_the_total_only_when_it_differs(self):
+        self.assertEqual(bt.counts_phrase(FULL), "5 words muted (Family setting), 6 counted in total")
+        same = dict(FULL, totalFlagged=5)
+        self.assertEqual(bt.counts_phrase(same), "5 words muted (Family setting)")
+        one = dict(FULL, totalFlagged=1, profiles={"mild": 0, "family": 1, "strict": 1})
+        self.assertEqual(bt.counts_phrase(one), "1 word muted (Family setting)")
+        none_muted = dict(FULL, totalFlagged=1, profiles={"mild": 0, "family": 0, "strict": 1})
+        self.assertEqual(bt.counts_phrase(none_muted), "0 words muted (Family setting), 1 counted in total")
+
+    def test_the_summary_and_panel_state_both_numbers(self):
+        self.assertIn("5 words muted (Family setting), 6 counted in total", bt.language_summary(FULL, LABELS))
+        panel = re.sub(r"<[^>]+>", "", bt.analysis_panel(FULL, LABELS))
+        self.assertIn("Muted on the Family setting: 5", panel)
+        self.assertIn("Counted in total: 6", panel)
+        same = re.sub(r"<[^>]+>", "", bt.analysis_panel(dict(FULL, totalFlagged=5), LABELS))
+        self.assertNotIn("Counted in total", same)
+
+    def test_the_old_raw_total_wording_is_gone_from_a_page(self):
+        page = bt.title_page_html(FULL, {FULL["videoId"]: FULL}, LABELS, BENCHMARK)
+        self.assertNotIn("flagged swear word", page)
+        self.assertNotIn("Total flagged words", page)
+        faq = dict(bt.faq_items(FULL, LABELS, BENCHMARK))
+        self.assertIn("5 words muted (Family setting), 6 counted in total", faq["How many swear words are in Test Film?"])
+        self.assertIn("5 words muted (Family setting)", faq["Does Test Film have bad words?"])
+
+
 class Timeline(unittest.TestCase):
     def timeline(self, words, strong):
         return dict(TITLE, timeline={"bucketMs": 600000, "words": words, "strongProfanity": strong})
@@ -297,17 +326,18 @@ def jsonld_blocks(page):
 class SearchTitle(unittest.TestCase):
     def test_the_title_asks_the_question_parents_type_with_the_real_count(self):
         t = dict(FULL, title="Moana", year=2016)
-        self.assertEqual(bt.seo_title(t), "Does Moana (2016) have bad words? 6 swear words")
+        self.assertEqual(bt.seo_title(t), "Does Moana (2016) have bad words? 5 words muted")
         self.assertEqual(bt.seo_title(dict(CLEAN, title="Moana", year=2016)), "Does Moana (2016) have bad words? no swearing")
         self.assertEqual(bt.seo_h1(t), "Does Moana (2016) have bad words?")
 
     def test_a_title_set_to_the_guide_style_says_parents_guide(self):
-        t = dict(FULL, title="Gone Girl", year=2014, totalFlagged=130, seoStyle="guide")
-        self.assertEqual(bt.seo_title(t), "Gone Girl (2014) parents guide: 130 swear words by type")
+        t = dict(FULL, title="Gone Girl", year=2014, totalFlagged=130, seoStyle="guide",
+                 profiles={"mild": 90, "family": 115, "strict": 117})
+        self.assertEqual(bt.seo_title(t), "Gone Girl (2014) parents guide: 115 words muted")
         self.assertEqual(bt.seo_h1(t), "Gone Girl (2014) parents guide: swearing and language")
         d = bt.seo_description(t)
         self.assertIn("parents guide", d)
-        self.assertIn("130 flagged swear words", d)
+        self.assertIn("115 words muted (Family setting), 130 counted in total", d)
         self.assertEqual(bt.seo_style(dict(FULL, seoStyle="nonsense")), "question")
 
     def test_a_long_title_falls_back_to_a_shorter_form_within_the_limit(self):
@@ -321,13 +351,28 @@ class SearchTitle(unittest.TestCase):
 
     def test_the_description_has_the_count_the_severity_and_the_mute_promise_within_155(self):
         d = bt.seo_description(dict(FULL, label="moderate"))
-        self.assertIn(f"{FULL['totalFlagged']} flagged swear word", d)
+        self.assertIn("5 words muted (Family setting), 6 counted in total", d)
         self.assertIn("moderate swearing", d)
         self.assertIn("mute", d)
         self.assertIn("no swearing", bt.seo_description(CLEAN))
         long_name = dict(FULL, title="Ant-Man and the Wasp: Quantumania", year=2023, label="moderate", totalFlagged=47)
         for t in (FULL, CLEAN, long_name):
             self.assertLessEqual(len(bt.seo_description(t)), bt.DESCRIPTION_LIMIT)
+
+    def test_counted_in_total_is_left_out_when_it_equals_the_muted_count(self):
+        d = bt.seo_description(dict(FULL, totalFlagged=5))
+        self.assertIn("5 words muted (Family setting)", d)
+        self.assertNotIn("counted in total", d)
+
+    def test_every_real_page_description_fits_and_leads_with_the_muted_count(self):
+        with open(bt.DATA_PATH) as f:
+            data = json.load(f)
+        for t in data["titles"]:
+            d = bt.seo_description(t)
+            self.assertLessEqual(len(d), bt.DESCRIPTION_LIMIT, t["slug"])
+            if t["totalFlagged"]:
+                self.assertIn(f"{t['profiles']['family']} word", d, t["slug"])
+                self.assertIn("(Family setting)", d, t["slug"])
 
     def test_the_page_carries_the_title_h1_and_a_parents_guide_description(self):
         page = bt.title_page_html(FULL, {FULL["videoId"]: FULL}, LABELS, BENCHMARK)
@@ -341,7 +386,7 @@ class SearchTitle(unittest.TestCase):
 class AnswerFirst(unittest.TestCase):
     def test_the_lead_gives_the_total_the_strong_count_and_the_f_word_count(self):
         sentence, detail = bt.answer_lead(FULL)
-        self.assertIn("Yes, Test Film (2020) has bad words: 6 flagged words", sentence)
+        self.assertIn("Yes, Test Film (2020) has bad words: 5 words muted (Family setting), 6 counted in total", sentence)
         self.assertTrue(detail.startswith("Strong profanity: 2. F-word: 2."))
 
     def test_the_lead_splits_the_total_by_category_and_says_when_there_is_no_strong_profanity(self):
@@ -384,7 +429,7 @@ class Faq(unittest.TestCase):
 
     def test_the_kids_answer_uses_the_record_and_makes_no_age_claim(self):
         answer = dict(bt.faq_items(FULL, LABELS, BENCHMARK))[f"Is {FULL['title']} OK for kids?"]
-        self.assertIn(f"{FULL['totalFlagged']} flagged word", answer)
+        self.assertIn("5 words muted (Family setting), 6 counted in total", answer)
         self.assertIn("not violence", answer)
         self.assertIsNone(re.search(r"\bunder \d+|\bages? \d+|\d+\+", answer))
 
@@ -446,7 +491,9 @@ class LowCount(unittest.TestCase):
 class ResultBlock(unittest.TestCase):
     def test_total_label_and_one_bar_per_category(self):
         html = bt.result_block(FULL, LABELS)
-        self.assertIn('<span class="result-figure">6</span>', html)
+        self.assertIn('<span class="result-figure">5</span>', html)
+        self.assertIn("words muted (Family setting)", html)
+        self.assertIn("6 counted in total", html)
         self.assertIn("pill pill-moderate", html)
         nums = [int(n) for n in re.findall(r'<span class="bar-num">(\d+)</span>', html)]
         self.assertEqual(nums, [2, 3, 1])
@@ -560,8 +607,8 @@ class FilmCss(unittest.TestCase):
         self.assertIn('<link rel="stylesheet" href="film.css">', page)
         self.assertEqual(page.count('class="title-row" data-search="'), 2)
         self.assertIn('data-search="test film"', page)
-        self.assertIn("6 flagged words", page)
-        self.assertIn("0 flagged words", page)
+        self.assertIn("5 words muted (Family setting), 6 counted in total", page)
+        self.assertIn("0 words muted (Family setting)", page)
         self.assertIn("document.querySelectorAll('.title-row')", page)
 
 
