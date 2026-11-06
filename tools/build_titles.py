@@ -122,7 +122,7 @@ def header(active, depth):
     <nav class="site-nav" aria-label="Pages">
 {nav(active, depth)}
     </nav>
-    <a class="btn btn-sm head-cta" href="https://play.google.com/store/apps/details?id=com.familyfiltertv.app">Get the app</a>
+    <a class="btn btn-sm head-cta" href="https://play.google.com/store/apps/details?id=com.familyfiltertv.app" data-cta="header">Get the app</a>
   </div>
 </header>'''
 
@@ -1161,6 +1161,7 @@ def title_page_html(t, by_id, category_labels, benchmark=None):
 <link rel="canonical" href="{canonical}">
 <link rel="stylesheet" href="../../style.css">
 <script src="../../hit.js" defer></script>
+<script src="../../consent.js" defer></script>
 <link rel="stylesheet" href="../film.css">
 <script type="application/ld+json">
 {jsonld(jsonld_work)}
@@ -1296,6 +1297,7 @@ def methodology_page_html(titles, category_labels):
 <link rel="canonical" href="{canonical}">
 <link rel="stylesheet" href="../../style.css">
 <script src="../../hit.js" defer></script>
+<script src="../../consent.js" defer></script>
 <script type="application/ld+json">
 {jsonld(jsonld_page)}
 </script>
@@ -1476,6 +1478,7 @@ def index_page_html(titles, category_labels):
 <link rel="canonical" href="{canonical}">
 <link rel="stylesheet" href="../style.css">
 <script src="../hit.js" defer></script>
+<script src="../consent.js" defer></script>
 <link rel="stylesheet" href="film.css">
 <script type="application/ld+json">
 {jsonld(jsonld_breadcrumb)}
