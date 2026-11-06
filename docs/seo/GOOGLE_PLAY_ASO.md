@@ -40,9 +40,13 @@ Keep the current structure (it is clear and honest). Edits to make:
 4. Leave out until verified: any other streaming service name, iPhone or iPad, any rating or count.
 5. Use each natural keyword a few times at most: "mute swear words", "profanity", "Android TV", "Google TV", "Stremio", "subtitles". Play's ranking reads the full description, but repetition lowers conversion and risks a policy flag.
 
+## Audience wording (Jacques, 6 Nov 2026)
+
+The app is for anyone who does not like profanity and wants to enjoy their films and shows anyway, including adult titles such as Ted or Suits. It is not a kids-only product and must not read as one. Lead the short and full description with the viewer, not the children: "Enjoy the films and shows you like, without the swearing." Keep the product name and the "Family" filter level as they are. Say "family" only for the household setting (one filter for every TV in the house), never as a claim that titles are safe for children. Nothing here goes to the Play Console until 1.1.13 is approved; the 14-day free trial wording stays.
+
 ## Keyword strategy for the store
 
-Primary: mute swear words, profanity filter, Android TV, Google TV. Secondary: Stremio external player, family movie night, language filter. The terms match `KEYWORD_STRATEGY.md`. Do not include competitor names in the listing (policy).
+Primary: mute swear words, profanity filter, Android TV, Google TV. Secondary: Stremio external player, swearing filter for movies and TV shows, language filter, family movie night (household use, not the main message). The terms match `KEYWORD_STRATEGY.md`. Do not include competitor names in the listing (policy).
 
 ## Screenshot copy (one idea per screenshot; real screens only)
 
@@ -51,6 +55,7 @@ Use real captures from 1.1.13. Suggested captions, in order:
 1. "Mutes the swearing. The picture keeps playing."
 2. "Choose how strict: Mild, Family or Strict."  (the app shows Off as well; match the screen)
 3. "One setting for every TV in the house."
+3b. Opening screenshot or feature graphic line (adult viewer): "Enjoy the films and shows you like, without the swearing."
 4. "Pick the title on your phone. The TV follows."
 5. "14 days free. Cancel any time in Google Play."
 6. "Honest limits: English titles, needs subtitles, best effort."

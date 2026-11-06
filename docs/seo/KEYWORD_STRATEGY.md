@@ -21,9 +21,10 @@ Scope: the target terms in Jacques's brief, mapped to one page each so no two pa
 | Netflix | profanity filter for Netflix; does Netflix have a profanity filter | Informational then commercial | `/does-netflix-have-a-profanity-filter.html` (question), `/mute-swearing-on-netflix.html` (steps) | Exist | P1 |
 | Stremio | profanity filter for Stremio | Commercial | `/stremio-profanity-filter.html` | Exists | P1 |
 | Windows | profanity filter for Windows PC | Commercial, low volume | `/windows-profanity-filter.html` | Exists (early beta, stated plainly) | P3 |
-| Family-friendly viewing | family-friendly streaming; family movie night without swearing; parental controls vs profanity filter | Informational | `/family-movie-night-without-swearing.html`, `/parental-controls-vs-profanity-filter.html` | Exist | P2 |
+| Adult viewers who dislike swearing | watch movies without swearing; swearing filter for TV shows; mute swearing in Suits, Ted and other adult titles | Informational then commercial | `/mute-swearing-on-tv.html`, `/swearing-in-movies.html`, per-film pages | Positioning from Jacques, 6 Nov 2026: the app is for people who do not like profanity, so adult titles (Ted, Suits) are in scope. New pages only from real counts | P1 |
+| Household viewing | family movie night without swearing; parental controls vs profanity filter | Informational | `/family-movie-night-without-swearing.html`, `/parental-controls-vs-profanity-filter.html` | Exist | P2 |
 | Competitors | alternatives to VidAngel; alternatives to ClearPlay; VidAngel vs ClearPlay | Commercial investigation | `/vidangel-clearplay-alternative.html`; also `/movie-filtering-services-compared.html`, `/tvguardian-alternative.html`, `/cleancut-alternative-android-tv.html`, `/enjoy-movies-your-way-alternative.html` | Exist | P1 |
-| Per-film language | is [film] OK for kids; swearing in [film] | Informational, long tail | `/titles/<film>/` | Exist, generated, another PR owns them | P2 |
+| Per-film language | swearing in [film]; is [film] OK to watch if you don't like swearing; [film] parents guide (kept for search) | Informational, long tail | `/titles/<film>/` | Exist, generated, another PR owns them | P2 |
 | Questions | does it work on my TV; how much does it cost; is there a free trial | Informational | `/faq.html`, `/which-tvs.html` | `/faq.html` new | P1 |
 | Video | profanity filter demo; family filter tv demo | Navigational | `/demo.html` | New this mission | P2 |
 

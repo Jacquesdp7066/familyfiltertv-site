@@ -91,7 +91,7 @@ class FamilySettingWording(unittest.TestCase):
         self.assertIn("Mild language only", block)
         self.assertIn("the Family setting mutes none, Strict mutes it", block)
         self.assertNotIn("result-figure", block)
-        kids = dict(bt.faq_items(ZERO, LABELS, BENCHMARK))["Is Test Film OK for kids?"]
+        kids = dict(bt.faq_items(ZERO, LABELS, BENCHMARK))["Is Test Film OK to watch if you don't like swearing?"]
         self.assertIn(ZERO_PHRASE.replace("Mild", "mild"), kids)
         self.assertNotIn("Yes", dict(bt.faq_items(ZERO, LABELS, BENCHMARK))["Does Test Film have bad words?"][:3])
 
@@ -457,11 +457,11 @@ class Faq(unittest.TestCase):
         items = bt.faq_items(CLEAN, LABELS, BENCHMARK)
         self.assertTrue(4 <= len(items) <= 8)
         self.assertIn("No.", dict(items)["Does Clean Film use the F-word?"])
-        self.assertIn("On language, yes", dict(items)["Is Clean Film OK for kids?"])
+        self.assertIn("On language, yes", dict(items)["Is Clean Film OK to watch if you don't like swearing?"])
         self.assertIn("Can I watch Clean Film without the swearing?", dict(items))
 
     def test_the_kids_answer_uses_the_record_and_makes_no_age_claim(self):
-        answer = dict(bt.faq_items(FULL, LABELS, BENCHMARK))[f"Is {FULL['title']} OK for kids?"]
+        answer = dict(bt.faq_items(FULL, LABELS, BENCHMARK))[f"Is {FULL['title']} OK to watch if you don't like swearing?"]
         self.assertIn("the Family setting mutes it 5 times, 6 words counted in total", answer)
         self.assertIn("not violence", answer)
         self.assertIsNone(re.search(r"\bunder \d+|\bages? \d+|\d+\+", answer))
