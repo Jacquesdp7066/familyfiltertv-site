@@ -20,7 +20,6 @@
 <link rel="preload" href="assets/fonts/manrope-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="style.css">
 <script src="hit.js" defer></script>
-<script src="price.js" defer></script>
 <script src="signup.js" defer></script>
 <script type="application/ld+json">
 {
@@ -59,13 +58,6 @@
     "Plays the next episode of the same download automatically",
     "Direct install for TV boxes without the Play Store"
   ],
-  "offers": {
-    "@type": "Offer",
-    "price": "14.99",
-    "priceCurrency": "USD",
-    "category": "Annual subscription",
-    "description": "US$14.99 a year after a 14-day free trial. Google Play charges in your own currency."
-  },
   "publisher": {
     "@type": "Organization",
     "name": "Family Filter TV",
@@ -126,7 +118,7 @@
       "name": "What happens during the 14-day free trial?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The first 14 days are free. After the trial the subscription is US$14.99 a year, billed through Google Play, and you can cancel any time from Google Play. If the trial ends and you have not subscribed, the app stops filtering and stops playback; it never plays a stream unfiltered."
+        "text": "The first 14 days are free. After the trial you choose a 30-day or 1-year plan, billed through Google Play with current prices shown there, and you can cancel any time from Google Play. If the trial ends and you have not subscribed, the app stops filtering and stops playback; it never plays a stream unfiltered."
       }
     },
     {
@@ -198,7 +190,7 @@
       "name": "What does Family Filter TV cost?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "US$14.99 a year, with the first 14 days free. Google Play shows and charges the price in your own currency. One account covers three devices, and more can be added up to six."
+        "text": "Choose a 30-day or 1-year plan after your 14-day free trial — current prices are shown in Google Play, in your own currency. One account covers three devices, and more can be added up to six."
       }
     },
     {
@@ -253,7 +245,7 @@
         <a class="btn" href="https://play.google.com/store/apps/details?id=com.familyfiltertv.app">Try Free for 14 Days</a>
         <a class="btn-quiet" href="#video">Watch How It Works</a>
       </div>
-      <p class="cta-note">14 days free, then US$14.99 a year. No Play Store on your TV?
+      <p class="cta-note">14 days free, then choose a 30-day or 1-year plan; current prices are shown in Google Play. No Play Store on your TV?
       <a href="download.html">Install it directly</a>. Or <a href="setup.html#quick-start">set up in 5 minutes</a>.</p>
       <div class="works-on">
         <p class="works-on-label" id="works-on-label">Works on</p>
@@ -473,7 +465,7 @@
   <ol class="steps">
     <li><div><h3>Install and link</h3><p>Install Family Filter TV from Google Play on your TV and your phone, sign in, and link the TV with the short code it shows.</p></div></li>
     <li><div><h3>Use it for 14 days, free</h3><p>The first 14 days cost nothing. Watch, change the filter strength and see how it suits your household.</p></div></li>
-    <li><div><h3>Keep it or stop</h3><p>After the trial the subscription is US$14.99 a year, billed through Google Play. You can cancel any time from Google Play and keep filtering until the end of the period you paid for. If the trial ends and you have not subscribed, the app stops filtering and stops playback; it never plays a stream unfiltered. See the <a href="terms.html">terms</a>.</p></div></li>
+    <li><div><h3>Keep it or stop</h3><p>After the trial you choose a 30-day or 1-year plan, billed through Google Play, with current prices shown there. You can cancel any time from Google Play and keep filtering until the end of the period you paid for. If the trial ends and you have not subscribed, the app stops filtering and stops playback; it never plays a stream unfiltered. See the <a href="terms.html">terms</a>.</p></div></li>
   </ol>
 
   <h2 id="why">Why Family Filter TV</h2>
@@ -498,33 +490,13 @@
   </div>
 
   <h2>What it costs</h2>
-  <div class="price">
-    <div class="price-country" id="price-country" hidden>
-      <label for="price-country-input">Country</label>
-      <select id="price-country-input" aria-describedby="price-note"></select>
-    </div>
-    <p class="price-figure" aria-live="polite"><span id="price-annual">US$14.99</span> <span>a year</span></p>
-    <!-- price.js fills this for the viewer's country before showing it. Kept empty and out of
-         search snippets: the seat count and local price are live, per-country figures, and a
-         hard-coded example here was being quoted by Google's AI Overview as the price. -->
-    <div class="price-launch" id="price-launch" hidden aria-live="polite" data-nosnippet>
-      <p class="price-launch-label">Launch offer</p>
-      <p class="price-figure price-launch-figure"><span id="price-launch-pct"></span> <span>off your first year</span></p>
-      <ul>
-        <li id="price-launch-seats"></li>
-        <li id="price-launch-price"></li>
-        <li id="price-launch-next"></li>
-        <li id="price-launch-end"></li>
-      </ul>
-    </div>
+  <div class="panel">
+    <p>Choose a 30-day or 1-year plan after your 14-day free trial &mdash; current prices are shown in Google Play.</p>
     <ul>
       <li>The first 14 days are free.</li>
-      <li>Three devices on one account, and up to six if you need them.</li>
-      <li id="price-devices">A 4th, 5th or 6th device adds US$3.09, US$5.99 or US$8.99 a year.</li>
+      <li>Three devices on one account, and up to six if you need them. Extra devices are priced in Google Play.</li>
       <li>Android TVs, Android TV boxes and Android phones.</li>
-      <li>Google Play shows and charges the price in your own currency.</li>
-      <li id="price-note">Prices are Google Play's listed prices<span id="price-note-country"> for the United States</span>; the final amount is confirmed at checkout.</li>
-      <li>Launch discounts apply to the first year only; the subscription renews at the full price shown above.</li>
+      <li>Google Play shows and charges the price in your own currency, and confirms the final amount at checkout.</li>
     </ul>
   </div>
 
@@ -581,7 +553,7 @@
     </div>
     <div>
       <h3>What happens during the 14-day free trial?</h3>
-      <p>The first 14 days are free. After the trial the subscription is US$14.99 a year, billed through Google Play, and you can cancel any time from Google Play. If the trial ends and you have not subscribed, the app stops filtering and stops playback; it never plays a stream unfiltered. See the <a href="terms.html">terms</a>.</p>
+      <p>The first 14 days are free. After the trial you choose a 30-day or 1-year plan, billed through Google Play with current prices shown there, and you can cancel any time from Google Play. If the trial ends and you have not subscribed, the app stops filtering and stops playback; it never plays a stream unfiltered. See the <a href="terms.html">terms</a>.</p>
     </div>
     <div>
       <h3>Does it cut or skip anything?</h3>
@@ -632,7 +604,7 @@
     </div>
     <div>
       <h3>What does Family Filter TV cost?</h3>
-      <p>US$14.99 a year, with the first 14 days free. Google Play shows and charges the price in your own currency. One account covers three devices, and more can be added up to six.</p>
+      <p>Choose a 30-day or 1-year plan after your 14-day free trial &mdash; current prices are shown in Google Play, in your own currency. One account covers three devices, and more can be added up to six.</p>
     </div>
     <div>
       <h3>Will it work on my TV?</h3>
