@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Profanity Filter for Android TV: Mute Swear Words | Family Filter TV</title>
-<meta name="description" content="Automatically mute profanity on Android TV while the picture keeps playing. Works with Stremio and follows along with Netflix and other apps on Android TV.">
+<title>Automatically Mute Profanity in Movies &amp; TV | Family Filter TV</title>
+<meta name="description" content="Family Filter TV automatically mutes profanity in movies and TV shows while the picture keeps playing. For Android TV and Google TV. 14 days free.">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta name="theme-color" content="#0B0C0F">
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
@@ -12,8 +12,8 @@
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <meta property="og:url" content="https://familyfiltertv.com/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Profanity Filter for Android TV: Mute Swear Words | Family Filter TV">
-<meta property="og:description" content="Automatically mute swear words and profanity on Android TV while the picture keeps playing. Works with Stremio and with Netflix and other apps on Android TV.">
+<meta property="og:title" content="Automatically Mute Profanity in Movies &amp; TV Shows | Family Filter TV">
+<meta property="og:description" content="Enjoy your favourite entertainment with fewer unwanted words. Family Filter TV automatically mutes profanity during supported playback on Android TV and Google TV.">
 <meta property="og:image" content="https://familyfiltertv.com/assets/feature-graphic.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://familyfiltertv.com/">
@@ -80,6 +80,36 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://familyfiltertv.com/#organization",
+      "name": "Family Filter TV",
+      "alternateName": "FamilyFilterTV",
+      "url": "https://familyfiltertv.com/",
+      "logo": "https://familyfiltertv.com/assets/icon-512.png",
+      "founder": { "@type": "Person", "name": "Jacques du Preez" },
+      "email": "jacquesjdupreez@gmail.com",
+      "sameAs": [
+        "https://www.youtube.com/@FamilyFilterTV",
+        "https://www.instagram.com/familyfiltertv/",
+        "https://www.tiktok.com/@familyfiltertvapp"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://familyfiltertv.com/#website",
+      "name": "Family Filter TV",
+      "url": "https://familyfiltertv.com/",
+      "inLanguage": "en",
+      "publisher": { "@id": "https://familyfiltertv.com/#organization" }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
     {
@@ -88,6 +118,14 @@
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "Filtering availability varies by title. Family Filter TV tells you on screen when filtering is unavailable."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens during the 14-day free trial?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The first 14 days are free. After the trial the subscription is US$14.99 a year, billed through Google Play, and you can cancel any time from Google Play. If the trial ends and you have not subscribed, the app stops filtering and stops playback; it never plays a stream unfiltered."
       }
     },
     {
@@ -205,16 +243,17 @@
 <main class="wrap wide">
   <div class="hero split">
     <div class="hero-copy">
-      <h1>Mute swear words on your Android TV.</h1>
-      <p class="lead">Family Filter TV is a profanity filter. It automatically mutes swear words and other
-      unwanted language while the picture keeps playing. It works with Stremio, follows along with Netflix
-      and other apps on Android TV and Google TV, and you set how strict it is from your phone.</p>
+      <h1>Automatically Mute Profanity in Movies &amp; TV Shows</h1>
+      <p class="lead">Enjoy your favourite entertainment with fewer unwanted words. Family Filter TV
+      automatically detects and mutes profanity during supported playback.</p>
+      <p>Today that means Android TV, Google TV and Android TV boxes: it works with Stremio, follows along
+      with Netflix and other apps, and you set how strict it is from your phone.</p>
       <div class="actions">
-        <a class="btn" href="https://play.google.com/store/apps/details?id=com.familyfiltertv.app">Get it on Google Play</a>
-        <a class="btn-quiet" href="setup.html#quick-start">Set up in 5 minutes</a>
+        <a class="btn" href="https://play.google.com/store/apps/details?id=com.familyfiltertv.app">Try Free for 14 Days</a>
+        <a class="btn-quiet" href="#video">Watch How It Works</a>
       </div>
       <p class="cta-note">14 days free, then US$14.99 a year. No Play Store on your TV?
-      <a href="download.html">Install it directly</a>.</p>
+      <a href="download.html">Install it directly</a>. Or <a href="setup.html#quick-start">set up in 5 minutes</a>.</p>
       <div class="works-on">
         <p class="works-on-label" id="works-on-label">Works on</p>
         <ul aria-labelledby="works-on-label">
@@ -308,6 +347,7 @@
     Android TV, Stremio and follow-along workflows.</p>
     <div class="panel">
       <ul>
+        <li><a href="how-it-works.html"><strong>How automatic profanity filtering works</strong></a> — subtitles, filter strength, follow-along and what it cannot catch.</li>
         <li><a href="profanity-filter-android-tv.html"><strong>Profanity filter for Android TV</strong></a> — how the filtering works, what you need, and what it can't do.</li>
         <li><a href="stremio-profanity-filter.html"><strong>Stremio profanity filter</strong></a> — how to watch with automatic language filtering on Android TV.</li>
         <li><a href="mute-swearing-on-tv.html"><strong>How to mute swearing on TV</strong></a> — what the viewing experience looks like when language is filtered.</li>
@@ -327,7 +367,20 @@
     </div>
   </section>
 
-  <h2>What it works with</h2>
+  <h2 id="compatibility">What it works with</h2>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Where you watch</th><th>Status</th><th>What to know</th></tr></thead>
+      <tbody>
+        <tr><td>Android TV, Google TV, Android TV boxes</td><td>Supported</td><td>Install from Google Play, or <a href="download.html">directly</a> if your box has no Play Store.</td></tr>
+        <tr><td>Stremio on Android TV</td><td>Supported</td><td>Choose Family Filter TV as Stremio&rsquo;s external player. See <a href="stremio-profanity-filter.html">Stremio profanity filter</a>.</td></tr>
+        <tr><td>Netflix and other apps on Android TV</td><td>Follow-along mode</td><td>Pick the title on your Android phone and the TV mutes the swearing. English titles. See <a href="mute-swearing-on-netflix.html">muting swearing on Netflix</a>.</td></tr>
+        <tr><td>Android phones (Android 7.0 or newer)</td><td>Supported</td><td>Set the filter and pick the title from your phone.</td></tr>
+        <tr><td>Windows 10 and 11 PCs</td><td>Early beta</td><td><a href="windows-profanity-filter.html">What the beta does and its limits</a>.</td></tr>
+        <tr><td>Samsung, LG, Roku and Fire TV built-in apps</td><td>Not supported</td><td>A Google TV or Android TV stick in an HDMI port works. <a href="which-tvs.html">Will it work on my TV?</a></td></tr>
+      </tbody>
+    </table>
+  </div>
   <p>Family Filter TV works with supported Stremio playback on Android TV and Android TV boxes,
   and it can follow along while you watch Netflix and other apps on your Android TV.</p>
   <div class="panel">
@@ -390,14 +443,15 @@
   <p><a href="setup.html">The full walkthrough</a> covers installation, linking your TV and the
   few settings needed before you start watching.</p>
 
-  <h2 id="video">See it in 30 seconds</h2>
+  <h2 id="video">See how it works in 30 seconds</h2>
   <figure class="demo">
     <video class="demo-video" width="1280" height="720" controls preload="none" playsinline
       poster="assets/media/launch-poster.jpg">
       <source src="assets/media/launch-video.mp4" type="video/mp4">
+      <track kind="captions" src="assets/media/launch-video.en.vtt" srclang="en" label="English" default>
       Your browser can&rsquo;t play this video. <a href="https://www.youtube.com/@FamilyFilterTV">Watch it on YouTube</a>.
     </video>
-    <figcaption>The 30-second launch video, with sound. Also on <a href="https://www.youtube.com/@FamilyFilterTV" rel="me noopener">YouTube</a>, <a href="https://www.instagram.com/familyfiltertv/" rel="me noopener">Instagram</a> and <a href="https://www.tiktok.com/@familyfiltertvapp" rel="me noopener">TikTok</a>. Film: &ldquo;Tears of Steel&rdquo; &copy; Blender Foundation | mango.blender.org, <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</figcaption>
+    <figcaption>The 30-second launch video, with sound. Also on <a href="https://www.youtube.com/@FamilyFilterTV" rel="me noopener">YouTube</a>, <a href="https://www.instagram.com/familyfiltertv/" rel="me noopener">Instagram</a> and <a href="https://www.tiktok.com/@familyfiltertvapp" rel="me noopener">TikTok</a>. Film: &ldquo;Tears of Steel&rdquo; &copy; Blender Foundation | mango.blender.org, <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>. <a href="demo.html">Read the transcript and what the video shows</a>.</figcaption>
   </figure>
 
   <h2>One filter for the whole house</h2>
@@ -412,6 +466,34 @@
       <li>Three devices are included on one account, and you can add up to six.</li>
       <li>Nobody has to fetch a computer, cast anything, or change a setting on the TV itself.</li>
     </ul>
+  </div>
+
+  <h2 id="trial">What happens in the 14-day free trial</h2>
+  <ol class="steps">
+    <li><div><h3>Install and link</h3><p>Install Family Filter TV from Google Play on your TV and your phone, sign in, and link the TV with the short code it shows.</p></div></li>
+    <li><div><h3>Use it for 14 days, free</h3><p>The first 14 days cost nothing. Watch, change the filter strength and see how it suits your household.</p></div></li>
+    <li><div><h3>Keep it or stop</h3><p>After the trial the subscription is US$14.99 a year, billed through Google Play. You can cancel any time from Google Play and keep filtering until the end of the period you paid for. If the trial ends and you have not subscribed, the app stops filtering and stops playback; it never plays a stream unfiltered. See the <a href="terms.html">terms</a>.</p></div></li>
+  </ol>
+
+  <h2 id="why">Why Family Filter TV</h2>
+  <div class="panel">
+    <ul>
+      <li><strong>Only the word drops.</strong> Nothing is cut, blurred or skipped; the sound returns straight after the line.</li>
+      <li><strong>It runs on the television itself.</strong> No computer to fetch and nothing to cast.</li>
+      <li><strong>One setting for the household.</strong> Choose off, mild, family or strict on your phone and every linked TV follows.</li>
+      <li><strong>Listening stays on your phone.</strong> When follow-along needs to find your place in a film, the sound is turned into words on the phone and is never stored or sent.</li>
+      <li><strong>Straight about the limits.</strong> Muting is best effort, English titles only for now, and it needs subtitles for the title. <a href="how-it-works.html">How it works, and where it can slip</a>.</li>
+    </ul>
+  </div>
+
+  <h2 id="install">Where to install it</h2>
+  <div class="panel">
+    <div class="actions">
+      <a class="btn" href="https://play.google.com/store/apps/details?id=com.familyfiltertv.app">Try Free for 14 Days on Google Play</a>
+      <a class="btn-quiet" href="download.html">Direct install for TV boxes</a>
+      <a class="btn-quiet" href="download.html#windows">Windows beta</a>
+    </div>
+    <p class="muted">Google Play is the simplest route on Android TV, Google TV and Android phones. <a href="install.html">Install guides</a> cover each device.</p>
   </div>
 
   <h2>What it costs</h2>
@@ -488,12 +570,17 @@
   <p class="muted" style="margin-top:16px">Credit lands 3 days after your friend's first payment. Up to five friends a year count towards your free time.
   <a href="setup.html#invite">How inviting works</a>.</p>
 
-  <h2>Questions</h2>
+  <h2 id="faq">Questions</h2>
+  <p><a href="faq.html">All questions and answers</a>, including troubleshooting.</p>
   <div class="faq">
     <div>
       <h3>What happens if a title has no subtitles?</h3>
       <p>Filtering availability varies by title. Family Filter TV tells you on screen when filtering
       is unavailable.</p>
+    </div>
+    <div>
+      <h3>What happens during the 14-day free trial?</h3>
+      <p>The first 14 days are free. After the trial the subscription is US$14.99 a year, billed through Google Play, and you can cancel any time from Google Play. If the trial ends and you have not subscribed, the app stops filtering and stops playback; it never plays a stream unfiltered. See the <a href="terms.html">terms</a>.</p>
     </div>
     <div>
       <h3>Does it cut or skip anything?</h3>
