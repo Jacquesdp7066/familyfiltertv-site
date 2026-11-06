@@ -180,16 +180,37 @@ def plural(n, word):
 
 
 def muted_count(t):
-    """What the Family setting mutes: the figure our posts lead with."""
+    """How often the Family setting mutes this film: its muted subtitle lines (profiles.family).
+    A line with several flagged words is one mute, so this is lines, not words."""
     return t["profiles"].get("family", 0)
 
 
+def mild_only(t):
+    """Something was counted, but the Family setting mutes none of it (only the Strict setting does)."""
+    return bool(t["totalFlagged"]) and muted_count(t) == 0
+
+
+def cap(text):
+    return text[:1].upper() + text[1:]
+
+
 def counts_phrase(t):
-    """'28 words muted (Family setting), 29 counted in total'. Leads with the Family setting and
-    adds the raw total only where it differs, so a page and a post never show different numbers."""
+    """What the Family setting does, then the words counted in total where that differs. Lower
+    case so it fits inside a sentence; wrap in cap() to start one.
+
+      "the Family setting mutes it 28 times, 29 words counted in total"
+      "mild language only: 1 counted; the Family setting mutes none, Strict mutes it"
+
+    The total (sum of counts) is words; the muted figure (profiles.family) is subtitle lines, so
+    the two are different units and only coincide on some films."""
     muted, total = muted_count(t), t["totalFlagged"]
-    phrase = f"{plural(muted, 'word')} muted (Family setting)"
-    return phrase if total == muted else f"{phrase}, {total} counted in total"
+    if not total:
+        return "0 words counted"
+    if mild_only(t):
+        them = "it" if total == 1 else "them"
+        return f"mild language only: {total} counted; the Family setting mutes none, Strict mutes {them}"
+    phrase = f"the Family setting mutes it {plural(muted, 'time')}"
+    return phrase if total == muted else f"{phrase}, {plural(total, 'word')} counted in total"
 
 
 def language_summary(t, category_labels, limit=None):
@@ -202,8 +223,8 @@ def language_summary(t, category_labels, limit=None):
     if limit:
         rows = sorted(rows, key=lambda r: -r[1])[:limit]
     cats = ", ".join(f"{val} {label.lower()}" for label, val in rows)
-    by = "Counted in total, by category" if total != muted_count(t) else "By category"
-    return f"In the English subtitles of {name}: {counts_phrase(t)}. {by}: {cats}."
+    by = "Words counted in total, by category" if total != muted_count(t) else "By category"
+    return f"In the English subtitles of {name}: {cap(counts_phrase(t))}. {by}: {cats}."
 
 
 SKIP_RELEASE = re.compile(r"commentary|cd ?[12]\b|trailer|sample|\bextras?\b", re.I)
@@ -417,11 +438,19 @@ def result_block(t, category_labels):
         for k in keys
     )
     muted = muted_count(t)
-    unit = "word muted (Family setting)" if muted == 1 else "words muted (Family setting)"
-    sub = f'\n    <p class="result-sub">{esc(total)} counted in total</p>' if total != muted else ""
+    if mild_only(t):
+        them = "it" if total == 1 else "them"
+        head = '<p class="result-calm">Mild language only</p>'
+        sub = (f'\n    <p class="result-sub">{esc(total)} counted; the Family setting mutes none, '
+               f'Strict mutes {them}</p>')
+    else:
+        head = (f'<p class="result-total"><span class="result-figure">{esc(muted)}</span> '
+                f'<span class="result-unit">{"time" if muted == 1 else "times"} muted on the Family setting</span></p>')
+        sub = (f'\n    <p class="result-sub">{esc(total)} {"word" if total == 1 else "words"} counted in total</p>'
+               if total != muted else "")
     return f'''  <section class="result" aria-label="Result at a glance for {name}">
     <div class="result-head">
-      <p class="result-total"><span class="result-figure">{esc(muted)}</span> <span class="result-unit">{unit}</span></p>
+      {head}
       {label_pill(t)}
     </div>{sub}
     <ul class="bars" aria-label="Words counted in total, by category">
@@ -648,7 +677,7 @@ def analysis_panel(t, category_labels):
             f'      <li>{esc(category_labels.get(key, key))}: {esc(t["counts"][key])}{term_list(t, key)}</li>'
             for key in keys
         )
-        cat_heading = "Counted in total, by category" if t["totalFlagged"] != muted_count(t) else "Flagged by category"
+        cat_heading = "Words counted in total, by category" if t["totalFlagged"] != muted_count(t) else "Flagged by category"
         cat_block = f'''    <h3>{cat_heading}</h3>
     <ul>
 {cat_html}
@@ -666,7 +695,7 @@ def analysis_panel(t, category_labels):
     )
 
     total_line = (
-        f'\n    <p><strong>Counted in total:</strong> {esc(t["totalFlagged"])}</p>'
+        f'\n    <p><strong>Words counted in total:</strong> {esc(t["totalFlagged"])}</p>'
         if t["totalFlagged"] != muted_count(t) else ""
     )
 
@@ -674,7 +703,7 @@ def analysis_panel(t, category_labels):
     <h2 id="ffa-heading">How much swearing is in {esc(t["title"])}?</h2>
     <p>{esc(language_summary(t, category_labels))}</p>
     <p><strong>Language level:</strong> {esc(t["labelText"])}</p>
-    <p><strong>Muted on the Family setting:</strong> {esc(muted_count(t))}</p>{total_line}
+    <p><strong>Muted on the Family setting:</strong> {esc(plural(muted_count(t), "time"))}</p>{total_line}
 {cat_block}
     <h3>Lines muted per filter profile</h3>
     <ul class="tiles">
@@ -737,13 +766,13 @@ def seo_title(t):
     """What the page is called in search results: the question parents type (or "parents guide"
     for a title set to that style) plus the real count. Longest form that fits TITLE_LIMIT."""
     name, year, total = t["title"], t["year"], t["totalFlagged"]
-    count = f"{plural(muted_count(t), 'word')} muted" if total else "no swearing"
+    count = ("mild language only" if mild_only(t) else f"muted {plural(muted_count(t), 'time')}") if total else "no swearing"
     if seo_style(t) == "guide":
         base = f"{name} ({year}) parents guide"
         candidates = (f"{base}: {count}", base)
     else:
         q = f"Does {name} ({year}) have bad words?"
-        candidates = (f"{q} {count}", q)
+        candidates = (f"{q} {cap(count) if total else count}", q)
     return next((c for c in candidates if len(c) <= TITLE_LIMIT), f"Swear words in {name} ({year})")
 
 
@@ -781,12 +810,19 @@ def answer_lead(t, category_labels=None):
         if category_labels:
             rows = [(label.lower(), n) for label, n in category_rows(t["counts"], category_labels)]
             cats = " (" + ", ".join(f"{n} {label}" for label, n in rows) + ")"
-        has = ("has bad words" if t["counts"].get("strong_profanity", 0)
-               else "has some swearing but no strong profanity")
-        sentence = (
-            f"Yes, {name} ({year}) {has}: {counts_phrase(t)} in its English "
-            f"subtitles{cats}, counted across {cues:,} subtitle lines."
-        )
+        if mild_only(t):
+            them = "it" if total == 1 else "them"
+            sentence = (
+                f"Mild language only in {name} ({year}): {total} counted in its English subtitles{cats}, "
+                f"across {cues:,} subtitle lines. The Family setting mutes none, Strict mutes {them}."
+            )
+        else:
+            has = ("has bad words" if t["counts"].get("strong_profanity", 0)
+                   else "has some swearing but no strong profanity")
+            sentence = (
+                f"Yes, {name} ({year}) {has}: {counts_phrase(t)} in its English "
+                f"subtitles{cats}, across {cues:,} subtitle lines."
+            )
     else:
         sentence = (
             f"No. {name} ({year}) has no flagged swearing in its English subtitles: "
@@ -819,15 +855,17 @@ def seo_description(t):
     leads = ()
     if total:
         who = "it" if total == 1 else "them"
-        strong_bit = f", {strong} strong profanity" if strong else ", no strong profanity"
-        count = counts_phrase(t)
-        if guide:
-            leads = (f"{name} ({year}) parents guide to language: {count} in the English subtitles; {sev}",
-                     f"{name} ({year}) parents guide to language: {count}; {sev}")
+        strong_bit = f" ({strong} strong profanity)" if strong else " (no strong profanity)"
+        count = cap(counts_phrase(t))
+        if mild_only(t):
+            leads = (f"{name} ({year}) parents guide to language. {count}" if guide else f"{name} ({year}). {count}",)
+            mid = (".",)
+        elif guide:
+            leads = (f"{name} ({year}) parents guide to language ({sev}). {count}",
+                     f"{name} ({year}) parents guide to language. {count}")
             mid = (strong_bit + ", listed by category.", strong_bit + ".", ".")
         else:
-            leads = (f"Yes: {name} ({year}) has {count} in its English subtitles; {sev}",
-                     f"Yes: {name} ({year}) has {count}; {sev}")
+            leads = (f"Yes: {name} ({year}) has {sev}. {count}", f"Yes: {name} ({year}). {count}")
             mid = (strong_bit + ".", ".")
         tails = (f" Family Filter TV can mute {who} on Android TV.", f" The TV app can mute {who}.", "")
     else:
@@ -858,7 +896,7 @@ def faq_items(t, category_labels, benchmark=None):
     if total:
         kids = (
             f"That is a call for you, and it depends on how old your kids are. On language alone, {name} has "
-            f"{severity_phrase(t)}: {counts_phrase(t)}, in {cues:,} subtitle lines"
+            f"{counts_phrase(t) if mild_only(t) else severity_phrase(t) + ': ' + counts_phrase(t)}, across {cues:,} subtitle lines"
             f"{', with no strong profanity' if not strong else f', with {strong} strong profanity'}."
         )
     else:
@@ -1028,7 +1066,7 @@ def low_count_section(t, by_id, category_labels):
     if others:
         items = "\n".join(
             f'      <li><a href="../{o["slug"]}/">{esc(o["title"])} ({o["year"]})</a> &mdash; '
-            f'{esc(counts_phrase(o))} in {o["cueCount"]:,} subtitle lines</li>'
+            f'{esc(cap(counts_phrase(o)))} in {o["cueCount"]:,} subtitle lines</li>'
             for o in others
         )
         other_html = f'''
@@ -1309,9 +1347,12 @@ def methodology_page_html(titles, category_labels):
     <p>Each film page also shows how many subtitle lines each profile would mute. That is a count
     of lines, not words: a line with three flagged words is one muted line but adds three to the
     word count, and a line is muted only if it holds a word in a category the profile covers.</p>
-    <p>The headline figure, &ldquo;words muted (Family setting)&rdquo;, is what the Family filter
-    mutes in the film; &ldquo;counted in total&rdquo; is every flagged word we found, including the
-    categories only the Strict filter covers. The two are shown together only where they differ.</p>
+    <p>Each film page leads with how often the Family setting mutes it (&ldquo;the Family setting
+    mutes it 28 times&rdquo;). That is the Family filter's muted subtitle lines. &ldquo;Words
+    counted in total&rdquo; is every flagged word we found, in every category, including the ones
+    only the Strict filter covers, so it can be higher. It is shown only where it differs. A film
+    the Family setting mutes none of is labelled &ldquo;mild language only&rdquo;, with the number
+    counted and the note that the Strict setting mutes it.</p>
   </section>
 
   <section aria-labelledby="level-heading">
@@ -1407,7 +1448,7 @@ def index_page_html(titles, category_labels):
             f'      <li class="title-row" data-search="{esc(t["title"].lower())}">'
             f'<a class="title-link" href="{t["slug"]}/">{esc(t["title"])} ({t["year"]})</a>'
             f'<span class="title-meta">{label_pill(t)} '
-            f'<span class="title-count">{esc(counts_phrase(t))}</span></span>'
+            f'<span class="title-count">{esc(cap(counts_phrase(t)))}</span></span>'
             f'<span class="title-bar" aria-hidden="true"><span style="width:{pct:.1f}%"></span></span></li>'
         )
 
