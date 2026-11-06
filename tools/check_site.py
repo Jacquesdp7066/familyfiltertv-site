@@ -7,7 +7,7 @@
   - every sitemap URL maps to a file
   - no page lost JSON-LD types it had on the base ref (default origin/main)
 
-  python3 tools/check_site.py [--base origin/main]
+  python3 tools/check_site.py [--base origin/main] [--allow-lost Offer]
 """
 import argparse
 import json
@@ -126,6 +126,7 @@ def resolve(href, page_path):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--base", default="origin/main")
+    ap.add_argument("--allow-lost", action="append", default=[], metavar="TYPE", help="JSON-LD type removed on purpose (e.g. Offer)")
     args = ap.parse_args()
     fails = []
 
@@ -164,7 +165,9 @@ def main():
         if old is not None:
             lost = ld_types(parse(old).ld) - ld_types(p.ld)
             if lost:
-                fails.append(f"{rel}: lost JSON-LD types {sorted(lost)}")
+                lost = {x for x in lost if x not in args.allow_lost}
+                if lost:
+                    fails.append(f"{rel}: lost JSON-LD types {sorted(lost)}")
 
     urls = [e.text.strip() for e in ET.parse(os.path.join(ROOT, "sitemap.xml")).getroot().iter()
             if e.tag.endswith("}loc") and e.text]

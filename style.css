@@ -908,3 +908,27 @@ main.wrap.wide > .signup { max-width: 560px; }
   .signup { padding: 22px 18px 18px; border-radius: 18px; }
   .signup button { flex: 1 1 100%; }
 }
+
+/* Visible breadcrumbs (new pages) */
+.crumbs { font-size: 0.875rem; color: var(--muted); margin: 0 0 12px; }
+.crumbs a { color: var(--ink-soft); }
+
+/* Analytics consent banner (consent.js). Accept and Reject are identical in size and weight. */
+.consent {
+  position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 50;
+  max-width: 760px; margin: 0 auto;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px;
+  padding: 16px 18px;
+  background: var(--surface-2); color: var(--ink);
+  border: 1px solid var(--line-strong); border-radius: 14px;
+  box-shadow: 0 18px 50px -18px rgba(0, 0, 0, 0.8);
+}
+.consent-text { margin: 0; flex: 1 1 320px; font-size: 0.9375rem; color: var(--ink-soft); }
+.consent-text a { color: var(--ink); }
+.consent-actions { display: flex; gap: 10px; flex: 0 0 auto; }
+.consent-btn {
+  font: inherit; font-weight: 700; font-size: 0.9375rem; cursor: pointer;
+  min-width: 96px; min-height: 44px; padding: 8px 18px;
+  color: var(--ink); background: var(--surface); border: 2px solid var(--ink-soft); border-radius: 10px;
+}
+.consent-btn:hover { background: var(--field); border-color: var(--ink); }

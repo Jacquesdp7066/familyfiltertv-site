@@ -13,7 +13,7 @@ import glob, html, re, sys
 
 TARGETS = {  # page -> keywords it should rank for
     "mute-swearing-on-tv.html": ["mute swearing", "mutes swearing", "mute swear words"],
-    "android-tv-profanity-filter.html": ["profanity filter for android tv", "android tv profanity filter"],
+    "profanity-filter-android-tv.html": ["profanity filter for android tv", "android tv profanity filter"],
     "does-netflix-have-a-profanity-filter.html": ["netflix profanity filter", "profanity filter on netflix"],
     "google-tv-profanity-filter.html": ["google tv"],
     "stremio-profanity-filter.html": ["stremio"],
@@ -35,8 +35,7 @@ EDITS = [
     ("stremio-profanity-filter.html", "mute swearing", "mute-swearing-on-tv.html"),
     ("setup.html", "mute swearing", "mute-swearing-on-tv.html"),
     ("parental-controls-vs-profanity-filter.html", "mutes swearing", "mute-swearing-on-tv.html"),
-    ("facts.html", "profanity filter for Android TV", "android-tv-profanity-filter.html"),
-    ("profanity-filter-android-tv.html", "Profanity filter for Android TV", "android-tv-profanity-filter.html"),
+    ("facts.html", "profanity filter for Android TV", "profanity-filter-android-tv.html"),
     ("movie-filtering-services-compared.html", "on Windows", "windows-profanity-filter.html"),
 ]
 SKIP = ("google", "tiktok", "admin.html", "link.html", "titles/")
