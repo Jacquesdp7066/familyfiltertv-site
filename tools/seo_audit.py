@@ -17,6 +17,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 HOST = "https://familyfiltertv.com"
 # Pages that are deliberately not indexable / not part of the public site
 NOINDEX_OK = {"admin.html", "link.html", "join.html", "creator.html", "tiktok-callback.html", "tiktok-publisher.html"}
+# Redirect stubs: old URLs kept alive with canonical + meta refresh to the real page
+STUBS = {"android-tv-profanity-filter.html"}
 SKIP = {"googlee3a0c7bd81717f36.html"}
 
 
@@ -25,11 +27,12 @@ class P(HTMLParser):
         super().__init__(convert_charrefs=True)
         self.title = ""; self.meta = {}; self.canonical = None; self.h = []; self.imgs = []
         self.ld = []; self.links = []; self.words = 0
-        self._t = self._ld = False; self._h = None; self._buf = []; self._skip = 0
+        self._t = self._ld = self._body = False; self._h = None; self._buf = []; self._skip = 0
 
     def handle_starttag(self, tag, attrs):
         a = dict(attrs)
-        if tag == "title": self._t = True
+        if tag == "title" and not self.title and not self._body: self._t = True
+        elif tag == "body": self._body = True
         elif tag == "meta":
             k = a.get("name") or a.get("property")
             if k: self.meta[k.lower()] = a.get("content", "")
@@ -114,6 +117,9 @@ def main():
     for rel in sorted(pages):
         p = pages[rel]; f = []
         noindex = "noindex" in p.meta.get("robots", "").lower()
+        if rel in STUBS:
+            rows.append((rel, len(p.title.strip()), 0, len([1 for tg, _ in p.h if tg == "h1"]), p.words, inbound[rel], [], "redirect-stub"))
+            continue
         title = p.title.strip(); desc = p.meta.get("description", "").strip()
         if not title: f.append("no <title>")
         elif len(title) > 65: f.append(f"title {len(title)} chars (>65)")
@@ -130,7 +136,7 @@ def main():
             if inbound[rel] == 0 and rel != "index.html": f.append("orphan (no inbound internal links)")
             if p.words < 250 and not rel.startswith("titles/"): f.append(f"thin ({p.words} words)")
         h1 = [t for tag, t in p.h if tag == "h1"]
-        if len(h1) != 1: f.append(f"{len(h1)} <h1>")
+        if len(h1) != 1 and not noindex: f.append(f"{len(h1)} <h1>")
         lv = [int(tag[1]) for tag, _ in p.h]
         if any(b - a > 1 for a, b in zip(lv, lv[1:])): f.append("heading level skipped")
         noalt = sum(1 for i in p.imgs if i.get("alt") is None)
