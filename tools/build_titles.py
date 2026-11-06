@@ -822,11 +822,11 @@ def seo_description(t):
         strong_bit = f", {strong} strong profanity" if strong else ", no strong profanity"
         count = counts_phrase(t)
         if guide:
-            leads = (f"{name} ({year}) parents guide to language: {count}; {sev} in the English subtitles",
+            leads = (f"{name} ({year}) parents guide to language: {count} in the English subtitles; {sev}",
                      f"{name} ({year}) parents guide to language: {count}; {sev}")
             mid = (strong_bit + ", listed by category.", strong_bit + ".", ".")
         else:
-            leads = (f"Yes: {name} ({year}) has {count}; {sev} in its English subtitles",
+            leads = (f"Yes: {name} ({year}) has {count} in its English subtitles; {sev}",
                      f"Yes: {name} ({year}) has {count}; {sev}")
             mid = (strong_bit + ".", ".")
         tails = (f" Family Filter TV can mute {who} on Android TV.", f" The TV app can mute {who}.", "")
