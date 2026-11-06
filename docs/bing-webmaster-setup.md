@@ -64,7 +64,7 @@ It prints `IndexNow: HTTP 200` (or 202) when accepted. `--dry-run` shows the pay
 ## 4. After setup
 
 - Come back in a week and open **Search Performance**. Bing reports impressions, clicks and queries
-  just like Search Console; the film-page question titles ("Is Moana (2016) OK for kids?") are what
+  just like Search Console; the film-page question titles ("Is Moana (2016) OK to watch if you don't like swearing?") are what
   to watch.
 - Under **Configure My Site > Crawl Control** leave the defaults.
 - Nothing else is needed: no paid features, no ads.

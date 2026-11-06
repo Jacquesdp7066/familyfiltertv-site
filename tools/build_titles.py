@@ -895,7 +895,7 @@ def faq_items(t, category_labels, benchmark=None):
 
     if total:
         kids = (
-            f"That is a call for you, and it depends on how old your kids are. On language alone, {name} has "
+            f"That is your call. On language alone, {name} has "
             f"{counts_phrase(t) if mild_only(t) else severity_phrase(t) + ': ' + counts_phrase(t)}, across {cues:,} subtitle lines"
             f"{', with no strong profanity' if not strong else f', with {strong} strong profanity'}."
         )
@@ -905,7 +905,7 @@ def faq_items(t, category_labels, benchmark=None):
             f"across {cues:,} subtitle lines."
         )
     kids += " We only check spoken language, not violence, nudity or frightening scenes."
-    items.append((f"Is {name} OK for kids?", kids))
+    items.append((f"Is {name} OK to watch if you don't like swearing?", kids))
 
     forms = fword_forms(t)
     if forms is not None:
