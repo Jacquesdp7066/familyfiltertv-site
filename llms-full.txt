@@ -209,10 +209,10 @@ Q: What was the first movie to use the F-word?
 A: It depends on what counts. Director Robert Altman said M*A*S*H (1970) was the first major American studio film to use the word, and the Wikipedia list of films that most use it describes M*A*S*H as the first mainstream American film under the ratings system to do so. Films from outside the major studios and from other countries may have used the word earlier.
 
 Q: Which movie has the most swearing?
-A: By reported count of the F-word, Swearnet: The Movie (2014) leads with 935, and the documentary Fuck (2005) follows with 857. Among narrative feature films, The Wolf of Wall Street (2013) is listed at 569, though sources give between 506 and 569. In our own subtitle analysis of 1,286 films, the heaviest has 837 flagged words of all kinds.
+A: By reported count of the F-word, Swearnet: The Movie (2014) leads with 935, and the documentary Fuck (2005) follows with 857. Among narrative feature films, The Wolf of Wall Street (2013) is listed at 569, though sources give between 506 and 569. In our own subtitle analysis of 1,540 films, the heaviest has 839 flagged words of all kinds.
 
 Q: How much swearing is normal in a movie?
-A: Less than the famous records suggest. In 1,286 films we counted from their English subtitles, half have 43 or fewer flagged words, 4% have none, and about one in four has 100 or more. Flagged words include mild language such as damn and religious exclamations, not only strong profanity.
+A: Less than the famous records suggest. In 1,540 films we counted from their English subtitles, half have 40 or fewer flagged words, 4% have none, and about one in five has 100 or more. Flagged words include mild language such as damn and religious exclamations, not only strong profanity.
 
 Q: Can I watch a movie with the swearing muted?
 A: On an Android TV or Google TV, yes. Family Filter TV mutes the swear words it finds in the subtitles while the picture keeps playing. It works with supported Stremio playback and follows along with Netflix and other apps. It covers spoken language only, English titles for now, and muting is best effort, so a word may slip through. Family Filter TV is not affiliated with Netflix.
@@ -220,7 +220,7 @@ A: On an Android TV or Google TV, yes. Family Filter TV mutes the swear words it
 ## How many swear words are there? (https://familyfiltertv.com/how-many-swear-words-are-there.html)
 
 Q: How many swear words are there?
-A: There is no official number, because it depends on what you count. Three English lists we checked on 8 November 2026 hold 279 entries (Family Filter TV's own list), 403 (the open-source List of Dirty, Naughty, Obscene, and Otherwise Bad Words) and 1,795 (the cuss word list, version 2.2.0, which rates each entry as likely, maybe or unlikely to be profane). In practice a handful of words do most of the work: in about 1,600 films we analysed, the 10 most common flagged forms make up 69% of all flagged words.
+A: There is no official number, because it depends on what you count. Three English lists we checked on 8 November 2026 hold 279 entries (Family Filter TV's own list), 403 (the open-source List of Dirty, Naughty, Obscene, and Otherwise Bad Words) and 1,795 (the cuss word list, version 2.2.0, which rates each entry as likely, maybe or unlikely to be profane). In practice a handful of words do most of the work: in the 1,591 films we analysed on 8 November 2026, the 10 most common flagged forms make up 69% of all flagged words.
 
 Q: How many curse words are there?
 A: The same answer as for swear words: no official figure. "Curse words", "swear words" and "profanity" are used loosely, and lists differ on whether they include slurs, sexual terms, mild words like damn and religious exclamations like oh my god. Published English lists run from a few hundred entries to about 1,800.
@@ -232,7 +232,7 @@ Q: How many dirty words did George Carlin list?
 A: Seven. George Carlin's 1972 routine "Seven Dirty Words" named the words he said could not be said on American broadcast radio and television. A recording of it led to the US Supreme Court case FCC v. Pacifica Foundation in 1978. It was a comedy routine, not a count of all swear words, and the number of words that bother people today is much larger.
 
 Q: Which swear words are used most in films?
-A: In about 1,600 films whose English subtitles we analysed, the F-word in its different endings and the S-word are the most common strong words, but mild and religious language is just as common: damn-type words, hell, ass, oh my god, oh god and goddamn all sit in the top ten flagged forms. The top 5 forms make up 55% of all flagged words, the top 10 make up 69% and the top 20 make up 81%.
+A: In the 1,591 films whose English subtitles we analysed on 8 November 2026, the F-word in its different endings and the S-word are the most common strong words, but mild and religious language is just as common: damn-type words, hell, ass, oh my god, oh god and goddamn all sit in the top ten flagged forms. The top 5 forms make up 55% of all flagged words, the top 10 make up 69% and the top 20 make up 81%.
 
 Q: Can I watch a film without hearing the swearing?
 A: On an Android TV or Google TV, yes. Family Filter TV mutes the swear words it finds in the subtitles while the picture keeps playing, using the same word list described on this page. It covers spoken language only, English titles for now, and muting is best effort, so a word may slip through.
@@ -240,13 +240,13 @@ A: On an Android TV or Google TV, yes. Family Filter TV mutes the swear words it
 ## Movies with no swearing (https://familyfiltertv.com/movies-with-no-swearing.html)
 
 Q: Which movies have no swearing?
-A: Of the 1,286 films we have analysed, 55 have no flagged words in their English subtitles, including Moana (2016), Toy Story (1995), The Lego Movie (2014), Finding Dory (2016) and Mary Poppins (1964). The full list is on the page. Zero means none in the subtitles of the one release we counted. It is not a rating, and it says nothing about violence or frightening scenes.
+A: Of the 1,286 films we had analysed by 12 October 2026, 55 have no flagged words in their English subtitles, including Moana (2016), Toy Story (1995), The Lego Movie (2014), Finding Dory (2016) and Mary Poppins (1964). The full list is on the page. Zero means none in the subtitles of the one release we counted. It is not a rating, and it says nothing about violence or frightening scenes.
 
 Q: Does zero flagged words mean a movie is suitable for kids?
 A: No. It only means our word list found nothing in the English subtitles of that release. We did not assess violence, nudity, frightening scenes or themes, so a film with no flagged words can still be unsuitable for young children. The list includes horror films, for example. Check an age rating or a content guide for those.
 
 Q: How much swearing does a typical movie have?
-A: In the 1,286 films we counted, half have 43 or fewer flagged words. About 4% have none, 14% have five or fewer, and about one in four has 100 or more. Flagged words include mild language such as damn and religious exclamations, not only strong profanity.
+A: In the 1,286 films we had counted by 12 October 2026, half have 43 or fewer flagged words. About 4% have none, 14% have five or fewer, and about one in four has 100 or more. Flagged words include mild language such as damn and religious exclamations, not only strong profanity.
 
 Q: What counts as a flagged word?
 A: Any word in our dictionary found in a film's English subtitles, filed under strong profanity, mild profanity, religious exclamations, crude language, explicit sexual language, suggestive language or slurs. Every appearance counts, and bleeped or unsubtitled words cannot be counted. The rules are on our methodology page.
@@ -544,9 +544,9 @@ A: Needs Family Filter TV on an Android TV or Google TV device and on an Android
 - Mute swearing on TV without cutting the video: What watching looks like when unwanted language is muted and the picture keeps playing. https://familyfiltertv.com/mute-swearing-on-tv.html
 - How to mute swearing on Netflix: The steps for Android TV and Google TV, and what to expect. Not affiliated with Netflix. https://familyfiltertv.com/mute-swearing-on-netflix.html
 - Does Netflix have a profanity filter?: What Netflix's own controls do, and the real options, including muting on an Android TV or Google TV. https://familyfiltertv.com/does-netflix-have-a-profanity-filter.html
-- Swearing in movies: The Hays Code years, the first F-word in a studio film, the records, and how much swearing is typical in 1,286 films counted from their English subtitles. https://familyfiltertv.com/swearing-in-movies.html
-- How many swear words are there?: There is no official count. English word lists run from 279 to 1,795 entries, and in about 1,600 films ten word forms make up 69% of all flagged words. https://familyfiltertv.com/how-many-swear-words-are-there.html
-- Movies with no swearing: The 55 of 1,286 films we counted with no flagged words in their English subtitles, 129 more with one to five, and what zero does and does not mean. https://familyfiltertv.com/movies-with-no-swearing.html
+- Swearing in movies: The Hays Code years, the first F-word in a studio film, the records, and how much swearing is typical in 1,540 films counted from their English subtitles. https://familyfiltertv.com/swearing-in-movies.html
+- How many swear words are there?: There is no official count. English word lists run from 279 to 1,795 entries, and in the 1,591 films we analysed on 8 November 2026 ten word forms make up 69% of all flagged words. https://familyfiltertv.com/how-many-swear-words-are-there.html
+- Movies with no swearing: The 55 of the 1,286 films counted to 12 October 2026 with no flagged words in their English subtitles, 129 more with one to five, and what zero does and does not mean. https://familyfiltertv.com/movies-with-no-swearing.html
 - VidAngel and ClearPlay alternative for Stremio households: A side-by-side comparison with VidAngel and ClearPlay for Stremio and Android TV households. https://familyfiltertv.com/vidangel-clearplay-alternative.html
 - Movie filtering services compared: Family Filter TV, VidAngel, ClearPlay, Enjoy Movies Your Way and TVGuardian compared on price, devices, what they filter, country and trial. https://familyfiltertv.com/movie-filtering-services-compared.html
 - Will it work on my TV?: Which TV brands and systems are supported, including Samsung, LG, Hisense, Roku and Fire TV. https://familyfiltertv.com/which-tvs.html
