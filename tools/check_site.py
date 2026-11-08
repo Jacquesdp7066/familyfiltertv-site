@@ -158,6 +158,50 @@ def stale_film_stats():
     return problems
 
 
+def title_page_problems(sitemap_urls):
+    """Film pages (titles/*/) and the pages under them need a unique title, H1 and description, a
+    canonical link equal to their own URL, a sitemap entry, no age or kid-safe wording, no outbound
+    follow-links to ClearPlay or VidAngel, and no poster or still images."""
+    banned = re.compile(r"kid-safe|family-friendly|for (?:kids|children)|age-appropriate|child-friendly", re.I)
+    seen = {"title": {}, "h1": {}, "description": {}}
+    problems = []
+    tdir = os.path.join(ROOT, "titles")
+    for slug in sorted(os.listdir(tdir)):
+        path = os.path.join(tdir, slug, "index.html")
+        if not os.path.isfile(path):
+            continue
+        rel = f"titles/{slug}/index.html"
+        text = open(path, encoding="utf-8").read()
+        got = {
+            "title": re.search(r"<title>(.*?)</title>", text, re.S),
+            "h1": re.search(r"<h1[^>]*>(.*?)</h1>", text, re.S),
+            "description": re.search(r'<meta name="description" content="([^"]*)"', text),
+        }
+        for k, m in got.items():
+            if not m:
+                problems.append(f"{rel}: no {k}")
+            elif m.group(1) in seen[k]:
+                problems.append(f"{rel}: {k} duplicates {seen[k][m.group(1)]}")
+            else:
+                seen[k][m.group(1)] = rel
+        url = f"https://{SITE_HOST}/titles/{slug}/"
+        if f'<link rel="canonical" href="{url}">' not in text:
+            problems.append(f"{rel}: canonical link is missing or not {url}")
+        if url not in sitemap_urls:
+            problems.append(f"{rel}: not in sitemap.xml")
+        visible = re.sub(r"<script.*?</script>|<style.*?</style>", "", text, flags=re.S)
+        if m := banned.search(visible):
+            problems.append(f"{rel}: wording not allowed: {m.group(0)!r}")
+        if re.search(r"<img[^>]+(?:poster|still|metahub)", text, re.I):
+            problems.append(f"{rel}: poster or still image")
+        if "film studio" not in text:
+            problems.append(f"{rel}: missing the not-affiliated-with-studios line")
+        for tag in re.findall(r"<a [^>]*href=\"https?://[^\"]*(?:clearplay|vidangel)\.com[^>]*>", text):
+            if "nofollow" not in tag:
+                problems.append(f"{rel}: ClearPlay/VidAngel link without rel=nofollow")
+    return problems
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--base", default="origin/main")
@@ -212,6 +256,7 @@ def main():
             fails.append(f"sitemap.xml: {u} does not map to a file")
 
     fails += [f"stale film stat: {x}" for x in stale_film_stats()]
+    fails += [f"film pages: {x}" for x in title_page_problems(set(urls))]
 
     print(f"{len(htmls)} HTML files, {n_ld} JSON-LD blocks, {n_links} internal links, {len(urls)} sitemap URLs checked")
     for f in fails:
