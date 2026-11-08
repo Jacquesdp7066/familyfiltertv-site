@@ -133,12 +133,14 @@ def stale_film_stats():
 
 
 def title_page_problems(sitemap_urls):
-    """Film pages (titles/*/) and the pages under them need a unique title, H1 and description, a
+    """Film pages (titles/*/) and the pages under them need a TL;DR under the H1, links in from at
+    least two other film pages, a unique title, H1 and description, a
     canonical link equal to their own URL, a sitemap entry, no age or kid-safe wording, no outbound
     follow-links to ClearPlay or VidAngel, and no poster or still images."""
     banned = re.compile(r"kid-safe|family-friendly|for (?:kids|children)|age-appropriate|child-friendly", re.I)
     seen = {"title": {}, "h1": {}, "description": {}}
     problems = []
+    inbound, film_slugs = {}, []
     tdir = os.path.join(ROOT, "titles")
     for slug in sorted(os.listdir(tdir)):
         path = os.path.join(tdir, slug, "index.html")
@@ -146,6 +148,8 @@ def title_page_problems(sitemap_urls):
             continue
         rel = f"titles/{slug}/index.html"
         text = open(path, encoding="utf-8").read()
+        if slug != "methodology":
+            film_slugs.append(slug)
         got = {
             "title": re.search(r"<title>(.*?)</title>", text, re.S),
             "h1": re.search(r"<h1[^>]*>(.*?)</h1>", text, re.S),
@@ -168,11 +172,22 @@ def title_page_problems(sitemap_urls):
             problems.append(f"{rel}: wording not allowed: {m.group(0)!r}")
         if re.search(r"<img[^>]+(?:poster|still|metahub)", text, re.I):
             problems.append(f"{rel}: poster or still image")
+        if slug != "methodology" and not re.search(r'</h1>\s*<p class="lead tldr"><strong>TL;DR:</strong> [^<]{40,}</p>', text):
+            problems.append(f"{rel}: no TL;DR directly under the H1")
+        for other in re.findall(r'href="\.\./([a-z0-9-]+)/"', text):
+            if other != slug:
+                inbound.setdefault(other, set()).add(slug)
         if "film studio" not in text:
             problems.append(f"{rel}: missing the not-affiliated-with-studios line")
         for tag in re.findall(r"<a [^>]*href=\"https?://[^\"]*(?:clearplay|vidangel)\.com[^>]*>", text):
             if "nofollow" not in tag:
                 problems.append(f"{rel}: ClearPlay/VidAngel link without rel=nofollow")
+    for slug in sorted(film_slugs):
+        if len(inbound.get(slug, ())) < 2:
+            problems.append(f"titles/{slug}/index.html: linked from {len(inbound.get(slug, ()))} other film pages, needs 2")
+    for name in ("how-many-swear-words-are-there.html", "swearing-in-movies.html"):
+        if not re.search(r'</h1>\s*<p class="lead tldr"><strong>TL;DR:</strong>', open(os.path.join(ROOT, name), encoding="utf-8").read()):
+            problems.append(f"{name}: no TL;DR directly under the H1")
     return problems
 
 

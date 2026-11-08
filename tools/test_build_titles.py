@@ -700,5 +700,103 @@ class ProseStatsTest(unittest.TestCase):
         self.assertEqual(ss.run(write=False), [])
 
 
+class TldrTest(unittest.TestCase):
+    def page(self, t):
+        return bt.title_page_html(t, {t["videoId"]: t}, LABELS, BENCHMARK)
+
+    def test_the_tldr_sits_between_the_h1_and_the_short_answer(self):
+        page = self.page(FULL)
+        h1, tldr, box = page.index("</h1>"), page.index('class="lead tldr"'), page.index('class="panel answer-box"')
+        self.assertLess(h1, tldr)
+        self.assertLess(tldr, box)
+
+    def test_the_tldr_is_built_from_the_record(self):
+        text = bt.tldr(FULL)
+        self.assertIn("Test Film (2020) has 6 flagged words", text)
+        self.assertIn("2 of them strong profanity", text)
+        self.assertIn("heaviest between minute 20 and 30", text)
+        self.assertIn("mutes it 5 times", text)
+        self.assertIn("best effort", text)
+        changed = bt.tldr(dict(FULL, totalFlagged=9, counts={"strong_profanity": 9}, profiles={"mild": 9, "family": 9, "strict": 9}))
+        self.assertIn("has 9 flagged words, mostly strong profanity", changed)
+        self.assertIn("mutes it 9 times", changed)
+
+    def test_the_tldr_covers_clean_mild_and_single_word_films(self):
+        self.assertIn("has no flagged swearing", bt.tldr(CLEAN))
+        self.assertIn("best effort", bt.tldr(CLEAN))
+        self.assertIn("mild language only", bt.tldr(ZERO))
+        self.assertIn("mutes none", bt.tldr(ZERO))
+        one = bt.tldr(dict(FULL, totalFlagged=1, counts={"strong_profanity": 1}, profiles={"mild": 1, "family": 1, "strict": 1}))
+        self.assertIn("has 1 flagged word,", one)
+        self.assertIn("mutes it 1 time ", one)
+
+    def test_the_tldr_stays_within_three_sentences_and_has_no_age_wording(self):
+        for t in (FULL, CLEAN, ZERO):
+            text = bt.tldr(t)
+            self.assertLessEqual(len(re.findall(r"[.;] ", text + " ")), 3)
+            self.assertNotRegex(text, r"(?i)kid|child|family-friendly|safe|suitable|\bages?\b")
+
+    def test_the_tldr_is_in_the_rendered_page_escaped(self):
+        t = dict(FULL, title="A <b>Film</b>")
+        page = self.page(t)
+        self.assertIn("A &lt;b&gt;Film&lt;/b&gt; (2020) has 6 flagged words", page)
+
+
+def film(i, genres, year, total, related=()):
+    return dict(FULL, videoId=f"tt{i}", title=f"Film {i}", slug=f"film-{i}-{year}", year=year, genres=list(genres),
+                totalFlagged=total, related=list(related))
+
+
+class RelatedFilmsTest(unittest.TestCase):
+    def cohort(self):
+        return [
+            film(1, ["Comedy"], 2010, 100, ["tt2"]), film(2, ["Comedy"], 2012, 90), film(3, ["Comedy", "Crime"], 2011, 120),
+            film(4, ["Drama"], 1994, 400), film(5, ["Drama", "Crime"], 1995, 380), film(6, ["Action"], 2020, 60),
+            film(7, ["Action", "Comedy"], 2021, 70), film(8, ["Animation"], 2016, 0), film(9, ["Animation"], 2013, 3),
+            film(10, ["Horror"], 1980, 15),
+        ]
+
+    def test_the_lists_do_not_depend_on_the_input_order(self):
+        a = self.cohort()
+        self.assertEqual(bt.related_ids(a), bt.related_ids(list(reversed(a))))
+
+    def test_hand_set_links_come_first_and_nothing_links_to_itself_or_twice(self):
+        out = bt.related_ids(self.cohort())
+        self.assertEqual(out["tt1"][0], "tt2")
+        for vid, ids in out.items():
+            self.assertNotIn(vid, ids)
+            self.assertEqual(len(ids), len(set(ids)))
+            self.assertTrue(set(ids) <= {t["videoId"] for t in self.cohort()})
+
+    def test_the_closest_films_are_picked_by_genre_then_decade_then_swear_count(self):
+        out = bt.related_ids(self.cohort())
+        self.assertEqual(out["tt4"][0], "tt5")      # shared genre, same decade
+        self.assertIn("tt3", out["tt1"])             # shares Comedy, same decade
+        self.assertIn("tt9", out["tt8"])             # both Animation
+
+    def test_every_film_gets_at_least_two_links_in_from_other_films(self):
+        films = self.cohort()
+        out = bt.related_ids(films)
+        for t in films:
+            inbound = [v for v, ids in out.items() if t["videoId"] in ids]
+            self.assertGreaterEqual(len(inbound), bt.MIN_INBOUND, t["slug"])
+
+    def test_a_new_film_is_linked_from_existing_films_and_older_lists_only_grow_a_little(self):
+        films = self.cohort()
+        before = bt.related_ids(films)
+        films.append(film(11, ["Comedy"], 2011, 95))
+        after = bt.related_ids(films)
+        self.assertGreaterEqual(len([v for v, ids in after.items() if "tt11" in ids]), 2)
+        for vid, ids in before.items():
+            self.assertLessEqual(len(after[vid]), bt.MAX_RELATED)
+
+    def test_the_block_is_called_related_films_and_links_each_film(self):
+        a, b = film(1, ["Comedy"], 2010, 5), film(2, ["Comedy"], 2010, 6)
+        html_ = bt.related_section(a, {"tt1": a, "tt2": b}, "../", ["tt2"])
+        self.assertIn(">Related films<", html_)
+        self.assertIn('href="../film-2-2010/"', html_)
+        self.assertEqual(bt.related_section(a, {"tt1": a}, "../", []), "")
+
+
 if __name__ == "__main__":
     unittest.main()
