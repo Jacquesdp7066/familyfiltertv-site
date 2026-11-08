@@ -14,6 +14,7 @@ import unittest.mock
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import build_titles as bt  # noqa: E402
+import sync_stats as ss  # noqa: E402
 import weekly_refresh as wr  # noqa: E402
 
 LABELS = {"strong_profanity": "Strong profanity", "mild_profanity": "Mild profanity", "religious": "Religious exclamations"}
@@ -361,13 +362,13 @@ class SearchTitle(unittest.TestCase):
         self.assertEqual(bt.seo_title(dict(CLEAN, title="Moana", year=2016)), "Does Moana (2016) have bad words? no swearing")
         self.assertEqual(bt.seo_h1(t), "Does Moana (2016) have bad words?")
 
-    def test_a_title_set_to_the_guide_style_says_parents_guide(self):
+    def test_a_title_set_to_the_guide_style_says_language_guide(self):
         t = dict(FULL, title="Gone Girl", year=2014, totalFlagged=130, seoStyle="guide",
                  profiles={"mild": 90, "family": 115, "strict": 117})
-        self.assertEqual(bt.seo_title(t), "Gone Girl (2014) parents guide: muted 115 times")
-        self.assertEqual(bt.seo_h1(t), "Gone Girl (2014) parents guide: swearing and language")
+        self.assertEqual(bt.seo_title(t), "Gone Girl (2014) language guide: muted 115 times")
+        self.assertEqual(bt.seo_h1(t), "Gone Girl (2014) language guide: swearing and profanity")
         d = bt.seo_description(t)
-        self.assertIn("parents guide", d)
+        self.assertIn("language guide", d)
         self.assertIn("The Family setting mutes it 115 times, 130 words counted in total", d)
         self.assertEqual(bt.seo_style(dict(FULL, seoStyle="nonsense")), "question")
 
@@ -407,13 +408,13 @@ class SearchTitle(unittest.TestCase):
                 self.assertIn("the Family setting mutes none", d, t["slug"])
             self.assertLessEqual(len(bt.seo_title(t)), bt.TITLE_LIMIT, t["slug"])
 
-    def test_the_page_carries_the_title_h1_and_a_parents_guide_description(self):
+    def test_the_page_carries_the_title_h1_and_a_language_guide_description(self):
         page = bt.title_page_html(FULL, {FULL["videoId"]: FULL}, LABELS, BENCHMARK)
         self.assertIn(f"<title>{bt.seo_title(FULL)}</title>", page)
         self.assertIn(f"<h1 class=\"page-title\">{bt.seo_h1(FULL)}</h1>", page)
         self.assertIn(f'<meta property="og:title" content="{bt.seo_title(FULL)}">', page)
         self.assertEqual(bt.seo_description(FULL), re.search(r'name="description" content="([^"]*)"', page).group(1))
-        self.assertIn("Parents guide: swearing and language", page)
+        self.assertIn("Language guide: swearing and profanity", page)
 
 
 class AnswerFirst(unittest.TestCase):
@@ -672,6 +673,31 @@ class SitemapAndLlms(unittest.TestCase):
         self.assertEqual(out.count(f"{bt.SITE}/titles/methodology/"), 1)
         self.assertLess(out.index(f"{bt.SITE}/titles/ "), out.index(f"{bt.SITE}/titles/methodology/"))
         self.assertFalse(again)
+
+
+class ProseStatsTest(unittest.TestCase):
+    def test_prose_stats_cover_the_films_with_word_detail_and_the_newest_date(self):
+        a = export_record(videoId="tt1", terms={"strong_profanity": {"f***": 3, "s***": 1}})
+        b = export_record(videoId="tt2", computedAt="2026-11-02T10:00:00.000Z", terms={"mild_profanity": {"hell": 1}})
+        out = bt.build_prose_stats([a, b])
+        self.assertEqual(out["asOf"], "2026-11-02")
+        self.assertEqual(out["words"]["films"], 2)
+        self.assertEqual(out["words"]["flagged"], 5)
+        self.assertEqual(out["words"]["forms"], 3)
+        self.assertEqual(out["words"]["top"]["1"], 60)
+
+    def test_quoted_figures_follow_the_benchmark_and_dated_snapshots_stay(self):
+        text = ("typical in 1,286 films we counted. Half the films have 43 or fewer flagged words.\n"
+                "the 55 of the 1,286 films counted to 12 October 2026 with none\n")
+        for pattern, skip in ((ss.RULES[0][1], True), (ss.RULES[1][1], False)):
+            values = {"films": "1,600", "median": "39"}
+            text, _ = ss.rewrite(text, pattern, skip, values)
+        self.assertIn("typical in 1,600 films", text)
+        self.assertIn("have 39 or fewer", text)
+        self.assertIn("55 of the 1,286 films counted to 12 October 2026", text)
+
+    def test_the_site_files_match_the_benchmark(self):
+        self.assertEqual(ss.run(write=False), [])
 
 
 if __name__ == "__main__":

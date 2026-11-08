@@ -25,6 +25,9 @@ import statistics
 import sys
 import xml.sax.saxutils as sax
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import sync_stats  # noqa: E402
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_PATH = os.path.join(ROOT, "titles", "data.json")
 SITEMAP_PATH = os.path.join(ROOT, "sitemap.xml")
@@ -338,6 +341,29 @@ def build_benchmark(export):
         if isinstance(e, dict) and usable(e) and e.get("type", "movie") == "movie"
     )
     return {"filmCount": len(totals), "totals": totals}
+
+
+def build_prose_stats(export):
+    """What the hand-written pages quote beyond the totals (see tools/sync_stats.py): the date of
+    the newest analysis in the cohort, and how the flagged words spread over word forms across the
+    usable films that carry per-word detail (older records do not)."""
+    films = [e for e in export if isinstance(e, dict) and usable(e) and e.get("type", "movie") == "movie"]
+    forms = {}
+    detailed = 0
+    for e in films:
+        if "terms" not in e:
+            continue
+        detailed += 1
+        for words in e["terms"].values():
+            for term, n in words.items():
+                forms[term] = forms.get(term, 0) + n
+    total = sum(forms.values())
+    ranked = sorted(forms.values(), reverse=True)
+    top = {str(k): int(100 * sum(ranked[:k]) / total + 0.5) for k in (1, 5, 10, 20, 50)}
+    return {
+        "asOf": max(e["computedAt"][:10] for e in films),
+        "words": {"films": detailed, "flagged": total, "forms": len(forms), "top": top},
+    }
 
 
 def refresh_titles(titles, export, accept_changes=False):
@@ -757,18 +783,18 @@ def severity_phrase(t):
 
 def seo_style(t):
     """"question" (default): the page answers "does X have bad words". "guide": it answers
-    "X parents guide". Set "seoStyle": "guide" on a title in titles/data.json for a film whose
-    Search Console queries say "parents guide" (refreshes leave the field alone)."""
+    "X language guide". Set "seoStyle": "guide" on a title in titles/data.json for a film whose
+    Search Console queries say "language guide" (refreshes leave the field alone)."""
     return "guide" if t.get("seoStyle") == "guide" else "question"
 
 
 def seo_title(t):
-    """What the page is called in search results: the question parents type (or "parents guide"
+    """What the page is called in search results: the question people type (or "language guide"
     for a title set to that style) plus the real count. Longest form that fits TITLE_LIMIT."""
     name, year, total = t["title"], t["year"], t["totalFlagged"]
     count = ("mild language only" if mild_only(t) else f"muted {plural(muted_count(t), 'time')}") if total else "no swearing"
     if seo_style(t) == "guide":
-        base = f"{name} ({year}) parents guide"
+        base = f"{name} ({year}) language guide"
         candidates = (f"{base}: {count}", base)
     else:
         q = f"Does {name} ({year}) have bad words?"
@@ -778,7 +804,7 @@ def seo_title(t):
 
 def seo_h1(t):
     if seo_style(t) == "guide":
-        return f"{t['title']} ({t['year']}) parents guide: swearing and language"
+        return f"{t['title']} ({t['year']}) language guide: swearing and profanity"
     return f"Does {t['title']} ({t['year']}) have bad words?"
 
 
@@ -858,18 +884,18 @@ def seo_description(t):
         strong_bit = f" ({strong} strong profanity)" if strong else " (no strong profanity)"
         count = cap(counts_phrase(t))
         if mild_only(t):
-            leads = (f"{name} ({year}) parents guide to language. {count}" if guide else f"{name} ({year}). {count}",)
+            leads = (f"{name} ({year}) language guide. {count}" if guide else f"{name} ({year}). {count}",)
             mid = (".",)
         elif guide:
-            leads = (f"{name} ({year}) parents guide to language ({sev}). {count}",
-                     f"{name} ({year}) parents guide to language. {count}")
+            leads = (f"{name} ({year}) language guide ({sev}). {count}",
+                     f"{name} ({year}) language guide. {count}")
             mid = (strong_bit + ", listed by category.", strong_bit + ".", ".")
         else:
             leads = (f"Yes: {name} ({year}) has {sev}. {count}", f"Yes: {name} ({year}). {count}")
             mid = (strong_bit + ".", ".")
         tails = (f" Family Filter TV can mute {who} on Android TV.", f" The TV app can mute {who}.", "")
     else:
-        lead = (f"{name} ({year}) parents guide to language: " if guide else f"No: {name} ({year}) has no swearing, ") + \
+        lead = (f"{name} ({year}) language guide: " if guide else f"No: {name} ({year}) has no swearing, ") + \
             f"0 flagged words in {cues:,} English subtitle lines"
         mid = (".",)
         tails = (" Family Filter TV mutes swearing on Android TV.", " The TV app can mute it.", "")
@@ -1181,7 +1207,7 @@ def title_page_html(t, by_id, category_labels, benchmark=None):
 
 <main class="wrap">
   {breadcrumb}
-  <p class="muted">Parents guide: swearing and language</p>
+  <p class="muted">Language guide: swearing and profanity</p>
   <h1 class="page-title">{esc(seo_h1(t))}</h1>
   <section class="panel answer-box" aria-label="Short answer">
     <p class="lead">{esc(lead)}</p>
@@ -1212,7 +1238,7 @@ def title_page_html(t, by_id, category_labels, benchmark=None):
     <p>Open the title through a supported playback route such as Stremio. Family Filter TV
     analyses subtitle cues against your household filter settings and automatically mutes
     matching dialogue during playback. The picture keeps playing &mdash; only the sound briefly
-    drops.</p>
+    drops. Muting is best effort, so a word can slip through.</p>
   </section>
 
   <section aria-labelledby="supported-heading">
@@ -1230,7 +1256,7 @@ def title_page_html(t, by_id, category_labels, benchmark=None):
 {related}
 
   <p class="fine">Family Filter TV is an independent app. It is not affiliated with, endorsed by,
-  or connected to Stremio, Google, or any streaming service.</p>
+  or connected to Stremio, Google, any streaming service, or any film studio or distributor. Film titles are named only to describe their language; no posters or stills are used.</p>
 </main>
 {footer(2)}
 </body>
@@ -1244,7 +1270,7 @@ def methodology_page_html(titles, category_labels):
     description = (
         "How Family Filter TV counts swear words: automated analysis of English subtitles, what "
         "each category means for the filter profiles, and why our number can differ from other "
-        "parents guides."
+        "language guides."
     )
     jsonld_page = {
         "@context": "https://schema.org",
@@ -1313,7 +1339,7 @@ def methodology_page_html(titles, category_labels):
   <h1 class="page-title">How we count swear words</h1>
   <p class="lead">Every number on a film page comes from software reading the film's English
   subtitles. Nobody watches the film and tallies words by ear. This page explains what is counted,
-  what is not, and why our figure can differ from other parents guides.</p>
+  what is not, and why our figure can differ from other language guides.</p>
 
   <section aria-labelledby="counted-heading">
     <h2 id="counted-heading">What is counted</h2>
@@ -1420,7 +1446,7 @@ def methodology_page_html(titles, category_labels):
   </div>
 
   <p class="fine">Family Filter TV is an independent app. It is not affiliated with, endorsed by,
-  or connected to Stremio, Google, or any streaming service.</p>
+  or connected to Stremio, Google, any streaming service, or any film studio or distributor. Film titles are named only to describe their language; no posters or stills are used.</p>
 </main>
 {footer(2)}
 </body>
@@ -1430,9 +1456,9 @@ def methodology_page_html(titles, category_labels):
 
 def index_page_html(titles, category_labels):
     canonical = f"{SITE}/titles/"
-    page_title = "Parents Guides to Swearing in Films | Family Filter TV"
+    page_title = "Swearing in Films: Language Guides | Family Filter TV"
     description = (
-        "Parents guides to the swearing and language in specific films: exact flagged word "
+        "Language guides to the swearing and profanity in specific films: exact flagged word "
         "counts by category, from Family Filter TV's own subtitle analysis."
     )
 
@@ -1489,7 +1515,7 @@ def index_page_html(titles, category_labels):
 
 <main class="wrap">
   {breadcrumb}
-  <h1 class="page-title">Parents guides: swearing and language by film</h1>
+  <h1 class="page-title">Swearing in films: language guides</h1>
   <p class="lead">How much swearing is in a film, counted word by word from Family Filter TV's
   own subtitle analysis. These guides cover spoken language only, not violence, nudity or
   frightening scenes.</p>
@@ -1513,7 +1539,7 @@ def index_page_html(titles, category_labels):
   <a href="../download.html">download Family Filter TV</a>.</p>
 
   <p class="fine">Family Filter TV is an independent app. It is not affiliated with, endorsed by,
-  or connected to Stremio, Google, or any streaming service.</p>
+  or connected to Stremio, Google, any streaming service, or any film studio or distributor. Film titles are named only to describe their language; no posters or stills are used.</p>
 </main>
 {footer(1)}
 </body>
@@ -1561,7 +1587,7 @@ def update_llms(titles):
         content = f.read()
     out = content
 
-    titles_line = f"- {SITE}/titles/ — title-by-title parents guides to swearing and language, from our own subtitle analysis\n"
+    titles_line = f"- {SITE}/titles/ — title-by-title language guides to swearing and profanity, from our own subtitle analysis\n"
     if f"{SITE}/titles/ " not in out:
         # insert after the stremio-profanity-filter.html line in the ## Pages section, else at the end
         anchor = f"- {SITE}/stremio-profanity-filter.html — muting swearing in Stremio, step-by-step\n"
@@ -1595,7 +1621,7 @@ def main():
         with open(sys.argv[sys.argv.index(flag) + 1], "r") as f:
             export = json.load(f)
         updated, held = refresh_titles(data["titles"], export, "--accept-changes" in sys.argv)
-        data["benchmark"] = build_benchmark(export)
+        data["benchmark"] = {**build_benchmark(export), **build_prose_stats(export)}
         with open(DATA_PATH, "w") as f:
             f.write(json.dumps(data, indent=2, ensure_ascii=False))
         for line in updated:
@@ -1642,6 +1668,9 @@ def main():
 
     sitemap_changed = update_sitemap(titles)
     llms_changed = update_llms(titles)
+
+    # hand-written pages quote the benchmark; rewrite those figures from it
+    sync_stats.run(write=True)
 
     print(f"generated {len(titles)} title pages + index ({changed_pages} files changed this run)")
     print(f"sitemap.xml changed: {sitemap_changed}")

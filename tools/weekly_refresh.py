@@ -5,7 +5,9 @@
 
 Reads rated titles from Firestore (read-only), runs `build_titles.py --refresh` in a throwaway
 worktree of origin/main, and if any page changed pushes a `refresh/<date>` branch and opens a
-pull request. It never merges and never passes --accept-changes: a change that would surprise a
+pull request. Figures that hand-written pages quote from the benchmark (film count, median, most common
+words) are rewritten by build_titles.py via sync_stats.py, and check_site.py must pass or nothing is published.
+It never merges and never passes --accept-changes: a change that would surprise a
 parent is listed in the pull request (or an issue, when nothing else changed) for a human look.
 
 Auth: `GOOGLE_OAUTH_ACCESS_TOKEN` if set, otherwise `gcloud auth print-access-token`. Needs `git`
@@ -25,7 +27,9 @@ FIRESTORE = "https://firestore.googleapis.com/v1/projects/familyfiltertv/databas
 SITE_REPO = "Jacquesdp7066/familyfiltertv-site"
 HELD_ISSUE_TITLE = "Film page refresh: changes held for review"
 # The only paths a refresh may publish.
-PUBLISHED = ("titles", "sitemap.xml", "llms.txt")
+# sync_stats.py (run by build_titles.py) rewrites the figures these hand-written pages quote from the benchmark.
+PUBLISHED = ("titles", "sitemap.xml", "llms.txt", "llms-full.txt", "swearing-in-movies.html",
+             "how-many-swear-words-are-there.html", "guides.html", "index.html")
 
 
 def plain(v):
@@ -122,6 +126,10 @@ def main():
         tests = run([sys.executable, "tools/test_build_titles.py"], tree, check=False)
         if tests.returncode != 0:
             sys.exit("generator tests failed after the refresh; nothing published\n" + tests.stderr[-2000:])
+
+        site = run([sys.executable, "tools/check_site.py"], tree, check=False)
+        if site.returncode != 0:
+            sys.exit("site checks failed after the refresh; nothing published\n" + (site.stdout + site.stderr)[-2000:])
 
         status = run(["git", "status", "--porcelain", "--", *PUBLISHED], tree).stdout
         changed = [ln for ln in status.splitlines() if ln.strip()]
