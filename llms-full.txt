@@ -243,7 +243,7 @@ Q: Which movies have no swearing?
 A: Of the 1,286 films we have analysed, 55 have no flagged words in their English subtitles, including Moana (2016), Toy Story (1995), The Lego Movie (2014), Finding Dory (2016) and Mary Poppins (1964). The full list is on the page. Zero means none in the subtitles of the one release we counted. It is not a rating, and it says nothing about violence or frightening scenes.
 
 Q: Does zero flagged words mean a movie is suitable for kids?
-A: No. It only means our word list found nothing in the English subtitles of that release. We did not assess violence, nudity, frightening scenes or themes, so a film with no flagged words can still be unsuitable for young children. The list includes horror films, for example. Check an age rating or a parents guide for those.
+A: No. It only means our word list found nothing in the English subtitles of that release. We did not assess violence, nudity, frightening scenes or themes, so a film with no flagged words can still be unsuitable for young children. The list includes horror films, for example. Check an age rating or a content guide for those.
 
 Q: How much swearing does a typical movie have?
 A: In the 1,286 films we counted, half have 43 or fewer flagged words. About 4% have none, 14% have five or fewer, and about one in four has 100 or more. Flagged words include mild language such as damn and religious exclamations, not only strong profanity.
@@ -566,7 +566,7 @@ A: Needs Family Filter TV on an Android TV or Google TV device and on an Android
 - Download Family Filter TV: Google Play, direct install for TV boxes without Google Play, and the Windows early beta. https://familyfiltertv.com/download.html
 - Language Ratings for Stremio: A free Stremio add-on that counts the swearing in a film from its English subtitles; it does not mute. https://familyfiltertv.com/stremio.html
 - Family viewing guides by title: Language level and flagged-word counts for individual films, from our own subtitle analysis. https://familyfiltertv.com/titles/
-- How we count swear words: How the swear-word counts are made from English subtitles, and why our number can differ from other parents guides. https://familyfiltertv.com/titles/methodology/
+- How we count swear words: How the swear-word counts are made from English subtitles, and why our number can differ from other language guides. https://familyfiltertv.com/titles/methodology/
 - Family Filter TV: the facts: One page of citable facts: what it is, what it does and does not do, versions, price and contact. https://familyfiltertv.com/facts.html
 - Support: How to get help, the follow mode questions and the known limits. https://familyfiltertv.com/support.html
 - For creators: What Family Filter TV offers people who talk to families about what they watch. https://familyfiltertv.com/creators.html

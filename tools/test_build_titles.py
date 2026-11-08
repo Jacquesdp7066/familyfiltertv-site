@@ -361,13 +361,13 @@ class SearchTitle(unittest.TestCase):
         self.assertEqual(bt.seo_title(dict(CLEAN, title="Moana", year=2016)), "Does Moana (2016) have bad words? no swearing")
         self.assertEqual(bt.seo_h1(t), "Does Moana (2016) have bad words?")
 
-    def test_a_title_set_to_the_guide_style_says_parents_guide(self):
+    def test_a_title_set_to_the_guide_style_says_language_guide(self):
         t = dict(FULL, title="Gone Girl", year=2014, totalFlagged=130, seoStyle="guide",
                  profiles={"mild": 90, "family": 115, "strict": 117})
-        self.assertEqual(bt.seo_title(t), "Gone Girl (2014) parents guide: muted 115 times")
-        self.assertEqual(bt.seo_h1(t), "Gone Girl (2014) parents guide: swearing and language")
+        self.assertEqual(bt.seo_title(t), "Gone Girl (2014) language guide: muted 115 times")
+        self.assertEqual(bt.seo_h1(t), "Gone Girl (2014) language guide: swearing and profanity")
         d = bt.seo_description(t)
-        self.assertIn("parents guide", d)
+        self.assertIn("language guide", d)
         self.assertIn("The Family setting mutes it 115 times, 130 words counted in total", d)
         self.assertEqual(bt.seo_style(dict(FULL, seoStyle="nonsense")), "question")
 
@@ -407,13 +407,13 @@ class SearchTitle(unittest.TestCase):
                 self.assertIn("the Family setting mutes none", d, t["slug"])
             self.assertLessEqual(len(bt.seo_title(t)), bt.TITLE_LIMIT, t["slug"])
 
-    def test_the_page_carries_the_title_h1_and_a_parents_guide_description(self):
+    def test_the_page_carries_the_title_h1_and_a_language_guide_description(self):
         page = bt.title_page_html(FULL, {FULL["videoId"]: FULL}, LABELS, BENCHMARK)
         self.assertIn(f"<title>{bt.seo_title(FULL)}</title>", page)
         self.assertIn(f"<h1 class=\"page-title\">{bt.seo_h1(FULL)}</h1>", page)
         self.assertIn(f'<meta property="og:title" content="{bt.seo_title(FULL)}">', page)
         self.assertEqual(bt.seo_description(FULL), re.search(r'name="description" content="([^"]*)"', page).group(1))
-        self.assertIn("Parents guide: swearing and language", page)
+        self.assertIn("Language guide: swearing and profanity", page)
 
 
 class AnswerFirst(unittest.TestCase):
