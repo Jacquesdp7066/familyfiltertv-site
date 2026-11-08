@@ -13,7 +13,6 @@ import argparse
 import json
 import os
 import re
-import statistics
 import subprocess
 import sys
 import xml.etree.ElementTree as ET
@@ -125,37 +124,12 @@ def resolve(href, page_path):
     return path
 
 
-# Hand-written pages and text files that quote the size and spread of the film analysis. The
-# numbers must follow titles/data.json (benchmark, refreshed weekly); a line that carries its own
-# date ("... by 12 October 2026") is a dated snapshot and is left alone, and so is the
-# movies-with-no-swearing.html snapshot page.
-COUNT_FILES = ("swearing-in-movies.html", "index.html", "guides.html", "llms.txt", "llms-full.txt")
-FILM_COUNT = re.compile(r"\b(\d,\d{3}) films\b|\bof (?:the )?(\d,\d{3})\b")
-DATED = re.compile(r"\b\d{1,2} (?:January|February|March|April|May|June|July|August|September|October|November|December) 20\d\d\b")
-
-
 def stale_film_stats():
-    """Problems where a quoted film count, median or heaviest film differs from data.json."""
-    with open(os.path.join(ROOT, "titles", "data.json"), encoding="utf-8") as f:
-        totals = json.load(f)["benchmark"]["totals"]
-    want = {"film count": f"{len(totals):,}", "median": f"{statistics.median(totals):g}", "heaviest": str(max(totals))}
-    problems = []
-    for name in COUNT_FILES:
-        with open(os.path.join(ROOT, name), encoding="utf-8") as f:
-            for n, line in enumerate(f, 1):
-                if DATED.search(line):
-                    continue
-                for m in FILM_COUNT.finditer(line):
-                    found = m.group(1) or m.group(2)
-                    if found != want["film count"]:
-                        problems.append(f"{name}:{n}: says {found} films, titles/data.json has {want['film count']}")
-                for m in re.finditer(r"half (?:the films )?have (\d+) or fewer", line):
-                    if m.group(1) != want["median"]:
-                        problems.append(f"{name}:{n}: says median {m.group(1)}, titles/data.json has {want['median']}")
-                for m in re.finditer(r"heaviest has (\d+)", line):
-                    if m.group(1) != want["heaviest"]:
-                        problems.append(f"{name}:{n}: says heaviest has {m.group(1)}, titles/data.json has {want['heaviest']}")
-    return problems
+    """Hand-written pages that quote the film analysis (count, median, most common words ...)
+    must match titles/data.json; tools/sync_stats.py rewrites them and build_titles.py runs it."""
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import sync_stats
+    return [f"{name} is out of step with titles/data.json (run tools/build_titles.py)" for name in sync_stats.run(write=False)]
 
 
 def title_page_problems(sitemap_urls):
