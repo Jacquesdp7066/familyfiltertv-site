@@ -14,6 +14,7 @@ import unittest.mock
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import build_titles as bt  # noqa: E402
+import sync_stats as ss  # noqa: E402
 import weekly_refresh as wr  # noqa: E402
 
 LABELS = {"strong_profanity": "Strong profanity", "mild_profanity": "Mild profanity", "religious": "Religious exclamations"}
@@ -672,6 +673,31 @@ class SitemapAndLlms(unittest.TestCase):
         self.assertEqual(out.count(f"{bt.SITE}/titles/methodology/"), 1)
         self.assertLess(out.index(f"{bt.SITE}/titles/ "), out.index(f"{bt.SITE}/titles/methodology/"))
         self.assertFalse(again)
+
+
+class ProseStatsTest(unittest.TestCase):
+    def test_prose_stats_cover_the_films_with_word_detail_and_the_newest_date(self):
+        a = export_record(videoId="tt1", terms={"strong_profanity": {"f***": 3, "s***": 1}})
+        b = export_record(videoId="tt2", computedAt="2026-11-02T10:00:00.000Z", terms={"mild_profanity": {"hell": 1}})
+        out = bt.build_prose_stats([a, b])
+        self.assertEqual(out["asOf"], "2026-11-02")
+        self.assertEqual(out["words"]["films"], 2)
+        self.assertEqual(out["words"]["flagged"], 5)
+        self.assertEqual(out["words"]["forms"], 3)
+        self.assertEqual(out["words"]["top"]["1"], 60)
+
+    def test_quoted_figures_follow_the_benchmark_and_dated_snapshots_stay(self):
+        text = ("typical in 1,286 films we counted. Half the films have 43 or fewer flagged words.\n"
+                "the 55 of the 1,286 films counted to 12 October 2026 with none\n")
+        for pattern, skip in ((ss.RULES[0][1], True), (ss.RULES[1][1], False)):
+            values = {"films": "1,600", "median": "39"}
+            text, _ = ss.rewrite(text, pattern, skip, values)
+        self.assertIn("typical in 1,600 films", text)
+        self.assertIn("have 39 or fewer", text)
+        self.assertIn("55 of the 1,286 films counted to 12 October 2026", text)
+
+    def test_the_site_files_match_the_benchmark(self):
+        self.assertEqual(ss.run(write=False), [])
 
 
 if __name__ == "__main__":

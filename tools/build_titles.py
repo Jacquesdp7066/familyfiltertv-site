@@ -25,6 +25,9 @@ import statistics
 import sys
 import xml.sax.saxutils as sax
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import sync_stats  # noqa: E402
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_PATH = os.path.join(ROOT, "titles", "data.json")
 SITEMAP_PATH = os.path.join(ROOT, "sitemap.xml")
@@ -338,6 +341,29 @@ def build_benchmark(export):
         if isinstance(e, dict) and usable(e) and e.get("type", "movie") == "movie"
     )
     return {"filmCount": len(totals), "totals": totals}
+
+
+def build_prose_stats(export):
+    """What the hand-written pages quote beyond the totals (see tools/sync_stats.py): the date of
+    the newest analysis in the cohort, and how the flagged words spread over word forms across the
+    usable films that carry per-word detail (older records do not)."""
+    films = [e for e in export if isinstance(e, dict) and usable(e) and e.get("type", "movie") == "movie"]
+    forms = {}
+    detailed = 0
+    for e in films:
+        if "terms" not in e:
+            continue
+        detailed += 1
+        for words in e["terms"].values():
+            for term, n in words.items():
+                forms[term] = forms.get(term, 0) + n
+    total = sum(forms.values())
+    ranked = sorted(forms.values(), reverse=True)
+    top = {str(k): int(100 * sum(ranked[:k]) / total + 0.5) for k in (1, 5, 10, 20, 50)}
+    return {
+        "asOf": max(e["computedAt"][:10] for e in films),
+        "words": {"films": detailed, "flagged": total, "forms": len(forms), "top": top},
+    }
 
 
 def refresh_titles(titles, export, accept_changes=False):
@@ -1595,7 +1621,7 @@ def main():
         with open(sys.argv[sys.argv.index(flag) + 1], "r") as f:
             export = json.load(f)
         updated, held = refresh_titles(data["titles"], export, "--accept-changes" in sys.argv)
-        data["benchmark"] = build_benchmark(export)
+        data["benchmark"] = {**build_benchmark(export), **build_prose_stats(export)}
         with open(DATA_PATH, "w") as f:
             f.write(json.dumps(data, indent=2, ensure_ascii=False))
         for line in updated:
@@ -1642,6 +1668,9 @@ def main():
 
     sitemap_changed = update_sitemap(titles)
     llms_changed = update_llms(titles)
+
+    # hand-written pages quote the benchmark; rewrite those figures from it
+    sync_stats.run(write=True)
 
     print(f"generated {len(titles)} title pages + index ({changed_pages} files changed this run)")
     print(f"sitemap.xml changed: {sitemap_changed}")
