@@ -1212,7 +1212,7 @@ def title_page_html(t, by_id, category_labels, benchmark=None):
     <p>Open the title through a supported playback route such as Stremio. Family Filter TV
     analyses subtitle cues against your household filter settings and automatically mutes
     matching dialogue during playback. The picture keeps playing &mdash; only the sound briefly
-    drops.</p>
+    drops. Muting is best effort, so a word can slip through.</p>
   </section>
 
   <section aria-labelledby="supported-heading">
@@ -1230,7 +1230,7 @@ def title_page_html(t, by_id, category_labels, benchmark=None):
 {related}
 
   <p class="fine">Family Filter TV is an independent app. It is not affiliated with, endorsed by,
-  or connected to Stremio, Google, or any streaming service.</p>
+  or connected to Stremio, Google, any streaming service, or any film studio or distributor. Film titles are named only to describe their language; no posters or stills are used.</p>
 </main>
 {footer(2)}
 </body>
@@ -1420,7 +1420,7 @@ def methodology_page_html(titles, category_labels):
   </div>
 
   <p class="fine">Family Filter TV is an independent app. It is not affiliated with, endorsed by,
-  or connected to Stremio, Google, or any streaming service.</p>
+  or connected to Stremio, Google, any streaming service, or any film studio or distributor. Film titles are named only to describe their language; no posters or stills are used.</p>
 </main>
 {footer(2)}
 </body>
@@ -1513,7 +1513,7 @@ def index_page_html(titles, category_labels):
   <a href="../download.html">download Family Filter TV</a>.</p>
 
   <p class="fine">Family Filter TV is an independent app. It is not affiliated with, endorsed by,
-  or connected to Stremio, Google, or any streaming service.</p>
+  or connected to Stremio, Google, any streaming service, or any film studio or distributor. Film titles are named only to describe their language; no posters or stills are used.</p>
 </main>
 {footer(1)}
 </body>
