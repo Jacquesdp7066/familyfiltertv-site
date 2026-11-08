@@ -741,9 +741,53 @@ def analysis_panel(t, category_labels):
   </section>'''
 
 
-def related_section(t, by_id, depth_up):
+BASE_RELATED = 5   # links on a film page: its hand-set related films first, then the closest others
+MAX_RELATED = 7    # a page may grow to this many when a film still needs inbound links
+MIN_INBOUND = 2    # every film page is linked from at least this many other film pages
+
+
+def closeness(a, b):
+    """Sort key, smallest first: how near film b is to film a. More shared genres, then the same
+    decade, then the nearest flagged-word total, then slug so ties are always broken the same way."""
+    shared = len(set(a.get("genres", [])) & set(b.get("genres", [])))
+    return (-shared, 0 if a["year"] // 10 == b["year"] // 10 else 1,
+            abs(a["totalFlagged"] - b["totalFlagged"]), b["slug"])
+
+
+def related_ids(titles):
+    """{videoId: [related videoIds]} for the "Related films" block. A page links its hand-set
+    "related" films first, then the closest others up to BASE_RELATED. A film that still has fewer
+    than MIN_INBOUND links in is then added to the pages closest to it that have room, so a newly
+    added film is linked from existing pages and the existing pages are regenerated with the links.
+    Depends only on the data, never on the order of the list."""
+    by_id = {t["videoId"]: t for t in titles}
+    ordered = sorted(titles, key=lambda t: t["slug"])
+    out = {}
+    for t in ordered:
+        ids = []
+        for rid in t.get("related", []):
+            if rid in by_id and rid != t["videoId"] and rid not in ids:
+                ids.append(rid)
+        for other in sorted((o for o in ordered if o is not t), key=lambda o: closeness(t, o)):
+            if len(ids) >= BASE_RELATED:
+                break
+            if other["videoId"] not in ids:
+                ids.append(other["videoId"])
+        out[t["videoId"]] = ids
+    for b in ordered:
+        inbound = sum(1 for ids in out.values() if b["videoId"] in ids)
+        for a in sorted((o for o in ordered if o is not b), key=lambda o: closeness(b, o)):
+            if inbound >= MIN_INBOUND:
+                break
+            if b["videoId"] not in out[a["videoId"]] and len(out[a["videoId"]]) < MAX_RELATED:
+                out[a["videoId"]].append(b["videoId"])
+                inbound += 1
+    return out
+
+
+def related_section(t, by_id, depth_up, ids=None):
     items = []
-    for rel_id in t["related"]:
+    for rel_id in (t["related"] if ids is None else ids):
         rel = by_id.get(rel_id)
         if not rel:
             continue
@@ -754,7 +798,7 @@ def related_section(t, by_id, depth_up):
     if not items:
         return ""
     return f'''  <section aria-labelledby="related-heading">
-    <h2 id="related-heading">Related titles</h2>
+    <h2 id="related-heading">Related films</h2>
     <ul>
 {chr(10).join(items)}
     </ul>
@@ -868,6 +912,41 @@ def answer_lead(t, category_labels=None):
             detail += f" First strong profanity: {slot_when(first_strong, bucket_ms)}."
         detail += f" Heaviest stretch: {slot_when(peak, bucket_ms)}."
     return sentence, detail
+
+
+def tldr(t):
+    """Two or three sentences under the H1 that give the answer at once. Every figure comes from
+    the record (total, strong profanity, heaviest stretch, times muted); nothing is hand-written."""
+    name, year, total = t["title"], t["year"], t["totalFlagged"]
+    if not total:
+        return (f"{name} ({year}) has no flagged swearing in its English subtitles, so there is nothing for "
+                "Family Filter TV to mute. Muting is best effort, and other cuts of a film can differ.")
+    strong = t["counts"].get("strong_profanity", 0)
+    first = f"{name} ({year}) has {plural(total, 'flagged word')}"
+    if mild_only(t):
+        first += ", mild language only"
+    elif total == 1:
+        first += ", and it is strong profanity" if strong else ", and it is not strong profanity"
+    elif strong * 2 > total:
+        first += ", mostly strong profanity"
+    elif strong:
+        first += f", {strong} of them strong profanity"
+    else:
+        first += ", none of them strong profanity"
+    timeline = t.get("timeline")
+    if total > 1 and timeline and sum(timeline["words"]):
+        words = timeline["words"]
+        peak = max(range(len(words)), key=lambda i: (words[i], -i))
+        first += f", heaviest {slot_when(peak, timeline['bucketMs'])}"
+    first += "."
+    if mild_only(t):
+        them = "it" if total == 1 else "them"
+        second = (f"Family Filter TV's Family setting mutes none of {them} and the Strict setting mutes {them}; "
+                  "muting is best effort, so a word can slip through.")
+    else:
+        second = (f"Family Filter TV's Family setting mutes it {plural(muted_count(t), 'time')} as it plays; "
+                  "muting is best effort, so a word can slip through.")
+    return f"{first} {second}"
 
 
 def seo_description(t):
@@ -1111,7 +1190,7 @@ def low_count_section(t, by_id, category_labels):
   </section>'''
 
 
-def title_page_html(t, by_id, category_labels, benchmark=None):
+def title_page_html(t, by_id, category_labels, benchmark=None, related_map=None):
     slug = t["slug"]
     name = t["title"]
     year = t["year"]
@@ -1155,7 +1234,7 @@ def title_page_html(t, by_id, category_labels, benchmark=None):
     ])
 
     breadcrumb = breadcrumb_html(2, title=name)
-    related = related_section(t, by_id, "../")
+    related = related_section(t, by_id, "../", (related_map or {}).get(t["videoId"]))
     detail = "\n\n".join(
         part for part in (
             low_count_section(t, by_id, category_labels),
@@ -1209,6 +1288,7 @@ def title_page_html(t, by_id, category_labels, benchmark=None):
   {breadcrumb}
   <p class="muted">Language guide: swearing and profanity</p>
   <h1 class="page-title">{esc(seo_h1(t))}</h1>
+  <p class="lead tldr"><strong>TL;DR:</strong> {esc(tldr(t))}</p>
   <section class="panel answer-box" aria-label="Short answer">
     <p class="lead">{esc(lead)}</p>
     <p class="lead"><strong>{esc(lead_detail)}</strong></p>
@@ -1638,13 +1718,14 @@ def main():
     benchmark = data.get("benchmark")
     by_id = {t["videoId"]: t for t in titles}
 
+    related_map = related_ids(titles)
     titles_dir = os.path.join(ROOT, "titles")
     changed_pages = 0
     for t in titles:
         page_dir = os.path.join(titles_dir, t["slug"])
         os.makedirs(page_dir, exist_ok=True)
         page_path = os.path.join(page_dir, "index.html")
-        html = title_page_html(t, by_id, category_labels, benchmark)
+        html = title_page_html(t, by_id, category_labels, benchmark, related_map)
         if not os.path.exists(page_path) or open(page_path).read() != html:
             with open(page_path, "w") as f:
                 f.write(html)
