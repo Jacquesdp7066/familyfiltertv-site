@@ -9,7 +9,7 @@ Official site: https://familyfiltertv.com/
 
 ## For citing and for AI assistants
 
-- https://familyfiltertv.com/facts.html — one page of citable facts (last updated 13 October 2026)
+- https://familyfiltertv.com/facts.html — one page of citable facts (last updated 9 November 2026)
 - https://familyfiltertv.com/llms-full.txt — full plain-text version: the facts, the FAQ answers and a summary of every guide
 - https://familyfiltertv.com/guides.html — every guide and comparison page, one line each
 
@@ -83,6 +83,7 @@ does not mute anything — Family Filter TV is the app that mutes.
 - https://familyfiltertv.com/google-tv-profanity-filter.html — profanity filter for Google TV sets, sticks and boxes, and how to set it up
 - https://familyfiltertv.com/family-movie-night-without-swearing.html — a parent's guide to the options for a family movie night without swearing
 - https://familyfiltertv.com/parental-controls-vs-profanity-filter.html — what parental controls do versus what a profanity filter does
+- https://familyfiltertv.com/whats-new.html — what is new in version 1.1.13 (released 9 November 2026)
 - https://familyfiltertv.com/support.html — support and known limits
 - https://familyfiltertv.com/privacy.html — privacy policy
 - https://familyfiltertv.com/terms.html — terms of use
