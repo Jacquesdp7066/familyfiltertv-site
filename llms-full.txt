@@ -4,7 +4,7 @@
 
 Official site: https://familyfiltertv.com/
 Short version: https://familyfiltertv.com/llms.txt
-Last updated 6 November 2026
+Last updated 9 November 2026
 
 # The facts (https://familyfiltertv.com/facts.html)
 
@@ -42,6 +42,7 @@ Last updated 6 November 2026
 
 ## Versions and where to get them
 - Google Play: https://play.google.com/store/apps/details?id=com.familyfiltertv.app (package com.familyfiltertv.app).
+- Latest on Google Play: Version 1.1.13, released 9 November 2026. See https://familyfiltertv.com/whats-new.html .
 - Direct install (APK): For TV boxes without Google Play. The current version is on https://familyfiltertv.com/download.html .
 - Follow along needs: Version 0.2.21 or newer. If Google Play still offers an older version, install from https://familyfiltertv.com/download.html .
 - Windows: Early beta for Windows 10 and 11. See https://familyfiltertv.com/download.html#windows .
@@ -568,6 +569,7 @@ A: Needs Family Filter TV on an Android TV or Google TV device and on an Android
 - Family viewing guides by title: Language level and flagged-word counts for individual films, from our own subtitle analysis. https://familyfiltertv.com/titles/
 - How we count swear words: How the swear-word counts are made from English subtitles, and why our number can differ from other language guides. https://familyfiltertv.com/titles/methodology/
 - Family Filter TV: the facts: One page of citable facts: what it is, what it does and does not do, versions, price and contact. https://familyfiltertv.com/facts.html
+- What's new in Family Filter TV 1.1.13: Steadier follow mode through rewinds, automatic timing correction, a Follow again button and account deletion in the app. https://familyfiltertv.com/whats-new.html
 - Support: How to get help, the follow mode questions and the known limits. https://familyfiltertv.com/support.html
 - For creators: What Family Filter TV offers people who talk to families about what they watch. https://familyfiltertv.com/creators.html
 - Privacy policy: The privacy policy, including how the microphone is used in follow mode. https://familyfiltertv.com/privacy.html
