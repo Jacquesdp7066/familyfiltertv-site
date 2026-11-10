@@ -5,18 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,follow">
 <title>You've been invited — Family Filter TV</title>
-<meta name="description" content="You've been invited to Family Filter TV, the language filter that runs on your television. 30-day free trial for invited friends.">
+<meta name="description" content="You've been invited to Family Filter TV, which mutes the swearing on your Android TV or Google TV while the picture keeps playing. 30 days free with your invite code.">
 <meta name="theme-color" content="#0B0C0F">
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="icon" href="assets/icon-192.png" sizes="192x192" type="image/png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="You've been invited to Family Filter TV">
-<meta property="og:description" content="It mutes the swearing in what you watch on the TV. 30 days free because a friend invited you.">
+<meta property="og:description" content="Mutes the swearing on your Android TV or Google TV while the picture keeps playing. 30 days free with your invite code.">
 <meta property="og:image" content="https://familyfiltertv.com/assets/feature-graphic.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preload" href="assets/fonts/manrope-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="style.css">
+<script src="hit.js" defer></script>
+<script src="signup.js" defer></script>
 </head>
 <body>
 <header class="site-head">
@@ -39,20 +41,54 @@
 </header>
 
 <main class="wrap">
-  <h1 class="page-title">You've been invited to Family Filter TV</h1>
-  <p class="lead">It mutes the swearing in what you watch on the TV. 30-day free trial because a friend invited you (the usual trial is 14 days), then choose a
-  30-day or 1-year plan. Current prices are shown in Google Play.</p>
-
-  <div class="code-plate" id="code-plate" hidden>
-    <p class="code-note">If the app asks for an invite code, enter <code id="code-text"></code>.</p>
-  </div>
+  <p class="join-kicker">You've been invited</p>
+  <h1 class="page-title">Enjoy what you watch, without the swearing</h1>
+  <p class="lead">Family Filter TV mutes the swear words on your Android TV or Google TV while the picture keeps playing.</p>
+  <p class="join-offer" id="join-offer"><strong>Your first 14 days are free</strong>, then choose a 30-day or 1-year plan. Prices show in your own currency on Google Play, and you can cancel any time there.</p>
 
   <div class="actions">
-    <a class="btn" id="play-btn" href="https://play.google.com/store/apps/details?id=com.familyfiltertv.app">Get it on Google Play</a>
+    <a class="btn" id="play-btn" href="https://play.google.com/store/apps/details?id=com.familyfiltertv.app" data-cta="join_play">Get it on Google Play</a>
     <a class="btn-quiet" id="open-app-btn" href="#" hidden>Already installed? Open the app</a>
   </div>
-  <p><a class="btn-quiet" href="download.html">Other ways to install</a></p>
-  <p class="muted">Once you're set up, you can invite friends of your own — 10 weeks free for
+  <div class="code-plate" id="code-plate" hidden>
+    <p class="code-label">Your invite code</p>
+    <p class="code-display" id="code-text"></p>
+    <p class="code-note">It is added for you when you install with the button above. If the app asks for a code, type this one.</p>
+    <button type="button" class="btn-quiet" id="copy-code" hidden>Copy code</button>
+  </div>
+
+  <p class="join-compat">Works on Android TV, Google TV, Android TV boxes and Android phones. No Play Store on your TV? <a href="download.html">Install it directly</a>.</p>
+
+  <div class="join-ios" id="ios-note" hidden>
+    <h2>On an iPhone?</h2>
+    <p>There is no iPhone or Apple TV app yet. Leave your email and we will tell you if that changes.</p>
+    <section class="signup" data-signup data-source="join-ios" hidden aria-labelledby="signup-title">
+      <form class="signup-form" novalidate>
+        <label for="signup-email">Email address</label>
+        <div class="signup-row">
+          <input type="email" id="signup-email" name="email" autocomplete="email" inputmode="email" required placeholder="you@example.com">
+          <button type="submit">Tell me</button>
+        </div>
+        <div class="hp" aria-hidden="true">
+          <label for="signup-website">Leave this field empty</label>
+          <input type="text" id="signup-website" name="website" tabindex="-1" autocomplete="off">
+        </div>
+        <p class="signup-status" role="status" aria-live="polite"></p>
+        <p class="fine">We will only email you about Family Filter TV. Unsubscribe any time. See the <a href="privacy.html#email-signup">privacy policy</a>.</p>
+      </form>
+      <div class="signup-thanks" tabindex="-1" hidden><p>Thank you. We will be in touch.</p></div>
+    </section>
+  </div>
+
+  <h2>How it works</h2>
+  <ol class="steps">
+    <li><div><h3>Install it on your TV</h3><p>Get it from Google Play on your Android TV or Google TV, then link your household with the short code the TV shows.</p></div></li>
+    <li><div><h3>Choose how strict it is</h3><p>Off, mild, family or strict, set once and followed by every linked TV in the house.</p></div></li>
+    <li><div><h3>Press play</h3><p>Start a title in Stremio and pick Family Filter TV as the player: that is where it is most accurate. For Netflix and other apps on Android TV it follows along instead (English titles), and it works better on some titles than others.</p></div></li>
+  </ol>
+
+  <p class="muted">It mutes the words and leaves the picture alone. It is for adults who like a film or show but not the language, and it does not change what is on screen, so it is not a way to make a film suitable for children. See <a href="how-it-works.html">how it works</a> and what it can miss.</p>
+  <p class="muted">Once you're set up, you can invite friends of your own: 10 weeks free for
   every friend who subscribes, up to five friends a year.</p>
 </main>
 
@@ -80,34 +116,39 @@
 (function () {
   "use strict";
   var ALPHABET_RE = /^[23456789ABCDEFGHJKLMNPQRSTUVWXYZ]{6}$/;
+  var UTM_RE = /^[a-z0-9_.-]{1,40}$/i;
   var params = new URLSearchParams(window.location.search);
   var raw = (params.get('ref') || '').trim().toUpperCase();
   var code = ALPHABET_RE.test(raw) ? raw : null;
-
-  // #232: FREE26 is the public free voucher, not a friend referral. Same code
-  // format so it flows through the invite-code field untouched, but it doesn't
-  // count as a referral open and gets its own pitch below.
-  var VOUCHER_CODE = 'FREE26';
-  var isVoucher = code === VOUCHER_CODE;
+  var ua = navigator.userAgent || '';
 
   var playBtn = document.getElementById('play-btn');
+  var offer = document.getElementById('join-offer');
   var playUrl = 'https://play.google.com/store/apps/details?id=com.familyfiltertv.app';
+
+  // iPhone and iPad visitors (link in bio): say plainly there is no app for them yet.
+  if (/iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1)) {
+    document.getElementById('ios-note').hidden = false;
+  }
 
   if (!code) {
     playBtn.href = playUrl;
     return;
   }
 
+  // #232: FREE26 is the public free voucher, not a friend referral. Same code
+  // format so it flows through the invite-code field untouched, but it doesn't
+  // count as a referral open and gets its own pitch below.
   // #611: FREE26 is closed to new households (its two redeemers keep their access), so its
   // link must not promise anything: say it closed, offer the normal start, show no code to type.
-  if (isVoucher) {
-    var closedLead = document.querySelector('.lead');
-    if (closedLead) {
-      closedLead.textContent = 'It mutes the swearing in what you watch on the TV. The FREE26 offer has closed, but you can still start with 14 days free on Google Play, then choose a 30-day or 1-year plan. Current prices are shown in Google Play.';
-    }
+  if (code === 'FREE26') {
+    offer.textContent = 'The FREE26 offer has closed, but you can still start with 14 days free on Google Play, then choose a 30-day or 1-year plan. Current prices are shown in Google Play.';
     playBtn.href = playUrl;
     return;
   }
+
+  // A real invite code: the offer becomes the 30 days (the code replaces the 14-day start, it does not add to it).
+  offer.innerHTML = '<strong>30 days free with your invite code</strong>, then choose a 30-day or 1-year plan. Prices show in your own currency on Google Play, and you can cancel any time there.';
 
   try { localStorage.setItem('ffRef', code); } catch (e) { /* private mode: ignore */ }
 
@@ -130,14 +171,34 @@
   document.getElementById('code-text').textContent = code;
   document.getElementById('code-plate').hidden = false;
 
-  playBtn.href = playUrl + '&referrer=' + encodeURIComponent('ref=' + code);
+  // Play keeps the install referrer, so the code and where the visitor came from travel to the install.
+  // The app only reads `ref`; the utm tags show up in Play Console's acquisition reports.
+  var referrer = 'ref=' + code;
+  ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'].forEach(function (k) {
+    var v = (params.get(k) || '').trim();
+    if (UTM_RE.test(v)) referrer += '&' + k + '=' + v.toLowerCase();
+  });
+  playBtn.href = playUrl + '&referrer=' + encodeURIComponent(referrer);
 
-  var joinUrl = 'https://familyfiltertv.com/join?ref=' + code;
-  var openAppBtn = document.getElementById('open-app-btn');
-  openAppBtn.href = 'intent://familyfiltertv.com/join?ref=' + code +
-    '#Intent;scheme=https;package=com.familyfiltertv.app;S.browser_fallback_url=' +
-    encodeURIComponent(joinUrl) + ';end';
-  openAppBtn.hidden = false;
+  // "Open the app" only makes sense on an Android phone or tablet that may already have it.
+  if (/Android/.test(ua)) {
+    var joinUrl = 'https://familyfiltertv.com/join?ref=' + code;
+    var openAppBtn = document.getElementById('open-app-btn');
+    openAppBtn.href = 'intent://familyfiltertv.com/join?ref=' + code +
+      '#Intent;scheme=https;package=com.familyfiltertv.app;S.browser_fallback_url=' +
+      encodeURIComponent(joinUrl) + ';end';
+    openAppBtn.hidden = false;
+  }
+
+  var copyBtn = document.getElementById('copy-code');
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    copyBtn.hidden = false;
+    copyBtn.addEventListener('click', function () {
+      navigator.clipboard.writeText(code).then(function () {
+        copyBtn.textContent = 'Copied';
+      }, function () { /* clipboard blocked: the code is on screen anyway */ });
+    });
+  }
 })();
 </script>
 </body>

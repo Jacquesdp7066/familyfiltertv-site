@@ -932,3 +932,18 @@ main.wrap.wide > .signup { max-width: 560px; }
   color: var(--ink); background: var(--surface); border: 2px solid var(--ink-soft); border-radius: 10px;
 }
 .consent-btn:hover { background: var(--field); border-color: var(--ink); }
+
+/* ---------- /join landing page (creator and friend links) ---------- */
+
+.join-kicker { margin: 0 0 10px; color: var(--signal); font-weight: 700; font-size: 0.875rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.join-offer { color: var(--ink); font-size: 1.0625rem; line-height: 1.5; max-width: 46ch; }
+.join-offer strong { color: var(--accent); }
+.join-compat { margin: 14px 0 0; color: var(--muted); font-size: 0.9375rem; }
+.join-ios { margin: 28px 0 0; padding: 18px 20px; border: 1px solid var(--line-strong); border-radius: var(--radius); background: var(--surface); }
+.join-ios h2 { margin: 0 0 0.3em; font-size: 1.125rem; }
+.join-ios h2::before { content: none !important; }
+.join-ios .signup { margin: 0; padding: 0; border: 0; background: transparent; }
+.code-plate { padding: 22px 20px 22px; margin: 22px 0 0; }
+.code-label { margin: 0 0 6px; color: var(--ink-soft); font-size: 0.875rem; font-weight: 600; max-width: none; }
+.code-plate .btn-quiet { margin-top: 14px; }
+.btn-quiet[hidden], .btn[hidden] { display: none; }
