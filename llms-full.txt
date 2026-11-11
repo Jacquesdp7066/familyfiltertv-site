@@ -26,12 +26,12 @@ Last updated 9 November 2026
 - It does not cut, skip or blur the video.
 - It is not a streaming library and does not provide films, series or subscription access.
 - It only mutes when subtitles are found for the title. Filtering availability varies by title, and the app tells the viewer when filtering is unavailable.
-- It does not work with the built-in apps of Samsung (Tizen), LG (webOS), Hisense VIDAA and other non-Android TVs. Roku TVs and Amazon Fire TV are not supported at this time.
+- Family Filter TV is not installed on Samsung (Tizen) or LG (webOS) smart TVs. The Android phone mutes them over the home Wi-Fi instead. Hisense sets running VIDAA, Roku TVs and Amazon Fire TV are not supported at this time.
 - It does not filter DStv.
 
 ## Where it runs
 - Runs on: Android TVs and Android TV boxes (including Google TV), Android phones, and Windows 10 or 11 as an early beta.
-- Does not run on: The built-in apps of Samsung and LG TVs, Hisense sets running VIDAA, Roku TVs and Amazon Fire TV. A Google TV or Android TV streaming stick or box plugged into the TV's HDMI port works.
+- Does not run on: The built-in apps of Samsung and LG TVs (the Android phone mutes those TVs over Wi-Fi instead), Hisense sets running VIDAA, Roku TVs and Amazon Fire TV. A Google TV or Android TV streaming stick or box plugged into the TV's HDMI port works.
 - How to tell: Press Home on the TV remote. If you see Google TV, or the Google Play Store among the apps, it works. See https://familyfiltertv.com/which-tvs.html .
 
 ## What you need
@@ -161,7 +161,7 @@ Q: Does it cut or skip scenes?
 A: No. The picture keeps playing normally and nothing is cut, blurred or skipped. Only the sound briefly drops.
 
 Q: Which TVs does it work on?
-A: Android TV, Google TV and Android TV boxes, with a companion app on an Android phone. It does not work with the built-in apps of Samsung, LG and other non-Android TVs.
+A: Android TV, Google TV and Android TV boxes, with a companion app on an Android phone. On Samsung and LG smart TVs the Android phone mutes the TV over your home Wi-Fi.
 
 Q: Can it mute swearing on Netflix?
 A: Family Filter TV follows along while you watch Netflix and other apps on your Android TV or Google TV: you pick the title on your Android phone and the TV mutes the swearing. Muting is best effort and works for English titles for now. Family Filter TV is not affiliated with Netflix.
@@ -175,7 +175,7 @@ Q: Can you mute swearing on Netflix on a TV?
 A: Yes, on an Android TV or Google TV. Family Filter TV runs on the TV next to the Netflix app and mutes the sound for the swear words it finds in the subtitles, while the picture keeps playing. Muting is best effort, so a line may slip through. Family Filter TV is not affiliated with Netflix.
 
 Q: Does it work on Samsung or LG TVs?
-A: Not with the Netflix app built into Samsung, LG and other non-Android TVs. It works on Android TV and Google TV sets and boxes.
+A: Yes, from your phone. The Android phone mutes a Samsung or LG smart TV over your home Wi-Fi, including the Netflix app built into the TV. It also works on Android TV and Google TV sets and boxes. Muting is best effort.
 
 Q: Do browser extensions that filter Netflix work on a TV?
 A: No. Browser extensions run in a web browser on a computer. They do not run inside the Netflix app on a TV.
@@ -289,10 +289,10 @@ A: No. Family Filter TV is an independent app and is not affiliated with, endors
 ## Will it work on my TV? (https://familyfiltertv.com/which-tvs.html)
 
 Q: Will Family Filter TV work on my TV?
-A: It depends on the system your TV runs, not the brand. If your TV has the Google Play Store, yes.
+A: It depends on the system your TV runs, not the brand. If your TV has the Google Play Store, yes. Samsung and LG smart TVs work too, muted from your Android phone over Wi-Fi.
 
 Q: Does it work on a Samsung or LG TV?
-A: Not on the TV itself. A Google TV or Android TV streaming stick or box in an HDMI port is the simplest way today.
+A: Yes, from your phone. On Samsung and LG smart TVs the Android phone mutes the TV over your home Wi-Fi. Family Filter TV is not installed on the TV, and muting is best effort.
 
 Q: How can I tell what my TV runs?
 A: Press Home on the remote. If you see Google TV or the Google Play Store among the apps, it works.
@@ -303,7 +303,7 @@ Q: Does Family Filter TV need extra hardware?
 A: No. It is an app for Android TV and Google TV sets and boxes, with a companion app on an Android phone.
 
 Q: Does Family Filter TV work on Samsung, LG, Roku or Fire TV?
-A: Not on the built-in apps of Samsung (Tizen), LG (webOS), Roku or Fire TV. See the page on which TVs work for what does run.
+A: Yes for Samsung (Tizen) and LG (webOS) smart TVs, from the Android phone over your home Wi-Fi. Not on Roku or Fire TV. See the page on which TVs work for what does run.
 
 Q: What does Family Filter TV filter?
 A: Spoken profanity only. It mutes the words while the picture keeps playing. It does not filter violence or nudity.
@@ -343,7 +343,7 @@ Q: Does it work with Netflix?
 A: Family Filter TV follows along while you watch Netflix and other apps on your Android TV. You pick the film or episode on the phone and the TV mutes the swearing. This needs version 0.2.21 or newer, and English titles only for now. Family Filter TV is not affiliated with Netflix.
 
 Q: Which TVs does it run on?
-A: Android TV and Google TV sets and boxes. It does not run on the built-in apps of Samsung (Tizen), LG (webOS), Roku or Fire TV.
+A: Android TV and Google TV sets and boxes. Samsung (Tizen) and LG (webOS) smart TVs are muted from the Android phone over Wi-Fi. It does not run on Roku or Fire TV.
 
 Q: What does Family Filter TV cost?
 A: There is a 14-day free trial, then a 30-day or 1-year plan (current prices are shown in Google Play), with three devices included and up to six. Google Play charges in local currency.
@@ -533,7 +533,7 @@ Q: Does the phone listen to my TV?
 A: Only when it has to. With Netflix on your Android TV, the TV reads where you are in the film by itself. When the TV or a Windows computer cannot tell, the phone finds the place by listening. Once you have allowed the microphone, it starts by itself when you follow a title, usually within a few seconds of clear talking, and it keeps listening while the Follow screen is open so it can correct itself after a pause or a skip. Tap Stop to stop it. The sound is turned into words on the phone and compared there with the subtitles. Nothing is stored or sent anywhere. See If it is not in sync and the privacy policy.
 
 Q: What are the limits of follow mode?
-A: Needs Family Filter TV on an Android TV or Google TV device and on an Android phone. English titles only for now. Does not work with the built-in apps of Samsung, LG and other non-Android TVs. See Will it work on my TV? Family Filter TV is not affiliated with Netflix.
+A: Needs Family Filter TV on an Android TV or Google TV device and on an Android phone. English titles only for now. On Samsung and LG smart TVs the Android phone mutes the TV over your home Wi-Fi instead. See Will it work on my TV? Family Filter TV is not affiliated with Netflix.
 
 # Guides
 
@@ -550,7 +550,7 @@ A: Needs Family Filter TV on an Android TV or Google TV device and on an Android
 - Movies with no swearing: The 55 of the 1,286 films counted to 12 October 2026 with no flagged words in their English subtitles, 129 more with one to five, and what zero does and does not mean. https://familyfiltertv.com/movies-with-no-swearing.html
 - VidAngel and ClearPlay alternative for Stremio households: A side-by-side comparison with VidAngel and ClearPlay for Stremio and Android TV households. https://familyfiltertv.com/vidangel-clearplay-alternative.html
 - Movie filtering services compared: Family Filter TV, VidAngel, ClearPlay, Enjoy Movies Your Way and TVGuardian compared on price, devices, what they filter, country and trial. https://familyfiltertv.com/movie-filtering-services-compared.html
-- Will it work on my TV?: Which TV brands and systems are supported, including Samsung, LG, Hisense, Roku and Fire TV. https://familyfiltertv.com/which-tvs.html
+- Will it work on my TV?: Which TV brands and systems are supported, including how the phone mutes Samsung and LG TVs, and Hisense, Roku and Fire TV. https://familyfiltertv.com/which-tvs.html
 - TVGuardian alternative for Android TV and Google TV: A fair comparison of TVGuardian and Family Filter TV: what each mutes, where it runs and what you need. https://familyfiltertv.com/tvguardian-alternative.html
 - CleanCut alternative for Android TV and Google TV: CleanCut is a profanity filter for Apple TV; a comparison with Family Filter TV on Android TV and Google TV. https://familyfiltertv.com/cleancut-alternative-android-tv.html
 - Enjoy Movies Your Way alternative for Android TV and Google TV: A fair comparison of Enjoy Movies Your Way and Family Filter TV for Android TV and Google TV. https://familyfiltertv.com/enjoy-movies-your-way-alternative.html
