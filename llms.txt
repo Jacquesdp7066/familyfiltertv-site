@@ -65,10 +65,8 @@ does not mute anything — Family Filter TV is the app that mutes.
 - https://familyfiltertv.com/titles/methodology/ — how we count swear words: automated analysis of English subtitles, the categories, and why our numbers can differ from other guides
 - https://familyfiltertv.com/mute-swearing-on-tv.html — muting unwanted language on TV
 - https://familyfiltertv.com/mute-swearing-on-netflix.html — how to mute swearing on Netflix on Android TV and Google TV (not affiliated with Netflix)
-- https://familyfiltertv.com/vidangel-clearplay-alternative.html — What Family Filter TV does and does not do for a Stremio and Android TV household.
-- https://familyfiltertv.com/tvguardian-alternative.html — An app for Android TV and Google TV that mutes spoken profanity from subtitles, with no extra hardware.
-- https://familyfiltertv.com/cleancut-alternative-android-tv.html — Family Filter TV mutes spoken profanity on Android TV and Google TV; it does not run on Apple TV.
-- https://familyfiltertv.com/enjoy-movies-your-way-alternative.html — What Family Filter TV covers on Android TV and Google TV, and what it does not.
+- https://familyfiltertv.com/stremio-android-tv-household.html — What Family Filter TV does and does not do for a Stremio and Android TV household.
+- https://familyfiltertv.com/android-tv-google-tv-what-it-covers.html — An app for Android TV and Google TV that mutes spoken profanity from subtitles; what it does, where it runs and what you need. It does not run on Apple TV.
 - https://familyfiltertv.com/profanity-filter-browser-extension-vs-tv.html — Where Family Filter TV runs: televisions, and an early-beta Windows companion for a computer.
 - https://familyfiltertv.com/movie-filtering-services-compared.html — What to check before choosing a movie filtering service, with the answers for Family Filter TV.
 - https://familyfiltertv.com/does-netflix-have-a-profanity-filter.html — Where to find Netflix's own controls, and how Family Filter TV mutes swearing while Netflix plays on an Android TV or Google TV.

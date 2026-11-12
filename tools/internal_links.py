@@ -30,7 +30,7 @@ EDITS = [
     ("parental-controls-vs-profanity-filter.html", "Stremio", "stremio-profanity-filter.html"),
     ("which-tvs.html", "Google TV", "google-tv-profanity-filter.html"),
     ("install-android-tv.html", "Google TV", "google-tv-profanity-filter.html"),
-    ("tvguardian-alternative.html", "Google TV", "google-tv-profanity-filter.html"),
+    ("android-tv-google-tv-what-it-covers.html", "Google TV", "google-tv-profanity-filter.html"),
     ("does-netflix-have-a-profanity-filter.html", "mute swearing", "mute-swearing-on-tv.html"),
     ("stremio-profanity-filter.html", "mute swearing", "mute-swearing-on-tv.html"),
     ("setup.html", "mute swearing", "mute-swearing-on-tv.html"),

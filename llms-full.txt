@@ -251,10 +251,7 @@ A: Any word in our dictionary found in a film's English subtitles, filed under s
 Q: Can I watch other movies with the swearing muted?
 A: On an Android TV or Google TV, yes. Family Filter TV mutes the swear words it finds in the subtitles while the picture keeps playing. It works with supported Stremio playback and follows along with Netflix and other apps. It covers spoken language only, English titles for now, and muting is best effort, so a word may slip through. Family Filter TV is not affiliated with Netflix.
 
-## Family Filter TV for Stremio and Android TV households (https://familyfiltertv.com/vidangel-clearplay-alternative.html)
-
-Q: Is Family Filter TV affiliated with VidAngel or ClearPlay?
-A: No. Family Filter TV is an independent app and is not affiliated with, endorsed by, or connected to VidAngel, ClearPlay or any streaming service.
+## Family Filter TV for Stremio and Android TV households (https://familyfiltertv.com/stremio-android-tv-household.html)
 
 Q: What does Family Filter TV filter?
 A: Spoken profanity only. It mutes the words while the picture keeps playing. It does not filter violence or nudity.
@@ -264,6 +261,9 @@ A: Yes, on the TV. Family Filter TV mutes profanity in Stremio playback using th
 
 Q: Does it work with Netflix?
 A: Family Filter TV follows along while you watch Netflix and other apps on your Android TV. You pick the film or episode on the phone and the TV mutes the swearing. This needs version 0.2.21 or newer, and English titles only for now. Family Filter TV is not affiliated with Netflix.
+
+Q: Is Family Filter TV a streaming service?
+A: No. It is not a streaming service and provides no films or series. It works alongside the apps you already use.
 
 Q: What does Family Filter TV cost?
 A: There is a 14-day free trial, then a 30-day or 1-year plan (current prices are shown in Google Play), with three devices included and up to six. Google Play charges in local currency.
@@ -296,24 +296,13 @@ A: Yes, from your phone. On Samsung and LG smart TVs the Android phone mutes the
 Q: How can I tell what my TV runs?
 A: Press Home on the remote. If you see Google TV or the Google Play Store among the apps, it works.
 
-## Family Filter TV: a profanity-muting app, no extra hardware (https://familyfiltertv.com/tvguardian-alternative.html)
+## Family Filter TV on Android TV and Google TV: what it does and what you need (https://familyfiltertv.com/android-tv-google-tv-what-it-covers.html)
 
 Q: Does Family Filter TV need extra hardware?
 A: No. It is an app for Android TV and Google TV sets and boxes, with a companion app on an Android phone.
 
-Q: Does Family Filter TV work on Samsung, LG, Roku or Fire TV?
-A: Yes for Samsung (Tizen) and LG (webOS) smart TVs, from the Android phone over your home Wi-Fi. Not on Roku or Fire TV. See the page on which TVs work for what does run.
-
 Q: What does Family Filter TV filter?
 A: Spoken profanity only. It mutes the words while the picture keeps playing. It does not filter violence or nudity.
-
-Q: Does it work with Netflix?
-A: Family Filter TV follows along while you watch Netflix and other apps on your Android TV. You pick the film or episode on the phone and the TV mutes the swearing. This needs version 0.2.21 or newer, and English titles only for now. Family Filter TV is not affiliated with Netflix.
-
-Q: What does Family Filter TV cost?
-A: There is a 14-day free trial, then a 30-day or 1-year plan (current prices are shown in Google Play), with three devices included and up to six. Google Play charges in local currency.
-
-## Family Filter TV on Android TV and Google TV (not Apple TV) (https://familyfiltertv.com/cleancut-alternative-android-tv.html)
 
 Q: Does Family Filter TV run on Apple TV?
 A: No. It runs on Android TV and Google TV sets and boxes, with a companion app on an Android phone.
@@ -321,28 +310,14 @@ A: No. It runs on Android TV and Google TV sets and boxes, with a companion app 
 Q: Do I need an Android phone?
 A: Yes. The companion app on an Android phone sets the filter level and, in follow-along mode, is where you pick the film or episode.
 
-Q: Does it work with Netflix?
-A: Family Filter TV follows along while you watch Netflix and other apps on your Android TV. You pick the film or episode on the phone and the TV mutes the swearing. This needs version 0.2.21 or newer, and English titles only for now. Family Filter TV is not affiliated with Netflix. If Google Play still offers an older version, the newer one is on the download page.
-
-Q: Does it work with Stremio?
-A: Yes, on the TV. Family Filter TV mutes profanity in Stremio playback using the subtitles for the title.
-
-Q: What does Family Filter TV cost?
-A: There is a 14-day free trial, then a 30-day or 1-year plan (current prices are shown in Google Play), with three devices included and up to six. Google Play charges in local currency.
-
-## Family Filter TV for Android TV and Google TV: what it covers (https://familyfiltertv.com/enjoy-movies-your-way-alternative.html)
-
-Q: Does Family Filter TV filter violence or nudity?
-A: No. It filters spoken profanity only, and it depends on subtitles being available for the title.
-
-Q: Is Family Filter TV a streaming service?
-A: No. It is not a streaming service and provides no films or series. It works alongside the apps you already use.
+Q: Does Family Filter TV work on Samsung, LG, Roku or Fire TV?
+A: Yes for Samsung (Tizen) and LG (webOS) smart TVs, from the Android phone over your home Wi-Fi. Not on Roku or Fire TV. See the page on which TVs work for what does run.
 
 Q: Does it work with Netflix?
 A: Family Filter TV follows along while you watch Netflix and other apps on your Android TV. You pick the film or episode on the phone and the TV mutes the swearing. This needs version 0.2.21 or newer, and English titles only for now. Family Filter TV is not affiliated with Netflix.
 
-Q: Which TVs does it run on?
-A: Android TV and Google TV sets and boxes. Samsung (Tizen) and LG (webOS) smart TVs are muted from the Android phone over Wi-Fi. It does not run on Roku or Fire TV.
+Q: Does it work with Stremio?
+A: Yes, on the TV. Family Filter TV mutes profanity in Stremio playback using the subtitles for the title.
 
 Q: What does Family Filter TV cost?
 A: There is a 14-day free trial, then a 30-day or 1-year plan (current prices are shown in Google Play), with three devices included and up to six. Google Play charges in local currency.
@@ -547,12 +522,10 @@ A: Needs Family Filter TV on an Android TV or Google TV device and on an Android
 - Swearing in movies: The Hays Code years, the first F-word in a studio film, the records, and how much swearing is typical in 1,600 films counted from their English subtitles. https://familyfiltertv.com/swearing-in-movies.html
 - How many swear words are there?: There is no official count. English word lists run from 279 to 1,795 entries, and in the 1,591 films we analysed on 8 November 2026 ten word forms make up 69% of all flagged words. https://familyfiltertv.com/how-many-swear-words-are-there.html
 - Movies with no swearing: The 55 of the 1,286 films counted to 12 October 2026 with no flagged words in their English subtitles, 129 more with one to five, and what zero does and does not mean. https://familyfiltertv.com/movies-with-no-swearing.html
-- Family Filter TV for Stremio and Android TV households: What Family Filter TV does and does not do for a Stremio and Android TV household. https://familyfiltertv.com/vidangel-clearplay-alternative.html
+- Family Filter TV for Stremio and Android TV households: What Family Filter TV does and does not do for a Stremio and Android TV household. https://familyfiltertv.com/stremio-android-tv-household.html
 - Choosing a movie filtering service: What to check before choosing a movie filtering service, with the answers for Family Filter TV. https://familyfiltertv.com/movie-filtering-services-compared.html
 - Will it work on my TV?: Which TV brands and systems are supported, including how the phone mutes Samsung and LG TVs, and Hisense, Roku and Fire TV. https://familyfiltertv.com/which-tvs.html
-- Family Filter TV: a profanity-muting app, no extra hardware: An app for Android TV and Google TV that mutes spoken profanity from subtitles, with no extra hardware. https://familyfiltertv.com/tvguardian-alternative.html
-- Family Filter TV on Android TV and Google TV (not Apple TV): Family Filter TV mutes spoken profanity on Android TV and Google TV; it does not run on Apple TV. https://familyfiltertv.com/cleancut-alternative-android-tv.html
-- Family Filter TV for Android TV and Google TV: What Family Filter TV covers on Android TV and Google TV, and what it does not. https://familyfiltertv.com/enjoy-movies-your-way-alternative.html
+- Family Filter TV on Android TV and Google TV: what it does and what you need: An app for Android TV and Google TV that mutes spoken profanity from subtitles; what it does, where it runs and what you need. It does not run on Apple TV. https://familyfiltertv.com/android-tv-google-tv-what-it-covers.html
 - Profanity filter on the television or on a computer: Where Family Filter TV runs: televisions, and an early-beta Windows companion for a computer. https://familyfiltertv.com/profanity-filter-browser-extension-vs-tv.html
 - Family movie night without the swearing: The options for a family movie night without the swearing: edited versions, parental controls, watching ahead and a mute filter. https://familyfiltertv.com/family-movie-night-without-swearing.html
 - Profanity filter for Google TV: Google TV sets, sticks and boxes run the same system as Android TV; how to check your TV and set it up. https://familyfiltertv.com/google-tv-profanity-filter.html
