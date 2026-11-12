@@ -19,7 +19,7 @@ TARGETS = {  # page -> keywords it should rank for
     "stremio-profanity-filter.html": ["stremio"],
     "windows-profanity-filter.html": ["on windows"],
     "family-movie-night-without-swearing.html": ["family movie night"],
-    "movie-filtering-services-compared.html": ["vidangel", "clearplay", "tvguardian"],
+    "movie-filtering-services-compared.html": ["movie filtering service"],
     "parental-controls-vs-profanity-filter.html": ["parental controls"],
     "which-tvs.html": ["which tvs", "supported tvs"],
 }

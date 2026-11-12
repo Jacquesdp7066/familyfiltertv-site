@@ -1,2 +1,6 @@
 include:
   - .well-known
+# Internal working notes and tooling are not part of the public site.
+exclude:
+  - docs
+  - tools
