@@ -11,7 +11,7 @@ Official site: https://familyfiltertv.com/
 
 - https://familyfiltertv.com/facts.html — one page of citable facts (last updated 9 November 2026)
 - https://familyfiltertv.com/llms-full.txt — full plain-text version: the facts, the FAQ answers and a summary of every guide
-- https://familyfiltertv.com/guides.html — every guide and comparison page, one line each
+- https://familyfiltertv.com/guides.html — every guide page, one line each
 
 ## What it does
 
@@ -65,13 +65,13 @@ does not mute anything — Family Filter TV is the app that mutes.
 - https://familyfiltertv.com/titles/methodology/ — how we count swear words: automated analysis of English subtitles, the categories, and why our numbers can differ from other guides
 - https://familyfiltertv.com/mute-swearing-on-tv.html — muting unwanted language on TV
 - https://familyfiltertv.com/mute-swearing-on-netflix.html — how to mute swearing on Netflix on Android TV and Google TV (not affiliated with Netflix)
-- https://familyfiltertv.com/vidangel-clearplay-alternative.html — comparison with VidAngel and ClearPlay
-- https://familyfiltertv.com/tvguardian-alternative.html — comparison with TVGuardian
-- https://familyfiltertv.com/cleancut-alternative-android-tv.html — CleanCut is for Apple TV; the Android TV and Google TV option
-- https://familyfiltertv.com/enjoy-movies-your-way-alternative.html — comparison with Enjoy Movies Your Way
-- https://familyfiltertv.com/profanity-filter-browser-extension-vs-tv.html — browser extension versus television profanity filtering
-- https://familyfiltertv.com/movie-filtering-services-compared.html — Family Filter TV, VidAngel, ClearPlay, Enjoy Movies Your Way and TVGuardian compared on price, devices, what they filter, country and trial (as of October 2026)
-- https://familyfiltertv.com/does-netflix-have-a-profanity-filter.html — does Netflix have a profanity filter: what its own controls do, and the options (not affiliated with Netflix)
+- https://familyfiltertv.com/vidangel-clearplay-alternative.html — What Family Filter TV does and does not do for a Stremio and Android TV household.
+- https://familyfiltertv.com/tvguardian-alternative.html — An app for Android TV and Google TV that mutes spoken profanity from subtitles, with no extra hardware.
+- https://familyfiltertv.com/cleancut-alternative-android-tv.html — Family Filter TV mutes spoken profanity on Android TV and Google TV; it does not run on Apple TV.
+- https://familyfiltertv.com/enjoy-movies-your-way-alternative.html — What Family Filter TV covers on Android TV and Google TV, and what it does not.
+- https://familyfiltertv.com/profanity-filter-browser-extension-vs-tv.html — Where Family Filter TV runs: televisions, and an early-beta Windows companion for a computer.
+- https://familyfiltertv.com/movie-filtering-services-compared.html — What to check before choosing a movie filtering service, with the answers for Family Filter TV.
+- https://familyfiltertv.com/does-netflix-have-a-profanity-filter.html — Where to find Netflix's own controls, and how Family Filter TV mutes swearing while Netflix plays on an Android TV or Google TV.
 - https://familyfiltertv.com/swearing-in-movies.html — swearing in movies: the Hays Code years, the first F-word in a studio film, the records, and how much is typical in 1,600 films counted from their English subtitles
 - https://familyfiltertv.com/how-many-swear-words-are-there.html — how many swear words are there: no official count; English lists run from 279 to 1,795 entries, and ten word forms make up 69% of flagged words in films
 - https://familyfiltertv.com/movies-with-no-swearing.html — movies with no swearing: the 55 of the 1,286 films counted to 12 October 2026 with no flagged words in their English subtitles, and 129 more with one to five
