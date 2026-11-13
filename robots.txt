@@ -15,3 +15,25 @@ Disallow: /admin.html
 Sitemap: https://familyfiltertv.com/sitemap.xml
 
 # IndexNow key (Bing, Yandex, Seznam, Naver): https://familyfiltertv.com/4ad2adafa64621f92399c85be15f01bb.txt
+
+# OpenAI search/browse agents (explicit allow, 2026-11-13). A named group replaces
+# the "*" group for that crawler, so the Disallow rules are repeated here.
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /link.html
+Disallow: /join.html
+Disallow: /join
+Disallow: /creator
+Disallow: /creator.html
+Disallow: /apk/
+Disallow: /admin.html
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /link.html
+Disallow: /join.html
+Disallow: /join
+Disallow: /creator
+Disallow: /creator.html
+Disallow: /apk/
+Disallow: /admin.html
