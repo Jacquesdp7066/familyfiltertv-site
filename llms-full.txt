@@ -27,7 +27,7 @@ Last updated 9 November 2026
 - It is not a streaming library and does not provide films, series or subscription access.
 - It only mutes when subtitles are found for the title. Filtering availability varies by title, and the app tells the viewer when filtering is unavailable.
 - Family Filter TV is not installed on Samsung (Tizen) or LG (webOS) smart TVs. The Android phone mutes them over the home Wi-Fi instead. Hisense sets running VIDAA, Roku TVs and Amazon Fire TV are not supported at this time.
-- It does not filter DStv.
+- With DStv, pick the film or show that is playing; if an ad break interrupts, tap Listen to sync and it catches up again.
 
 ## Where it runs
 - Runs on: Android TVs and Android TV boxes (including Google TV), Android phones, and Windows 10 or 11 as an early beta.
@@ -130,7 +130,7 @@ Q: Does it filter violence or nudity on Android TV?
 A: No. It filters spoken profanity only. Nothing is blurred, cut or skipped.
 
 Q: Does it work with Netflix or DStv on Android TV?
-A: Netflix, yes on Android TV and Google TV, through follow mode: pick the title on your Android phone and the TV mutes the swearing. It also works with supported playback started in Stremio. DStv is not supported, and Family Filter TV isn't affiliated with Netflix or any other streaming service.
+A: Netflix, yes on Android TV and Google TV, through follow mode: pick the title on your Android phone and the TV mutes the swearing. It also works with supported playback started in Stremio. It works with DStv too: pick the film or show that is playing, and if an ad break interrupts, tap Listen to sync and it catches up again. Family Filter TV isn't affiliated with Netflix or any other streaming service.
 
 Q: What Android TV devices does it run on?
 A: Android TVs, Android TV boxes, and Android phones — the app itself, no computer needed.
