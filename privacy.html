@@ -65,7 +65,7 @@
 
 <main class="wrap">
   <h1 class="page-title">Privacy policy</h1>
-  <p class="muted">Last updated: 31 October 2026</p>
+  <p class="muted">Last updated: 15 November 2026</p>
 
   <p>This policy covers the Family Filter TV Android app (TV and phone). It explains what an account
   involves, what we store, how payment works, and what the third-party services the app relies on
@@ -113,6 +113,15 @@
   purchase token or Apple purchase receipt and your Firebase user id, so it can tell us whether your
   subscription is active — it does not receive your card details, and neither do we. No card, bank, or payment-card information
   ever reaches Family Filter TV's own servers.</p>
+  <p>If you buy a launch-offer plan on Android, the app also sends the Google Play purchase token to our own
+  server (it is not sent for other plans). Our server asks Google Play to confirm the purchase is real and counts it against
+  the limited number of launch-offer places. We keep one record per purchase: a one-way code made
+  from the token, your user id, the offer, the country the purchase was made in, the Google Play
+  order id and the time. It holds no card details. We do this only to confirm the purchase and to count the
+  limited offer places; the only other party involved is Google Play, which we ask to confirm the purchase. We do not delete
+  these records on a timer. If you delete your account, your user id is removed from the record, but the rest (the one-way code, the offer, the
+  country, the Google Play order id and the time) stays until you ask us to delete it: email
+  <a href="mailto:jacquesjdupreez@gmail.com">jacquesjdupreez@gmail.com</a> from the address on the account (see "How long we keep your data, and deleting your account").</p>
 
   <h2>Network requests during playback</h2>
   <p>Besides our own account and billing systems, Family Filter TV may contact third-party Stremio
@@ -239,8 +248,15 @@
     counting after 90 days. They are removed when you delete your account. The one exception is the
     plain timing number in the shared subtitle table, which stays because it cannot be traced to you.</li>
     <li><strong>Wi-Fi TV muting.</strong> The phone looks for your Samsung or LG TV on your home
-    network (iOS asks for Local Network access). We store only the TV's brand and model and counts of
-    how well muting worked.</li>
+    network (iOS asks for Local Network access). When you mute a Samsung or LG TV this way, the
+    phone also uploads a small diagnostics record to your household account: the TV's brand and
+    model (never its address or the name you gave it), how it is controlled, how many mutes were sent,
+    confirmed and failed, how long a mute typically takes, how many times the connection dropped,
+    the result of "Test my TV" if you run it, the app version and the times of the session. It holds
+    no titles, no audio and no words. We use it to see whether muting works on a given TV and to
+    improve it. There is one record per household, replaced after each session, and we keep it as
+    long as your account exists. It is removed when you delete your account, or on request (see
+    "How long we keep your data, and deleting your account").</li>
   </ul>
 
   <h2>Direct-install updates</h2>
