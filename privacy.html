@@ -117,8 +117,11 @@
   server (it is not sent for other plans). Our server asks Google Play to confirm the purchase is real and counts it against
   the limited number of launch-offer places. We keep one record per purchase: a one-way code made
   from the token, your user id, the offer, the country the purchase was made in, the Google Play
-  order id and the time. It holds no card details. We do not delete these records on a timer; they
-  are removed if you ask us to (see "How long we keep your data, and deleting your account").</p>
+  order id and the time. It holds no card details. We do this only to confirm the purchase and to count the
+  limited offer places; the only other party involved is Google Play, which we ask to confirm the purchase. We do not delete
+  these records on a timer. If you delete your account, your user id is removed from the record, but the rest (the one-way code, the offer, the
+  country, the Google Play order id and the time) stays until you ask us to delete it: email
+  <a href="mailto:jacquesjdupreez@gmail.com">jacquesjdupreez@gmail.com</a> from the address on the account (see "How long we keep your data, and deleting your account").</p>
 
   <h2>Network requests during playback</h2>
   <p>Besides our own account and billing systems, Family Filter TV may contact third-party Stremio
