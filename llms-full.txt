@@ -152,6 +152,14 @@ A: Check that Stremio's Player menu is still set to External, Family Filter TV, 
 Q: Does it filter violence or nudity?
 A: No. It filters spoken profanity only. Violence and nudity are not currently filtered.
 
+## How to mute swearing on Google TV and Android TV (https://familyfiltertv.com/mute-swearing-android-tv-google-tv.html)
+
+Q: How do I mute swearing on Google TV or Android TV?
+A: Check you have an Android TV or Google TV and an Android phone (Android 7.0 or newer). Install Family Filter TV from Google Play on both. Open it on the TV to see a short code, then on the phone tap Account, Link a device and type the code. Then either set Family Filter TV as Stremio's external player, or use Follow along for Netflix and other apps. The first 14 days are free.
+
+Q: Does Family Filter TV need the internet?
+A: Yes. You sign in with an account, your linked devices and plan are kept against that account, and the subtitles for a title come from the video's own subtitle track or from Stremio's subtitle service. The streaming apps you watch need the internet as well.
+
 ## Mute swearing on TV without cutting the video (https://familyfiltertv.com/mute-swearing-on-tv.html)
 
 Q: How do you mute swearing on TV without cutting the video?
@@ -516,6 +524,7 @@ A: Needs Family Filter TV on an Android TV or Google TV device and on an Android
 - Demo: Family Filter TV mutes swearing in 30 seconds: Launch video with captions and transcript. https://familyfiltertv.com/demo.html
 - Profanity filter for Android TV: how it works and what it can't do: How the filtering works on screen, what it needs and what it cannot do. https://familyfiltertv.com/profanity-filter-android-tv.html
 - Mute swearing in Stremio: step-by-step: Stremio has no built-in profanity filter; these steps add Family Filter TV as the external player. https://familyfiltertv.com/stremio-profanity-filter.html
+- How to mute swearing on Google TV and Android TV: Four steps and about five minutes: check your TV, install, link your phone, and pick Stremio or follow-along. https://familyfiltertv.com/mute-swearing-android-tv-google-tv.html
 - Mute swearing on TV without cutting the video: What watching looks like when unwanted language is muted and the picture keeps playing. https://familyfiltertv.com/mute-swearing-on-tv.html
 - How to mute swearing on Netflix: The steps for Android TV and Google TV, and what to expect. Not affiliated with Netflix. https://familyfiltertv.com/mute-swearing-on-netflix.html
 - Muting swearing on Netflix on Android TV and Google TV: Where to find Netflix's own controls, and how Family Filter TV mutes swearing while Netflix plays on an Android TV or Google TV. https://familyfiltertv.com/does-netflix-have-a-profanity-filter.html

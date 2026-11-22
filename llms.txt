@@ -63,6 +63,7 @@ does not mute anything — Family Filter TV is the app that mutes.
 - https://familyfiltertv.com/install.html — step-by-step install guides: Android TV and Google TV, Android phone and Windows, from Google Play or directly with the APK
 - https://familyfiltertv.com/titles/ — title-by-title language guides to swearing and profanity, from our own subtitle analysis
 - https://familyfiltertv.com/titles/methodology/ — how we count swear words: automated analysis of English subtitles, the categories, and why our numbers can differ from other guides
+- https://familyfiltertv.com/mute-swearing-android-tv-google-tv.html — how to mute swearing on Google TV and Android TV: four steps, about five minutes, with Stremio or follow-along
 - https://familyfiltertv.com/mute-swearing-on-tv.html — muting unwanted language on TV
 - https://familyfiltertv.com/mute-swearing-on-netflix.html — how to mute swearing on Netflix on Android TV and Google TV (not affiliated with Netflix)
 - https://familyfiltertv.com/stremio-android-tv-household.html — What Family Filter TV does and does not do for a Stremio and Android TV household.

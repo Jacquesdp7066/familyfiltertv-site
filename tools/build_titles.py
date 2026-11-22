@@ -105,6 +105,8 @@ def foot_nav(depth):
         '      <a href="https://www.tiktok.com/@familyfiltertvapp" rel="me noopener">TikTok</a>',
         f'      <a href="{up}titles/">Titles</a>',
         f'      <a href="{up}guides.html">Guides</a>',
+        f'      <a href="{up}mute-swearing-android-tv-google-tv.html">Mute swearing on Android TV</a>',
+        f'      <a href="{up}faq.html">FAQ</a>',
         f'      <a href="{up}download.html">Download</a>',
         f'      <a href="{up}setup.html">Get set up</a>',
         f'      <a href="{up}support.html">Support</a>',
@@ -1267,6 +1269,7 @@ def title_page_html(t, by_id, category_labels, benchmark=None, related_map=None)
 <link rel="stylesheet" href="../../style.css">
 <script src="../../hit.js" defer></script>
 <script src="../../consent.js" defer></script>
+<script src="../../play-ref.js" defer></script>
 <link rel="stylesheet" href="../film.css">
 <script type="application/ld+json">
 {jsonld(jsonld_work)}
@@ -1404,6 +1407,7 @@ def methodology_page_html(titles, category_labels):
 <link rel="stylesheet" href="../../style.css">
 <script src="../../hit.js" defer></script>
 <script src="../../consent.js" defer></script>
+<script src="../../play-ref.js" defer></script>
 <script type="application/ld+json">
 {jsonld(jsonld_page)}
 </script>
@@ -1585,6 +1589,7 @@ def index_page_html(titles, category_labels):
 <link rel="stylesheet" href="../style.css">
 <script src="../hit.js" defer></script>
 <script src="../consent.js" defer></script>
+<script src="../play-ref.js" defer></script>
 <link rel="stylesheet" href="film.css">
 <script type="application/ld+json">
 {jsonld(jsonld_breadcrumb)}

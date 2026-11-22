@@ -37,3 +37,104 @@ Disallow: /creator
 Disallow: /creator.html
 Disallow: /apk/
 Disallow: /admin.html
+
+# Other AI assistants' and search crawlers, explicitly allowed (2026-11-22). Same Disallow rules as above.
+User-agent: GPTBot
+Allow: /
+Disallow: /link.html
+Disallow: /join.html
+Disallow: /join
+Disallow: /creator
+Disallow: /creator.html
+Disallow: /apk/
+Disallow: /admin.html
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /link.html
+Disallow: /join.html
+Disallow: /join
+Disallow: /creator
+Disallow: /creator.html
+Disallow: /apk/
+Disallow: /admin.html
+
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /link.html
+Disallow: /join.html
+Disallow: /join
+Disallow: /creator
+Disallow: /creator.html
+Disallow: /apk/
+Disallow: /admin.html
+
+User-agent: Claude-User
+Allow: /
+Disallow: /link.html
+Disallow: /join.html
+Disallow: /join
+Disallow: /creator
+Disallow: /creator.html
+Disallow: /apk/
+Disallow: /admin.html
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /link.html
+Disallow: /join.html
+Disallow: /join
+Disallow: /creator
+Disallow: /creator.html
+Disallow: /apk/
+Disallow: /admin.html
+
+User-agent: Perplexity-User
+Allow: /
+Disallow: /link.html
+Disallow: /join.html
+Disallow: /join
+Disallow: /creator
+Disallow: /creator.html
+Disallow: /apk/
+Disallow: /admin.html
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /link.html
+Disallow: /join.html
+Disallow: /join
+Disallow: /creator
+Disallow: /creator.html
+Disallow: /apk/
+Disallow: /admin.html
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /link.html
+Disallow: /join.html
+Disallow: /join
+Disallow: /creator
+Disallow: /creator.html
+Disallow: /apk/
+Disallow: /admin.html
+
+User-agent: Bingbot
+Allow: /
+Disallow: /link.html
+Disallow: /join.html
+Disallow: /join
+Disallow: /creator
+Disallow: /creator.html
+Disallow: /apk/
+Disallow: /admin.html
+
+User-agent: Googlebot
+Allow: /
+Disallow: /link.html
+Disallow: /join.html
+Disallow: /join
+Disallow: /creator
+Disallow: /creator.html
+Disallow: /apk/
+Disallow: /admin.html
